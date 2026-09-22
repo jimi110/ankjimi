@@ -162,6 +162,21 @@ body {
 .icon-btn:hover { background: var(--bg-secondary); }
 .icon-btn.hidden { visibility: hidden; }
 
+/* Puntito rojo de aviso sobre el botón de Ajustes (⚙️) y sobre "Información"
+   dentro del panel de Ajustes, para animar al usuario a leer la información
+   al menos una vez. Desaparece en cuanto se abre. */
+#btn-settings, #btn-open-info { position: relative; }
+.info-badge-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ff3b30;
+}
+#btn-open-info .info-badge-dot { top: 6px; right: 10px; }
+
 /* ---------------- Vistas ---------------- */
 #views {
   flex: 1;
@@ -693,7 +708,10 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
 /* ---------------- Modal de información ---------------- */
 .info-modal {
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 200;
   display: none;
   align-items: center;
@@ -734,7 +752,10 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
 /* ---------------- Modal ---------------- */
 .modal-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background: rgba(20, 18, 14, 0.45);
   display: flex;
   align-items: center;
@@ -788,47 +809,82 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
 }
 .modal-input:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+/* ---------------- Ajustes como panel superpuesto ----------------
+   En todos los tamaños, Ajustes se abre como un panel que se desliza
+   encima del contenido, sin ocultar la vista anterior (que sigue
+   activa y visible debajo, así el fondo no cambia). En móvil el panel
+   ocupa todo el ancho; en escritorio se queda como barra lateral. */
+#settings-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  z-index: 40;
+}
+#settings-overlay.visible { opacity: 1; pointer-events: auto; }
+
+#view-settings.view {
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background: var(--paper);
+  box-shadow: -2px 0 16px rgba(0, 0, 0, 0.12);
+  z-index: 41;
+  overflow-y: auto;
+  padding: 0 16px 40px;
+  transform: translateX(100%);
+  transition: transform 0.26s ease;
+  animation: none;
+}
+#view-settings.view.active {
+  transform: translateX(0);
+  animation: none;
+}
+#view-settings .settings-card { border: none; box-shadow: none; padding: 0; }
+
+/* Cabecera propia del panel de Ajustes: "Ajustes" + flecha de volver,
+   siempre por encima del panel y del fondo oscurecido. */
+.settings-topbar {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  padding: 14px 16px;
+  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  z-index: 5;
+  border-bottom: 1px solid var(--line);
+  margin: 0 -16px 16px;
+}
+.settings-topbar #btn-back-settings { grid-column: 1; justify-self: start; }
+.settings-topbar-title {
+  grid-column: 2;
+  font-family: var(--font-card);
+  font-weight: 700;
+  font-size: 1.35rem;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ---------------- Responsive / escritorio ---------------- */
 @media (min-width: 720px) {
   body { background: var(--bg-secondary); }
-  #app { box-shadow: 0 0 0 1px var(--line); }
   .card-content { font-size: 1.5rem; }
   .deck-actions { flex-direction: row; }
 
-  /* Ajustes como panel lateral (no ocupa toda la pantalla en PC),
-     con animación de deslizamiento al entrar y salir. */
-  #settings-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.25);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.22s ease;
-    z-index: 40;
-  }
-  #settings-overlay.visible { opacity: 1; pointer-events: auto; }
-
-  #view-settings.view {
-    display: block;
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: min(400px, 92vw);
-    background: var(--paper);
-    box-shadow: -2px 0 16px rgba(0, 0, 0, 0.12);
-    z-index: 41;
-    overflow-y: auto;
-    padding: 20px 16px 40px;
-    transform: translateX(100%);
-    transition: transform 0.26s ease;
-    animation: none;
-  }
-  #view-settings.view.active {
-    transform: translateX(0);
-    animation: none;
-  }
-  #view-settings .settings-card { border: none; box-shadow: none; padding: 0; }
+  #view-settings.view { width: min(400px, 92vw); }
 }
 
 </style>
@@ -843,7 +899,7 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
   <header class="topbar">
     <button id="btn-back" class="icon-btn hidden" aria-label="Volver">←</button>
     <h1 id="topbar-title">Ankジミー</h1>
-    <button id="btn-settings" class="icon-btn" aria-label="Ajustes">⚙️</button>
+    <button id="btn-settings" class="icon-btn" aria-label="Ajustes">⚙️<span id="settings-info-dot" class="info-badge-dot" style="display:none;"></span></button>
   </header>
 
   <main id="views">
@@ -960,8 +1016,12 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
 
     <!-- ============ VISTA: AJUSTES ============ -->
     <section id="view-settings" class="view">
+      <div class="settings-topbar">
+        <button type="button" id="btn-back-settings" class="icon-btn" aria-label="Volver">←</button>
+        <h2 class="settings-topbar-title">Ajustes</h2>
+      </div>
       <div class="settings-card">
-        <button type="button" id="btn-open-info" class="btn secondary">ℹ️ Información</button>
+        <button type="button" id="btn-open-info" class="btn secondary">ℹ️ Información<span id="info-btn-dot" class="info-badge-dot" style="display:none;"></span></button>
 
         <h2>🎨 Apariencia</h2>
         <div class="theme-grid" id="theme-grid"></div>
@@ -1389,6 +1449,16 @@ function uid(prefix = '') {
   return `${prefix}${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
 }
 
+/** Igual que `valor ?? porDefecto`, pero compatible con Safari/iOS antiguo
+ *  (el operador `??` no existe en iOS 12, usado en el iPad Air de 1.ª gen,
+ *  y rompía TODO el script con un error de sintaxis, dejando todos los
+ *  botones y el menú de Ajustes sin responder). Solo sustituye null/undefined,
+ *  igual que ??, así que un 0 válido (p. ej. "0 tarjetas nuevas al día") se respeta.
+ */
+function orDefault(valor, porDefecto) {
+  return (valor === null || valor === undefined) ? porDefecto : valor;
+}
+
 // ---------------------------------------------------------------------
 // Mazos
 // ---------------------------------------------------------------------
@@ -1399,10 +1469,10 @@ async function createDeck(name, opts = {}) {
     id: opts.id || uid('deck_'),
     name,
     createdAt: Date.now(),
-    newPerDay: opts.newPerDay ?? 10,
-    maxAccumulated: opts.maxAccumulated ?? 100,
-    newReleasedTotal: opts.newReleasedTotal ?? 0,
-    lastReleaseDate: opts.lastReleaseDate ?? null,
+    newPerDay: orDefault(opts.newPerDay, 10),
+    maxAccumulated: orDefault(opts.maxAccumulated, 100),
+    newReleasedTotal: orDefault(opts.newReleasedTotal, 0),
+    lastReleaseDate: orDefault(opts.lastReleaseDate, null),
     isDefault: !!opts.isDefault,
   };
   const t = tx(db, ['decks'], 'readwrite');
@@ -1633,7 +1703,7 @@ async function wipeAll() {
 // ---------------------------------------------------------------------
 
 const CONFIG_KEY = 'ankiweb-config';
-const DEFAULT_CONFIG = { theme: 'light', layout: 'auto', sound: true, furigana: false, newPerDaySessionCap: 9999, customThemeColor: '#1cb0f6' };
+const DEFAULT_CONFIG = { theme: 'light', layout: 'auto', sound: true, furigana: false, newPerDaySessionCap: 9999, customThemeColor: '#1cb0f6', infoSeen: false };
 
 function getConfig() {
   try {
@@ -2341,12 +2411,17 @@ const VIEWS_WITH_BACK = new Set([
 ]);
 
 function showView(viewId, opts = {}) {
-  document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
-  document.getElementById(viewId).classList.add('active');
-  document.getElementById('topbar-title').textContent = opts.title || VIEW_TITLES[viewId] || '';
-  document.getElementById('btn-back').classList.toggle('hidden', !VIEWS_WITH_BACK.has(viewId));
+  if (viewId === 'view-settings') {
+    // Ajustes se abre como un panel superpuesto: la vista actual NO se oculta,
+    // sigue activa y visible debajo, para que el fondo no cambie.
+    document.getElementById('view-settings').classList.add('active');
+  } else {
+    document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
+    document.getElementById(viewId).classList.add('active');
+    document.getElementById('topbar-title').textContent = opts.title || VIEW_TITLES[viewId] || '';
+    document.getElementById('btn-back').classList.toggle('hidden', !VIEWS_WITH_BACK.has(viewId));
+  }
   document.getElementById('btn-settings').classList.toggle('hidden', viewId === 'view-settings');
-  // En PC, Ajustes es un panel lateral: mostramos/ocultamos su fondo oscurecido a la vez.
   document.getElementById('settings-overlay').classList.toggle('visible', viewId === 'view-settings');
   window.scrollTo(0, 0);
 }
@@ -2365,9 +2440,16 @@ function navigateTo(viewId, opts = {}) {
 
 function goBack() {
   if (backStack.length > 1) {
-    backStack.pop();
+    const closing = backStack.pop();
     const prev = backStack[backStack.length - 1];
-    showView(prev);
+    if (closing === 'view-settings') {
+      // La vista de debajo ya estaba activa y visible; solo cerramos el panel.
+      document.getElementById('view-settings').classList.remove('active');
+      document.getElementById('settings-overlay').classList.remove('visible');
+      document.getElementById('btn-settings').classList.remove('hidden');
+    } else {
+      showView(prev);
+    }
     if (prev === 'view-decks') refreshDeckList();
     if (prev === 'view-deck-detail') refreshDeckDetail();
   }
@@ -2375,6 +2457,7 @@ function goBack() {
 
 document.getElementById('btn-back').addEventListener('click', goBack);
 document.getElementById('btn-settings').addEventListener('click', () => navigateTo('view-settings'));
+document.getElementById('btn-back-settings').addEventListener('click', goBack);
 
 // ---------------------------------------------------------------------
 // Modal genérico (progreso / mensajes / confirmaciones)
@@ -2453,8 +2536,8 @@ async function ensureDailyRelease(deck) {
   const today = todayKey();
   if (deck.lastReleaseDate === today) return deck;
 
-  const newPerDay = deck.newPerDay ?? 10;
-  const maxAccumulated = deck.maxAccumulated ?? 100;
+  const newPerDay = orDefault(deck.newPerDay, 10);
+  const maxAccumulated = orDefault(deck.maxAccumulated, 100);
   const updated = {
     ...deck,
     newReleasedTotal: Math.min(maxAccumulated, (deck.newReleasedTotal || 0) + newPerDay),
@@ -2470,7 +2553,7 @@ async function ensureDailyRelease(deck) {
  * `sortOrder`). El resto de nuevas existen pero no se muestran todavía.
  */
 function pickAvailableNewCards(newCards, deck) {
-  const cap = Math.min(deck.newReleasedTotal || 0, deck.maxAccumulated ?? 100);
+  const cap = Math.min(deck.newReleasedTotal || 0, orDefault(deck.maxAccumulated, 100));
   return newCards
     .slice()
     .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
@@ -2519,7 +2602,7 @@ async function refreshDeckList() {
 
 function escapeHtml(str) {
   const div = document.createElement('div');
-  div.textContent = str ?? '';
+  div.textContent = orDefault(str, '');
   return div.innerHTML;
 }
 
@@ -2646,8 +2729,8 @@ async function openDeckLimitsModal() {
   if (!state.currentDeckId) return;
   const deck = await window.DB.getDeck(state.currentDeckId);
   if (!deck) return;
-  document.getElementById('input-new-per-day').value = deck.newPerDay ?? 10;
-  document.getElementById('input-max-accumulated').value = deck.maxAccumulated ?? 100;
+  document.getElementById('input-new-per-day').value = orDefault(deck.newPerDay, 10);
+  document.getElementById('input-max-accumulated').value = orDefault(deck.maxAccumulated, 100);
   document.getElementById('deck-limits-modal').classList.add('visible');
   playSound('secondary');
 }
@@ -3448,9 +3531,24 @@ document.getElementById('furigana-controls').querySelectorAll('.seg-btn').forEac
 // Modal de información
 // ---------------------------------------------------------------------
 
+// Muestra/oculta los puntitos rojos de aviso sobre el botón de Ajustes (⚙️)
+// y sobre "Información" dentro del panel, según si el usuario ya ha abierto
+// alguna vez el modal de Información.
+function updateInfoBadgeDots() {
+  const fabDot = document.getElementById('settings-info-dot');
+  const btnDot = document.getElementById('info-btn-dot');
+  const show = getConfig().infoSeen ? 'none' : 'block';
+  if (fabDot) fabDot.style.display = show;
+  if (btnDot) btnDot.style.display = show;
+}
+
 function openInfoModal() {
   document.getElementById('info-modal').classList.add('visible');
   playSound('secondary');
+  if (!getConfig().infoSeen) {
+    setConfig({ infoSeen: true });
+    updateInfoBadgeDots();
+  }
 }
 function closeInfoModal() {
   document.getElementById('info-modal').classList.remove('visible');
@@ -3473,6 +3571,7 @@ async function init() {
   applyLayout();
   applySoundPref();
   applyFuriganaPref();
+  updateInfoBadgeDots();
   await window.DB.openDB();
   await refreshDeckList();
 
