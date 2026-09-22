@@ -2489,7 +2489,12 @@ function showView(viewId, opts = {}) {
   document.getElementById('btn-settings').classList.toggle('hidden', viewId === 'view-settings');
   document.getElementById('settings-overlay').classList.toggle('visible', viewId === 'view-settings');
   document.getElementById('app').classList.toggle('settings-open', viewId === 'view-settings');
-  window.scrollTo(0, 0);
+
+  // Al abrir Ajustes el contenido de fondo debe conservar exactamente su
+  // posición actual. Solo las navegaciones entre vistas normales vuelven arriba.
+  if (viewId !== 'view-settings') {
+    window.scrollTo(0, 0);
+  }
 }
 
 /** Cierra el panel de Ajustes (comportamiento equivalente a "Volver"). */
