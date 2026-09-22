@@ -469,13 +469,26 @@ body.furigana-off ruby rt { display: none; }
 /* Sin líneas divisorias: el espaciado entre bloques (frente y reverso) basta para separarlos. */
 #card-front hr, #card-back hr { display: none; }
 
-.card-content img {
-  display: block;
-  max-width: 100%;
+.card-content img,
+.card-content > img,
+.card-content picture,
+.card-content figure {
+  display: block !important;
+  float: none !important;
+  position: static !important;
+  box-sizing: border-box;
+  max-width: 100% !important;
   max-height: 34vh;
-  border-radius: var(--radius-m);
-  margin: 6px auto 0;
 }
+.card-content img {
+  width: auto !important;
+  height: auto !important;
+  border-radius: var(--radius-m);
+  margin: 6px auto 0 !important;
+  align-self: center !important;
+}
+
+/* Botones circulares de audio */
 
 /* Botones circulares de audio */
 .audio-row {
@@ -1257,6 +1270,20 @@ function scheduleNextReview(card, answer, config = SRS_DEFAULT_CONFIG) {
   const now = nowMs();
   const next = { ...card, lastReview: now };
 
+  // Las tarjetas importadas que nunca se han estudiado en Ankジミー
+  // comienzan como nuevas aunque Anki las tuviera en review.
+  if (card.importedFromAnki && card.lastReview == null) {
+    next.state = 'new';
+    next.queue = 'new';
+    next.intervalMinutes = 0;
+    next.learningStep = 0;
+    next.reps = 0;
+    next.lapses = 0;
+    next.correctCount = 0;
+    next.wrongCount = 0;
+    next.easeFactor = config.startingEase;
+  }
+
   if (answer === 'again') {
     next.wrongCount += 1;
   } else {
@@ -1974,40 +2001,20 @@ function audioButtonHtml(soundField) {
  * nuestro sistema, para no arriesgar a perder tarjetas de vista.
  */
 function mapAnkiCardToInternal(ankiCard, now) {
-  // type: 0=new, 1=learning, 2=review, 3=relearning (aprox., varía por versión)
+  // El .apkg es una fuente de contenido; su scheduling no se importa.
+  // Todas las tarjetas empiezan nuevas en Ankジミー.
   const base = window.SRS.createNewCardState();
-
-  if (ankiCard.type === 2 && ankiCard.ivl > 0) {
-    base.state = 'review';
-    base.queue = 'review';
-    base.intervalMinutes = ankiCard.ivl * 24 * 60; // ivl en días en tarjetas de repaso
-    base.easeFactor = ankiCard.factor || window.SRS.DEFAULT_CONFIG.startingEase;
-    base.reps = ankiCard.reps || 0;
-    base.lapses = ankiCard.lapses || 0;
-    // due en Anki para review cards es "días desde el epoch de la colección";
-    // como aproximación práctica, si no podemos reconstruir la fecha exacta,
-    // programamos la revisión a partir de ahora usando el intervalo (conservador:
-    // el usuario la verá algo antes de lo que Anki habría dictado, nunca después).
-    base.due = now + base.intervalMinutes * 60 * 1000;
-  } else {
-    // Nueva, en aprendizaje o en re-aprendizaje: la tratamos como nueva
-    // en nuestro sistema para no complicar el mapeo de colas de Anki.
-    base.state = 'new';
-    base.queue = 'new';
-    base.due = now;
-  }
-
-  base.correctCount = ankiCard.reps ? Math.max(0, ankiCard.reps - (ankiCard.lapses || 0)) : 0;
-  base.wrongCount = ankiCard.lapses || 0;
-
-  // Para tarjetas nuevas, el campo "due" de Anki es su posición dentro de la cola
-  // de nuevas (no una fecha), así que la reutilizamos tal cual para que aparezcan
-  // en el mismo orden que tendrían en Anki. Si no es un número usable, usamos el
-  // id de la tarjeta (creciente y estable) como alternativa.
-  base.sortOrder = (base.state === 'new' && Number.isFinite(ankiCard.due))
-    ? ankiCard.due
-    : ankiCard.id;
-
+  base.state = 'new';
+  base.queue = 'new';
+  base.due = now;
+  base.intervalMinutes = 0;
+  base.learningStep = 0;
+  base.correctCount = 0;
+  base.wrongCount = 0;
+  base.reps = 0;
+  base.lapses = 0;
+  base.easeFactor = window.SRS.DEFAULT_CONFIG.startingEase;
+  base.sortOrder = Number.isFinite(ankiCard.due) ? ankiCard.due : ankiCard.id;
   return base;
 }
 
@@ -2492,7 +2499,12 @@ function goBack() {
   }
 }
 
-document.getElementById('btn-back').addEventListener('click', goBack);
+document.getElementById('btn-back').addEventListener('click', async () => {
+  if (document.getElementById('view-study').classList.contains('active') && state.studyQueue.length > 0) {
+    await persistStudySessionQueue(state.studyQueue);
+  }
+  goBack();
+});
 document.getElementById('btn-settings').addEventListener('click', () => navigateTo('view-settings'));
 document.getElementById('btn-back-settings').addEventListener('click', goBack);
 
@@ -2642,6 +2654,12 @@ async function refreshDeckList() {
     const counts = await computeDeckCounts(deck.id);
     const row = document.createElement('div');
     row.className = 'deck-row';
+
+    const savedQueue = Array.isArray(deck.studySessionQueue) ? deck.studySessionQueue : [];
+    const pending = deck.studySessionActive && savedQueue.length > 0
+      ? savedQueue.length
+      : counts.pendingPreview;
+
     row.innerHTML = `
       <div>
         <div class="deck-name">${escapeHtml(deck.name)}</div>
@@ -2650,9 +2668,8 @@ async function refreshDeckList() {
           <span>${counts.reviewCount} repaso</span>
         </div>
       </div>
-      <div class="badge-due ${counts.total === 0 ? 'zero' : ''}">${counts.total}</div>
-    `;
-    row.addEventListener('click', () => openDeckDetail(deck.id));
+      <div class="badge-due ${pending === 0 ? 'zero' : ''}">${pending}</div>
+    `;    row.addEventListener('click', () => openDeckDetail(deck.id));
     listEl.appendChild(row);
   }
 }
@@ -3124,10 +3141,24 @@ async function showNextCard() {
   wireAudioButtons(frontEl);
   wireAudioButtons(backEl);
 
+  // Guardamos la sesión mientras la tarjeta está visible. Así una recarga
+  // o salida inmediata conserva exactamente la cola actual.
+  if (state.studyQueue.length > 0) {
+    await persistStudySessionQueue(state.studyQueue);
+  }
+
   // Precalcular las etiquetas de los 2 botones con el intervalo estimado.
+  const previewCard = (card.importedFromAnki && card.lastReview == null)
+    ? { ...card, state: 'new', queue: 'new', intervalMinutes: 0, learningStep: 0 }
+    : card;
+
   for (const answer of ['again', 'good']) {
-    const preview = window.SRS.scheduleNextReview(card, answer);
-    document.getElementById(`${answer}-eta`).textContent = window.SRS.formatInterval(preview.intervalMinutes);
+    const preview = window.SRS.scheduleNextReview(previewCard, answer);
+    const previewMinutes = previewCard.state === 'new'
+      ? (answer === 'again' ? 1 : 10)
+      : preview.intervalMinutes;
+    document.getElementById(answer + '-eta').textContent =
+      window.SRS.formatInterval(previewMinutes);
   }
 
   // El frente ya no suena solo al mostrarse la tarjeta; el audio empieza al
@@ -3190,6 +3221,9 @@ async function answerCurrentCard(answer) {
   // quede guardado inmediatamente. Si "Otra vez" reintroduce la tarjeta,
   // también queda guardada en su nueva posición.
   await persistStudySessionQueue(state.studyQueue);
+  if (state.currentDeckId) {
+    await refreshDeckDetail();
+  }
   await showNextCard();
 }
 
