@@ -2817,11 +2817,9 @@ async function refreshDeckDetail() {
   document.getElementById('stat-review').textContent = counts.reviewCount;
   document.getElementById('stat-new').textContent = counts.newCount;
 
-  // El botón sí depende de si existen tarjetas disponibles para iniciar
-  // una nueva sesión, aunque "Pendientes" esté en 0.
-  const canStartStudy = counts.pendingPreview > 0 || hasSavedSession;
-  document.getElementById('btn-start-study').classList.toggle('hidden', !canStartStudy);
-  document.getElementById('no-due-hint').classList.toggle('hidden', canStartStudy);
+  // El botón solo aparece cuando esta sesión tiene tarjetas pendientes.
+  document.getElementById('btn-start-study').classList.toggle('hidden', pending === 0);
+  document.getElementById('no-due-hint').classList.toggle('hidden', pending > 0);
 }
 
 document.getElementById('btn-edit-deck-name').addEventListener('click', async () => {
