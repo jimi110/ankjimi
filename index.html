@@ -3206,10 +3206,21 @@ function showSaveToast() {
   _saveToastTimer = setTimeout(() => el.classList.remove('visible'), 900);
 }
 
+async function consumeNewDailyQuota(card) {
+  if (!state.currentDeckId || card.state !== 'new') return;
+  let deck = await window.DB.getDeck(state.currentDeckId);
+  if (!deck) return;
+  deck = await ensureDailyRelease(deck);
+  deck.newReleasedTotal = Math.max(0, (deck.newReleasedTotal || 0) - 1);
+  await window.DB.updateDeck(deck);
+}
+
 async function answerCurrentCard(answer) {
   const item = state.studyQueue.shift();
   if (!item) return;
   const { card } = item;
+  const wasNew = card.state === 'new';
+  if (wasNew) await consumeNewDailyQuota(card);
 
   const before = { interval: card.intervalMinutes, ease: card.easeFactor };
   const updated = window.SRS.scheduleNextReview(card, answer);
