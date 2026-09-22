@@ -413,6 +413,12 @@ body {
   text-align: center;
   word-break: break-word;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-content > * {
+  max-width: 100%;
 }
 
 /* Bloque principal del frente: palabra/kanji grande */
@@ -464,10 +470,11 @@ body.furigana-off ruby rt { display: none; }
 #card-front hr, #card-back hr { display: none; }
 
 .card-content img {
+  display: block;
   max-width: 100%;
   max-height: 34vh;
   border-radius: var(--radius-m);
-  margin-top: 6px;
+  margin: 6px auto 0;
 }
 
 /* Botones circulares de audio */
@@ -955,16 +962,16 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
         </div>
         <div class="stat-row">
           <div class="stat">
-            <span class="stat-number" id="stat-new">0</span>
-            <span class="stat-label">Nuevas</span>
+            <span class="stat-number" id="stat-pending">0</span>
+            <span class="stat-label">Pendientes</span>
           </div>
           <div class="stat">
             <span class="stat-number" id="stat-review">0</span>
-            <span class="stat-label">Para repasar</span>
+            <span class="stat-label">Repaso</span>
           </div>
           <div class="stat">
-            <span class="stat-number" id="stat-total">0</span>
-            <span class="stat-label">Total pendientes</span>
+            <span class="stat-number" id="stat-new">0</span>
+            <span class="stat-label">Por estudiar</span>
           </div>
         </div>
         <button id="btn-start-study" class="btn primary big">Empezar a estudiar</button>
@@ -1501,6 +1508,8 @@ async function createDeck(name, opts = {}) {
     maxAccumulated: orDefault(opts.maxAccumulated, 100),
     newReleasedTotal: orDefault(opts.newReleasedTotal, 0),
     lastReleaseDate: orDefault(opts.lastReleaseDate, null),
+    studySessionActive: !!opts.studySessionActive,
+    studySessionQueue: Array.isArray(opts.studySessionQueue) ? opts.studySessionQueue.slice() : [],
     isDefault: !!opts.isDefault,
   };
   const t = tx(db, ['decks'], 'readwrite');
@@ -2589,16 +2598,36 @@ function pickAvailableNewCards(newCards, deck) {
 }
 
 async function computeDeckCounts(deckId) {
+  let deck = await window.DB.getDeck(deckId);
+  if (!deck) return { newCount: 0, reviewCount: 0, availableNewCount: 0, pendingPreview: 0, total: 0, totalCards: 0 };
+
+  // Libera el cupo diario antes de calcular lo que se puede estudiar hoy.
+  deck = await ensureDailyRelease(deck);
+
   const cards = await window.DB.getCardsByDeck(deckId);
   const now = window.SRS.nowMs();
-  let newCount = 0;
-  let reviewCount = 0;
-  for (const c of cards) {
-    if (!window.SRS.isCardDue(c, now)) continue;
-    if (c.state === 'new') newCount += 1;
-    else reviewCount += 1;
-  }
-  return { newCount, reviewCount, total: newCount + reviewCount, totalCards: cards.length };
+
+  // "Por estudiar" = todas las tarjetas que siguen siendo nuevas, aunque
+  // algunas todavía no estén liberadas por el límite diario.
+  const newCards = cards.filter((c) => c.state === 'new');
+
+  // "Repaso" = tarjetas ya estudiadas que vencen ahora.
+  const reviewDue = cards.filter((c) => c.state !== 'new' && window.SRS.isCardDue(c, now));
+  const availableNew = pickAvailableNewCards(
+    newCards.filter((c) => window.SRS.isCardDue(c, now)),
+    deck
+  );
+
+  const pendingPreview = reviewDue.length + availableNew.length;
+
+  return {
+    newCount: newCards.length,
+    reviewCount: reviewDue.length,
+    availableNewCount: availableNew.length,
+    pendingPreview,
+    total: pendingPreview,
+    totalCards: cards.length,
+  };
 }
 
 async function refreshDeckList() {
@@ -2722,12 +2751,23 @@ async function refreshDeckDetail() {
   document.getElementById('topbar-title').textContent = deck.name;
 
   const counts = await computeDeckCounts(state.currentDeckId);
-  document.getElementById('stat-new').textContent = counts.newCount;
-  document.getElementById('stat-review').textContent = counts.reviewCount;
-  document.getElementById('stat-total').textContent = counts.total;
 
-  document.getElementById('btn-start-study').classList.toggle('hidden', counts.total === 0);
-  document.getElementById('no-due-hint').classList.toggle('hidden', counts.total > 0);
+  // Si hay una sesión empezada, "Pendientes" es exactamente lo que queda
+  // en esa sesión y se conserva incluso aunque el usuario salga del mazo.
+  const hasSavedSession = deck.studySessionActive &&
+    Array.isArray(deck.studySessionQueue) &&
+    deck.studySessionQueue.length > 0;
+
+  const pending = hasSavedSession
+    ? deck.studySessionQueue.length
+    : counts.pendingPreview;
+
+  document.getElementById('stat-pending').textContent = pending;
+  document.getElementById('stat-review').textContent = counts.reviewCount;
+  document.getElementById('stat-new').textContent = counts.newCount;
+
+  document.getElementById('btn-start-study').classList.toggle('hidden', pending === 0);
+  document.getElementById('no-due-hint').classList.toggle('hidden', pending > 0);
 }
 
 document.getElementById('btn-edit-deck-name').addEventListener('click', async () => {
@@ -2834,40 +2874,100 @@ document.getElementById('btn-deck-stats').addEventListener('click', async () => 
 // Sesión de estudio
 // ---------------------------------------------------------------------
 
-async function startStudySession() {
-  const deckRaw = await window.DB.getDeck(state.currentDeckId);
-  const deck = await ensureDailyRelease(deckRaw);
-  const cards = await window.DB.getCardsByDeck(state.currentDeckId);
-  const now = window.SRS.nowMs();
-  const dueAll = cards.filter((c) => window.SRS.isCardDue(c, now));
+/**
+ * Guarda en el mazo la cola exacta de la sesión. Así, si el usuario sale
+ * del mazo, recarga la página o vuelve más tarde, "Pendientes" no vuelve
+ * a empezar desde cero: se conserva la cola que quedaba.
+ */
+async function persistStudySessionQueue(queue) {
+  if (!state.currentDeckId) return;
+  const deck = await window.DB.getDeck(state.currentDeckId);
+  if (!deck) return;
 
-  // Repasos vencidos: todos los que toquen (incluye los de días anteriores
-  // que se quedaron pendientes). Nuevas: solo las que el cupo diario
-  // acumulado del mazo permite mostrar hoy.
-  const dueReview = dueAll.filter((c) => c.state !== 'new');
-  const dueNew = dueAll.filter((c) => c.state === 'new');
-  const availableNew = pickAvailableNewCards(dueNew, deck);
-  const due = [...dueReview, ...availableNew];
+  deck.studySessionQueue = queue.map((item) => item.card.id);
+  deck.studySessionActive = queue.length > 0;
+  await window.DB.updateDeck(deck);
+}
 
-  // Orden: primero repasos vencidos hace más tiempo, luego nuevas en el mismo
-  // orden que tenían en Anki (o en el orden en que se añadieron a mano).
-  due.sort((a, b) => {
-    if (a.state === 'new' && b.state !== 'new') return 1;
-    if (a.state !== 'new' && b.state === 'new') return -1;
-    if (a.state === 'new' && b.state === 'new') return (a.sortOrder || 0) - (b.sortOrder || 0);
-    return a.due - b.due;
-  });
+/** Recupera una sesión guardada usando los IDs persistidos en el mazo. */
+async function restoreStudySession(deck) {
+  if (!deck || !deck.studySessionActive || !Array.isArray(deck.studySessionQueue)) return null;
+  if (deck.studySessionQueue.length === 0) return null;
 
+  const cards = await window.DB.getCardsByDeck(deck.id);
+  const cardById = new Map(cards.map((card) => [card.id, card]));
   const queue = [];
-  for (const card of due) {
+
+  for (const cardId of deck.studySessionQueue) {
+    const card = cardById.get(cardId);
+    if (!card) continue;
     const note = await window.DB.getNote(card.noteId);
     if (note) queue.push({ card, note });
   }
 
-  state.studyQueue = queue;
+  // Limpia automáticamente IDs que ya no existan.
+  if (queue.length !== deck.studySessionQueue.length) {
+    const fixedDeck = {
+      ...deck,
+      studySessionQueue: queue.map((item) => item.card.id),
+      studySessionActive: queue.length > 0,
+    };
+    await window.DB.updateDeck(fixedDeck);
+  }
+
+  return queue;
+}
+
+async function startStudySession() {
+  let deck = await window.DB.getDeck(state.currentDeckId);
+  if (!deck) return;
+
+  // Si ya había una sesión empezada, continúa exactamente donde se dejó.
+  let queue = await restoreStudySession(deck);
+
+  if (!queue || queue.length === 0) {
+    deck = await ensureDailyRelease(deck);
+    const cards = await window.DB.getCardsByDeck(state.currentDeckId);
+    const now = window.SRS.nowMs();
+    const dueAll = cards.filter((c) => window.SRS.isCardDue(c, now));
+
+    // Repasos vencidos: todos los que toquen. Nuevas: solo las que el
+    // cupo diario acumulado del mazo permite mostrar hoy.
+    const dueReview = dueAll.filter((c) => c.state !== 'new');
+    const dueNew = dueAll.filter((c) => c.state === 'new');
+    const availableNew = pickAvailableNewCards(dueNew, deck);
+    const due = [...dueReview, ...availableNew];
+
+    // Orden: primero repasos vencidos hace más tiempo, luego nuevas.
+    due.sort((a, b) => {
+      if (a.state === 'new' && b.state !== 'new') return 1;
+      if (a.state !== 'new' && b.state === 'new') return -1;
+      if (a.state === 'new' && b.state === 'new') return (a.sortOrder || 0) - (b.sortOrder || 0);
+      return a.due - b.due;
+    });
+
+    queue = [];
+    for (const card of due) {
+      const note = await window.DB.getNote(card.noteId);
+      if (note) queue.push({ card, note });
+    }
+
+    if (queue.length > 0) {
+      deck.studySessionActive = true;
+      deck.studySessionQueue = queue.map((item) => item.card.id);
+      await window.DB.updateDeck(deck);
+    }
+  }
+
+  state.studyQueue = queue || [];
   state.studySessionStats = { studied: 0, again: 0, good: 0, hard: 0, easy: 0 };
 
-  if (queue.length === 0) {
+  if (state.studyQueue.length === 0) {
+    // No hay sesión abierta: "Pendientes" vuelve a ser el cálculo de lo
+    // disponible para estudiar ahora mismo.
+    deck.studySessionActive = false;
+    deck.studySessionQueue = [];
+    await window.DB.updateDeck(deck);
     await refreshDeckDetail();
     return;
   }
@@ -3086,6 +3186,10 @@ async function answerCurrentCard(answer) {
     state.studyQueue.splice(insertAt, 0, { card: updated, note });
   }
 
+  // Persistimos la cola DESPUÉS de responder, de modo que pasar de 10 a 9
+  // quede guardado inmediatamente. Si "Otra vez" reintroduce la tarjeta,
+  // también queda guardada en su nueva posición.
+  await persistStudySessionQueue(state.studyQueue);
   await showNextCard();
 }
 
@@ -3105,6 +3209,7 @@ document.getElementById('btn-delete-card').addEventListener('click', () => {
         label: 'Eliminar', style: 'danger', onClick: async () => {
           state.studyQueue.shift();
           await window.DB.deleteCard(item.card.id);
+          await persistStudySessionQueue(state.studyQueue);
           playSound('danger');
           showSaveToast();
           await showNextCard();
@@ -3118,6 +3223,18 @@ async function finishStudySession() {
   const stats = state.studySessionStats;
   document.getElementById('session-summary').textContent =
     `Has repasado ${stats.studied} tarjeta(s): ${stats.good} bien, ${stats.again} otra vez.`;
+
+  // La sesión terminó: "Pendientes" pasa a 0 y en la siguiente entrada
+  // se calcularán de nuevo las tarjetas disponibles para estudiar.
+  if (state.currentDeckId) {
+    const deck = await window.DB.getDeck(state.currentDeckId);
+    if (deck) {
+      deck.studySessionActive = false;
+      deck.studySessionQueue = [];
+      await window.DB.updateDeck(deck);
+    }
+  }
+
   playSound('complete');
   backStack = ['view-decks'];
   showView('view-session-done');
