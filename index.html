@@ -1549,6 +1549,7 @@ async function createDeck(name, opts = {}) {
     dailyQuotaMigrated: !!opts.dailyQuotaMigrated,
     studySessionActive: !!opts.studySessionActive,
     studySessionQueue: Array.isArray(opts.studySessionQueue) ? opts.studySessionQueue.slice() : [],
+    studySessionFinishedDate: orDefault(opts.studySessionFinishedDate, null),
     isDefault: !!opts.isDefault,
   };
   const t = tx(db, ['decks'], 'readwrite');
@@ -2687,12 +2688,13 @@ async function refreshDeckList() {
     row.className = 'deck-row';
 
     const savedQueue = Array.isArray(deck.studySessionQueue) ? deck.studySessionQueue : [];
-    // "Pendientes" representa únicamente la sesión actualmente abierta.
-    // Al terminar una sesión vuelve a 0; las tarjetas que tocan se reflejan
-    // en "Repaso" y "Por estudiar", y se podrán iniciar en una nueva sesión.
+    // "Pendientes" guarda la sesión actual. Si todavía no se ha terminado
+    // la sesión de hoy, mostramos lo disponible para empezar. Después de
+    // terminarla, queda en 0 hasta el siguiente día.
+    const finishedToday = deck.studySessionFinishedDate === todayKey();
     const pending = deck.studySessionActive && savedQueue.length > 0
       ? savedQueue.length
-      : 0;
+      : (finishedToday ? 0 : counts.pendingPreview);
 
     row.innerHTML = `
       <div>
@@ -2809,15 +2811,18 @@ async function refreshDeckDetail() {
     Array.isArray(deck.studySessionQueue) &&
     deck.studySessionQueue.length > 0;
 
-  // "Pendientes" es la cola de la sesión actual, no un contador general.
-  // Por eso queda en 0 cuando no hay una sesión abierta.
-  const pending = hasSavedSession ? deck.studySessionQueue.length : 0;
+  // Si hay una sesión abierta, "Pendientes" es exactamente lo que queda.
+  // Si hoy ya se terminó, queda en 0. Si aún no se ha empezado hoy,
+  // muestra las tarjetas disponibles para iniciar la sesión.
+  const finishedToday = deck.studySessionFinishedDate === todayKey();
+  const pending = hasSavedSession
+    ? deck.studySessionQueue.length
+    : (finishedToday ? 0 : counts.pendingPreview);
 
   document.getElementById('stat-pending').textContent = pending;
   document.getElementById('stat-review').textContent = counts.reviewCount;
   document.getElementById('stat-new').textContent = counts.newCount;
 
-  // El botón solo aparece cuando esta sesión tiene tarjetas pendientes.
   document.getElementById('btn-start-study').classList.toggle('hidden', pending === 0);
   document.getElementById('no-due-hint').classList.toggle('hidden', pending > 0);
 }
@@ -2884,6 +2889,9 @@ document.getElementById('btn-save-deck-limits').addEventListener('click', async 
     const delta = newPerDay - oldPerDay;
     deck.newReleasedTotal = Math.max(0, (deck.newReleasedTotal || 0) + delta);
     deck.lastReleaseAmount = newPerDay;
+    // Si al aumentar el límite aparecen nuevas tarjetas disponibles hoy,
+    // permitimos iniciar otra sesión en este mismo día.
+    if (delta > 0) deck.studySessionFinishedDate = null;
   } else {
     deck.lastReleaseAmount = newPerDay;
   }
@@ -3327,6 +3335,7 @@ async function finishStudySession() {
     if (deck) {
       deck.studySessionActive = false;
       deck.studySessionQueue = [];
+      deck.studySessionFinishedDate = todayKey();
       await window.DB.updateDeck(deck);
 
       const counts = await computeDeckCounts(state.currentDeckId);
