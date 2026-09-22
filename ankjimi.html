@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4f46e5">
+<title>Ankjimi — Repetición espaciada</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ankjimi">
+<style>
+/* =========================================================
+   Tokens de diseño
+   Paleta "cuaderno de estudio": papel cálido + tinta azul profunda.
+   Serif para el contenido de las tarjetas (lectura), sans para la UI.
+   ========================================================= */
+:root {
+  --paper: #faf7f0;
+  --paper-raised: #ffffff;
+  --ink: #1c2430;
+  --ink-soft: #5b6472;
+  --line: #e4ddd0;
+
+  --accent: #2b4570;       /* azul tinta profundo */
+  --accent-soft: #e8ecf5;
+  --good: #2f6f4e;          /* verde apagado, no acid-green */
+  --good-soft: #e3efe8;
+  --bad: #a13d3d;           /* rojo terroso, no rojo semáforo */
+  --bad-soft: #f5e6e4;
+
+  --radius-s: 8px;
+  --radius-m: 14px;
+  --radius-l: 20px;
+
+  --font-ui: 'Iowan Old Style', 'Palatino Linotype', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-ui-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-card: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #14171c;
+    --paper-raised: #1c2027;
+    --ink: #ecebe6;
+    --ink-soft: #a3aab5;
+    --line: #2b303a;
+    --accent: #7c93c2;
+    --accent-soft: #232b3c;
+    --good: #6fbf94;
+    --good-soft: #1c2e24;
+    --bad: #d98a8a;
+    --bad-soft: #33201f;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui-sans);
+  -webkit-tap-highlight-color: transparent;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+#app {
+  max-width: 720px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------- Barra superior ---------------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  z-index: 10;
+}
+
+.topbar h1 {
+  font-family: var(--font-card);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  padding: 6px 10px;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  color: var(--ink);
+}
+.icon-btn:hover { background: var(--accent-soft); }
+.icon-btn.hidden { visibility: hidden; }
+
+/* ---------------- Vistas ---------------- */
+#views {
+  flex: 1;
+  padding: 20px 16px 40px;
+}
+
+.view { display: none; }
+.view.active { display: block; animation: fade-in 0.18s ease-out; }
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .view.active { animation: none; }
+}
+
+.hidden { display: none !important; }
+
+/* ---------------- Botones ---------------- */
+.btn {
+  font-family: var(--font-ui-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 13px 20px;
+  border-radius: var(--radius-m);
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: transform 0.08s ease, opacity 0.15s ease;
+}
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.secondary { background: var(--paper-raised); color: var(--ink); border: 1px solid var(--line); }
+.btn.success { background: var(--good-soft); color: var(--good); border: 1.5px solid var(--good); }
+.btn.danger { background: var(--bad-soft); color: var(--bad); border: 1.5px solid var(--bad); }
+.btn.big { padding: 16px 20px; font-size: 1.05rem; }
+
+.btn small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.75rem;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* ---------------- Lista de mazos ---------------- */
+.deck-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+
+.deck-row {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.deck-row:active { background: var(--accent-soft); }
+
+.deck-row .deck-name {
+  font-family: var(--font-card);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.deck-row .deck-counts {
+  display: flex;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+.deck-row .badge-due {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  min-width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0 8px;
+}
+.deck-row .badge-due.zero { background: var(--line); color: var(--ink-soft); }
+
+.fab-row { display: flex; flex-direction: column; gap: 4px; }
+
+.empty-hint {
+  color: var(--ink-soft);
+  text-align: center;
+  padding: 30px 10px;
+  line-height: 1.5;
+}
+
+/* ---------------- Detalle de mazo ---------------- */
+.deck-detail-card {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 24px 20px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.deck-detail-card h2 {
+  font-family: var(--font-card);
+  margin: 0 0 18px;
+  font-size: 1.4rem;
+}
+
+.stat-row { display: flex; justify-content: space-around; margin-bottom: 20px; }
+.stat { display: flex; flex-direction: column; }
+.stat-number { font-size: 1.8rem; font-weight: 700; font-family: var(--font-card); }
+.stat-label { font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; }
+
+.deck-actions { display: flex; flex-direction: column; gap: 4px; }
+
+/* ---------------- Estudio (tema oscuro fijo, al estilo Anki) ---------------- */
+:root {
+  --study-bg: #1f2124;
+  --study-bg-raised: #26282c;
+  --study-ink: #f2f1ed;
+  --study-ink-soft: #9a9da3;
+  --study-line: #35373b;
+  --study-accent: #5b8def;
+}
+
+#view-study {
+  background: var(--study-bg);
+  color: var(--study-ink);
+  margin: -20px -16px -40px;
+  padding: 20px 16px 40px;
+  min-height: 100vh;
+}
+
+/* Cuando se está estudiando, la barra superior también pasa a oscuro */
+body:has(#view-study.active) .topbar {
+  background: var(--study-bg);
+  border-bottom-color: var(--study-line);
+}
+body:has(#view-study.active) .topbar h1,
+body:has(#view-study.active) .icon-btn {
+  color: var(--study-ink);
+}
+
+.study-progress {
+  text-align: center;
+  color: #9a9da3;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.card-area {
+  min-height: 38vh;
+  display: flex;
+  align-items: flex-start;
+}
+
+.card-face {
+  background: transparent;
+  border: none;
+  padding: 18px 6px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.card-content {
+  font-family: var(--font-card);
+  line-height: 1.5;
+  text-align: center;
+  word-break: break-word;
+  width: 100%;
+}
+
+/* Bloque principal del frente: palabra/kanji grande */
+#card-front { font-size: clamp(1.7rem, 8vw, 2.4rem); font-weight: 600; }
+.field-sentence { line-height: 1.6; }
+#card-front ruby { ruby-position: over; }
+#card-front rt {
+  font-size: 0.85rem;
+  color: #b9bcc2;
+  font-family: var(--font-ui-sans);
+  font-weight: 400;
+}
+
+/* Campos etiquetados por el importador (mapFieldsToFrontBack en anki-import.js) */
+.field-reading {
+  font-size: 1.1rem;
+  color: #b9bcc2;
+  font-family: var(--font-ui-sans);
+}
+.field-meaning {
+  font-size: 1.35rem;
+  font-family: var(--font-ui-sans);
+  color: var(--study-ink);
+  margin-top: 4px;
+}
+.field-sentence {
+  font-size: 1.2rem;
+  margin-top: 12px;
+  color: var(--study-ink);
+}
+.field-sentence-meaning {
+  font-size: 1.02rem;
+  color: #b9bcc2;
+  font-family: var(--font-ui-sans);
+  margin-top: 2px;
+}
+.field-notes {
+  font-size: 0.92rem;
+  color: #9a9da3;
+  font-family: var(--font-ui-sans);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--study-line);
+}
+#card-back hr {
+  border: none;
+  border-top: 1px solid var(--study-line);
+  margin: 10px 0;
+}
+
+.card-content img {
+  max-width: 100%;
+  max-height: 34vh;
+  border-radius: var(--radius-s);
+  margin-top: 6px;
+}
+
+/* Botones circulares de audio, al estilo Anki */
+.audio-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 6px;
+}
+.audio-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #34373c;
+  color: var(--study-ink);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.audio-btn:active { background: #40444a; }
+/* Reproduce automáticamente el audio del frente si audio-autoplay lo indica */
+
+#card-back {
+  border-top: 1px solid var(--study-line);
+  padding-top: 16px;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.study-controls { margin-top: 20px; }
+
+/* Confirmación breve de que el progreso ya quedó guardado en este dispositivo */
+.save-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  transform: translate(-50%, 10px);
+  background: var(--study-bg-raised, #26282c);
+  color: var(--good, #2f6f4e);
+  border: 1px solid var(--good, #2f6f4e);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: var(--font-ui-sans);
+  font-size: 0.85rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 50;
+}
+.save-toast.visible { opacity: 1; transform: translate(-50%, 0); }
+
+#view-study .btn.primary.big {
+  background: var(--study-accent);
+  color: #fff;
+}
+
+/* Fila de 2 botones de calificación (Otra vez / Bien) */
+.answer-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.rate-btn {
+  border: none;
+  border-radius: var(--radius-m);
+  padding: 16px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  background: #2c2f34;
+  color: var(--study-ink);
+  font-family: var(--font-ui-sans);
+}
+.rate-btn:active { transform: scale(0.97); }
+.rate-label { font-size: 1.02rem; font-weight: 600; }
+.rate-eta { font-size: 0.76rem; color: #a7aab0; }
+
+.rate-again { background: var(--bad-soft-study, #3a2c2c); }
+.rate-again .rate-label { color: #e79a9a; }
+.rate-again .rate-eta { color: #e79a9a; }
+.rate-good { background: var(--good-soft-study, #23342a); }
+.rate-good .rate-label { color: #8fcf9f; }
+.rate-good .rate-eta { color: #8fcf9f; }
+
+/* ---------------- Sesión completada ---------------- */
+.done-card {
+  text-align: center;
+  padding: 60px 10px;
+}
+.done-emoji { font-size: 3rem; margin: 0 0 6px; }
+.done-card h2 { font-family: var(--font-card); margin: 0 0 8px; }
+.done-card p { color: var(--ink-soft); margin-bottom: 24px; }
+
+/* ---------------- Formularios ---------------- */
+.form-card, .stats-card, .settings-card {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 20px;
+}
+
+.form-card label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin: 14px 0 6px;
+}
+.form-card label:first-child { margin-top: 0; }
+
+textarea {
+  width: 100%;
+  font-family: var(--font-card);
+  font-size: 1.05rem;
+  padding: 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  resize: vertical;
+}
+textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------------- Estadísticas ---------------- */
+.stats-card h2, .settings-card h2 {
+  font-family: var(--font-card);
+  font-size: 1.1rem;
+  margin: 0 0 12px;
+}
+.settings-card h2:not(:first-child) { margin-top: 26px; }
+
+.stats-list { list-style: none; margin: 0; padding: 0; }
+.stats-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+.stats-list li:last-child { border-bottom: none; }
+.stats-list li strong { font-family: var(--font-card); }
+
+.hint-text { color: var(--ink-soft); font-size: 0.9rem; line-height: 1.5; margin: 0 0 12px; }
+
+/* ---------------- Modal ---------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 18, 14, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+
+.modal-box {
+  background: var(--paper-raised);
+  border-radius: var(--radius-l);
+  padding: 22px;
+  max-width: 380px;
+  width: 100%;
+}
+
+.modal-box p { margin: 0 0 14px; line-height: 1.5; white-space: pre-line; }
+
+.modal-spinner {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  border: 3.5px solid var(--accent-soft);
+  border-top-color: var(--accent);
+  animation: modal-spin 0.8s linear infinite;
+}
+@keyframes modal-spin { to { transform: rotate(360deg); } }
+
+.modal-progress {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+
+.modal-actions { display: flex; gap: 8px; }
+.modal-actions .btn { margin-top: 0; }
+
+/* ---------------- Responsive / escritorio ---------------- */
+@media (min-width: 720px) {
+  #app { border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .card-content { font-size: 1.5rem; }
+  .deck-actions { flex-direction: row; }
+}
+
+</style>
+</head>
+<body>
+
+<div id="save-toast" class="save-toast">✓ Progreso guardado en este dispositivo</div>
+<div id="app">
+
+  <!-- ============ BARRA SUPERIOR ============ -->
+  <header class="topbar">
+    <button id="btn-back" class="icon-btn hidden" aria-label="Volver">←</button>
+    <h1 id="topbar-title">Ankjimi</h1>
+    <button id="btn-settings" class="icon-btn" aria-label="Ajustes">⚙️</button>
+  </header>
+
+  <main id="views">
+
+    <!-- ============ VISTA: LISTA DE MAZOS ============ -->
+    <section id="view-decks" class="view active">
+      <div id="deck-list" class="deck-list">
+        <p class="empty-hint" id="no-decks-hint">
+          Aún no tienes ningún mazo. Crea uno nuevo o importa un archivo .apkg de Anki.
+        </p>
+      </div>
+
+      <div class="fab-row">
+        <button id="btn-new-deck" class="btn secondary">+ Nuevo mazo</button>
+        <button id="btn-import-apkg" class="btn primary">Importar .apkg</button>
+      </div>
+    </section>
+
+    <!-- ============ VISTA: DETALLE DE MAZO ============ -->
+    <section id="view-deck-detail" class="view">
+      <div class="deck-detail-card">
+        <h2 id="deck-detail-name">Nombre del mazo</h2>
+        <div class="stat-row">
+          <div class="stat">
+            <span class="stat-number" id="stat-new">0</span>
+            <span class="stat-label">Nuevas</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="stat-review">0</span>
+            <span class="stat-label">Para repasar</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="stat-total">0</span>
+            <span class="stat-label">Total pendientes</span>
+          </div>
+        </div>
+        <button id="btn-start-study" class="btn primary big">Empezar a estudiar</button>
+        <p id="no-due-hint" class="empty-hint hidden">
+          No hay tarjetas pendientes ahora mismo. Vuelve más tarde 🎉
+        </p>
+      </div>
+
+      <div class="deck-actions">
+        <button id="btn-add-card" class="btn secondary">+ Añadir tarjeta</button>
+        <button id="btn-deck-stats" class="btn secondary">Estadísticas</button>
+        <button id="btn-delete-deck" class="btn danger">Eliminar mazo</button>
+      </div>
+    </section>
+
+    <!-- ============ VISTA: ESTUDIO ============ -->
+    <section id="view-study" class="view">
+      <div class="study-progress">
+        <span id="study-remaining">0 restantes</span>
+      </div>
+
+      <div class="card-area">
+        <div id="card-face" class="card-face">
+          <div id="card-front" class="card-content"></div>
+          <div id="card-back" class="card-content hidden"></div>
+        </div>
+      </div>
+
+      <div class="study-controls">
+        <button id="btn-show-answer" class="btn primary big">Mostrar respuesta</button>
+
+        <div id="answer-buttons" class="answer-buttons hidden">
+          <button id="btn-again" class="rate-btn rate-again">
+            <span class="rate-label">Otra vez</span>
+            <span class="rate-eta" id="again-eta"></span>
+          </button>
+          <button id="btn-good" class="rate-btn rate-good">
+            <span class="rate-label">Bien</span>
+            <span class="rate-eta" id="good-eta"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VISTA: SESIÓN TERMINADA ============ -->
+    <section id="view-session-done" class="view">
+      <div class="done-card">
+        <p class="done-emoji">🎉</p>
+        <h2>¡Sesión completada!</h2>
+        <p id="session-summary"></p>
+        <button id="btn-back-to-decks" class="btn primary">Volver a mazos</button>
+      </div>
+    </section>
+
+    <!-- ============ VISTA: AÑADIR TARJETA ============ -->
+    <section id="view-add-card" class="view">
+      <div class="form-card">
+        <label for="input-front">Pregunta / Frente</label>
+        <textarea id="input-front" rows="3" placeholder="Escribe la pregunta..."></textarea>
+
+        <label for="input-back">Respuesta / Reverso</label>
+        <textarea id="input-back" rows="3" placeholder="Escribe la respuesta..."></textarea>
+
+        <button id="btn-save-card" class="btn primary big">Guardar tarjeta</button>
+      </div>
+    </section>
+
+    <!-- ============ VISTA: ESTADÍSTICAS ============ -->
+    <section id="view-stats" class="view">
+      <div class="stats-card">
+        <h2>Resumen del mazo</h2>
+        <ul id="stats-list" class="stats-list"></ul>
+      </div>
+    </section>
+
+    <!-- ============ VISTA: AJUSTES ============ -->
+    <section id="view-settings" class="view">
+      <div class="settings-card">
+        <h2>Copia de seguridad</h2>
+        <p class="hint-text">Exporta tu progreso a un archivo JSON, o restáuralo en otro dispositivo.</p>
+        <button id="btn-export-backup" class="btn secondary">Exportar copia de seguridad</button>
+        <button id="btn-import-backup" class="btn secondary">Restaurar copia de seguridad</button>
+
+        <h2>Datos</h2>
+        <button id="btn-wipe-all" class="btn danger">Borrar todos los datos</button>
+
+        <h2>Acerca de</h2>
+        <p class="hint-text">
+          Ankjimi — aplicación de repetición espaciada de código abierto, inspirada en Anki.
+          Funciona 100% en tu navegador, sin servidor, y puede instalarse como app (PWA).
+          Tu progreso se guarda automáticamente en este dispositivo cada vez que respondes una tarjeta.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Inputs de archivo ocultos -->
+  <input type="file" id="file-apkg" accept=".apkg" class="hidden">
+  <input type="file" id="file-backup" accept=".json" class="hidden">
+
+  <!-- Modal genérico simple -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div id="modal-spinner" class="modal-spinner hidden" aria-hidden="true"></div>
+      <p id="modal-message"></p>
+      <div id="modal-progress" class="modal-progress hidden"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script>
+
+/* ===== srs.js ===== */
+/**
+ * srs.js
+ * ------
+ * Motor de repetición espaciada (SRS), inspirado en el algoritmo de Anki.
+ * No depende de la interfaz ni de IndexedDB: recibe un objeto "card" plano
+ * y devuelve una nueva versión actualizada. Esto permite testear y
+ * modificar el algoritmo de forma aislada.
+ *
+ * Soporta las 4 respuestas clásicas de Anki: 'again' (otra vez), 'hard'
+ * (difícil), 'good' (bien) y 'easy' (fácil).
+ *
+ * MODELO DE TARJETA (campos relevantes para el SRS):
+ * {
+ *   state: 'new' | 'learning' | 'review' | 'relearning',
+ *   queue: 'new' | 'learning' | 'review',      // cola efectiva de estudio
+ *   easeFactor: number,        // ej. 2500 = 250% (se guarda *1000 para evitar floats raros)
+ *   intervalMinutes: number,   // intervalo actual, en minutos (permite sub-día)
+ *   learningStep: number,      // índice dentro de los pasos de aprendizaje
+ *   reps: number,              // nº de repasos correctos consecutivos totales
+ *   lapses: number,            // nº de fallos en fase 'review' (leeches)
+ *   correctCount: number,      // contador histórico de aciertos
+ *   wrongCount: number,        // contador histórico de fallos
+ *   due: number,               // timestamp (ms) de la próxima revisión
+ *   lastReview: number|null,   // timestamp (ms) del último repaso
+ * }
+ */
+
+const SRS_DEFAULT_CONFIG = Object.freeze({
+  learningStepsMinutes: [1, 10],
+  relearningStepsMinutes: [10],
+  graduatingIntervalDays: 1,
+  easyIntervalDays: 4,
+  startingEase: 2500,
+  easeBonusGood: 0,
+  easeBonusEasy: 150,
+  easePenaltyHard: 150,
+  easePenaltyAgain: 200,
+  minEase: 1300,
+  hardIntervalMultiplier: 1.2,
+  easyBonusMultiplier: 1.3,
+  fuzzRatio: 0.05,
+  leechThreshold: 8,
+  maxIntervalDays: 365 * 2,
+});
+
+function nowMs() {
+  return Date.now();
+}
+
+function minutesToMs(min) {
+  return min * 60 * 1000;
+}
+
+function applyFuzz(intervalMinutes, config) {
+  if (intervalMinutes < 24 * 60) return intervalMinutes;
+  const fuzz = intervalMinutes * config.fuzzRatio;
+  const delta = (Math.random() * 2 - 1) * fuzz;
+  return Math.max(1, Math.round(intervalMinutes + delta));
+}
+
+function createNewCardState() {
+  return {
+    state: 'new',
+    queue: 'new',
+    easeFactor: SRS_DEFAULT_CONFIG.startingEase,
+    intervalMinutes: 0,
+    learningStep: 0,
+    reps: 0,
+    lapses: 0,
+    correctCount: 0,
+    wrongCount: 0,
+    due: nowMs(),
+    lastReview: null,
+    // Posición para mantener el mismo orden de aprendizaje que tenía en Anki
+    // (o el orden de creación, para tarjetas nuevas añadidas a mano). Cuanto
+    // más bajo, antes aparece entre las tarjetas nuevas.
+    sortOrder: 0,
+  };
+}
+
+/**
+ * @param {object} card
+ * @param {'again'|'hard'|'good'|'easy'} answer
+ * @param {object} [config]
+ */
+function scheduleNextReview(card, answer, config = SRS_DEFAULT_CONFIG) {
+  const now = nowMs();
+  const next = { ...card, lastReview: now };
+
+  if (answer === 'again') {
+    next.wrongCount += 1;
+  } else {
+    next.correctCount += 1;
+  }
+
+  if (next.state === 'new' || next.state === 'learning') {
+    next.state = 'learning';
+    next.queue = 'learning';
+
+    if (answer === 'again') {
+      next.learningStep = 0;
+      const stepMin = config.learningStepsMinutes[0];
+      next.intervalMinutes = stepMin;
+      next.due = now + minutesToMs(stepMin);
+      return next;
+    }
+
+    if (answer === 'easy') {
+      next.state = 'review';
+      next.queue = 'review';
+      next.learningStep = 0;
+      next.reps += 1;
+      const easyMin = config.easyIntervalDays * 24 * 60;
+      next.intervalMinutes = applyFuzz(easyMin, config);
+      next.due = now + minutesToMs(next.intervalMinutes);
+      return next;
+    }
+
+    const steps = config.learningStepsMinutes;
+    const nextStepIndex = answer === 'hard' ? next.learningStep : next.learningStep + 1;
+
+    if (nextStepIndex < steps.length) {
+      next.learningStep = nextStepIndex;
+      const stepMin = steps[nextStepIndex];
+      next.intervalMinutes = stepMin;
+      next.due = now + minutesToMs(stepMin);
+      return next;
+    }
+
+    next.state = 'review';
+    next.queue = 'review';
+    next.learningStep = 0;
+    next.reps += 1;
+    const graduatingMin = config.graduatingIntervalDays * 24 * 60;
+    next.intervalMinutes = applyFuzz(graduatingMin, config);
+    next.due = now + minutesToMs(next.intervalMinutes);
+    return next;
+  }
+
+  if (next.state === 'relearning') {
+    next.queue = 'learning';
+
+    if (answer === 'again') {
+      next.learningStep = 0;
+      const stepMin = config.relearningStepsMinutes[0];
+      next.intervalMinutes = stepMin;
+      next.due = now + minutesToMs(stepMin);
+      return next;
+    }
+
+    const steps = config.relearningStepsMinutes;
+    const nextStepIndex = answer === 'hard' ? next.learningStep : next.learningStep + 1;
+    if (nextStepIndex < steps.length) {
+      next.learningStep = nextStepIndex;
+      const stepMin = steps[nextStepIndex];
+      next.intervalMinutes = stepMin;
+      next.due = now + minutesToMs(stepMin);
+      return next;
+    }
+
+    next.state = 'review';
+    next.queue = 'review';
+    next.learningStep = 0;
+    const minDays = 1;
+    next.intervalMinutes = applyFuzz(minDays * 24 * 60, config);
+    next.due = now + minutesToMs(next.intervalMinutes);
+    return next;
+  }
+
+  if (next.state === 'review') {
+    const currentDays = Math.max(1, next.intervalMinutes / (24 * 60));
+
+    if (answer === 'again') {
+      next.lapses += 1;
+      next.easeFactor = Math.max(config.minEase, next.easeFactor - config.easePenaltyAgain);
+      next.state = 'relearning';
+      next.queue = 'learning';
+      next.learningStep = 0;
+      const stepMin = config.relearningStepsMinutes[0];
+      next.intervalMinutes = stepMin;
+      next.due = now + minutesToMs(stepMin);
+      next.isLeech = next.lapses > 0 && next.lapses % config.leechThreshold === 0;
+      return next;
+    }
+
+    if (answer === 'hard') {
+      next.reps += 1;
+      next.easeFactor = Math.max(config.minEase, next.easeFactor - config.easePenaltyHard);
+      let newDays = currentDays * config.hardIntervalMultiplier;
+      newDays = Math.min(newDays, config.maxIntervalDays);
+      next.intervalMinutes = applyFuzz(Math.round(newDays * 24 * 60), config);
+      next.due = now + minutesToMs(next.intervalMinutes);
+      return next;
+    }
+
+    if (answer === 'easy') {
+      next.reps += 1;
+      next.easeFactor = Math.min(4000, next.easeFactor + config.easeBonusEasy);
+      let newDays = currentDays * (next.easeFactor / 1000) * config.easyBonusMultiplier;
+      newDays = Math.min(newDays, config.maxIntervalDays);
+      next.intervalMinutes = applyFuzz(Math.round(newDays * 24 * 60), config);
+      next.due = now + minutesToMs(next.intervalMinutes);
+      return next;
+    }
+
+    next.reps += 1;
+    next.easeFactor = Math.min(4000, next.easeFactor + config.easeBonusGood);
+    let newDays = currentDays * (next.easeFactor / 1000);
+    newDays = Math.min(newDays, config.maxIntervalDays);
+    next.intervalMinutes = applyFuzz(Math.round(newDays * 24 * 60), config);
+    next.due = now + minutesToMs(next.intervalMinutes);
+    return next;
+  }
+
+  return next;
+}
+
+function isCardDue(card, atMs = nowMs()) {
+  return card.due <= atMs;
+}
+
+function formatInterval(minutes) {
+  if (minutes < 1) return '<1 min';
+  if (minutes < 60) return `${Math.round(minutes)} min`;
+  if (minutes < 24 * 60) return `${Math.round(minutes / 60)} h`;
+  const days = minutes / (24 * 60);
+  if (days < 30) return `${Math.round(days)} d`;
+  if (days < 365) return `${Math.round(days / 30)} mes(es)`;
+  return `${(days / 365).toFixed(1)} años`;
+}
+
+window.SRS = {
+  DEFAULT_CONFIG: SRS_DEFAULT_CONFIG,
+  createNewCardState,
+  scheduleNextReview,
+  isCardDue,
+  formatInterval,
+  nowMs,
+};
+
+
+/* ===== db.js ===== */
+/**
+ * db.js
+ * -----
+ * Capa de persistencia. Usa IndexedDB para todo lo "grande" (mazos, notas,
+ * tarjetas, historial de repasos, medios) y localStorage solo para
+ * configuración simple (tema, nuevas/día, etc.).
+ *
+ * Esquema de object stores:
+ *  - decks:   { id, name, createdAt, newPerDay, isDefault }
+ *  - notes:   { id, deckId, modelName, fields: {front, back, ...}, tags: [] }
+ *  - cards:   { id, noteId, deckId, ...estado SRS (ver srs.js), createdAt }
+ *  - revlog:  { id (auto), cardId, ts, answer, intervalBefore, intervalAfter, easeBefore, easeAfter }
+ *  - media:   { id (= nombre de archivo), blob, mime }
+ */
+
+const DB_NAME = 'ankiweb-db';
+const DB_VERSION = 1;
+
+let _dbPromise = null;
+
+function openDB() {
+  if (_dbPromise) return _dbPromise;
+  _dbPromise = new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+
+    req.onupgradeneeded = (event) => {
+      const db = req.result;
+
+      if (!db.objectStoreNames.contains('decks')) {
+        const store = db.createObjectStore('decks', { keyPath: 'id' });
+        store.createIndex('name', 'name', { unique: false });
+      }
+      if (!db.objectStoreNames.contains('notes')) {
+        const store = db.createObjectStore('notes', { keyPath: 'id' });
+        store.createIndex('deckId', 'deckId', { unique: false });
+      }
+      if (!db.objectStoreNames.contains('cards')) {
+        const store = db.createObjectStore('cards', { keyPath: 'id' });
+        store.createIndex('deckId', 'deckId', { unique: false });
+        store.createIndex('noteId', 'noteId', { unique: false });
+        store.createIndex('due', 'due', { unique: false });
+        store.createIndex('state', 'state', { unique: false });
+      }
+      if (!db.objectStoreNames.contains('revlog')) {
+        const store = db.createObjectStore('revlog', { keyPath: 'id', autoIncrement: true });
+        store.createIndex('cardId', 'cardId', { unique: false });
+        store.createIndex('ts', 'ts', { unique: false });
+      }
+      if (!db.objectStoreNames.contains('media')) {
+        db.createObjectStore('media', { keyPath: 'id' });
+      }
+    };
+
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+  return _dbPromise;
+}
+
+function tx(db, storeNames, mode = 'readonly') {
+  return db.transaction(storeNames, mode);
+}
+
+function reqToPromise(req) {
+  return new Promise((resolve, reject) => {
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+function uid(prefix = '') {
+  return `${prefix}${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+}
+
+// ---------------------------------------------------------------------
+// Mazos
+// ---------------------------------------------------------------------
+
+async function createDeck(name, opts = {}) {
+  const db = await openDB();
+  const deck = {
+    id: opts.id || uid('deck_'),
+    name,
+    createdAt: Date.now(),
+    newPerDay: opts.newPerDay ?? 20,
+    isDefault: !!opts.isDefault,
+  };
+  const t = tx(db, ['decks'], 'readwrite');
+  t.objectStore('decks').put(deck);
+  await reqToPromise(t.objectStore('decks').get(deck.id));
+  return deck;
+}
+
+async function getAllDecks() {
+  const db = await openDB();
+  const t = tx(db, ['decks']);
+  return reqToPromise(t.objectStore('decks').getAll());
+}
+
+async function getDeck(id) {
+  const db = await openDB();
+  const t = tx(db, ['decks']);
+  return reqToPromise(t.objectStore('decks').get(id));
+}
+
+async function updateDeck(deck) {
+  const db = await openDB();
+  const t = tx(db, ['decks'], 'readwrite');
+  t.objectStore('decks').put(deck);
+  return new Promise((res, rej) => {
+    t.oncomplete = () => res(deck);
+    t.onerror = () => rej(t.error);
+  });
+}
+
+async function deleteDeck(deckId) {
+  const db = await openDB();
+  const t = tx(db, ['decks', 'notes', 'cards'], 'readwrite');
+  t.objectStore('decks').delete(deckId);
+
+  const noteIdx = t.objectStore('notes').index('deckId');
+  const cardIdx = t.objectStore('cards').index('deckId');
+
+  await new Promise((res, rej) => {
+    const cursorReq = noteIdx.openCursor(IDBKeyRange.only(deckId));
+    cursorReq.onsuccess = (e) => {
+      const cursor = e.target.result;
+      if (cursor) {
+        cursor.delete();
+        cursor.continue();
+      } else res();
+    };
+    cursorReq.onerror = () => rej(cursorReq.error);
+  });
+
+  await new Promise((res, rej) => {
+    const cursorReq = cardIdx.openCursor(IDBKeyRange.only(deckId));
+    cursorReq.onsuccess = (e) => {
+      const cursor = e.target.result;
+      if (cursor) {
+        cursor.delete();
+        cursor.continue();
+      } else res();
+    };
+    cursorReq.onerror = () => rej(cursorReq.error);
+  });
+
+  return new Promise((res, rej) => {
+    t.oncomplete = () => res();
+    t.onerror = () => rej(t.error);
+  });
+}
+
+// ---------------------------------------------------------------------
+// Notas y tarjetas
+// ---------------------------------------------------------------------
+
+/**
+ * Crea una nota + su(s) tarjeta(s) asociada(s). Para el modelo básico
+ * (pregunta/respuesta) cada nota genera exactamente una tarjeta.
+ */
+async function addNoteWithCard(deckId, fields, tags = []) {
+  const db = await openDB();
+  const noteId = uid('note_');
+  const cardId = uid('card_');
+
+  const note = {
+    id: noteId,
+    deckId,
+    modelName: 'Basic',
+    fields, // { front, back }
+    tags,
+  };
+
+  const card = {
+    id: cardId,
+    noteId,
+    deckId,
+    createdAt: Date.now(),
+    ...window.SRS.createNewCardState(),
+  };
+  card.sortOrder = card.createdAt;
+
+  const t = tx(db, ['notes', 'cards'], 'readwrite');
+  t.objectStore('notes').put(note);
+  t.objectStore('cards').put(card);
+
+  return new Promise((res, rej) => {
+    t.oncomplete = () => res({ note, card });
+    t.onerror = () => rej(t.error);
+  });
+}
+
+async function bulkInsert(notes, cards) {
+  const db = await openDB();
+  const t = tx(db, ['notes', 'cards'], 'readwrite');
+  const noteStore = t.objectStore('notes');
+  const cardStore = t.objectStore('cards');
+  for (const n of notes) noteStore.put(n);
+  for (const c of cards) cardStore.put(c);
+  return new Promise((res, rej) => {
+    t.oncomplete = () => res();
+    t.onerror = () => rej(t.error);
+  });
+}
+
+async function getNote(noteId) {
+  const db = await openDB();
+  const t = tx(db, ['notes']);
+  return reqToPromise(t.objectStore('notes').get(noteId));
+}
+
+async function getCardsByDeck(deckId) {
+  const db = await openDB();
+  const t = tx(db, ['cards']);
+  const idx = t.objectStore('cards').index('deckId');
+  return reqToPromise(idx.getAll(IDBKeyRange.only(deckId)));
+}
+
+async function getAllCards() {
+  const db = await openDB();
+  const t = tx(db, ['cards']);
+  return reqToPromise(t.objectStore('cards').getAll());
+}
+
+async function updateCard(card) {
+  const db = await openDB();
+  const t = tx(db, ['cards'], 'readwrite');
+  t.objectStore('cards').put(card);
+  return new Promise((res, rej) => {
+    t.oncomplete = () => res(card);
+    t.onerror = () => rej(t.error);
+  });
+}
+
+async function deleteCard(cardId) {
+  const db = await openDB();
+  const t = tx(db, ['cards'], 'readwrite');
+  t.objectStore('cards').delete(cardId);
+  return new Promise((res, rej) => {
+    t.oncomplete = () => res();
+    t.onerror = () => rej(t.error);
+  });
+}
+
+// ---------------------------------------------------------------------
+// Historial de repasos (revlog)
+// ---------------------------------------------------------------------
+
+async function logReview(entry) {
+  const db = await openDB();
+  const t = tx(db, ['revlog'], 'readwrite');
+  t.objectStore('revlog').add({ ts: Date.now(), ...entry });
+  return new Promise((res, rej) => {
+    t.oncomplete = () => res();
+    t.onerror = () => rej(t.error);
+  });
+}
+
+async function getRevlog(cardId = null) {
+  const db = await openDB();
+  const t = tx(db, ['revlog']);
+  if (cardId) {
+    const idx = t.objectStore('revlog').index('cardId');
+    return reqToPromise(idx.getAll(IDBKeyRange.only(cardId)));
+  }
+  return reqToPromise(t.objectStore('revlog').getAll());
+}
+
+// ---------------------------------------------------------------------
+// Media
+// ---------------------------------------------------------------------
+
+async function putMedia(id, blob, mime) {
+  const db = await openDB();
+  const t = tx(db, ['media'], 'readwrite');
+  t.objectStore('media').put({ id, blob, mime });
+  return new Promise((res, rej) => {
+    t.oncomplete = () => res();
+    t.onerror = () => rej(t.error);
+  });
+}
+
+async function getMedia(id) {
+  const db = await openDB();
+  const t = tx(db, ['media']);
+  return reqToPromise(t.objectStore('media').get(id));
+}
+
+async function getAllMediaIds() {
+  const db = await openDB();
+  const t = tx(db, ['media']);
+  return reqToPromise(t.objectStore('media').getAllKeys());
+}
+
+// ---------------------------------------------------------------------
+// Borrado total (para "reiniciar aplicación")
+// ---------------------------------------------------------------------
+
+async function wipeAll() {
+  const db = await openDB();
+  const stores = ['decks', 'notes', 'cards', 'revlog', 'media'];
+  const t = tx(db, stores, 'readwrite');
+  stores.forEach((s) => t.objectStore(s).clear());
+  return new Promise((res, rej) => {
+    t.oncomplete = () => res();
+    t.onerror = () => rej(t.error);
+  });
+}
+
+// ---------------------------------------------------------------------
+// Configuración simple (localStorage)
+// ---------------------------------------------------------------------
+
+const CONFIG_KEY = 'ankiweb-config';
+
+function getConfig() {
+  try {
+    const raw = localStorage.getItem(CONFIG_KEY);
+    return raw ? JSON.parse(raw) : { theme: 'auto', newPerDaySessionCap: 9999 };
+  } catch (e) {
+    return { theme: 'auto', newPerDaySessionCap: 9999 };
+  }
+}
+
+function setConfig(partial) {
+  const current = getConfig();
+  const merged = { ...current, ...partial };
+  localStorage.setItem(CONFIG_KEY, JSON.stringify(merged));
+  return merged;
+}
+
+window.DB = {
+  openDB,
+  createDeck,
+  getAllDecks,
+  getDeck,
+  updateDeck,
+  deleteDeck,
+  addNoteWithCard,
+  bulkInsert,
+  getNote,
+  getCardsByDeck,
+  getAllCards,
+  updateCard,
+  deleteCard,
+  logReview,
+  getRevlog,
+  putMedia,
+  getMedia,
+  getAllMediaIds,
+  wipeAll,
+  getConfig,
+  setConfig,
+  uid,
+};
+
+
+/* ===== anki-import.js ===== */
+/**
+ * anki-import.js
+ * --------------
+ * Importa archivos .apkg reales de Anki:
+ *   1. Descomprime el ZIP con JSZip.
+ *   2. Localiza la base de datos SQLite interna (collection.anki21 o
+ *      collection.anki2; .anki21b comprimido con zstd no se soporta aún).
+ *   3. Carga esa base con sql.js (SQLite compilado a WebAssembly).
+ *   4. Lee las tablas notes/cards/decks/col y las traduce al esquema
+ *      interno de la aplicación (ver db.js).
+ *   5. Copia los archivos de medios (imágenes/audio) a IndexedDB.
+ *
+ * Devuelve un informe { decks, notesCount, cardsCount, mediaCount, warnings }
+ * para que la interfaz pueda mostrar qué se importó y qué no.
+ */
+
+let _sqlJsPromise = null;
+
+function loadSqlJs() {
+  if (_sqlJsPromise) return _sqlJsPromise;
+  _sqlJsPromise = new Promise((resolve, reject) => {
+    if (typeof initSqlJs === 'undefined') {
+      reject(new Error('sql.js no está cargado. Revisa la etiqueta <script> de sql-wasm.js.'));
+      return;
+    }
+    initSqlJs({
+      locateFile: (file) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}`,
+    })
+      .then(resolve)
+      .catch(reject);
+  });
+  return _sqlJsPromise;
+}
+
+/** Separa los campos de una nota (Anki usa 0x1F como separador). */
+function splitFields(fldsRaw) {
+  return fldsRaw.split('\x1f');
+}
+
+/** Extrae referencias a archivos de media (img src="..." y [sound:...]) de un campo HTML. */
+function extractMediaRefs(fieldHtml) {
+  if (!fieldHtml) return [];
+  const refs = new Set();
+  const imgRegex = /<img[^>]+?src=["']?([^"'\s>]+)["']?/gi;
+  const soundRegex = /\[sound:([^\]]+)\]/gi;
+  let m;
+  while ((m = imgRegex.exec(fieldHtml))) refs.add(m[1]);
+  while ((m = soundRegex.exec(fieldHtml))) refs.add(m[1]);
+  return [...refs];
+}
+
+/**
+ * Reescribe referencias de media dentro del HTML de un campo para que
+ * apunten a blobs locales (blob: URLs) generados a partir de IndexedDB.
+ * Se usa en tiempo de estudio (ver app.js), no en la importación.
+ */
+function rewriteMediaRefs(fieldHtml, mediaUrlMap) {
+  if (!fieldHtml) return fieldHtml;
+  let out = fieldHtml.replace(/<img([^>]+?)src=["']?([^"'\s>]+)["']?([^>]*)>/gi, (full, pre, src, post) => {
+    const url = mediaUrlMap.get(src);
+    if (!url) return ''; // sin el archivo, no mostramos icono de imagen rota
+    return `<img${pre}src="${url}"${post} onerror="this.remove()">`;
+  });
+  out = out.replace(/\[sound:([^\]]+)\]/gi, (full, name) => {
+    const url = mediaUrlMap.get(name);
+    // El botón ▶ (generado en audioButtonHtml) ya referencia este mismo nombre
+    // vía data-audio, así que aquí basta con quitar la etiqueta [sound:...] en
+    // los pocos casos en que aparezca suelta dentro de un campo.
+    return url ? '' : full;
+  });
+  return out;
+}
+
+/**
+ * Mapea los campos de una nota de Anki a nuestro modelo simple front/back,
+ * intentando reconocer campos "semánticos" comunes (palabra, lectura,
+ * significado, oración de ejemplo, audio, imagen...) en vez de asumir
+ * ciegamente que el campo 0 es el frente y el resto es el reverso.
+ *
+ * Esto cubre bien mazos populares de vocabulario (p.ej. Kaishi 1.5k, JLPT
+ * Tango, etc.) que usan nombres de campo predecibles en inglés, sin
+ * necesidad de conocer cada modelo de antemano. Si no reconocemos ningún
+ * campo por nombre, caemos de vuelta al comportamiento simple (campo 0 =
+ * frente, resto = reverso).
+ */
+function mapFieldsToFrontBack(fieldNames, fieldsArr, modelLabel) {
+  const lowerNames = fieldNames.map((n) => (n || '').toLowerCase().trim());
+
+  // Busca por nombre EXACTO primero (evita que "sentence" capture "sentence meaning").
+  const findField = (patterns) => {
+    for (const p of patterns) {
+      const i = lowerNames.indexOf(p);
+      if (i !== -1) return fieldsArr[i] || '';
+    }
+    for (let i = 0; i < lowerNames.length; i++) {
+      for (const p of patterns) {
+        if (lowerNames[i].includes(p)) return fieldsArr[i] || '';
+      }
+    }
+    return '';
+  };
+
+  // Patrones típicos de mazos de vocabulario (Kaishi, JLPT Tango, y similares).
+  // Los campos "furigana" (con sintaxis Kanji[lectura]) se priorizan sobre los
+  // planos, porque llevan más información y se pueden convertir a <ruby>.
+  const wordPlain = findField(['word', 'expression', 'vocab', 'term', 'front']);
+  const wordFurigana = findField(['word furigana', 'expression furigana']);
+  const reading = findField(['reading', 'pronunciation']);
+  const meaning = findField(['word meaning', 'meaning', 'definition', 'translation', 'back']);
+  const sentencePlain = findField(['sentence', 'example']);
+  const sentenceFurigana = findField(['sentence furigana', 'example furigana']);
+  const sentenceMeaning = findField(['sentence meaning', 'example meaning', 'example translation']);
+  const notes = findField(['notes', 'note']);
+  const picture = findField(['picture', 'image']);
+  const wordAudio = findField(['word audio']);
+  const sentenceAudio = findField(['sentence audio']);
+
+  const hasSemanticFields = wordPlain || wordFurigana || meaning || reading;
+
+  if (hasSemanticFields) {
+    // Frente: la palabra en furigana (convertida a <ruby>) si existe, si no la palabra
+    // plana, más la oración de ejemplo en japonés (sin traducir) para dar contexto
+    // desde el principio, tal y como pidió el usuario.
+    const wordHtml = wordFurigana ? furiganaToRuby(wordFurigana) : wordPlain;
+    const sentenceHtml = sentenceFurigana ? furiganaToRuby(sentenceFurigana) : sentencePlain;
+
+    const frontParts = [];
+    if (wordHtml) frontParts.push(`<div class="field-word">${wordHtml}</div>`);
+    if (wordAudio) frontParts.push(`<div class="audio-row">${audioButtonHtml(wordAudio)}</div>`);
+    if (picture) frontParts.push(picture);
+    if (sentenceHtml) {
+      const sentenceRow = [`<div class="field-sentence">${sentenceHtml}</div>`];
+      if (sentenceAudio) sentenceRow.push(`<div class="audio-row">${audioButtonHtml(sentenceAudio)}</div>`);
+      frontParts.push(`<hr>${sentenceRow.join('')}`);
+    }
+    const front = frontParts.join('') || fieldsArr[0] || '';
+
+    // Reverso: lectura, significado y traducción de la oración de ejemplo, más
+    // notas. La oración en japonés ya se mostró en el frente, así que aquí solo
+    // aparece su traducción para no repetirla.
+    const backParts = [];
+    if (reading && !wordFurigana) backParts.push(`<div class="field-reading">${reading}</div>`);
+    if (meaning) backParts.push(`<div class="field-meaning">${meaning}</div>`);
+    if (sentenceMeaning) backParts.push(`<hr><div class="field-sentence-meaning">${sentenceMeaning}</div>`);
+    // Botones para volver a escuchar los audios sin repetir el texto japonés
+    // (que ya se mostró y sonó en el frente).
+    const replayAudios = [wordAudio, sentenceAudio].filter(Boolean).map(audioButtonHtml).join('');
+    if (replayAudios) backParts.push(`<div class="audio-row">${replayAudios}</div>`);
+    if (notes) backParts.push(`<hr><div class="field-notes">${notes}</div>`);
+    const back = backParts.join('');
+
+    return { front, back, wasFlattened: false };
+  }
+
+  // Sin campos reconocibles por nombre: comportamiento simple de respaldo.
+  const front = fieldsArr[0] || '';
+  const back = fieldsArr.length > 1 ? fieldsArr.slice(1).filter(Boolean).join('<hr>') : '';
+  const wasFlattened = fieldsArr.length > 2;
+
+  return { front, back, wasFlattened };
+}
+
+/**
+ * Convierte la sintaxis de furigana de Anki (p.ej. "私[わたし]はアンです。")
+ * a HTML con <ruby>/<rt>, para que el navegador la muestre igual que la app
+ * oficial de Anki (lectura pequeña encima del kanji).
+ */
+function furiganaToRuby(text) {
+  return text.replace(/([^\s\[\]<>]+)\[([^\]]+)\]/g, '<ruby>$1<rt>$2</rt></ruby>');
+}
+
+/** Genera un botón de audio ▶ que reproduce un archivo [sound:...] al pulsarlo. */
+function audioButtonHtml(soundField) {
+  const m = /\[sound:([^\]]+)\]/i.exec(soundField);
+  if (!m) return '';
+  const fileName = m[1];
+  // data-audio se resuelve en tiempo de estudio (app.js) a una blob: URL real.
+  return `<button type="button" class="audio-btn" data-audio="${fileName.replace(/"/g, '&quot;')}">▶</button>`;
+}
+
+/**
+ * Convierte el estado interno de scheduling de Anki (colas 0/1/2/3, etc.)
+ * a nuestro propio modelo de estado SRS, de forma aproximada. Anki es
+ * bastante más complejo aquí (filtered decks, colas de aprendizaje día vs
+ * intra-día...), así que simplificamos: todo lo que no sea claramente
+ * "aprendida y con intervalo largo" entra como nueva/aprendizaje en
+ * nuestro sistema, para no arriesgar a perder tarjetas de vista.
+ */
+function mapAnkiCardToInternal(ankiCard, now) {
+  // type: 0=new, 1=learning, 2=review, 3=relearning (aprox., varía por versión)
+  const base = window.SRS.createNewCardState();
+
+  if (ankiCard.type === 2 && ankiCard.ivl > 0) {
+    base.state = 'review';
+    base.queue = 'review';
+    base.intervalMinutes = ankiCard.ivl * 24 * 60; // ivl en días en tarjetas de repaso
+    base.easeFactor = ankiCard.factor || window.SRS.DEFAULT_CONFIG.startingEase;
+    base.reps = ankiCard.reps || 0;
+    base.lapses = ankiCard.lapses || 0;
+    // due en Anki para review cards es "días desde el epoch de la colección";
+    // como aproximación práctica, si no podemos reconstruir la fecha exacta,
+    // programamos la revisión a partir de ahora usando el intervalo (conservador:
+    // el usuario la verá algo antes de lo que Anki habría dictado, nunca después).
+    base.due = now + base.intervalMinutes * 60 * 1000;
+  } else {
+    // Nueva, en aprendizaje o en re-aprendizaje: la tratamos como nueva
+    // en nuestro sistema para no complicar el mapeo de colas de Anki.
+    base.state = 'new';
+    base.queue = 'new';
+    base.due = now;
+  }
+
+  base.correctCount = ankiCard.reps ? Math.max(0, ankiCard.reps - (ankiCard.lapses || 0)) : 0;
+  base.wrongCount = ankiCard.lapses || 0;
+
+  // Para tarjetas nuevas, el campo "due" de Anki es su posición dentro de la cola
+  // de nuevas (no una fecha), así que la reutilizamos tal cual para que aparezcan
+  // en el mismo orden que tendrían en Anki. Si no es un número usable, usamos el
+  // id de la tarjeta (creciente y estable) como alternativa.
+  base.sortOrder = (base.state === 'new' && Number.isFinite(ankiCard.due))
+    ? ankiCard.due
+    : ankiCard.id;
+
+  return base;
+}
+
+/**
+ * Importa un fichero .apkg (File/Blob) y persiste todo en IndexedDB.
+ * @param {File} file
+ * @param {(msg:string)=>void} [onProgress]
+ */
+async function importApkg(file, onProgress = () => {}) {
+  const warnings = [];
+  onProgress('Descomprimiendo el archivo .apkg...');
+
+  if (typeof JSZip === 'undefined') {
+    throw new Error('JSZip no está cargado. Revisa la etiqueta <script> correspondiente.');
+  }
+
+  const zip = await JSZip.loadAsync(file);
+
+  // 1. Localizar la base de datos SQLite.
+  let dbFileName = null;
+  if (zip.file('collection.anki21')) dbFileName = 'collection.anki21';
+  else if (zip.file('collection.anki2')) dbFileName = 'collection.anki2';
+  else if (zip.file('collection.anki21b')) {
+    throw new Error(
+      'Este .apkg usa el formato más reciente de Anki (collection.anki21b, comprimido con zstd), ' +
+      'que todavía no está soportado por esta aplicación. Prueba a exportar desde Anki marcando ' +
+      'la opción "Support older Anki versions" al crear el paquete.'
+    );
+  }
+
+  if (!dbFileName) {
+    throw new Error('No se ha encontrado una base de datos de colección dentro del .apkg. El archivo podría estar corrupto o no ser un .apkg válido.');
+  }
+
+  onProgress('Leyendo la base de datos interna (SQLite)...');
+  const dbArrayBuffer = await zip.file(dbFileName).async('uint8array');
+
+  const SQL = await loadSqlJs();
+  const sqliteDb = new SQL.Database(dbArrayBuffer);
+
+  // 2. Leer tabla "col" -> contiene decks y modelos como JSON.
+  onProgress('Leyendo mazos y modelos de nota...');
+  const colResult = sqliteDb.exec('SELECT decks, models FROM col LIMIT 1');
+  if (!colResult.length) {
+    throw new Error('La base de datos no contiene la tabla "col" esperada. El archivo podría ser de una versión de Anki no soportada.');
+  }
+
+  const [decksJson, modelsJson] = colResult[0].values[0];
+  let ankiDecks = {};
+  let ankiModels = {};
+  try {
+    ankiDecks = JSON.parse(decksJson);
+  } catch (e) {
+    warnings.push('No se pudo interpretar la información de mazos; se creará un único mazo genérico.');
+  }
+  try {
+    ankiModels = JSON.parse(modelsJson);
+  } catch (e) {
+    warnings.push('No se pudo interpretar la información de modelos de nota; los campos se mostrarán en bruto.');
+  }
+
+  // 3. Leer notas.
+  onProgress('Leyendo notas...');
+  const notesResult = sqliteDb.exec('SELECT id, mid, flds, tags FROM notes');
+  const ankiNotes = notesResult.length
+    ? notesResult[0].values.map(([id, mid, flds, tags]) => ({ id, mid, flds, tags }))
+    : [];
+
+  // 4. Leer tarjetas.
+  onProgress('Leyendo tarjetas...');
+  const cardsResult = sqliteDb.exec('SELECT id, nid, did, type, queue, ivl, factor, reps, lapses, due FROM cards');
+  const ankiCards = cardsResult.length
+    ? cardsResult[0].values.map(
+        ([id, nid, did, type, queue, ivl, factor, reps, lapses, due]) => ({
+          id, nid, did, type, queue, ivl, factor, reps, lapses, due,
+        })
+      )
+    : [];
+
+  if (!ankiNotes.length) {
+    warnings.push('El paquete no contiene notas legibles.');
+  }
+
+  // 5. Leer el mapa de medios (archivo "media": JSON {"0":"nombre.jpg", ...}).
+  onProgress('Procesando archivos multimedia...');
+  let mediaMap = {};
+  const mediaEntry = zip.file('media');
+  if (mediaEntry) {
+    try {
+      const mediaText = await mediaEntry.async('text');
+      mediaMap = JSON.parse(mediaText);
+    } catch (e) {
+      warnings.push('No se pudo leer el índice de archivos multimedia; las imágenes/audio de este mazo no se importarán.');
+    }
+  }
+
+  let mediaCount = 0;
+  const mediaIdEntries = Object.entries(mediaMap); // [ ["0", "foto.jpg"], ... ]
+  const mediaTotal = mediaIdEntries.length;
+  if (mediaTotal > 0) onProgress(`Procesando archivos multimedia (0/${mediaTotal})...`);
+  let mediaProcessed = 0;
+  for (const [numericName, realName] of mediaIdEntries) {
+    const entry = zip.file(numericName);
+    if (!entry) { mediaProcessed += 1; continue; }
+    try {
+      const blob = await entry.async('blob');
+      const mime = guessMimeFromName(realName);
+      await window.DB.putMedia(realName, blob, mime);
+      mediaCount += 1;
+    } catch (e) {
+      warnings.push(`No se pudo importar el archivo multimedia "${realName}".`);
+    }
+    mediaProcessed += 1;
+    // Actualizamos el contador cada pocos archivos (no en cada uno, para no
+    // saturar el hilo principal) y cedemos el control al navegador un
+    // instante para que el spinner siga animándose y la pestaña no parezca
+    // congelada en mazos con muchísimos archivos.
+    if (mediaProcessed % 15 === 0 || mediaProcessed === mediaTotal) {
+      onProgress(`Procesando archivos multimedia (${mediaProcessed}/${mediaTotal})...`);
+      await new Promise((r) => setTimeout(r, 0));
+    }
+  }
+
+  // 6. Crear mazos internos a partir de los mazos de Anki referenciados por las tarjetas.
+  onProgress('Creando mazos...');
+  const usedDeckIds = new Set(ankiCards.map((c) => String(c.did)));
+  const deckIdMap = new Map(); // ankiDeckId(string) -> deckId interno
+
+  for (const ankiDeckId of usedDeckIds) {
+    const ankiDeckInfo = ankiDecks[ankiDeckId];
+    const name = ankiDeckInfo && ankiDeckInfo.name ? ankiDeckInfo.name : `Mazo importado ${ankiDeckId}`;
+    const deck = await window.DB.createDeck(name, { newPerDay: 20 });
+    deckIdMap.set(ankiDeckId, deck.id);
+  }
+
+  if (deckIdMap.size === 0) {
+    const fallbackDeck = await window.DB.createDeck(file.name.replace(/\.apkg$/i, ''), { newPerDay: 20 });
+    // Si no había tarjetas con did reconocible, usamos este mazo para todo.
+    deckIdMap.set('__fallback__', fallbackDeck.id);
+  }
+
+  // 7. Mapear notas por id para poder resolver front/back al crear tarjetas.
+  const noteById = new Map(ankiNotes.map((n) => [n.id, n]));
+  const now = Date.now();
+
+  const internalNotes = [];
+  const internalCards = [];
+  let skippedCards = 0;
+
+  // Contadores para agrupar avisos repetitivos (uno por modelo, no uno por nota).
+  const flattenedFieldsWarningByModel = new Map(); // modelName -> nº de notas afectadas
+
+  const cardsTotal = ankiCards.length;
+  onProgress(`Preparando tarjetas (0/${cardsTotal})...`);
+  let cardsProcessed = 0;
+
+  for (const ankiCard of ankiCards) {
+    const ankiNote = noteById.get(ankiCard.nid);
+    if (!ankiNote) {
+      skippedCards += 1;
+      cardsProcessed += 1;
+      continue;
+    }
+
+    const fieldsArr = splitFields(ankiNote.flds);
+    const model = ankiModels[ankiNote.mid];
+    const fieldNames = model && Array.isArray(model.flds) ? model.flds.map((f) => f.name) : [];
+    const modelLabel = model ? model.name : String(ankiNote.mid);
+
+    const mapped = mapFieldsToFrontBack(fieldNames, fieldsArr, modelLabel);
+    const { front, back, wasFlattened } = mapped;
+
+    if (wasFlattened) {
+      flattenedFieldsWarningByModel.set(modelLabel, (flattenedFieldsWarningByModel.get(modelLabel) || 0) + 1);
+    }
+
+    const noteId = window.DB.uid('note_');
+    const cardId = window.DB.uid('card_');
+    const deckId = deckIdMap.get(String(ankiCard.did)) || deckIdMap.get('__fallback__');
+
+    internalNotes.push({
+      id: noteId,
+      deckId,
+      modelName: modelLabel,
+      fields: { front, back, raw: fieldsArr, fieldNames },
+      tags: (ankiNote.tags || '').trim().split(/\s+/).filter(Boolean),
+    });
+
+    const srsState = mapAnkiCardToInternal(ankiCard, now);
+    internalCards.push({
+      id: cardId,
+      noteId,
+      deckId,
+      createdAt: now,
+      importedFromAnki: true,
+      ...srsState,
+    });
+
+    cardsProcessed += 1;
+    // Igual que con los medios: cedemos el control cada cierto número de
+    // tarjetas para que la interfaz (el spinner, sobre todo) no se quede
+    // congelada durante mazos muy grandes con miles de tarjetas.
+    if (cardsProcessed % 200 === 0 || cardsProcessed === cardsTotal) {
+      onProgress(`Preparando tarjetas (${cardsProcessed}/${cardsTotal})...`);
+      await new Promise((r) => setTimeout(r, 0));
+    }
+  }
+
+  if (skippedCards > 0) {
+    warnings.push(`${skippedCards} tarjeta(s) no se pudieron importar porque no se encontró su nota asociada.`);
+  }
+
+  // Un único aviso agregado por modelo, en vez de uno por cada nota individual.
+  for (const [modelLabel, count] of flattenedFieldsWarningByModel) {
+    warnings.push(
+      `El modelo "${modelLabel}" tiene más campos de los que esta app puede mostrar por separado ` +
+      `(usa un formato simple pregunta/respuesta). Se combinaron los campos adicionales en el reverso ` +
+      `en ${count} nota(s); no se ha perdido información, pero el reverso puede verse menos ordenado que en Anki.`
+    );
+  }
+
+  onProgress('Guardando en la base de datos local...');
+  await window.DB.bulkInsert(internalNotes, internalCards);
+
+  sqliteDb.close();
+
+  return {
+    decksCreated: deckIdMap.size,
+    notesCount: internalNotes.length,
+    cardsCount: internalCards.length,
+    mediaCount,
+    warnings,
+  };
+}
+
+function guessMimeFromName(name) {
+  const ext = (name.split('.').pop() || '').toLowerCase();
+  const map = {
+    jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', gif: 'image/gif',
+    webp: 'image/webp', svg: 'image/svg+xml',
+    mp3: 'audio/mpeg', ogg: 'audio/ogg', wav: 'audio/wav', m4a: 'audio/mp4',
+  };
+  return map[ext] || 'application/octet-stream';
+}
+
+window.AnkiImport = {
+  importApkg,
+  extractMediaRefs,
+  rewriteMediaRefs,
+};
+
+
+/* ===== import-export.js ===== */
+/**
+ * import-export.js
+ * -----------------
+ * Backup/restauración en formato JSON propio (no es un .apkg de Anki).
+ * Sirve para no perder el progreso al cambiar de dispositivo/navegador.
+ * Los archivos multimedia se incluyen como base64 dentro del propio JSON
+ * para que el backup sea un único archivo autocontenido.
+ *
+ * La arquitectura está preparada para añadir más adelante un exportador
+ * a .apkg real (generar SQLite + checksums compatibles con Anki), sin
+ * tener que tocar el resto de la aplicación: bastaría con añadir una
+ * función exportApkg() en este mismo módulo.
+ */
+
+const BACKUP_FORMAT_VERSION = 1;
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result); // data URL completa
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+function base64ToBlob(dataUrl) {
+  return fetch(dataUrl).then((r) => r.blob());
+}
+
+/** Genera un objeto JS con todo el estado de la aplicación. */
+async function buildBackupObject(onProgress = () => {}) {
+  onProgress('Recopilando mazos...');
+  const decks = await window.DB.getAllDecks();
+
+  onProgress('Recopilando tarjetas...');
+  const cards = await window.DB.getAllCards();
+
+  onProgress('Recopilando notas...');
+  const notes = [];
+  const seenNoteIds = new Set();
+  for (const card of cards) {
+    if (seenNoteIds.has(card.noteId)) continue;
+    seenNoteIds.add(card.noteId);
+    const note = await window.DB.getNote(card.noteId);
+    if (note) notes.push(note);
+  }
+
+  onProgress('Recopilando historial de repasos...');
+  const revlog = await window.DB.getRevlog();
+
+  onProgress('Recopilando archivos multimedia...');
+  const mediaIds = await window.DB.getAllMediaIds();
+  const media = [];
+  for (const id of mediaIds) {
+    const entry = await window.DB.getMedia(id);
+    if (!entry) continue;
+    const base64 = await blobToBase64(entry.blob);
+    media.push({ id: entry.id, mime: entry.mime, base64 });
+  }
+
+  return {
+    formatVersion: BACKUP_FORMAT_VERSION,
+    exportedAt: new Date().toISOString(),
+    decks,
+    notes,
+    cards,
+    revlog,
+    media,
+  };
+}
+
+/** Genera y descarga un archivo .json de backup. */
+async function exportBackup(onProgress = () => {}) {
+  const backup = await buildBackupObject(onProgress);
+  const json = JSON.stringify(backup);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  a.href = url;
+  a.download = `ankiweb-backup-${stamp}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  return backup;
+}
+
+/**
+ * Restaura un backup JSON generado por exportBackup().
+ * @param {File} file
+ * @param {{merge: boolean}} opts - merge=false borra todo antes de importar.
+ */
+async function importBackup(file, opts = { merge: false }, onProgress = () => {}) {
+  onProgress('Leyendo archivo de copia de seguridad...');
+  const text = await file.text();
+  let backup;
+  try {
+    backup = JSON.parse(text);
+  } catch (e) {
+    throw new Error('El archivo no es un JSON válido de copia de seguridad de esta aplicación.');
+  }
+
+  if (!backup.formatVersion) {
+    throw new Error('El archivo no parece ser una copia de seguridad válida de esta aplicación.');
+  }
+
+  if (!opts.merge) {
+    onProgress('Vaciando datos actuales...');
+    await window.DB.wipeAll();
+  }
+
+  onProgress('Restaurando mazos...');
+  for (const deck of backup.decks || []) {
+    await window.DB.updateDeck(deck);
+  }
+
+  onProgress('Restaurando notas y tarjetas...');
+  await window.DB.bulkInsert(backup.notes || [], backup.cards || []);
+
+  onProgress('Restaurando historial de repasos...');
+  for (const entry of backup.revlog || []) {
+    const { id, ...rest } = entry; // el id es autoincremental, no lo reutilizamos
+    await window.DB.logReview(rest);
+  }
+
+  onProgress('Restaurando archivos multimedia...');
+  for (const m of backup.media || []) {
+    try {
+      const blob = await base64ToBlob(m.base64);
+      await window.DB.putMedia(m.id, blob, m.mime);
+    } catch (e) {
+      // Un fallo puntual en un archivo multimedia no debe romper todo el restore.
+      console.warn('No se pudo restaurar el archivo multimedia', m.id, e);
+    }
+  }
+
+  return {
+    decksCount: (backup.decks || []).length,
+    notesCount: (backup.notes || []).length,
+    cardsCount: (backup.cards || []).length,
+    mediaCount: (backup.media || []).length,
+  };
+}
+
+window.ImportExport = {
+  exportBackup,
+  importBackup,
+  buildBackupObject,
+};
+
+
+/* ===== app.js ===== */
+/**
+ * app.js
+ * ------
+ * Orquesta la interfaz: navegación entre vistas, sesión de estudio,
+ * gestión de mazos, importación/exportación. Toda la lógica de
+ * repetición espaciada vive en srs.js; toda la persistencia en db.js.
+ */
+
+const state = {
+  currentDeckId: null,
+  studyQueue: [],       // [{card, note}] pendientes en la sesión actual
+  studySessionStats: { studied: 0, again: 0, good: 0, hard: 0, easy: 0 },
+  mediaUrlCache: new Map(), // nombre de archivo -> object URL (creado bajo demanda)
+};
+
+// ---------------------------------------------------------------------
+// Navegación entre vistas
+// ---------------------------------------------------------------------
+
+const VIEW_TITLES = {
+  'view-decks': 'Ankjimi',
+  'view-deck-detail': '',
+  'view-study': 'Estudiando',
+  'view-session-done': 'Ankjimi',
+  'view-add-card': 'Nueva tarjeta',
+  'view-stats': 'Estadísticas',
+  'view-settings': 'Ajustes',
+};
+
+const VIEWS_WITH_BACK = new Set([
+  'view-deck-detail', 'view-study', 'view-add-card', 'view-stats', 'view-settings',
+]);
+
+function showView(viewId, opts = {}) {
+  document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
+  document.getElementById(viewId).classList.add('active');
+  document.getElementById('topbar-title').textContent = opts.title || VIEW_TITLES[viewId] || '';
+  document.getElementById('btn-back').classList.toggle('hidden', !VIEWS_WITH_BACK.has(viewId));
+  document.getElementById('btn-settings').classList.toggle('hidden', viewId === 'view-settings');
+  window.scrollTo(0, 0);
+}
+
+let backStack = ['view-decks'];
+
+function navigateTo(viewId, opts = {}) {
+  backStack.push(viewId);
+  showView(viewId, opts);
+}
+
+function goBack() {
+  if (backStack.length > 1) {
+    backStack.pop();
+    const prev = backStack[backStack.length - 1];
+    showView(prev);
+    if (prev === 'view-decks') refreshDeckList();
+    if (prev === 'view-deck-detail') refreshDeckDetail();
+  }
+}
+
+document.getElementById('btn-back').addEventListener('click', goBack);
+document.getElementById('btn-settings').addEventListener('click', () => navigateTo('view-settings'));
+
+// ---------------------------------------------------------------------
+// Modal genérico (progreso / mensajes / confirmaciones)
+// ---------------------------------------------------------------------
+
+function showModal({ message, progress = false, actions = [] }) {
+  const overlay = document.getElementById('modal-overlay');
+  document.getElementById('modal-message').textContent = message;
+  document.getElementById('modal-spinner').classList.toggle('hidden', !progress);
+  document.getElementById('modal-progress').classList.toggle('hidden', !progress);
+  if (progress) document.getElementById('modal-progress').textContent = '';
+
+  const actionsEl = document.getElementById('modal-actions');
+  actionsEl.innerHTML = '';
+  actions.forEach((a) => {
+    const btn = document.createElement('button');
+    btn.className = `btn ${a.style || 'secondary'}`;
+    btn.textContent = a.label;
+    btn.onclick = () => {
+      if (a.closeOnClick !== false) hideModal();
+      a.onClick && a.onClick();
+    };
+    actionsEl.appendChild(btn);
+  });
+
+  overlay.classList.remove('hidden');
+}
+
+function updateModalProgress(text) {
+  const el = document.getElementById('modal-progress');
+  el.classList.remove('hidden');
+  el.textContent = text;
+}
+
+function hideModal() {
+  document.getElementById('modal-overlay').classList.add('hidden');
+}
+
+// ---------------------------------------------------------------------
+// Lista de mazos
+// ---------------------------------------------------------------------
+
+async function computeDeckCounts(deckId) {
+  const cards = await window.DB.getCardsByDeck(deckId);
+  const now = window.SRS.nowMs();
+  let newCount = 0;
+  let reviewCount = 0;
+  for (const c of cards) {
+    if (!window.SRS.isCardDue(c, now)) continue;
+    if (c.state === 'new') newCount += 1;
+    else reviewCount += 1;
+  }
+  return { newCount, reviewCount, total: newCount + reviewCount, totalCards: cards.length };
+}
+
+async function refreshDeckList() {
+  const decks = await window.DB.getAllDecks();
+  const listEl = document.getElementById('deck-list');
+  const hint = document.getElementById('no-decks-hint');
+
+  listEl.querySelectorAll('.deck-row').forEach((el) => el.remove());
+  hint.classList.toggle('hidden', decks.length > 0);
+
+  for (const deck of decks) {
+    const counts = await computeDeckCounts(deck.id);
+    const row = document.createElement('div');
+    row.className = 'deck-row';
+    row.innerHTML = `
+      <div>
+        <div class="deck-name">${escapeHtml(deck.name)}</div>
+        <div class="deck-counts">
+          <span>${counts.newCount} nuevas</span>
+          <span>${counts.reviewCount} repaso</span>
+        </div>
+      </div>
+      <div class="badge-due ${counts.total === 0 ? 'zero' : ''}">${counts.total}</div>
+    `;
+    row.addEventListener('click', () => openDeckDetail(deck.id));
+    listEl.appendChild(row);
+  }
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str ?? '';
+  return div.innerHTML;
+}
+
+document.getElementById('btn-new-deck').addEventListener('click', () => {
+  showModal({
+    message: 'Nombre del nuevo mazo:',
+    actions: [], // se sustituye por un prompt simple más abajo
+  });
+  hideModal();
+  const name = prompt('Nombre del nuevo mazo:');
+  if (name && name.trim()) {
+    window.DB.createDeck(name.trim()).then(refreshDeckList);
+  }
+});
+
+document.getElementById('btn-import-apkg').addEventListener('click', () => {
+  document.getElementById('file-apkg').click();
+});
+
+document.getElementById('file-apkg').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+
+  const importBtn = document.getElementById('btn-import-apkg');
+  importBtn.disabled = true;
+
+  showModal({
+    message: 'Importando mazo de Anki…\n\nSi el mazo es grande esto puede tardar un minuto. No cierres ni recargues la página, sigue trabajando.',
+    progress: true,
+  });
+  try {
+    const report = await window.AnkiImport.importApkg(file, updateModalProgress);
+    let msg = `Importación completada:\n\n` +
+      `• ${report.decksCreated} mazo(s)\n` +
+      `• ${report.notesCount} notas\n` +
+      `• ${report.cardsCount} tarjetas\n` +
+      `• ${report.mediaCount} archivos multimedia`;
+    if (report.warnings.length) {
+      msg += `\n\nAvisos:\n` + report.warnings.map((w) => `- ${w}`).join('\n');
+    }
+    showModal({
+      message: msg,
+      actions: [{ label: 'Aceptar', style: 'primary', onClick: refreshDeckList }],
+    });
+  } catch (err) {
+    showModal({
+      message: `No se pudo importar el archivo:\n\n${err.message}`,
+      actions: [{ label: 'Cerrar', style: 'secondary' }],
+    });
+  } finally {
+    importBtn.disabled = false;
+  }
+});
+
+// ---------------------------------------------------------------------
+// Detalle de mazo
+// ---------------------------------------------------------------------
+
+async function openDeckDetail(deckId) {
+  state.currentDeckId = deckId;
+  const deck = await window.DB.getDeck(deckId);
+  navigateTo('view-deck-detail', { title: deck.name });
+  await refreshDeckDetail();
+}
+
+async function refreshDeckDetail() {
+  if (!state.currentDeckId) return;
+  const deck = await window.DB.getDeck(state.currentDeckId);
+  if (!deck) return;
+  document.getElementById('deck-detail-name').textContent = deck.name;
+  document.getElementById('topbar-title').textContent = deck.name;
+
+  const counts = await computeDeckCounts(state.currentDeckId);
+  document.getElementById('stat-new').textContent = counts.newCount;
+  document.getElementById('stat-review').textContent = counts.reviewCount;
+  document.getElementById('stat-total').textContent = counts.total;
+
+  document.getElementById('btn-start-study').classList.toggle('hidden', counts.total === 0);
+  document.getElementById('no-due-hint').classList.toggle('hidden', counts.total > 0);
+}
+
+document.getElementById('btn-add-card').addEventListener('click', () => {
+  document.getElementById('input-front').value = '';
+  document.getElementById('input-back').value = '';
+  navigateTo('view-add-card');
+});
+
+document.getElementById('btn-save-card').addEventListener('click', async () => {
+  const front = document.getElementById('input-front').value.trim();
+  const back = document.getElementById('input-back').value.trim();
+  if (!front || !back) {
+    showModal({ message: 'Escribe tanto la pregunta como la respuesta.', actions: [{ label: 'Vale', style: 'primary' }] });
+    return;
+  }
+  await window.DB.addNoteWithCard(state.currentDeckId, { front, back }, []);
+  goBack();
+  await refreshDeckDetail();
+});
+
+document.getElementById('btn-delete-deck').addEventListener('click', async () => {
+  const deck = await window.DB.getDeck(state.currentDeckId);
+  showModal({
+    message: `¿Eliminar el mazo "${deck.name}" junto con todas sus tarjetas? Esta acción no se puede deshacer.`,
+    actions: [
+      { label: 'Cancelar', style: 'secondary' },
+      {
+        label: 'Eliminar', style: 'danger', onClick: async () => {
+          await window.DB.deleteDeck(state.currentDeckId);
+          state.currentDeckId = null;
+          backStack = ['view-decks'];
+          showView('view-decks');
+          await refreshDeckList();
+        },
+      },
+    ],
+  });
+});
+
+document.getElementById('btn-deck-stats').addEventListener('click', async () => {
+  await renderStats(state.currentDeckId);
+  navigateTo('view-stats');
+});
+
+// ---------------------------------------------------------------------
+// Sesión de estudio
+// ---------------------------------------------------------------------
+
+async function startStudySession() {
+  const cards = await window.DB.getCardsByDeck(state.currentDeckId);
+  const now = window.SRS.nowMs();
+  const due = cards.filter((c) => window.SRS.isCardDue(c, now));
+
+  // Orden: primero repasos vencidos hace más tiempo, luego nuevas en el mismo
+  // orden que tenían en Anki (o en el orden en que se añadieron a mano).
+  due.sort((a, b) => {
+    if (a.state === 'new' && b.state !== 'new') return 1;
+    if (a.state !== 'new' && b.state === 'new') return -1;
+    if (a.state === 'new' && b.state === 'new') return (a.sortOrder || 0) - (b.sortOrder || 0);
+    return a.due - b.due;
+  });
+
+  const queue = [];
+  for (const card of due) {
+    const note = await window.DB.getNote(card.noteId);
+    if (note) queue.push({ card, note });
+  }
+
+  state.studyQueue = queue;
+  state.studySessionStats = { studied: 0, again: 0, good: 0, hard: 0, easy: 0 };
+
+  if (queue.length === 0) {
+    await refreshDeckDetail();
+    return;
+  }
+
+  navigateTo('view-study');
+  await showNextCard();
+}
+
+document.getElementById('btn-start-study').addEventListener('click', startStudySession);
+
+async function resolveMediaUrl(fileName) {
+  if (!fileName) return null;
+  if (state.mediaUrlCache.has(fileName)) return state.mediaUrlCache.get(fileName);
+
+  // Intenta el nombre tal cual, luego variantes decodificadas/normalizadas, por si
+  // el campo de Anki referencia el archivo con un escapado distinto al que se usó
+  // al importarlo (esto es lo que hacía que algunas imágenes/audios no aparecieran).
+  const candidates = new Set([fileName]);
+  try { candidates.add(decodeURIComponent(fileName)); } catch (e) { /* nombre no codificado, ignorar */ }
+  try { candidates.add(fileName.normalize('NFC')); } catch (e) { /* ignorar */ }
+  try { candidates.add(decodeURIComponent(fileName).normalize('NFC')); } catch (e) { /* ignorar */ }
+
+  let entry = null;
+  let matchedName = fileName;
+  for (const candidate of candidates) {
+    entry = await window.DB.getMedia(candidate);
+    if (entry) { matchedName = candidate; break; }
+  }
+
+  // Último intento: comparación case-insensitive contra todos los archivos guardados.
+  if (!entry) {
+    const allIds = await window.DB.getAllMediaIds();
+    const lowerTarget = fileName.toLowerCase();
+    const found = allIds.find((id) => String(id).toLowerCase() === lowerTarget);
+    if (found) {
+      entry = await window.DB.getMedia(found);
+      matchedName = found;
+    }
+  }
+
+  if (!entry) {
+    state.mediaUrlCache.set(fileName, null);
+    return null;
+  }
+
+  const url = URL.createObjectURL(entry.blob);
+  state.mediaUrlCache.set(fileName, url);
+  state.mediaUrlCache.set(matchedName, url);
+  return url;
+}
+
+async function renderCardField(rawHtml) {
+  // Sustituye referencias a imágenes por URLs de blobs locales (los [sound:...]
+  // ya se convirtieron a botones data-audio en el importador, ver abajo).
+  const refs = window.AnkiImport.extractMediaRefs(rawHtml);
+  const map = new Map();
+  for (const ref of refs) {
+    const url = await resolveMediaUrl(ref);
+    if (url) map.set(ref, url);
+  }
+  return window.AnkiImport.rewriteMediaRefs(rawHtml, map);
+}
+
+/** Reproduce un archivo de audio a partir de su nombre, resolviéndolo a una blob: URL. */
+async function playAudioFile(fileName) {
+  const url = await resolveMediaUrl(fileName);
+  if (!url) return;
+  const audio = new Audio(url);
+  audio.play().catch(() => {
+    // Algunos navegadores (sobre todo iOS Safari) bloquean el autoplay si ha
+    // pasado demasiado tiempo desde el último toque del usuario. En ese caso
+    // el botón ▶ del audio sigue funcionando para reproducirlo manualmente.
+  });
+}
+
+/** Activa los botones de audio (▶) dentro de un contenedor recién renderizado. */
+function wireAudioButtons(container) {
+  container.querySelectorAll('.audio-btn[data-audio]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      playAudioFile(btn.getAttribute('data-audio'));
+    });
+  });
+}
+
+/** Reproduce automáticamente el primer audio (▶) de un contenedor, si tiene alguno. */
+function autoplayFirstAudio(container) {
+  const btn = container.querySelector('.audio-btn[data-audio]');
+  if (btn) playAudioFile(btn.getAttribute('data-audio'));
+}
+
+async function showNextCard() {
+  document.getElementById('answer-buttons').classList.add('hidden');
+  document.getElementById('btn-show-answer').classList.remove('hidden');
+  document.getElementById('card-back').classList.add('hidden');
+
+  if (state.studyQueue.length === 0) {
+    await finishStudySession();
+    return;
+  }
+
+  const { card, note } = state.studyQueue[0];
+  document.getElementById('study-remaining').textContent = `${state.studyQueue.length} restantes`;
+
+  const frontHtml = await renderCardField(note.fields.front || '');
+  const backHtml = await renderCardField(note.fields.back || '');
+  const frontEl = document.getElementById('card-front');
+  const backEl = document.getElementById('card-back');
+  frontEl.innerHTML = frontHtml;
+  backEl.innerHTML = backHtml;
+  wireAudioButtons(frontEl);
+  wireAudioButtons(backEl);
+
+  // Precalcular las etiquetas de los 2 botones con el intervalo estimado.
+  for (const answer of ['again', 'good']) {
+    const preview = window.SRS.scheduleNextReview(card, answer);
+    document.getElementById(`${answer}-eta`).textContent = window.SRS.formatInterval(preview.intervalMinutes);
+  }
+
+  // Autorreproducir el audio de la palabra en cuanto se muestra el frente.
+  autoplayFirstAudio(frontEl);
+}
+
+document.getElementById('btn-show-answer').addEventListener('click', () => {
+  const backEl = document.getElementById('card-back');
+  backEl.classList.remove('hidden');
+  document.getElementById('btn-show-answer').classList.add('hidden');
+  document.getElementById('answer-buttons').classList.remove('hidden');
+  autoplayFirstAudio(backEl);
+});
+
+let _saveToastTimer = null;
+function showSaveToast() {
+  const el = document.getElementById('save-toast');
+  el.classList.add('visible');
+  clearTimeout(_saveToastTimer);
+  _saveToastTimer = setTimeout(() => el.classList.remove('visible'), 900);
+}
+
+async function answerCurrentCard(answer) {
+  const item = state.studyQueue.shift();
+  if (!item) return;
+  const { card } = item;
+
+  const before = { interval: card.intervalMinutes, ease: card.easeFactor };
+  const updated = window.SRS.scheduleNextReview(card, answer);
+  await window.DB.updateCard(updated);
+  await window.DB.logReview({
+    cardId: updated.id,
+    answer,
+    intervalBefore: before.interval,
+    intervalAfter: updated.intervalMinutes,
+    easeBefore: before.ease,
+    easeAfter: updated.easeFactor,
+  });
+  showSaveToast();
+
+  state.studySessionStats.studied += 1;
+  state.studySessionStats[answer] = (state.studySessionStats[answer] || 0) + 1;
+
+  // Si la tarjeta sigue en fase de aprendizaje con un intervalo corto,
+  // y aún hay otras tarjetas en cola, la reinsertamos más adelante en la
+  // sesión para simular su reaparición "pronto" sin esperar a reabrir la app.
+  const now = window.SRS.nowMs();
+  if (updated.due - now < 20 * 60 * 1000 && (updated.state === 'learning' || updated.state === 'relearning')) {
+    // La colocamos tras unas cuantas tarjetas (o al final si hay pocas).
+    const insertAt = Math.min(state.studyQueue.length, 3);
+    const note = await window.DB.getNote(updated.noteId);
+    state.studyQueue.splice(insertAt, 0, { card: updated, note });
+  }
+
+  await showNextCard();
+}
+
+document.getElementById('btn-again').addEventListener('click', () => answerCurrentCard('again'));
+document.getElementById('btn-good').addEventListener('click', () => answerCurrentCard('good'));
+
+async function finishStudySession() {
+  const stats = state.studySessionStats;
+  document.getElementById('session-summary').textContent =
+    `Has repasado ${stats.studied} tarjeta(s): ${stats.good} bien, ${stats.again} otra vez.`;
+  backStack = ['view-decks'];
+  showView('view-session-done');
+  await refreshDeckList();
+}
+
+document.getElementById('btn-back-to-decks').addEventListener('click', () => {
+  backStack = ['view-decks'];
+  showView('view-decks');
+  refreshDeckList();
+});
+
+// ---------------------------------------------------------------------
+// Estadísticas
+// ---------------------------------------------------------------------
+
+async function renderStats(deckId) {
+  const cards = await window.DB.getCardsByDeck(deckId);
+  const revlog = await window.DB.getRevlog();
+  const cardIds = new Set(cards.map((c) => c.id));
+  const deckRevlog = revlog.filter((r) => cardIds.has(r.cardId));
+
+  const byState = { new: 0, learning: 0, review: 0, relearning: 0 };
+  for (const c of cards) byState[c.state] = (byState[c.state] || 0) + 1;
+
+  const totalReviews = deckRevlog.length;
+  const totalAgain = deckRevlog.filter((r) => r.answer === 'again').length;
+  const accuracy = totalReviews ? Math.round(((totalReviews - totalAgain) / totalReviews) * 100) : 0;
+
+  const leeches = cards.filter((c) => c.isLeech).length;
+  const avgEase = cards.length
+    ? Math.round(cards.reduce((s, c) => s + c.easeFactor, 0) / cards.length / 10)
+    : 0;
+
+  const list = document.getElementById('stats-list');
+  list.innerHTML = `
+    <li><span>Total de tarjetas</span><strong>${cards.length}</strong></li>
+    <li><span>Nuevas</span><strong>${byState.new || 0}</strong></li>
+    <li><span>En aprendizaje</span><strong>${(byState.learning || 0) + (byState.relearning || 0)}</strong></li>
+    <li><span>En repaso</span><strong>${byState.review || 0}</strong></li>
+    <li><span>Repasos totales realizados</span><strong>${totalReviews}</strong></li>
+    <li><span>Precisión</span><strong>${accuracy}%</strong></li>
+    <li><span>Facilidad media</span><strong>${avgEase}%</strong></li>
+    <li><span>Tarjetas "leech" (difíciles)</span><strong>${leeches}</strong></li>
+  `;
+}
+
+// ---------------------------------------------------------------------
+// Ajustes: backup / restauración / borrado
+// ---------------------------------------------------------------------
+
+document.getElementById('btn-export-backup').addEventListener('click', async () => {
+  showModal({ message: 'Generando copia de seguridad...', progress: true });
+  try {
+    await window.ImportExport.exportBackup(updateModalProgress);
+    showModal({ message: 'Copia de seguridad descargada correctamente.', actions: [{ label: 'Aceptar', style: 'primary' }] });
+  } catch (err) {
+    showModal({ message: `Error al exportar: ${err.message}`, actions: [{ label: 'Cerrar', style: 'secondary' }] });
+  }
+});
+
+document.getElementById('btn-import-backup').addEventListener('click', () => {
+  document.getElementById('file-backup').click();
+});
+
+document.getElementById('file-backup').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+
+  showModal({
+    message: 'Restaurar copia de seguridad sustituirá todos los datos actuales. ¿Continuar?',
+    actions: [
+      { label: 'Cancelar', style: 'secondary' },
+      {
+        label: 'Restaurar', style: 'primary', closeOnClick: false, onClick: async () => {
+          showModal({ message: 'Restaurando copia de seguridad...', progress: true });
+          try {
+            const report = await window.ImportExport.importBackup(file, { merge: false }, updateModalProgress);
+            showModal({
+              message: `Restauración completada:\n\n• ${report.decksCount} mazos\n• ${report.notesCount} notas\n• ${report.cardsCount} tarjetas\n• ${report.mediaCount} archivos multimedia`,
+              actions: [{ label: 'Aceptar', style: 'primary', onClick: refreshDeckList }],
+            });
+          } catch (err) {
+            showModal({ message: `Error al restaurar: ${err.message}`, actions: [{ label: 'Cerrar', style: 'secondary' }] });
+          }
+        },
+      },
+    ],
+  });
+});
+
+document.getElementById('btn-wipe-all').addEventListener('click', () => {
+  showModal({
+    message: '¿Borrar TODOS los mazos, tarjetas e historial? Esta acción no se puede deshacer.',
+    actions: [
+      { label: 'Cancelar', style: 'secondary' },
+      {
+        label: 'Borrar todo', style: 'danger', onClick: async () => {
+          await window.DB.wipeAll();
+          state.mediaUrlCache.forEach((url) => URL.revokeObjectURL(url));
+          state.mediaUrlCache.clear();
+          backStack = ['view-decks'];
+          showView('view-decks');
+          await refreshDeckList();
+        },
+      },
+    ],
+  });
+});
+
+// ---------------------------------------------------------------------
+// Inicialización
+// ---------------------------------------------------------------------
+
+async function init() {
+  await window.DB.openDB();
+  await refreshDeckList();
+
+  // Nota: esta version de archivo unico no registra Service Worker (PWA/offline
+  // instalable). Ver la version multi-archivo si necesitas esa funcionalidad.
+}
+
+init();
+
+
+</script>
+</body>
+</html>
