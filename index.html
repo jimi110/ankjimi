@@ -89,7 +89,9 @@ body {
   color: var(--ink);
   font-family: var(--font-ui-sans);
   -webkit-tap-highlight-color: transparent;
-  padding-top: env(safe-area-inset-top, 0px);
+  /* La safe-area superior ya se gestiona en las cabeceras; así evitamos
+     duplicarla y crear un hueco blanco excesivo en móvil. */
+  padding-top: 0;
   padding-bottom: env(safe-area-inset-bottom, 0px);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -884,6 +886,17 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
 }
 
 /* ---------------- Responsive / escritorio ---------------- */
+@media (max-width: 719px) {
+  .topbar {
+    padding: 8px 14px;
+    padding-top: calc(8px + env(safe-area-inset-top, 0px));
+  }
+
+  #views {
+    padding-top: 10px;
+  }
+}
+
 @media (min-width: 720px) {
   body { background: var(--paper); }
   .card-content { font-size: 1.5rem; }
