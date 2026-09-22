@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#4f46e5">
+<meta name="theme-color" content="#1cb0f6">
 <title>Ankjimi — Repetición espaciada</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -11,49 +11,65 @@
 <style>
 /* =========================================================
    Tokens de diseño
-   Paleta "cuaderno de estudio": papel cálido + tinta azul profunda.
-   Serif para el contenido de las tarjetas (lectura), sans para la UI.
+   Paleta clara y alegre, con botones 3D con sombra y esquinas
+   redondeadas, al estilo de apps de aprendizaje de idiomas.
+   Tema claro / oscuro, seleccionable en Ajustes.
    ========================================================= */
 :root {
-  --paper: #faf7f0;
+  --paper: #ffffff;
   --paper-raised: #ffffff;
-  --ink: #1c2430;
-  --ink-soft: #5b6472;
-  --line: #e4ddd0;
+  --bg-secondary: #f7f9fa;
+  --ink: #3c3c3c;
+  --ink-soft: #777777;
+  --line: #e5e5e5;
 
-  --accent: #2b4570;       /* azul tinta profundo */
-  --accent-soft: #e8ecf5;
-  --good: #2f6f4e;          /* verde apagado, no acid-green */
-  --good-soft: #e3efe8;
-  --bad: #a13d3d;           /* rojo terroso, no rojo semáforo */
-  --bad-soft: #f5e6e4;
+  --accent: #1cb0f6;
+  --accent-hover: #1899d6;
+  --accent-shadow: #1899d6;
+  --accent-soft: #e3f6ff;
+  --good: #58cc02;
+  --good-shadow: #46a302;
+  --good-soft: #d7ffb8;
+  --bad: #ff4b4b;
+  --bad-shadow: #cc3a3a;
+  --bad-soft: #ffdfe0;
 
   --radius-s: 8px;
-  --radius-m: 14px;
-  --radius-l: 20px;
+  --radius-m: 12px;
+  --radius-l: 16px;
 
-  --font-ui: 'Iowan Old Style', 'Palatino Linotype', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-ui-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-card: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+  --shadow-btn: 0 4px 0 var(--accent-shadow);
+  --shadow-btn-active: 0 0 0 var(--accent-shadow);
+  --shadow-card: 0 2px 0 var(--line);
+
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-ui-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-card: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #14171c;
-    --paper-raised: #1c2027;
-    --ink: #ecebe6;
-    --ink-soft: #a3aab5;
-    --line: #2b303a;
-    --accent: #7c93c2;
-    --accent-soft: #232b3c;
-    --good: #6fbf94;
-    --good-soft: #1c2e24;
-    --bad: #d98a8a;
-    --bad-soft: #33201f;
-    color-scheme: dark;
-  }
+body.theme-dark {
+  --paper: #131f24;
+  --paper-raised: #18252b;
+  --bg-secondary: #202f36;
+  --ink: #ffffff;
+  --ink-soft: #afafaf;
+  --line: #37464f;
+
+  --accent: #1cb0f6;
+  --accent-hover: #1cb0f6;
+  --accent-shadow: #1899d6;
+  --accent-soft: #202f36;
+  --good: #58cc02;
+  --good-shadow: #46a302;
+  --good-soft: #1a3300;
+  --bad: #ff4b4b;
+  --bad-shadow: #cc3a3a;
+  --bad-soft: #3a1111;
+
+  --shadow-card: 0 2px 0 var(--line);
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -70,6 +86,7 @@ body {
   -webkit-tap-highlight-color: transparent;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #app {
@@ -78,6 +95,28 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--paper);
+  transition: max-width 0.2s ease;
+}
+
+/* Modos de tamaño de la app, elegibles en Ajustes. "Auto" usa un ancho
+   amplio y dos columnas en la lista de mazos cuando hay sitio (pantallas
+   de escritorio), y se comporta como una app móvil en pantallas pequeñas. */
+#app.layout-mobile { max-width: 480px; }
+#app.layout-pc { max-width: 900px; }
+#app.layout-auto { max-width: 900px; }
+
+#app.layout-pc .deck-list,
+#app.layout-auto .deck-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 640px) {
+  #app.layout-pc .deck-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 768px) {
+  #app.layout-auto .deck-list { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ---------------- Barra superior ---------------- */
@@ -87,7 +126,6 @@ body {
   justify-content: space-between;
   padding: 14px 16px;
   padding-top: calc(14px + env(safe-area-inset-top, 0px));
-  border-bottom: 1px solid var(--line);
   position: sticky;
   top: 0;
   background: var(--paper);
@@ -96,8 +134,8 @@ body {
 
 .topbar h1 {
   font-family: var(--font-card);
-  font-weight: 600;
-  font-size: 1.25rem;
+  font-weight: 700;
+  font-size: 1.2rem;
   margin: 0;
   letter-spacing: 0.2px;
 }
@@ -106,12 +144,13 @@ body {
   background: none;
   border: none;
   font-size: 1.2rem;
-  padding: 6px 10px;
-  border-radius: var(--radius-s);
+  padding: 8px 10px;
+  border-radius: 50%;
   cursor: pointer;
   color: var(--ink);
+  transition: background-color 0.15s ease, transform 0.15s ease;
 }
-.icon-btn:hover { background: var(--accent-soft); }
+.icon-btn:hover { background: var(--bg-secondary); }
 .icon-btn.hidden { visibility: hidden; }
 
 /* ---------------- Vistas ---------------- */
@@ -138,23 +177,27 @@ body {
 .btn {
   font-family: var(--font-ui-sans);
   font-size: 1rem;
-  font-weight: 600;
-  padding: 13px 20px;
-  border-radius: var(--radius-m);
+  font-weight: 700;
+  padding: 15px 20px;
+  border-radius: var(--radius-l);
   border: none;
   cursor: pointer;
   width: 100%;
   margin-top: 10px;
-  transition: transform 0.08s ease, opacity 0.15s ease;
+  box-shadow: var(--shadow-btn);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.15s ease;
 }
-.btn:active { transform: scale(0.98); }
+.btn:active { transform: translateY(4px); box-shadow: var(--shadow-btn-active); }
 .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
 
-.btn.primary { background: var(--accent); color: #fff; }
-.btn.secondary { background: var(--paper-raised); color: var(--ink); border: 1px solid var(--line); }
-.btn.success { background: var(--good-soft); color: var(--good); border: 1.5px solid var(--good); }
-.btn.danger { background: var(--bad-soft); color: var(--bad); border: 1.5px solid var(--bad); }
-.btn.big { padding: 16px 20px; font-size: 1.05rem; }
+.btn.primary { background: var(--accent); color: #fff; box-shadow: 0 4px 0 var(--accent-shadow); }
+.btn.secondary { background: var(--paper-raised); color: var(--ink); border: 2px solid var(--line); box-shadow: var(--shadow-card); }
+.btn.secondary:active { box-shadow: 0 0 0 var(--line); }
+.btn.success { background: var(--good-soft); color: var(--good); border: 2px solid var(--good); box-shadow: 0 4px 0 var(--good-shadow); }
+.btn.success:active { box-shadow: 0 0 0 var(--good-shadow); }
+.btn.danger { background: var(--bad-soft); color: var(--bad); border: 2px solid var(--bad); box-shadow: 0 4px 0 var(--bad-shadow); }
+.btn.danger:active { box-shadow: 0 0 0 var(--bad-shadow); }
+.btn.big { padding: 17px 20px; font-size: 1.08rem; }
 
 .btn small {
   display: block;
@@ -169,15 +212,17 @@ body {
 
 .deck-row {
   background: var(--paper-raised);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
   padding: 14px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
-.deck-row:active { background: var(--accent-soft); }
+.deck-row:active { transform: translateY(2px); box-shadow: 0 0 0 var(--line); }
 
 .deck-row .deck-name {
   font-family: var(--font-card);
@@ -220,11 +265,12 @@ body {
 /* ---------------- Detalle de mazo ---------------- */
 .deck-detail-card {
   background: var(--paper-raised);
-  border: 1px solid var(--line);
+  border: 2px solid var(--line);
   border-radius: var(--radius-l);
   padding: 24px 20px;
   text-align: center;
   margin-bottom: 18px;
+  box-shadow: var(--shadow-card);
 }
 
 .deck-detail-card h2 {
@@ -240,39 +286,16 @@ body {
 
 .deck-actions { display: flex; flex-direction: column; gap: 4px; }
 
-/* ---------------- Estudio (tema oscuro fijo, al estilo Anki) ---------------- */
-:root {
-  --study-bg: #1f2124;
-  --study-bg-raised: #26282c;
-  --study-ink: #f2f1ed;
-  --study-ink-soft: #9a9da3;
-  --study-line: #35373b;
-  --study-accent: #5b8def;
-}
-
-#view-study {
-  background: var(--study-bg);
-  color: var(--study-ink);
-  margin: -20px -16px -40px;
-  padding: 20px 16px 40px;
-  min-height: 100vh;
-}
-
-/* Cuando se está estudiando, la barra superior también pasa a oscuro */
-body:has(#view-study.active) .topbar {
-  background: var(--study-bg);
-  border-bottom-color: var(--study-line);
-}
-body:has(#view-study.active) .topbar h1,
-body:has(#view-study.active) .icon-btn {
-  color: var(--study-ink);
-}
+/* ---------------- Estudio ---------------- */
+/* La vista de estudio ahora usa el tema global (claro/oscuro/auto),
+   igual que el resto de la app, en vez de un tema oscuro fijo. */
 
 .study-progress {
   text-align: center;
-  color: #9a9da3;
+  color: var(--ink-soft);
   font-size: 0.85rem;
   margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .card-area {
@@ -301,12 +324,12 @@ body:has(#view-study.active) .icon-btn {
 }
 
 /* Bloque principal del frente: palabra/kanji grande */
-#card-front { font-size: clamp(1.7rem, 8vw, 2.4rem); font-weight: 600; }
+#card-front { font-size: clamp(1.7rem, 8vw, 2.4rem); font-weight: 700; }
 .field-sentence { line-height: 1.6; }
 #card-front ruby { ruby-position: over; }
 #card-front rt {
   font-size: 0.85rem;
-  color: #b9bcc2;
+  color: var(--ink-soft);
   font-family: var(--font-ui-sans);
   font-weight: 400;
 }
@@ -314,48 +337,44 @@ body:has(#view-study.active) .icon-btn {
 /* Campos etiquetados por el importador (mapFieldsToFrontBack en anki-import.js) */
 .field-reading {
   font-size: 1.1rem;
-  color: #b9bcc2;
+  color: var(--ink-soft);
   font-family: var(--font-ui-sans);
 }
 .field-meaning {
   font-size: 1.35rem;
+  font-weight: 700;
   font-family: var(--font-ui-sans);
-  color: var(--study-ink);
+  color: var(--ink);
   margin-top: 4px;
 }
 .field-sentence {
   font-size: 1.2rem;
   margin-top: 12px;
-  color: var(--study-ink);
+  color: var(--ink);
 }
 .field-sentence-meaning {
   font-size: 1.02rem;
-  color: #b9bcc2;
+  color: var(--ink-soft);
   font-family: var(--font-ui-sans);
   margin-top: 2px;
 }
 .field-notes {
   font-size: 0.92rem;
-  color: #9a9da3;
+  color: var(--ink-soft);
   font-family: var(--font-ui-sans);
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--study-line);
+  margin-top: 14px;
 }
-#card-back hr {
-  border: none;
-  border-top: 1px solid var(--study-line);
-  margin: 10px 0;
-}
+/* Sin líneas divisorias: el espaciado entre bloques del reverso basta para separarlos. */
+#card-back hr { display: none; }
 
 .card-content img {
   max-width: 100%;
   max-height: 34vh;
-  border-radius: var(--radius-s);
+  border-radius: var(--radius-m);
   margin-top: 6px;
 }
 
-/* Botones circulares de audio, al estilo Anki */
+/* Botones circulares de audio */
 .audio-row {
   display: flex;
   gap: 14px;
@@ -367,20 +386,25 @@ body:has(#view-study.active) .icon-btn {
   height: 44px;
   border-radius: 50%;
   border: none;
-  background: #34373c;
-  color: var(--study-ink);
+  background: var(--accent-soft);
+  color: var(--accent);
   font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: transform 0.1s ease;
 }
-.audio-btn:active { background: #40444a; }
-/* Reproduce automáticamente el audio del frente si audio-autoplay lo indica */
+.audio-btn:active { transform: scale(0.92); }
+
+/* Los botones de audio del frente quedan ocultos hasta que se gira la
+   tarjeta (se muestran solo tras pulsar "Mostrar respuesta"), para no
+   distraer ni dar pistas antes de que el usuario intente recordar. */
+#card-front .audio-row { display: none; }
+#card-front.revealed .audio-row { display: flex; }
 
 #card-back {
-  border-top: 1px solid var(--study-line);
-  padding-top: 16px;
+  padding-top: 6px;
   margin-top: 4px;
   width: 100%;
 }
@@ -393,24 +417,21 @@ body:has(#view-study.active) .icon-btn {
   left: 50%;
   bottom: calc(18px + env(safe-area-inset-bottom, 0px));
   transform: translate(-50%, 10px);
-  background: var(--study-bg-raised, #26282c);
-  color: var(--good, #2f6f4e);
-  border: 1px solid var(--good, #2f6f4e);
+  background: var(--paper-raised);
+  color: var(--good);
+  border: 2px solid var(--good);
   padding: 8px 16px;
   border-radius: 999px;
   font-family: var(--font-ui-sans);
   font-size: 0.85rem;
+  font-weight: 600;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease, transform 0.25s ease;
   z-index: 50;
+  box-shadow: var(--shadow-card);
 }
 .save-toast.visible { opacity: 1; transform: translate(-50%, 0); }
-
-#view-study .btn.primary.big {
-  background: var(--study-accent);
-  color: #fff;
-}
 
 /* Fila de 2 botones de calificación (Otra vez / Bien) */
 .answer-buttons {
@@ -420,28 +441,30 @@ body:has(#view-study.active) .icon-btn {
 }
 
 .rate-btn {
-  border: none;
-  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
   padding: 16px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
   cursor: pointer;
-  background: #2c2f34;
-  color: var(--study-ink);
+  background: var(--paper-raised);
+  color: var(--ink);
   font-family: var(--font-ui-sans);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
-.rate-btn:active { transform: scale(0.97); }
-.rate-label { font-size: 1.02rem; font-weight: 600; }
-.rate-eta { font-size: 0.76rem; color: #a7aab0; }
+.rate-btn:active { transform: translateY(2px); box-shadow: 0 0 0 var(--line); }
+.rate-label { font-size: 1.02rem; font-weight: 700; }
+.rate-eta { font-size: 0.76rem; color: var(--ink-soft); }
 
-.rate-again { background: var(--bad-soft-study, #3a2c2c); }
-.rate-again .rate-label { color: #e79a9a; }
-.rate-again .rate-eta { color: #e79a9a; }
-.rate-good { background: var(--good-soft-study, #23342a); }
-.rate-good .rate-label { color: #8fcf9f; }
-.rate-good .rate-eta { color: #8fcf9f; }
+.rate-again { background: var(--bad-soft); border-color: var(--bad); }
+.rate-again .rate-label { color: var(--bad); }
+.rate-again .rate-eta { color: var(--bad); }
+.rate-good { background: var(--good-soft); border-color: var(--good); }
+.rate-good .rate-label { color: var(--good); }
+.rate-good .rate-eta { color: var(--good); }
 
 /* ---------------- Sesión completada ---------------- */
 .done-card {
@@ -455,15 +478,16 @@ body:has(#view-study.active) .icon-btn {
 /* ---------------- Formularios ---------------- */
 .form-card, .stats-card, .settings-card {
   background: var(--paper-raised);
-  border: 1px solid var(--line);
+  border: 2px solid var(--line);
   border-radius: var(--radius-l);
   padding: 20px;
+  box-shadow: var(--shadow-card);
 }
 
 .form-card label {
   display: block;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink-soft);
   margin: 14px 0 6px;
 }
@@ -474,8 +498,8 @@ textarea {
   font-family: var(--font-card);
   font-size: 1.05rem;
   padding: 12px;
-  border-radius: var(--radius-s);
-  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
   background: var(--paper);
   color: var(--ink);
   resize: vertical;
@@ -488,7 +512,8 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
 /* ---------------- Estadísticas ---------------- */
 .stats-card h2, .settings-card h2 {
   font-family: var(--font-card);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  font-weight: 700;
   margin: 0 0 12px;
 }
 .settings-card h2:not(:first-child) { margin-top: 26px; }
@@ -498,13 +523,117 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  border-bottom: 1px solid var(--line);
   font-size: 0.95rem;
 }
-.stats-list li:last-child { border-bottom: none; }
 .stats-list li strong { font-family: var(--font-card); }
 
 .hint-text { color: var(--ink-soft); font-size: 0.9rem; line-height: 1.5; margin: 0 0 12px; }
+
+/* ---------------- Ajustes: selector de tema (Apariencia) ---------------- */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.theme-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 6px;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+  text-align: center;
+  font-family: var(--font-ui-sans);
+}
+.theme-option:active { transform: translateY(1px); }
+.theme-option.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.theme-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.theme-swatch.light { background: #ffffff; }
+.theme-swatch.dark { background: #131f24; }
+.theme-option-label { font-size: 0.8rem; font-weight: 600; color: var(--ink); }
+
+/* ---------------- Ajustes: control segmentado (p.ej. Sonido, Tamaño) ---------------- */
+.segmented-control {
+  display: flex;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-m);
+  padding: 4px;
+  border: 2px solid var(--line);
+  gap: 4px;
+}
+.seg-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--ink-soft);
+  padding: 9px 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-ui-sans);
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.seg-btn:active { transform: translateY(1px); }
+.seg-btn.active {
+  background: var(--paper-raised);
+  color: var(--accent);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+/* ---------------- Modal de información ---------------- */
+.info-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(20, 18, 14, 0.48);
+}
+.info-modal.visible { display: flex; }
+.info-dialog {
+  position: relative;
+  width: min(480px, 100%);
+  max-height: 80vh;
+  overflow-y: auto;
+  background: var(--paper-raised);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 24px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+}
+.info-close {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 26px;
+  cursor: pointer;
+  line-height: 1;
+}
+.info-title { padding-right: 32px; font-size: 1.25rem; font-weight: 700; color: var(--accent); margin: 0 0 14px; }
+.info-subtitle { font-size: 0.95rem; font-weight: 700; margin: 16px 0 6px; color: var(--ink); }
+.info-subtitle:first-of-type { margin-top: 0; }
+.info-text { font-size: 0.9rem; line-height: 1.55; color: var(--ink); margin: 0 0 8px; }
+.info-link { display: block; color: var(--accent); font-weight: 600; word-break: break-word; margin: 4px 0 12px; text-decoration: underline; }
+.info-gambatte { text-align: center; font-weight: 700; font-size: 1rem; margin-top: 16px; color: var(--accent); }
 
 /* ---------------- Modal ---------------- */
 .modal-overlay {
@@ -524,6 +653,7 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
   padding: 22px;
   max-width: 380px;
   width: 100%;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.18);
 }
 
 .modal-box p { margin: 0 0 14px; line-height: 1.5; white-space: pre-line; }
@@ -679,6 +809,25 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
     <!-- ============ VISTA: AJUSTES ============ -->
     <section id="view-settings" class="view">
       <div class="settings-card">
+        <button type="button" id="btn-open-info" class="btn secondary">ℹ️ Información</button>
+
+        <h2>🎨 Apariencia</h2>
+        <div class="theme-grid" id="theme-grid"></div>
+
+        <h2>📐 Tamaño de la app</h2>
+        <p class="hint-text">"Auto" se adapta solo según si usas el móvil o el ordenador.</p>
+        <div class="segmented-control" id="layout-controls">
+          <button type="button" class="seg-btn" data-value="auto">Auto</button>
+          <button type="button" class="seg-btn" data-value="mobile">📱 Móvil</button>
+          <button type="button" class="seg-btn" data-value="pc">💻 PC</button>
+        </div>
+
+        <h2>🔊 Sonido</h2>
+        <div class="segmented-control" id="sound-controls">
+          <button type="button" class="seg-btn" data-value="true">🔊 Activado</button>
+          <button type="button" class="seg-btn" data-value="false">🔇 Silencio</button>
+        </div>
+
         <h2>Copia de seguridad</h2>
         <p class="hint-text">Exporta tu progreso a un archivo JSON, o restáuralo en otro dispositivo.</p>
         <button id="btn-export-backup" class="btn secondary">Exportar copia de seguridad</button>
@@ -697,6 +846,34 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
     </section>
 
   </main>
+
+  <!-- ============ MODAL: INFORMACIÓN ============ -->
+  <div id="info-modal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-title">
+    <div class="info-dialog">
+      <button class="info-close" aria-label="Cerrar información" id="btn-close-info">×</button>
+      <h2 id="info-title" class="info-title">ℹ️ Información</h2>
+
+      <p class="info-text">Esta app está inspirada en el flujo de aprendizaje de ANKI.</p>
+
+      <p class="info-text">
+        Si vienes de mi otra app buscando otra herramienta para mejorar tu aprendizaje de
+        japonés 🇯🇵, te recomiendo importar este mazo de 1.5k palabras:
+      </p>
+      <p class="info-text" style="margin-bottom:2px;"><strong>🔗 Mazo en AnkiWeb</strong></p>
+      <a class="info-link" href="https://ankiweb.net/shared/info/1196762551" target="_blank" rel="noopener noreferrer">https://ankiweb.net/shared/info/1196762551</a>
+
+      <p class="info-text">Créditos al autor original del mazo y a AnkiWeb 🙏</p>
+
+      <p class="info-text">
+        Si te está gustando la app y quieres apoyar el proyecto ❤️, puedes pasarte por mi
+        canal de YouTube:
+      </p>
+      <p class="info-text" style="margin-bottom:2px;"><strong>🎥 YouTube</strong></p>
+      <a class="info-link" href="https://www.youtube.com/@jimi11_" target="_blank" rel="noopener noreferrer">https://www.youtube.com/@jimi11_</a>
+
+      <p class="info-gambatte">がんばれ！💪</p>
+    </div>
+  </div>
 
   <!-- Inputs de archivo ocultos -->
   <input type="file" id="file-apkg" accept=".apkg" class="hidden">
@@ -1276,13 +1453,14 @@ async function wipeAll() {
 // ---------------------------------------------------------------------
 
 const CONFIG_KEY = 'ankiweb-config';
+const DEFAULT_CONFIG = { theme: 'light', layout: 'auto', sound: true, newPerDaySessionCap: 9999 };
 
 function getConfig() {
   try {
     const raw = localStorage.getItem(CONFIG_KEY);
-    return raw ? JSON.parse(raw) : { theme: 'auto', newPerDaySessionCap: 9999 };
+    return raw ? { ...DEFAULT_CONFIG, ...JSON.parse(raw) } : { ...DEFAULT_CONFIG };
   } catch (e) {
-    return { theme: 'auto', newPerDaySessionCap: 9999 };
+    return { ...DEFAULT_CONFIG };
   }
 }
 
@@ -2310,15 +2488,31 @@ async function renderCardField(rawHtml) {
   return window.AnkiImport.rewriteMediaRefs(rawHtml, map);
 }
 
-/** Reproduce un archivo de audio a partir de su nombre, resolviéndolo a una blob: URL. */
-async function playAudioFile(fileName) {
+/**
+ * Reproduce un archivo de audio a partir de su nombre, resolviéndolo a una
+ * blob: URL. Si waitForEnd es true, la promesa devuelta no se resuelve hasta
+ * que el audio termina de sonar (o falla), para poder encadenar reproducciones
+ * en secuencia sin que se solapen.
+ */
+async function playAudioFile(fileName, waitForEnd = false) {
   const url = await resolveMediaUrl(fileName);
   if (!url) return;
   const audio = new Audio(url);
-  audio.play().catch(() => {
-    // Algunos navegadores (sobre todo iOS Safari) bloquean el autoplay si ha
-    // pasado demasiado tiempo desde el último toque del usuario. En ese caso
-    // el botón ▶ del audio sigue funcionando para reproducirlo manualmente.
+
+  if (!waitForEnd) {
+    audio.play().catch(() => {
+      // Algunos navegadores (sobre todo iOS Safari) bloquean el autoplay si ha
+      // pasado demasiado tiempo desde el último toque del usuario. En ese caso
+      // el botón ▶ del audio sigue funcionando para reproducirlo manualmente.
+    });
+    return;
+  }
+
+  await new Promise((resolve) => {
+    const done = () => resolve();
+    audio.addEventListener('ended', done, { once: true });
+    audio.addEventListener('error', done, { once: true });
+    audio.play().catch(done);
   });
 }
 
@@ -2336,6 +2530,31 @@ function wireAudioButtons(container) {
 function autoplayFirstAudio(container) {
   const btn = container.querySelector('.audio-btn[data-audio]');
   if (btn) playAudioFile(btn.getAttribute('data-audio'));
+}
+
+/** Espera los milisegundos indicados. */
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Secuencia de audio al girar la tarjeta (mostrar la respuesta): primero suena
+ * la palabra sola (el botón ▶ del frente), después de medio segundo de pausa
+ * suena la frase de ejemplo completa (el botón ▶ de la frase en el frente).
+ * El frente ya no reproduce nada automáticamente al mostrarse la tarjeta.
+ */
+async function playRevealSequence(frontEl) {
+  const audioButtons = frontEl.querySelectorAll('.audio-btn[data-audio]');
+  const wordBtn = audioButtons[0] || null;
+  const sentenceBtn = audioButtons[1] || null;
+
+  if (wordBtn) {
+    await playAudioFile(wordBtn.getAttribute('data-audio'), true);
+  }
+  await wait(500);
+  if (sentenceBtn) {
+    await playAudioFile(sentenceBtn.getAttribute('data-audio'), true);
+  }
 }
 
 async function showNextCard() {
@@ -2357,6 +2576,8 @@ async function showNextCard() {
   const backEl = document.getElementById('card-back');
   frontEl.innerHTML = frontHtml;
   backEl.innerHTML = backHtml;
+  // Oculta los botones de audio del frente hasta que se gire la tarjeta.
+  frontEl.classList.remove('revealed');
   wireAudioButtons(frontEl);
   wireAudioButtons(backEl);
 
@@ -2366,16 +2587,20 @@ async function showNextCard() {
     document.getElementById(`${answer}-eta`).textContent = window.SRS.formatInterval(preview.intervalMinutes);
   }
 
-  // Autorreproducir el audio de la palabra en cuanto se muestra el frente.
-  autoplayFirstAudio(frontEl);
+  // El frente ya no suena solo al mostrarse la tarjeta; el audio empieza al
+  // pulsar "Mostrar respuesta" (ver btn-show-answer más abajo).
 }
 
 document.getElementById('btn-show-answer').addEventListener('click', () => {
+  const frontEl = document.getElementById('card-front');
   const backEl = document.getElementById('card-back');
   backEl.classList.remove('hidden');
   document.getElementById('btn-show-answer').classList.add('hidden');
   document.getElementById('answer-buttons').classList.remove('hidden');
-  autoplayFirstAudio(backEl);
+  // Revela los botones de audio del frente (antes ocultos) y lanza la secuencia:
+  // primero la palabra, medio segundo de pausa, y luego la frase entera.
+  frontEl.classList.add('revealed');
+  playRevealSequence(frontEl);
 });
 
 let _saveToastTimer = null;
@@ -2403,6 +2628,7 @@ async function answerCurrentCard(answer) {
     easeAfter: updated.easeFactor,
   });
   showSaveToast();
+  playSound(answer === 'good' ? 'correct' : 'again');
 
   state.studySessionStats.studied += 1;
   state.studySessionStats[answer] = (state.studySessionStats[answer] || 0) + 1;
@@ -2428,6 +2654,7 @@ async function finishStudySession() {
   const stats = state.studySessionStats;
   document.getElementById('session-summary').textContent =
     `Has repasado ${stats.studied} tarjeta(s): ${stats.good} bien, ${stats.again} otra vez.`;
+  playSound('complete');
   backStack = ['view-decks'];
   showView('view-session-done');
   await refreshDeckList();
@@ -2539,10 +2766,183 @@ document.getElementById('btn-wipe-all').addEventListener('click', () => {
 });
 
 // ---------------------------------------------------------------------
+// Apariencia (tema claro / oscuro)
+// ---------------------------------------------------------------------
+
+const THEME_OPTIONS = [
+  { id: 'light', label: 'Claro' },
+  { id: 'dark', label: 'Oscuro' },
+];
+
+/** Aplica el tema guardado al <body>. */
+function applyTheme() {
+  const theme = getConfig().theme || 'light';
+  document.body.classList.remove('theme-light', 'theme-dark');
+  document.body.classList.add(`theme-${theme}`);
+}
+
+/** Dibuja las opciones de tema en Ajustes y resalta la activa. */
+function renderThemeGrid() {
+  const grid = document.getElementById('theme-grid');
+  if (!grid) return;
+  const current = getConfig().theme || 'light';
+  grid.innerHTML = THEME_OPTIONS.map((t) => `
+    <button type="button" class="theme-option${t.id === current ? ' active' : ''}" data-theme-id="${t.id}">
+      <span class="theme-swatch ${t.id}"></span>
+      <span class="theme-option-label">${t.label}</span>
+    </button>
+  `).join('');
+
+  grid.querySelectorAll('.theme-option').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      setConfig({ theme: btn.getAttribute('data-theme-id') });
+      applyTheme();
+      renderThemeGrid();
+      playSound('toggle');
+    });
+  });
+}
+
+// ---------------------------------------------------------------------
+// Tamaño de la app (móvil / PC / auto) — adapta el ancho según el dispositivo
+// ---------------------------------------------------------------------
+
+/** Aplica el modo de tamaño guardado a #app (layout-mobile / layout-pc / layout-auto). */
+function applyLayout() {
+  const layout = getConfig().layout || 'auto';
+  const app = document.getElementById('app');
+  app.classList.remove('layout-mobile', 'layout-pc', 'layout-auto');
+  app.classList.add(`layout-${layout}`);
+  updateSegControl('layout-controls', layout);
+}
+
+/** Marca como activo el botón correspondiente dentro de un control segmentado. */
+function updateSegControl(containerId, activeValue) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.querySelectorAll('.seg-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.getAttribute('data-value') === String(activeValue));
+  });
+}
+
+document.getElementById('layout-controls').querySelectorAll('.seg-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    setConfig({ layout: btn.getAttribute('data-value') });
+    applyLayout();
+    playSound('toggle');
+  });
+});
+
+// ---------------------------------------------------------------------
+// Sonido de botones (osciladores nativos, sin archivos externos)
+// ---------------------------------------------------------------------
+
+const SoundAudioContext = window.AudioContext || window.webkitAudioContext;
+let uiAudioCtx = null;
+
+function initUiAudio() {
+  if (!SoundAudioContext) return;
+  if (!uiAudioCtx) uiAudioCtx = new SoundAudioContext();
+  if (uiAudioCtx.state === 'suspended') uiAudioCtx.resume();
+}
+
+/** Genera un tono corto y suave: ataque rápido, caída exponencial, filtro paso-bajo. */
+function uiTone({ freq, to, type = 'sine', duration = 0.14, gain = 0.18, at = 0, filter = 2600 }) {
+  const t0 = uiAudioCtx.currentTime + at;
+  const osc = uiAudioCtx.createOscillator();
+  const amp = uiAudioCtx.createGain();
+  const lp = uiAudioCtx.createBiquadFilter();
+  lp.type = 'lowpass';
+  lp.frequency.value = filter;
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, t0);
+  if (to) osc.frequency.exponentialRampToValueAtTime(to, t0 + duration);
+  amp.gain.setValueAtTime(0.0001, t0);
+  amp.gain.exponentialRampToValueAtTime(gain, t0 + 0.012);
+  amp.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+  osc.connect(lp);
+  lp.connect(amp);
+  amp.connect(uiAudioCtx.destination);
+  osc.start(t0);
+  osc.stop(t0 + duration + 0.02);
+}
+
+const UI_SOUND_RECIPES = {
+  click:     () => uiTone({ freq: 720, duration: 0.045, gain: 0.10, filter: 3000 }),
+  primary:   () => uiTone({ freq: 520, to: 660, duration: 0.09, gain: 0.16, filter: 2600 }),
+  secondary: () => uiTone({ freq: 480, duration: 0.06, gain: 0.11, filter: 2400 }),
+  toggle:    () => uiTone({ freq: 600, to: 500, duration: 0.07, gain: 0.13, filter: 2500 }),
+  danger:    () => uiTone({ freq: 340, to: 240, duration: 0.16, gain: 0.14, filter: 1600 }),
+  correct:   () => { uiTone({ freq: 660, duration: 0.09, gain: 0.2, filter: 3200 });
+                      uiTone({ freq: 990, duration: 0.14, gain: 0.16, filter: 3500, at: 0.07 }); },
+  again:     () => uiTone({ freq: 340, to: 260, duration: 0.14, gain: 0.13, filter: 1600 }),
+  complete:  () => { [440, 550, 660].forEach((f, i) => uiTone({ freq: f, duration: 0.16, gain: 0.17, filter: 3000, at: i * 0.1 })); },
+};
+
+let _lastUiSoundAt = 0;
+/** Reproduce un sonido de interfaz por su nombre, si el sonido está activado. */
+function playSound(name) {
+  if (!getConfig().sound) return;
+  const recipe = UI_SOUND_RECIPES[name];
+  if (!recipe || !SoundAudioContext) return;
+  initUiAudio();
+  const now = performance.now();
+  if (now - _lastUiSoundAt < 45) return; // evita solapes cuando dos eventos casi coinciden
+  _lastUiSoundAt = now;
+  try { recipe(); } catch (e) { /* algunos navegadores pueden bloquear audio sin gesto previo */ }
+}
+
+/** Activa el sonido 'click' en cualquier botón de la app (delegación en el documento). */
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  // Los controles de tema/tamaño/sonido ya reproducen su propio sonido ('toggle')
+  // desde sus listeners específicos, así que evitamos duplicarlo aquí.
+  if (btn.closest('#theme-grid, #layout-controls, #sound-controls')) return;
+  playSound('click');
+});
+
+function applySoundPref() {
+  updateSegControl('sound-controls', getConfig().sound ? 'true' : 'false');
+}
+
+document.getElementById('sound-controls').querySelectorAll('.seg-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const enabled = btn.getAttribute('data-value') === 'true';
+    setConfig({ sound: enabled });
+    applySoundPref();
+    if (enabled) playSound('toggle'); // sonido de confirmación al reactivarlo
+  });
+});
+
+// ---------------------------------------------------------------------
+// Modal de información
+// ---------------------------------------------------------------------
+
+function openInfoModal() {
+  document.getElementById('info-modal').classList.add('visible');
+  playSound('secondary');
+}
+function closeInfoModal() {
+  document.getElementById('info-modal').classList.remove('visible');
+  playSound('click');
+}
+
+document.getElementById('btn-open-info').addEventListener('click', openInfoModal);
+document.getElementById('btn-close-info').addEventListener('click', closeInfoModal);
+document.getElementById('info-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'info-modal') closeInfoModal();
+});
+
+// ---------------------------------------------------------------------
 // Inicialización
 // ---------------------------------------------------------------------
 
 async function init() {
+  applyTheme();
+  renderThemeGrid();
+  applyLayout();
+  applySoundPref();
   await window.DB.openDB();
   await refreshDeckList();
 
