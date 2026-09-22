@@ -231,8 +231,8 @@ body {
 .btn.secondary:active { box-shadow: 0 0 0 var(--line); }
 .btn.success { background: var(--good-soft); color: var(--good); border: 2px solid var(--good); box-shadow: 0 4px 0 var(--good-shadow); }
 .btn.success:active { box-shadow: 0 0 0 var(--good-shadow); }
-.btn.danger { background: var(--bad-soft); color: var(--bad); border: 2px solid var(--bad); box-shadow: 0 4px 0 var(--bad-shadow); }
-.btn.danger:active { box-shadow: 0 0 0 var(--bad-shadow); }
+.btn.danger { background: var(--bad-soft); color: var(--bad); border: 2px solid var(--bad); box-shadow: 0 4px 0 var(--bad); }
+.btn.danger:active { box-shadow: 0 0 0 var(--bad); }
 .btn.big { padding: 17px 20px; font-size: 1.08rem; }
 
 .btn small {
@@ -2687,9 +2687,12 @@ async function refreshDeckList() {
     row.className = 'deck-row';
 
     const savedQueue = Array.isArray(deck.studySessionQueue) ? deck.studySessionQueue : [];
+    // "Pendientes" representa únicamente la sesión actualmente abierta.
+    // Al terminar una sesión vuelve a 0; las tarjetas que tocan se reflejan
+    // en "Repaso" y "Por estudiar", y se podrán iniciar en una nueva sesión.
     const pending = deck.studySessionActive && savedQueue.length > 0
       ? savedQueue.length
-      : counts.pendingPreview;
+      : 0;
 
     row.innerHTML = `
       <div>
@@ -2806,16 +2809,19 @@ async function refreshDeckDetail() {
     Array.isArray(deck.studySessionQueue) &&
     deck.studySessionQueue.length > 0;
 
-  const pending = hasSavedSession
-    ? deck.studySessionQueue.length
-    : counts.pendingPreview;
+  // "Pendientes" es la cola de la sesión actual, no un contador general.
+  // Por eso queda en 0 cuando no hay una sesión abierta.
+  const pending = hasSavedSession ? deck.studySessionQueue.length : 0;
 
   document.getElementById('stat-pending').textContent = pending;
   document.getElementById('stat-review').textContent = counts.reviewCount;
   document.getElementById('stat-new').textContent = counts.newCount;
 
-  document.getElementById('btn-start-study').classList.toggle('hidden', pending === 0);
-  document.getElementById('no-due-hint').classList.toggle('hidden', pending > 0);
+  // El botón sí depende de si existen tarjetas disponibles para iniciar
+  // una nueva sesión, aunque "Pendientes" esté en 0.
+  const canStartStudy = counts.pendingPreview > 0 || hasSavedSession;
+  document.getElementById('btn-start-study').classList.toggle('hidden', !canStartStudy);
+  document.getElementById('no-due-hint').classList.toggle('hidden', canStartStudy);
 }
 
 document.getElementById('btn-edit-deck-name').addEventListener('click', async () => {
