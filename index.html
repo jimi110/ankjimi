@@ -2599,12 +2599,19 @@ async function ensureDailyRelease(deck) {
   const currentPerDay = Math.max(0, orDefault(deck.newPerDay, 10));
   const maxAccumulated = Math.max(0, orDefault(deck.maxAccumulated, 100));
 
-  // Este campo existía en una versión anterior donde el cupo se acumulaba
-  // entre días. Al migrar, empezamos con el cupo normal de hoy para que el
-  // comportamiento sea como Anki: cada día se ofrece el límite configurado,
-  // sin arrastrar automáticamente las nuevas no estudiadas del día anterior.
+  // newReleasedTotal representa cuántas tarjetas nuevas siguen liberadas
+  // y pendientes de introducir. Las que no se hicieron ayer se conservan
+  // y se les suma el cupo de hoy.
   if (!deck.dailyQuotaMigrated) {
-    deck.newReleasedTotal = Math.min(currentPerDay, maxAccumulated);
+    const cards = await window.DB.getCardsByDeck(deck.id);
+    const stillNew = cards.filter((c) => c.state === 'new').length;
+
+    // Migración segura de mazos antiguos: conserva el saldo que ya tenían,
+    // limitado a las tarjetas nuevas que realmente existen.
+    deck.newReleasedTotal = Math.min(
+      maxAccumulated,
+      Math.max(0, Math.min(orDefault(deck.newReleasedTotal, 0), stillNew))
+    );
     deck.dailyQuotaMigrated = true;
   }
 
@@ -2612,19 +2619,18 @@ async function ensureDailyRelease(deck) {
     const cards = await window.DB.getCardsByDeck(deck.id);
     const stillNew = cards.filter((c) => c.state === 'new').length;
 
-    // Nuevo día = nuevo cupo. Las tarjetas nuevas sobrantes de ayer siguen
-    // siendo nuevas, pero no aumentan el cupo de hoy: se ofrecerán cuando
-    // correspondan según el límite diario.
+    // Nuevo día: se añaden 10 (o el límite configurado) al saldo anterior.
+    // Ejemplo: quedaron 4 ayer -> hoy pasan a ser 14.
     deck.newReleasedTotal = Math.min(
-      currentPerDay,
       maxAccumulated,
+      Math.max(0, orDefault(deck.newReleasedTotal, 0)) + currentPerDay,
       stillNew
     );
     deck.lastReleaseDate = today;
     deck.lastReleaseAmount = currentPerDay;
 
-    // Una sesión terminada pertenece solo al día anterior; mañana vuelve a
-    // estar disponible la sesión con las tarjetas que toquen.
+    // La sesión terminada pertenece al día anterior; con el nuevo día se
+    // puede iniciar otra sesión con el nuevo saldo disponible.
     deck.studySessionFinishedDate = null;
 
     await window.DB.updateDeck(deck);
