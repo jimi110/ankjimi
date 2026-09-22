@@ -141,7 +141,7 @@ body {
   border-bottom: 1px solid var(--line);
 }
 .topbar #btn-back { grid-column: 1; justify-self: start; }
-.topbar #btn-settings { grid-column: 3; justify-self: end; }
+.topbar #btn-open-info { grid-column: 3; justify-self: end; }
 
 .topbar h1 {
   grid-column: 2;
@@ -177,7 +177,7 @@ body {
 /* Puntito rojo de aviso sobre el botón de Ajustes (⚙️) y sobre "Información"
    dentro del panel de Ajustes, para animar al usuario a leer la información
    al menos una vez. Desaparece en cuanto se abre. */
-#btn-settings, #btn-open-info { position: relative; }
+#btn-open-info { position: relative; }
 .info-badge-dot {
   position: absolute;
   top: 2px;
@@ -952,14 +952,13 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
 <body>
 
 <div id="save-toast" class="save-toast">✓ Progreso guardado en este dispositivo</div>
-<div id="settings-overlay"></div>
 <div id="app">
 
   <!-- ============ BARRA SUPERIOR ============ -->
   <header class="topbar">
     <button id="btn-back" class="icon-btn hidden" aria-label="Volver">←</button>
     <h1 id="topbar-title">Ankジミー</h1>
-    <button id="btn-settings" class="icon-btn" aria-label="Ajustes">⚙️<span id="settings-info-dot" class="info-badge-dot" style="display:none;"></span></button>
+    <button id="btn-open-info" class="icon-btn" aria-label="Información">ℹ️<span id="info-btn-dot" class="info-badge-dot" style="display:none;"></span></button>
   </header>
 
   <main id="views">
@@ -976,7 +975,16 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
         <button id="btn-new-deck" class="btn secondary">+ Nuevo mazo</button>
         <button id="btn-import-apkg" class="btn primary">Importar .apkg</button>
       </div>
+
+      <div class="fab-row" style="margin-top:10px;">
+        <button id="btn-export-backup" class="btn secondary">💾 Exportar copia</button>
+        <button id="btn-import-backup" class="btn secondary">📂 Restaurar copia</button>
+      </div>
+      <div class="fab-row" style="margin-top:10px;">
+        <button id="btn-wipe-all" class="btn danger">🗑️ Borrar todos los datos</button>
+      </div>
     </section>
+
 
     <!-- ============ VISTA: DETALLE DE MAZO ============ -->
     <section id="view-deck-detail" class="view">
@@ -1071,59 +1079,6 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
       <div class="stats-card">
         <h2>Resumen del mazo</h2>
         <ul id="stats-list" class="stats-list"></ul>
-      </div>
-    </section>
-
-    <!-- ============ VISTA: AJUSTES ============ -->
-    <section id="view-settings" class="view">
-      <div class="settings-topbar">
-        <button type="button" id="btn-back-settings" class="icon-btn" aria-label="Volver">←</button>
-        <h2 class="settings-topbar-title">Ajustes</h2>
-      </div>
-      <div class="settings-card">
-        <button type="button" id="btn-open-info" class="btn secondary">ℹ️ Información<span id="info-btn-dot" class="info-badge-dot" style="display:none;"></span></button>
-
-        <h2>🎨 Apariencia</h2>
-        <div class="theme-grid" id="theme-grid"></div>
-        <div id="custom-color-row" class="custom-color-row">
-          <label for="custom-color-input">Elige tu color base</label>
-          <input type="color" id="custom-color-input" class="custom-color-input" value="#1cb0f6">
-        </div>
-
-        <h2>📐 Tamaño de la app</h2>
-        <div class="segmented-control" id="layout-controls">
-          <button type="button" class="seg-btn" data-value="auto">Auto</button>
-          <button type="button" class="seg-btn" data-value="mobile">📱 Móvil</button>
-          <button type="button" class="seg-btn" data-value="pc">💻 PC</button>
-        </div>
-
-        <h2>🔊 Sonido</h2>
-        <div class="segmented-control" id="sound-controls">
-          <button type="button" class="seg-btn" data-value="true">🔊 Activado</button>
-          <button type="button" class="seg-btn" data-value="false">🔇 Silencio</button>
-        </div>
-
-        <h2>あ Furigana</h2>
-        <p class="hint-text">Muestra la lectura pequeña sobre los kanji. Desactivado por defecto para practicar sin ayuda.</p>
-        <div class="segmented-control" id="furigana-controls">
-          <button type="button" class="seg-btn" data-value="false">Desactivado</button>
-          <button type="button" class="seg-btn" data-value="true">Activado</button>
-        </div>
-
-        <h2>Copia de seguridad</h2>
-        <p class="hint-text">Exporta tu progreso a un archivo JSON, o restáuralo en otro dispositivo.</p>
-        <button id="btn-export-backup" class="btn secondary">Exportar copia de seguridad</button>
-        <button id="btn-import-backup" class="btn secondary">Restaurar copia de seguridad</button>
-
-        <h2>Datos</h2>
-        <button id="btn-wipe-all" class="btn danger">Borrar todos los datos</button>
-
-        <h2>Acerca de</h2>
-        <p class="hint-text">
-          Ankジミー — aplicación de repetición espaciada de código abierto, inspirada en Anki.
-          Funciona 100% en tu navegador, sin servidor, y puede instalarse como app (PWA).
-          Tu progreso se guarda automáticamente en este dispositivo cada vez que respondes una tarjeta.
-        </p>
       </div>
     </section>
 
@@ -1783,13 +1738,24 @@ async function wipeAll() {
 // Configuración simple (localStorage)
 // ---------------------------------------------------------------------
 
-const CONFIG_KEY = 'ankiweb-config';
+// Ajustes compartidos con la app principal (日本語 — Vocabulario Japonés).
+// En vez de tener su propia clave, esta app lee y escribe directamente en
+// 'nihongoAppPrefs' (la misma que usa la app padre), traduciendo los nombres
+// de campo que difieren: aquí 'furigana' es lo que la app padre llama
+// 'hiragana', y 'infoSeen'/'newPerDaySessionCap' son exclusivos de Anki y
+// viajan dentro del mismo objeto sin afectar a la app padre.
+const CONFIG_KEY = 'nihongoAppPrefs';
 const DEFAULT_CONFIG = { theme: 'light', layout: 'auto', sound: true, furigana: false, newPerDaySessionCap: 9999, customThemeColor: '#1cb0f6', infoSeen: false };
 
 function getConfig() {
   try {
     const raw = localStorage.getItem(CONFIG_KEY);
-    return raw ? { ...DEFAULT_CONFIG, ...JSON.parse(raw) } : { ...DEFAULT_CONFIG };
+    const parsed = raw ? JSON.parse(raw) : {};
+    return {
+      ...DEFAULT_CONFIG,
+      ...parsed,
+      furigana: parsed.hiragana !== undefined ? parsed.hiragana : DEFAULT_CONFIG.furigana
+    };
   } catch (e) {
     return { ...DEFAULT_CONFIG };
   }
@@ -1798,6 +1764,11 @@ function getConfig() {
 function setConfig(partial) {
   const current = getConfig();
   const merged = { ...current, ...partial };
+  // 'furigana' se guarda también como 'hiragana' para que la app padre
+  // (日本語 — Vocabulario Japonés) lo entienda con su propio nombre de campo;
+  // no guardamos 'furigana' por separado para no duplicar el dato.
+  if (partial.furigana !== undefined) merged.hiragana = partial.furigana;
+  delete merged.furigana;
   localStorage.setItem(CONFIG_KEY, JSON.stringify(merged));
   return merged;
 }
@@ -2464,33 +2435,19 @@ const VIEW_TITLES = {
   'view-session-done': 'Ankジミー',
   'view-add-card': 'Nueva tarjeta',
   'view-stats': 'Estadísticas',
-  'view-settings': 'Ajustes',
 };
 
 const VIEWS_WITH_BACK = new Set([
-  'view-deck-detail', 'view-study', 'view-add-card', 'view-stats', 'view-settings',
+  'view-deck-detail', 'view-study', 'view-add-card', 'view-stats',
 ]);
 
 function showView(viewId, opts = {}) {
-  if (viewId === 'view-settings') {
-    // Ajustes se abre como un panel superpuesto: la vista actual NO se oculta,
-    // sigue activa y visible debajo, para que el fondo no cambie.
-    document.getElementById('view-settings').classList.add('active');
-  } else {
-    document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
-    document.getElementById(viewId).classList.add('active');
-    document.getElementById('topbar-title').textContent = opts.title || VIEW_TITLES[viewId] || '';
-    document.getElementById('btn-back').classList.toggle('hidden', !VIEWS_WITH_BACK.has(viewId));
-  }
-  document.getElementById('btn-settings').classList.toggle('hidden', viewId === 'view-settings');
-  document.getElementById('settings-overlay').classList.toggle('visible', viewId === 'view-settings');
+  document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
+  document.getElementById(viewId).classList.add('active');
+  document.getElementById('topbar-title').textContent = opts.title || VIEW_TITLES[viewId] || '';
+  document.getElementById('btn-back').classList.toggle('hidden', !VIEWS_WITH_BACK.has(viewId));
   window.scrollTo(0, 0);
 }
-
-/** Cierra el panel de Ajustes (comportamiento equivalente a "Volver"). */
-document.getElementById('settings-overlay').addEventListener('click', () => {
-  if (document.getElementById('view-settings').classList.contains('active')) goBack();
-});
 
 let backStack = ['view-decks'];
 
@@ -2503,14 +2460,7 @@ function goBack() {
   if (backStack.length > 1) {
     const closing = backStack.pop();
     const prev = backStack[backStack.length - 1];
-    if (closing === 'view-settings') {
-      // La vista de debajo ya estaba activa y visible; solo cerramos el panel.
-      document.getElementById('view-settings').classList.remove('active');
-      document.getElementById('settings-overlay').classList.remove('visible');
-      document.getElementById('btn-settings').classList.remove('hidden');
-    } else {
-      showView(prev);
-    }
+    showView(prev);
     if (prev === 'view-decks') refreshDeckList();
     if (prev === 'view-deck-detail') refreshDeckDetail();
   }
@@ -2522,8 +2472,6 @@ document.getElementById('btn-back').addEventListener('click', async () => {
   }
   goBack();
 });
-document.getElementById('btn-settings').addEventListener('click', () => navigateTo('view-settings'));
-document.getElementById('btn-back-settings').addEventListener('click', goBack);
 
 // ---------------------------------------------------------------------
 // Modal genérico (progreso / mensajes / confirmaciones)
@@ -3637,51 +3585,6 @@ function applyTheme() {
   root.dataset.generatedTheme = '1';
 }
 
-function setCustomThemeColor(hexColor) {
-  setConfig({ theme: 'custom', customThemeColor: hexColor });
-  applyTheme();
-  renderThemeGrid();
-}
-
-/** Dibuja las opciones de tema en Ajustes y resalta la activa. */
-function renderThemeGrid() {
-  const grid = document.getElementById('theme-grid');
-  if (!grid) return;
-  const cfg = getConfig();
-  const current = cfg.theme || 'light';
-  grid.innerHTML = THEME_OPTIONS.map((t) => {
-    let swatchStyle;
-    if (t.id === 'light') swatchStyle = 'background:#ffffff;';
-    else if (t.id === 'dark') swatchStyle = 'background:#131f24;';
-    else if (t.id === 'custom') swatchStyle = `background:${cfg.customThemeColor || '#1cb0f6'};`;
-    else swatchStyle = `background:${THEME_BASE_COLORS[t.id]};`;
-    return `
-      <button type="button" class="theme-option${t.id === current ? ' active' : ''}" data-theme-id="${t.id}">
-        <span class="theme-swatch" style="${swatchStyle}"></span>
-        <span class="theme-option-label">${t.label}</span>
-      </button>
-    `;
-  }).join('');
-
-  grid.querySelectorAll('.theme-option').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      setConfig({ theme: btn.getAttribute('data-theme-id') });
-      applyTheme();
-      renderThemeGrid();
-      playSound('toggle');
-    });
-  });
-
-  const customRow = document.getElementById('custom-color-row');
-  const customInput = document.getElementById('custom-color-input');
-  if (customRow) customRow.classList.toggle('visible', current === 'custom');
-  if (customInput && cfg.customThemeColor) customInput.value = cfg.customThemeColor;
-}
-
-document.getElementById('custom-color-input').addEventListener('input', (e) => {
-  setCustomThemeColor(e.target.value);
-});
-
 // ---------------------------------------------------------------------
 // Tamaño de la app (móvil / PC / auto) — adapta el ancho según el dispositivo
 // ---------------------------------------------------------------------
@@ -3692,25 +3595,7 @@ function applyLayout() {
   const app = document.getElementById('app');
   app.classList.remove('layout-mobile', 'layout-pc', 'layout-auto');
   app.classList.add(`layout-${layout}`);
-  updateSegControl('layout-controls', layout);
 }
-
-/** Marca como activo el botón correspondiente dentro de un control segmentado. */
-function updateSegControl(containerId, activeValue) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.querySelectorAll('.seg-btn').forEach((btn) => {
-    btn.classList.toggle('active', btn.getAttribute('data-value') === String(activeValue));
-  });
-}
-
-document.getElementById('layout-controls').querySelectorAll('.seg-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    setConfig({ layout: btn.getAttribute('data-value') });
-    applyLayout();
-    playSound('toggle');
-  });
-});
 
 // ---------------------------------------------------------------------
 // Sonido de botones (osciladores nativos, sin archivos externos)
@@ -3775,53 +3660,26 @@ function playSound(name) {
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('button');
   if (!btn) return;
-  // Los controles de tema/tamaño/sonido/furigana ya reproducen su propio sonido
-  // ('toggle') desde sus listeners específicos, así que evitamos duplicarlo aquí.
-  if (btn.closest('#theme-grid, #layout-controls, #sound-controls, #furigana-controls')) return;
   playSound('click');
 });
 
-function applySoundPref() {
-  updateSegControl('sound-controls', getConfig().sound ? 'true' : 'false');
-}
-
-document.getElementById('sound-controls').querySelectorAll('.seg-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const enabled = btn.getAttribute('data-value') === 'true';
-    setConfig({ sound: enabled });
-    applySoundPref();
-    if (enabled) playSound('toggle'); // sonido de confirmación al reactivarlo
-  });
-});
+function applySoundPref() {}
 
 /** Muestra u oculta la lectura (furigana) sobre los kanji en las tarjetas. */
 function applyFuriganaPref() {
   const enabled = !!getConfig().furigana;
   document.body.classList.toggle('furigana-off', !enabled);
-  updateSegControl('furigana-controls', enabled ? 'true' : 'false');
 }
-
-document.getElementById('furigana-controls').querySelectorAll('.seg-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const enabled = btn.getAttribute('data-value') === 'true';
-    setConfig({ furigana: enabled });
-    applyFuriganaPref();
-    playSound('toggle');
-  });
-});
 
 // ---------------------------------------------------------------------
 // Modal de información
 // ---------------------------------------------------------------------
 
-// Muestra/oculta los puntitos rojos de aviso sobre el botón de Ajustes (⚙️)
-// y sobre "Información" dentro del panel, según si el usuario ya ha abierto
-// alguna vez el modal de Información.
+// Muestra/oculta el puntito rojo de aviso sobre "Información" (ℹ️) en la
+// barra superior, según si el usuario ya la ha abierto alguna vez.
 function updateInfoBadgeDots() {
-  const fabDot = document.getElementById('settings-info-dot');
   const btnDot = document.getElementById('info-btn-dot');
   const show = getConfig().infoSeen ? 'none' : 'block';
-  if (fabDot) fabDot.style.display = show;
   if (btnDot) btnDot.style.display = show;
 }
 
@@ -3850,7 +3708,6 @@ document.getElementById('info-modal').addEventListener('click', (e) => {
 
 async function init() {
   applyTheme();
-  renderThemeGrid();
   applyLayout();
   applySoundPref();
   applyFuriganaPref();
@@ -3861,6 +3718,18 @@ async function init() {
   // Nota: esta version de archivo unico no registra Service Worker (PWA/offline
   // instalable). Ver la version multi-archivo si necesitas esa funcionalidad.
 }
+
+// Los ajustes de tema, tamaño, sonido y furigana se comparten con la app
+// principal (日本語 — Vocabulario Japonés) a través de la misma clave de
+// localStorage ('nihongoAppPrefs'). Si se cambian desde allí mientras esta
+// app está abierta en su pestaña, este evento los reaplica al instante.
+window.addEventListener('storage', (e) => {
+  if (e.key !== CONFIG_KEY && e.key !== null) return;
+  applyTheme();
+  applyLayout();
+  applySoundPref();
+  applyFuriganaPref();
+});
 
 init();
 
