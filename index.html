@@ -905,6 +905,16 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
   #view-settings.view { width: min(400px, 92vw); }
 }
 
+/* El modo Móvil debe conservar los botones de acciones del mazo en vertical
+   incluso si la ventana es grande. El modo PC puede mantenerlos en horizontal. */
+#app.layout-mobile .deck-actions {
+  flex-direction: column;
+}
+
+#app.layout-pc .deck-actions {
+  flex-direction: row;
+}
+
 </style>
 </head>
 <body>
