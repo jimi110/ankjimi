@@ -2853,18 +2853,35 @@ document.getElementById('deck-limits-modal').addEventListener('click', (e) => {
 
 document.getElementById('btn-save-deck-limits').addEventListener('click', async () => {
   if (!state.currentDeckId) return;
-  const deck = await window.DB.getDeck(state.currentDeckId);
+  let deck = await window.DB.getDeck(state.currentDeckId);
   if (!deck) return;
+  deck = await ensureDailyRelease(deck);
+
+  const oldPerDay = Math.max(0, orDefault(deck.lastReleaseAmount, orDefault(deck.newPerDay, 10)));
   const newPerDay = Math.max(0, parseInt(document.getElementById('input-new-per-day').value, 10) || 0);
   const maxAccumulated = Math.max(0, parseInt(document.getElementById('input-max-accumulated').value, 10) || 0);
+
   deck.newPerDay = newPerDay;
   deck.maxAccumulated = maxAccumulated;
-  // El acumulado ya liberado no puede superar el nuevo máximo si se ha reducido.
+
+  // El cambio se aplica hoy. Por ejemplo: 10 nuevas ya completadas ->
+  // cambiar de 10/día a 20/día libera 10 nuevas adicionales inmediatamente.
+  if (deck.lastReleaseDate === todayKey()) {
+    const delta = newPerDay - oldPerDay;
+    deck.newReleasedTotal = Math.max(0, (deck.newReleasedTotal || 0) + delta);
+    deck.lastReleaseAmount = newPerDay;
+  } else {
+    deck.lastReleaseAmount = newPerDay;
+  }
+
   deck.newReleasedTotal = Math.min(deck.newReleasedTotal || 0, maxAccumulated);
   await window.DB.updateDeck(deck);
+
   playSound('toggle');
   closeDeckLimitsModal();
-});
+  await refreshDeckDetail();
+  await refreshDeckList();
+});});
 
 document.getElementById('btn-add-card').addEventListener('click', () => {
   document.getElementById('input-front').value = '';
@@ -3001,12 +3018,18 @@ async function startStudySession() {
   state.studySessionStats = { studied: 0, again: 0, good: 0, hard: 0, easy: 0 };
 
   if (state.studyQueue.length === 0) {
-    // No hay sesión abierta: "Pendientes" vuelve a ser el cálculo de lo
-    // disponible para estudiar ahora mismo.
     deck.studySessionActive = false;
     deck.studySessionQueue = [];
     await window.DB.updateDeck(deck);
     await refreshDeckDetail();
+
+    const freshCounts = await computeDeckCounts(state.currentDeckId);
+    if ((deck.newReleasedTotal || 0) <= 0 && freshCounts.reviewCount === 0) {
+      showModal({
+        message: '🎉 Hoy ya has practicado todas las palabras nuevas que tocaban.',
+        actions: [{ label: 'Entendido', style: 'primary' }],
+      });
+    }
     return;
   }
 
