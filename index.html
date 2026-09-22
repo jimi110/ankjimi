@@ -932,7 +932,13 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
   .card-content { font-size: 1.5rem; }
   .deck-actions { flex-direction: row; }
 
-  #view-settings.view { width: min(400px, 92vw); }
+  /* El panel lateral de Ajustes debe quedar alineado con el pequeño
+     desplazamiento vertical de la barra superior de la app. */
+  #view-settings.view {
+    width: min(400px, 92vw);
+    top: 4px;
+    height: calc(100% - 4px);
+  }
 }
 
 /* El modo Móvil debe conservar los botones de acciones del mazo en vertical
