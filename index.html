@@ -3015,7 +3015,7 @@ async function startStudySession() {
   }
 
   state.studyQueue = queue || [];
-  state.studySessionStats = { studied: 0, again: 0, good: 0, hard: 0, easy: 0 };
+  state.studySessionStats = { studied: 0, newStudied: 0, again: 0, good: 0, hard: 0, easy: 0 };
 
   if (state.studyQueue.length === 0) {
     deck.studySessionActive = false;
@@ -3023,13 +3023,6 @@ async function startStudySession() {
     await window.DB.updateDeck(deck);
     await refreshDeckDetail();
 
-    const freshCounts = await computeDeckCounts(state.currentDeckId);
-    if ((deck.newReleasedTotal || 0) <= 0 && freshCounts.reviewCount === 0) {
-      showModal({
-        message: '🎉 Hoy ya has practicado todas las palabras nuevas que tocaban.',
-        actions: [{ label: 'Entendido', style: 'primary' }],
-      });
-    }
     return;
   }
 
@@ -3259,6 +3252,7 @@ async function answerCurrentCard(answer) {
   playSound(answer === 'good' ? 'correct' : 'again');
 
   state.studySessionStats.studied += 1;
+  if (wasNew) state.studySessionStats.newStudied += 1;
   state.studySessionStats[answer] = (state.studySessionStats[answer] || 0) + 1;
 
   // Si la tarjeta sigue en fase de aprendizaje con un intervalo corto,
@@ -3313,14 +3307,18 @@ async function finishStudySession() {
   document.getElementById('session-summary').textContent =
     `Has repasado ${stats.studied} tarjeta(s): ${stats.good} bien, ${stats.again} otra vez.`;
 
-  // La sesión terminó: "Pendientes" pasa a 0 y en la siguiente entrada
-  // se calcularán de nuevo las tarjetas disponibles para estudiar.
+  let dailyFinished = false;
   if (state.currentDeckId) {
     const deck = await window.DB.getDeck(state.currentDeckId);
     if (deck) {
       deck.studySessionActive = false;
       deck.studySessionQueue = [];
       await window.DB.updateDeck(deck);
+
+      const counts = await computeDeckCounts(state.currentDeckId);
+      dailyFinished = stats.newStudied > 0 &&
+        (deck.newReleasedTotal || 0) <= 0 &&
+        counts.reviewCount === 0;
     }
   }
 
@@ -3328,6 +3326,13 @@ async function finishStudySession() {
   backStack = ['view-decks'];
   showView('view-session-done');
   await refreshDeckList();
+
+  if (dailyFinished) {
+    showModal({
+      message: '🎉 Hoy ya has practicado todas las palabras nuevas que tocaban.',
+      actions: [{ label: 'Entendido', style: 'primary' }],
+    });
+  }
 }
 
 document.getElementById('btn-back-to-decks').addEventListener('click', () => {
