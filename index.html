@@ -868,9 +868,9 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
 #view-settings.view {
   display: block;
   position: fixed;
-  top: 4px;
+  top: 0;
   right: 0;
-  height: calc(100% - 4px);
+  height: 100%;
   width: 100%;
   background: var(--paper);
   box-shadow: -2px 0 16px rgba(0, 0, 0, 0.12);
@@ -886,6 +886,10 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
   animation: none;
 }
 #view-settings .settings-card { border: none; box-shadow: none; padding: 0; }
+
+/* Al abrir Ajustes, solo desplazamos 4 px el título de la barra que queda
+   de fondo. El panel de Ajustes mantiene su posición normal. */
+#app.settings-open #topbar-title { transform: translateY(4px); }
 
 /* Cabecera propia del panel de Ajustes: "Ajustes" + flecha de volver,
    siempre por encima del panel y del fondo oscurecido. */
@@ -934,9 +938,7 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
 
   /* El panel lateral de Ajustes debe quedar alineado con el pequeño
      desplazamiento vertical de la barra superior de la app. */
-  #view-settings.view {
-    width: min(400px, 92vw);
-  }
+  #view-settings.view { width: min(400px, 92vw); }
 }
 
 /* El modo Móvil debe conservar los botones de acciones del mazo en vertical
@@ -2486,6 +2488,7 @@ function showView(viewId, opts = {}) {
   }
   document.getElementById('btn-settings').classList.toggle('hidden', viewId === 'view-settings');
   document.getElementById('settings-overlay').classList.toggle('visible', viewId === 'view-settings');
+  document.getElementById('app').classList.toggle('settings-open', viewId === 'view-settings');
   window.scrollTo(0, 0);
 }
 
@@ -2510,6 +2513,7 @@ function goBack() {
       document.getElementById('view-settings').classList.remove('active');
       document.getElementById('settings-overlay').classList.remove('visible');
       document.getElementById('btn-settings').classList.remove('hidden');
+      document.getElementById('app').classList.remove('settings-open');
     } else {
       showView(prev);
     }
