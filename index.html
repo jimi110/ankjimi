@@ -210,6 +210,21 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
+        /* --- Selección de grupos de kana para el test (chips multi-selección) --- */
+        .kana-group-toggle-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 16px; }
+        .kana-group-chip {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .kana-group-chip.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
         /* --- GRÁFICO DE PALABRAS PRACTICADAS POR DÍA --- */
         .practice-chart-scroll {
             overflow-x: auto;
@@ -1113,6 +1128,109 @@
         .res-meaning { color: var(--text-muted); font-size: 14px;}
         .center-btn-wrap { max-width: 400px; margin: 0 auto; width: 100%; }
 
+        /* --- MÓDULO KANA (hiragana / katakana) --- */
+        .kana-choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 480px; margin: 0 auto; }
+        .kana-choice-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 22px 12px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .kana-choice-card:active { box-shadow: var(--shadow-active); transform: translateY(4px); }
+        .kana-choice-glyph { font-size: 40px; margin-bottom: 8px; }
+        .kana-choice-title { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
+        .kana-choice-sub { color: var(--text-muted); font-size: 12.5px; }
+
+        .kana-section-title { font-size: 14px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin: 22px 0 10px; }
+        .kana-section-title:first-of-type { margin-top: 4px; }
+
+        .kana-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+        @media (max-width: 380px) { .kana-grid { grid-template-columns: repeat(4, 1fr); } }
+        .kana-tile {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 10px 4px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        .kana-tile:active { background: var(--bg-secondary); transform: translateY(2px); }
+        .kana-tile-glyph { font-size: 22px; font-weight: 700; line-height: 1.15; }
+        .kana-tile-romaji { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+        .kana-tile-audio { position: absolute; top: 2px; right: 4px; font-size: 10px; opacity: 0.55; }
+        .kana-tile.empty { visibility: hidden; pointer-events: none; }
+
+        .kana-practice-topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+        .kana-progress-bar-track { flex-grow: 1; height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; }
+        .kana-progress-bar-fill { height: 100%; background: var(--primary); border-radius: 4px; transition: width 0.25s ease; }
+        .kana-progress-count { font-size: 13px; color: var(--text-muted); font-weight: 700; white-space: nowrap; }
+
+        .kana-question-card { text-align: center; margin: 22px 0 30px; }
+        .kana-question-glyph { font-size: 96px; font-weight: 700; line-height: 1; }
+        .kana-question-label { color: var(--text-muted); font-size: 14px; margin-top: 10px; }
+        .kana-audio-btn {
+            margin: 14px auto 0; display: flex; align-items: center; justify-content: center;
+            width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--border);
+            background: var(--card-bg); font-size: 20px; cursor: pointer; color: var(--primary);
+        }
+        .kana-audio-btn:active { background: var(--bg-secondary); }
+
+        .kana-options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 480px; margin: 0 auto; width: 100%; }
+        .kana-option-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px 8px;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+        .kana-option-btn:active { box-shadow: var(--shadow-active); transform: translateY(4px); }
+        .kana-option-btn.disabled { pointer-events: none; }
+        .kana-option-btn.is-correct { border-color: var(--correct); background: var(--correct-bg); color: var(--text-main); }
+        .kana-option-btn.is-wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--text-main); }
+
+        .kana-result-score { text-align: center; font-size: 42px; font-weight: 800; color: var(--primary); margin: 10px 0 4px; }
+        .kana-result-sub { text-align: center; color: var(--text-muted); margin-bottom: 22px; }
+        .kana-result-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 24px; }
+        @media (max-width: 380px) { .kana-result-grid { grid-template-columns: repeat(5, 1fr); } }
+        .kana-result-tile {
+            border-radius: var(--radius-sm);
+            padding: 8px 2px;
+            text-align: center;
+            font-weight: 700;
+        }
+        .kana-result-tile.correct { background: var(--correct-bg); color: var(--correct); }
+        .kana-result-tile.wrong { background: var(--wrong-bg); color: var(--wrong); }
+        .kana-result-tile .kr-glyph { font-size: 18px; display: block; }
+        .kana-result-tile .kr-romaji { font-size: 10px; opacity: 0.85; }
+
+        .kana-stats-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+        .kana-stats-row:last-child { border-bottom: none; }
+        .kana-fail-badge { color: var(--wrong); font-size: 14px; font-weight: 700; }
+        .kana-text-input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 18px;
+            text-align: center;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-family: var(--font-family);
+        }
+        .kana-text-input:focus { outline: none; border-color: var(--primary); }
+        .kana-text-input.is-wrong { border-color: var(--wrong); background: var(--wrong-bg); }
+        .kana-text-input.is-correct { border-color: var(--correct); background: var(--correct-bg); }
+
     </style>
 </head>
 <body>
@@ -1182,6 +1300,14 @@
                 <div class="segmented-control panel-seg" id="sound-controls">
                     <button class="seg-btn active" data-value="true" onclick="setPref('sound', true)">🔊 Activado</button>
                     <button class="seg-btn" data-value="false" onclick="setPref('sound', false)">🔇 Silencio</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-section-title">🈴 Práctica de Kana</div>
+                <div class="segmented-control panel-seg" id="kana-difficulty-controls">
+                    <button class="seg-btn" data-value="facil" onclick="setPref('kanaDifficulty', 'facil')">🟢 Fácil</button>
+                    <button class="seg-btn active" data-value="dificil" onclick="setPref('kanaDifficulty', 'dificil')">🔴 Difícil</button>
                 </div>
             </div>
 
@@ -1368,10 +1494,100 @@
 
         <h2 style="font-size:16px; margin-top:28px;">Temarios</h2>
         <div id="stats-topics" style="display:flex; flex-direction:column; gap:10px;"></div>
+
+        <h2 style="font-size:16px; margin-top:28px;">🈴 Kana (hiragana / katakana)</h2>
+        <div id="stats-kana" style="display:flex; flex-direction:column; gap:14px;"></div>
     </div>
 
     <div id="screen-anki" class="screen" style="padding:0; max-width:none;">
         <iframe id="anki-iframe" title="Anki" style="border:0; width:100%; height:100%; display:block;"></iframe>
+    </div>
+
+    <!-- PANTALLA: MENÚ KANA (elegir hiragana / katakana) -->
+    <div id="screen-kana" class="screen">
+        <div style="text-align: center; margin-bottom: 24px; margin-top: 8px;">
+            <h2 style="font-size: 24px; margin-bottom:4px;">🈴 Kana</h2>
+            <p class="subtitle" style="margin-bottom:0;">Aprende y practica hiragana y katakana</p>
+        </div>
+        <div class="kana-choice-grid">
+            <div class="kana-choice-card" onclick="openKanaVocabulary('hiragana')">
+                <div class="kana-choice-glyph">あ</div>
+                <div class="kana-choice-title">Hiragana</div>
+                <div class="kana-choice-sub">ひらがな</div>
+            </div>
+            <div class="kana-choice-card" onclick="openKanaVocabulary('katakana')">
+                <div class="kana-choice-glyph">ア</div>
+                <div class="kana-choice-title">Katakana</div>
+                <div class="kana-choice-sub">カタカナ</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA: VOCABULARIO DE UN SILABARIO (con audio) + botón practicar -->
+    <div id="screen-kana-vocab" class="screen pad-bottom">
+        <div class="header-controls">
+            <button class="btn-back" onclick="showScreen('kana')">← Volver</button>
+        </div>
+        <div style="text-align: center; margin-bottom: 14px; margin-top: 4px;">
+            <h2 id="kana-vocab-title" style="font-size: 22px; margin-bottom:4px;">Hiragana</h2>
+            <p class="subtitle" id="kana-vocab-sub" style="margin-bottom:0;">Toca una letra para escuchar su pronunciación</p>
+        </div>
+        <div class="kana-section-title" style="text-align:center;">Qué incluir en el test</div>
+        <div class="kana-group-toggle-row" id="kana-group-toggle-row">
+            <button type="button" class="kana-group-chip active" data-group="basic" onclick="toggleKanaGroup('basic')">Básico</button>
+            <button type="button" class="kana-group-chip active" data-group="dakuten" onclick="toggleKanaGroup('dakuten')">Dakuten / Handakuten</button>
+            <button type="button" class="kana-group-chip active" data-group="yoon" onclick="toggleKanaGroup('yoon')">Yōon (contracciones)</button>
+        </div>
+        <div class="center-btn-wrap" style="margin-bottom: 18px;">
+            <button class="btn" id="kana-practice-start-btn">▶️ Practicar</button>
+        </div>
+        <div id="kana-vocab-content"></div>
+    </div>
+
+    <!-- PANTALLA: PRÁCTICA DE KANA -->
+    <div id="screen-kana-practice" class="screen">
+        <div class="kana-practice-topbar">
+            <button class="btn-back" style="padding:4px;" onclick="abortKanaPractice()">✕</button>
+            <div class="kana-progress-bar-track"><div class="kana-progress-bar-fill" id="kana-practice-progress" style="width:0%;"></div></div>
+            <div class="kana-progress-count" id="kana-practice-count">0/0</div>
+        </div>
+
+        <div class="kana-question-card">
+            <div class="kana-question-glyph" id="kana-question-glyph">あ</div>
+            <div class="kana-question-label" id="kana-question-label">¿Cómo se pronuncia esta letra?</div>
+            <button class="kana-audio-btn" id="kana-question-audio-btn" onclick="repeatKanaAudio()" aria-label="Escuchar pronunciación" style="display:none;">🔊</button>
+        </div>
+
+        <div class="kana-options-grid" id="kana-options-container"></div>
+
+        <div id="kana-input-area" style="display:none; max-width:320px; margin:0 auto; width:100%;">
+            <input type="text" id="kana-answer-input" class="kana-text-input" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Escribe el romaji…" oninput="checkKanaTextInput()">
+        </div>
+
+        <div class="center-btn-wrap" style="margin-top: 14px;">
+            <button class="btn outline" id="kana-skip-btn" onclick="skipKanaQuestion()" style="margin-bottom:0;">⏭️ Saltar</button>
+        </div>
+
+        <div id="kana-feedback-panel" class="feedback-panel" style="display:none;">
+            <div>
+                <div class="feedback-title" id="kana-feedback-title">✓ ¡Correcto!</div>
+                <div class="feedback-answer" id="kana-feedback-answer" style="display:block;"></div>
+            </div>
+            <button class="btn btn-next" onclick="nextKanaQuestion()" style="margin-bottom:0;">Continuar →</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA: RESULTADO DE PRÁCTICA DE KANA -->
+    <div id="screen-kana-result" class="screen">
+        <div style="text-align: center; margin-top: 8px;">
+            <h2 style="font-size: 22px; margin-bottom:4px;">📋 Resultado</h2>
+            <div class="kana-result-score" id="kana-result-score">0%</div>
+            <p class="kana-result-sub" id="kana-result-sub">0 aciertos de 0</p>
+        </div>
+        <div class="kana-result-grid" id="kana-result-grid"></div>
+        <div class="center-btn-wrap">
+            <button class="btn" id="kana-result-back-btn">Volver al vocabulario</button>
+        </div>
     </div>
 
     <button id="scroll-top-btn" class="scroll-top-btn" onclick="scrollActiveScreenToTop()" aria-label="Subir arriba del todo" title="Subir arriba">↑</button>
@@ -1384,6 +1600,9 @@
             <button class="bottom-nav-item" data-nav="review" onclick="openReviewHome()">
                 <span class="bottom-nav-icon">🔁</span><span>Repasar</span>
                 <span id="review-badge-dot" class="review-badge-dot" style="display:none;"></span>
+            </button>
+            <button class="bottom-nav-item" data-nav="kana" onclick="showScreen('kana')">
+                <span class="bottom-nav-icon">🈴</span><span>Kana</span>
             </button>
             <button class="bottom-nav-item" data-nav="stats" onclick="showScreen('stats')">
                 <span class="bottom-nav-icon">📊</span><span>Estadísticas</span>
@@ -1449,7 +1668,7 @@
 
 <script>
     // --- 1. CONFIGURACIÓN Y LOCALSTORAGE --- //
-    let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true, customThemeColor: '#1cb0f6', koreanMode: false, fillBlankEnabled: true };
+    let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true, customThemeColor: '#1cb0f6', koreanMode: false, fillBlankEnabled: true, kanaDifficulty: 'dificil' };
     let userProgress = {};
     // Errores pendientes de repaso: { [wordId]: { id, category, count, lastMissed } }
     let mistakes = {};
@@ -1475,6 +1694,28 @@
     // mediante window.updateAnkiBadgeFromIframe. Se usa para el puntito rojo
     // sobre "⭐ Anki" en el menú inferior.
     let ankiDueCount = 0;
+
+    // --- ESTADO DEL MÓDULO KANA (hiragana/katakana) --- //
+    // Estadísticas propias del módulo Kana, separadas de "stats" (vocabulario)
+    // pero mostradas dentro de la misma pantalla de "Mis estadísticas".
+    let kanaStats = {
+        hiragana: { attempts: 0, correct: 0, wrong: 0, mistakeCounts: {} }, // mistakeCounts: { kanaId: nºVecesFallada }
+        katakana: { attempts: 0, correct: 0, wrong: 0, mistakeCounts: {} }
+    };
+
+    function loadKanaStats() {
+        try {
+            const saved = localStorage.getItem('nihongoKanaStats');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                kanaStats.hiragana = { ...kanaStats.hiragana, ...(parsed.hiragana || {}) };
+                kanaStats.katakana = { ...kanaStats.katakana, ...(parsed.katakana || {}) };
+            }
+        } catch(e) {}
+    }
+    function saveKanaStats() {
+        try { localStorage.setItem('nihongoKanaStats', JSON.stringify(kanaStats)); } catch(e) {}
+    }
 
     function loadData() {
         try {
@@ -1546,6 +1787,7 @@
         updateSegControl('sound-controls', prefs.sound);
         updateSegControl('korean-mode-controls', prefs.koreanMode);
         updateSegControl('fillblank-controls', prefs.fillBlankEnabled);
+        updateSegControl('kana-difficulty-controls', prefs.kanaDifficulty);
         renderThemeGrid();
         applyKoreanTitle();
         applySearchPlaceholder();
@@ -6724,12 +6966,14 @@
         if (screenId === 'review') renderReview();
         if (screenId === 'stats') renderStats();
         if (screenId === 'anki') loadAnkiApp();
+        if (screenId === 'kana') renderKanaHome();
+        if (screenId === 'kana-vocab') renderKanaVocabScreen();
         applyInfoModalText();
         updateInfoBadgeDots();
         updateSettingsAnkiSection(screenId);
         updateBottomNav(screenId);
         const settingsFab = document.getElementById('settings-fab');
-        if (settingsFab) settingsFab.style.display = (screenId === 'theory' || screenId === 'practice') ? 'none' : 'flex';
+        if (settingsFab) settingsFab.style.display = (screenId === 'theory' || screenId === 'practice' || screenId === 'kana-practice') ? 'none' : 'flex';
         // La teoría solo restaura el scroll si se vuelve a entrar al mismo
         // temario del que se salió; si es uno distinto, empieza desde arriba
         // y esa posición guardada deja de pertenecer a nadie hasta salir de nuevo.
@@ -7630,13 +7874,14 @@
         const nav = document.getElementById('bottom-nav');
         if (!nav) return;
         // Durante la práctica se oculta para no chocar con el panel de feedback
-        if (screenId === 'practice') { nav.style.display = 'none'; return; }
+        if (screenId === 'practice' || screenId === 'kana-practice') { nav.style.display = 'none'; return; }
         nav.style.display = 'flex';
 
         let activeTab = 'home';
         if (screenId === 'review' || screenId === 'review-category') activeTab = 'review';
         else if (screenId === 'stats') activeTab = 'stats';
         else if (screenId === 'anki') activeTab = 'anki';
+        else if (screenId === 'kana' || screenId === 'kana-vocab' || screenId === 'kana-practice' || screenId === 'kana-result') activeTab = 'kana';
         else if (screenId === 'result' && practiceState.isReview) activeTab = 'review';
 
         document.querySelectorAll('.bottom-nav-item').forEach(btn => {
@@ -7971,6 +8216,8 @@
         }).filter(Boolean).join('');
         document.getElementById('stats-topics').innerHTML = topicsHTML ||
             `<p class="subtitle" style="margin:0; text-align:left;">Aún no has practicado ningún temario.</p>`;
+
+        renderKanaStatsBlock();
     }
 
     // Recalcula/limpia el progreso guardado (userProgress y stats.topicStats)
@@ -8022,6 +8269,9 @@
         stats.topicStats = {};
         stats.practicedByDate = {};
         userProgress = {};
+        kanaStats.hiragana = { attempts: 0, correct: 0, wrong: 0, mistakeCounts: {} };
+        kanaStats.katakana = { attempts: 0, correct: 0, wrong: 0, mistakeCounts: {} };
+        saveKanaStats();
         saveData();
         renderStats();
         if (btnElement) {
@@ -8447,11 +8697,546 @@
         }
     }
 
+    // ================= MÓDULO KANA (hiragana / katakana) ================= //
+    // Autocontenido: datos, render del listado con audio, motor de práctica
+    // (cola con reinserción de fallos al final, orden aleatorio) y resultado.
+
+    // Cada fila representa una fila del gojūon; null = hueco sin sílaba.
+    // syllables: [{ kana, romaji }]  — se incluyen dakuten/handakuten y yōon (きゃ, にゃ...).
+    const KANA_DATA = {
+        hiragana: {
+            basic: [
+                [{k:'あ',r:'a'},{k:'い',r:'i'},{k:'う',r:'u'},{k:'え',r:'e'},{k:'お',r:'o'}],
+                [{k:'か',r:'ka'},{k:'き',r:'ki'},{k:'く',r:'ku'},{k:'け',r:'ke'},{k:'こ',r:'ko'}],
+                [{k:'さ',r:'sa'},{k:'し',r:'shi'},{k:'す',r:'su'},{k:'せ',r:'se'},{k:'そ',r:'so'}],
+                [{k:'た',r:'ta'},{k:'ち',r:'chi'},{k:'つ',r:'tsu'},{k:'て',r:'te'},{k:'と',r:'to'}],
+                [{k:'な',r:'na'},{k:'に',r:'ni'},{k:'ぬ',r:'nu'},{k:'ね',r:'ne'},{k:'の',r:'no'}],
+                [{k:'は',r:'ha'},{k:'ひ',r:'hi'},{k:'ふ',r:'fu'},{k:'へ',r:'he'},{k:'ほ',r:'ho'}],
+                [{k:'ま',r:'ma'},{k:'み',r:'mi'},{k:'む',r:'mu'},{k:'め',r:'me'},{k:'も',r:'mo'}],
+                [{k:'や',r:'ya'},null,{k:'ゆ',r:'yu'},null,{k:'よ',r:'yo'}],
+                [{k:'ら',r:'ra'},{k:'り',r:'ri'},{k:'る',r:'ru'},{k:'れ',r:'re'},{k:'ろ',r:'ro'}],
+                [{k:'わ',r:'wa'},null,null,null,{k:'を',r:'wo'}],
+                [{k:'ん',r:'n'},null,null,null,null]
+            ],
+            dakuten: [
+                [{k:'が',r:'ga'},{k:'ぎ',r:'gi'},{k:'ぐ',r:'gu'},{k:'げ',r:'ge'},{k:'ご',r:'go'}],
+                [{k:'ざ',r:'za'},{k:'じ',r:'ji'},{k:'ず',r:'zu'},{k:'ぜ',r:'ze'},{k:'ぞ',r:'zo'}],
+                [{k:'だ',r:'da'},{k:'ぢ',r:'ji'},{k:'づ',r:'zu'},{k:'で',r:'de'},{k:'ど',r:'do'}],
+                [{k:'ば',r:'ba'},{k:'び',r:'bi'},{k:'ぶ',r:'bu'},{k:'べ',r:'be'},{k:'ぼ',r:'bo'}],
+                [{k:'ぱ',r:'pa'},{k:'ぴ',r:'pi'},{k:'ぷ',r:'pu'},{k:'ぺ',r:'pe'},{k:'ぽ',r:'po'}]
+            ],
+            yoon: [
+                [{k:'きゃ',r:'kya'},{k:'きゅ',r:'kyu'},{k:'きょ',r:'kyo'}],
+                [{k:'しゃ',r:'sha'},{k:'しゅ',r:'shu'},{k:'しょ',r:'sho'}],
+                [{k:'ちゃ',r:'cha'},{k:'ちゅ',r:'chu'},{k:'ちょ',r:'cho'}],
+                [{k:'にゃ',r:'nya'},{k:'にゅ',r:'nyu'},{k:'にょ',r:'nyo'}],
+                [{k:'ひゃ',r:'hya'},{k:'ひゅ',r:'hyu'},{k:'ひょ',r:'hyo'}],
+                [{k:'みゃ',r:'mya'},{k:'みゅ',r:'myu'},{k:'みょ',r:'myo'}],
+                [{k:'りゃ',r:'rya'},{k:'りゅ',r:'ryu'},{k:'りょ',r:'ryo'}],
+                [{k:'ぎゃ',r:'gya'},{k:'ぎゅ',r:'gyu'},{k:'ぎょ',r:'gyo'}],
+                [{k:'じゃ',r:'ja'},{k:'じゅ',r:'ju'},{k:'じょ',r:'jo'}],
+                [{k:'びゃ',r:'bya'},{k:'びゅ',r:'byu'},{k:'びょ',r:'byo'}],
+                [{k:'ぴゃ',r:'pya'},{k:'ぴゅ',r:'pyu'},{k:'ぴょ',r:'pyo'}]
+            ]
+        },
+        katakana: {
+            basic: [
+                [{k:'ア',r:'a'},{k:'イ',r:'i'},{k:'ウ',r:'u'},{k:'エ',r:'e'},{k:'オ',r:'o'}],
+                [{k:'カ',r:'ka'},{k:'キ',r:'ki'},{k:'ク',r:'ku'},{k:'ケ',r:'ke'},{k:'コ',r:'ko'}],
+                [{k:'サ',r:'sa'},{k:'シ',r:'shi'},{k:'ス',r:'su'},{k:'セ',r:'se'},{k:'ソ',r:'so'}],
+                [{k:'タ',r:'ta'},{k:'チ',r:'chi'},{k:'ツ',r:'tsu'},{k:'テ',r:'te'},{k:'ト',r:'to'}],
+                [{k:'ナ',r:'na'},{k:'ニ',r:'ni'},{k:'ヌ',r:'nu'},{k:'ネ',r:'ne'},{k:'ノ',r:'no'}],
+                [{k:'ハ',r:'ha'},{k:'ヒ',r:'hi'},{k:'フ',r:'fu'},{k:'ヘ',r:'he'},{k:'ホ',r:'ho'}],
+                [{k:'マ',r:'ma'},{k:'ミ',r:'mi'},{k:'ム',r:'mu'},{k:'メ',r:'me'},{k:'モ',r:'mo'}],
+                [{k:'ヤ',r:'ya'},null,{k:'ユ',r:'yu'},null,{k:'ヨ',r:'yo'}],
+                [{k:'ラ',r:'ra'},{k:'リ',r:'ri'},{k:'ル',r:'ru'},{k:'レ',r:'re'},{k:'ロ',r:'ro'}],
+                [{k:'ワ',r:'wa'},null,null,null,{k:'ヲ',r:'wo'}],
+                [{k:'ン',r:'n'},null,null,null,null]
+            ],
+            dakuten: [
+                [{k:'ガ',r:'ga'},{k:'ギ',r:'gi'},{k:'グ',r:'gu'},{k:'ゲ',r:'ge'},{k:'ゴ',r:'go'}],
+                [{k:'ザ',r:'za'},{k:'ジ',r:'ji'},{k:'ズ',r:'zu'},{k:'ゼ',r:'ze'},{k:'ゾ',r:'zo'}],
+                [{k:'ダ',r:'da'},{k:'ヂ',r:'ji'},{k:'ヅ',r:'zu'},{k:'デ',r:'de'},{k:'ド',r:'do'}],
+                [{k:'バ',r:'ba'},{k:'ビ',r:'bi'},{k:'ブ',r:'bu'},{k:'ベ',r:'be'},{k:'ボ',r:'bo'}],
+                [{k:'パ',r:'pa'},{k:'ピ',r:'pi'},{k:'プ',r:'pu'},{k:'ペ',r:'pe'},{k:'ポ',r:'po'}]
+            ],
+            yoon: [
+                [{k:'キャ',r:'kya'},{k:'キュ',r:'kyu'},{k:'キョ',r:'kyo'}],
+                [{k:'シャ',r:'sha'},{k:'シュ',r:'shu'},{k:'ショ',r:'sho'}],
+                [{k:'チャ',r:'cha'},{k:'チュ',r:'chu'},{k:'チョ',r:'cho'}],
+                [{k:'ニャ',r:'nya'},{k:'ニュ',r:'nyu'},{k:'ニョ',r:'nyo'}],
+                [{k:'ヒャ',r:'hya'},{k:'ヒュ',r:'hyu'},{k:'ヒョ',r:'hyo'}],
+                [{k:'ミャ',r:'mya'},{k:'ミュ',r:'myu'},{k:'ミョ',r:'myo'}],
+                [{k:'リャ',r:'rya'},{k:'リュ',r:'ryu'},{k:'リョ',r:'ryo'}],
+                [{k:'ギャ',r:'gya'},{k:'ギュ',r:'gyu'},{k:'ギョ',r:'gyo'}],
+                [{k:'ジャ',r:'ja'},{k:'ジュ',r:'ju'},{k:'ジョ',r:'jo'}],
+                [{k:'ビャ',r:'bya'},{k:'ビュ',r:'byu'},{k:'ビョ',r:'byo'}],
+                [{k:'ピャ',r:'pya'},{k:'ピュ',r:'pyu'},{k:'ピョ',r:'pyo'}]
+            ]
+        }
+    };
+
+    // Aplana KANA_DATA[type] en una lista simple [{kana, romaji, type}], usada
+    // tanto para pintar el listado como para generar la práctica. `groupKeys`
+    // permite restringir a un subconjunto de grupos (básico/dakuten/yoon); si
+    // no se indica, se usan todos (comportamiento original).
+    function getKanaFlatList(type, groupKeys) {
+        const groups = KANA_DATA[type];
+        const list = [];
+        (groupKeys || ['basic', 'dakuten', 'yoon']).forEach(group => {
+            groups[group].forEach(row => {
+                row.forEach(cell => {
+                    if (cell) list.push({ kana: cell.k, romaji: cell.r, type });
+                });
+            });
+        });
+        return list;
+    }
+
+    // Grupos de kana incluidos en el test (por defecto, todos). Compartido
+    // entre hiragana y katakana.
+    let kanaTestGroups = { basic: true, dakuten: true, yoon: true };
+
+    function toggleKanaGroup(groupKey) {
+        kanaTestGroups[groupKey] = !kanaTestGroups[groupKey];
+        const btn = document.querySelector(`.kana-group-chip[data-group="${groupKey}"]`);
+        if (btn) btn.classList.toggle('active', kanaTestGroups[groupKey]);
+    }
+
+    let currentKanaType = 'hiragana'; // 'hiragana' | 'katakana'
+
+    function speakKana(text) {
+        if (!window.speechSynthesis) return;
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+    }
+
+    function renderKanaHome() {
+        // Sin contenido dinámico por ahora: la pantalla es estática (elegir
+        // hiragana o katakana). Se deja el hook por si en el futuro se añaden
+        // porcentajes de progreso en las propias tarjetas.
+    }
+
+    function openKanaVocabulary(type) {
+        currentKanaType = type;
+        showScreen('kana-vocab', true);
+    }
+
+    const KANA_GROUP_TITLES = { basic: 'Básico', dakuten: 'Dakuten / Handakuten (゛゜)', yoon: 'Yōon (contracciones)' };
+
+    function renderKanaVocabScreen() {
+        const type = currentKanaType;
+        const isHira = type === 'hiragana';
+        document.getElementById('kana-vocab-title').innerText = isHira ? 'Hiragana' : 'Katakana';
+        document.getElementById('kana-vocab-sub').innerText = 'Toca una letra para escuchar su pronunciación';
+
+        const container = document.getElementById('kana-vocab-content');
+        container.innerHTML = '';
+        const groups = KANA_DATA[type];
+
+        ['basic', 'dakuten', 'yoon'].forEach(groupKey => {
+            const title = document.createElement('div');
+            title.className = 'kana-section-title';
+            title.innerText = KANA_GROUP_TITLES[groupKey];
+            container.appendChild(title);
+
+            const grid = document.createElement('div');
+            grid.className = 'kana-grid';
+            groups[groupKey].forEach(row => {
+                row.forEach(cell => {
+                    const tile = document.createElement('div');
+                    if (!cell) {
+                        tile.className = 'kana-tile empty';
+                        grid.appendChild(tile);
+                        return;
+                    }
+                    tile.className = 'kana-tile';
+                    tile.innerHTML = `<span class="kana-tile-audio">🔊</span><div class="kana-tile-glyph">${cell.k}</div><div class="kana-tile-romaji">${cell.r}</div>`;
+                    tile.onclick = () => speakKana(cell.k);
+                    grid.appendChild(tile);
+                });
+            });
+            container.appendChild(grid);
+        });
+
+        const startBtn = document.getElementById('kana-practice-start-btn');
+        startBtn.onclick = () => startKanaPractice(type);
+    }
+
+    // --- MOTOR DE PRÁCTICA --- //
+    // Cola de práctica: empieza con todas las sílabas del silabario en orden
+    // aleatorio. En modo fácil (opciones), cada fallo reinserta la sílaba al
+    // FINAL de la cola (reaparece más tarde) y hay que pulsar "Continuar".
+    // En modo difícil (escribir), la sílaba fallada se queda en la MISMA
+    // posición (no avanza) hasta acertarla, acumulando errores; al acertar
+    // pasa automáticamente a la siguiente, sin panel ni botón. La sesión
+    // termina cuando todas las sílabas se han acertado.
+    let kanaPracticeState = {
+        type: 'hiragana',
+        difficulty: 'facil',
+        queue: [],       // cola pendiente de preguntas (se consume por el principio)
+        totalUnique: 0,  // nº de sílabas distintas a dominar
+        current: null,
+        answered: false,
+        results: {}      // { kana: { romaji, failedCount, finalCorrect } } - para la pantalla de resultado
+    };
+
+    function startKanaPractice(type) {
+        const selectedGroups = Object.keys(kanaTestGroups).filter(g => kanaTestGroups[g]);
+        if (selectedGroups.length === 0) {
+            alert('Selecciona al menos un grupo (Básico, Dakuten o Yōon) para practicar.');
+            return;
+        }
+        playSound('primary');
+        const list = getKanaFlatList(type, selectedGroups);
+        kanaPracticeState = {
+            type,
+            difficulty: prefs.kanaDifficulty || 'dificil',
+            queue: shuffleArray(list),
+            totalUnique: list.length,
+            current: null,
+            answered: false,
+            results: {}
+        };
+        list.forEach(item => {
+            kanaPracticeState.results[item.kana] = { romaji: item.romaji, failedCount: 0, finalCorrect: false };
+        });
+        generateKanaQuestion();
+        showScreen('kana-practice');
+    }
+
+    function abortKanaPractice() {
+        if (confirm('¿Seguro que quieres salir de la práctica?')) {
+            showScreen('kana-vocab');
+        }
+    }
+
+    function kanaSolvedCount() {
+        return Object.values(kanaPracticeState.results).filter(r => r.finalCorrect).length;
+    }
+
+    function generateKanaQuestion() {
+        if (kanaPracticeState.queue.length === 0) {
+            showKanaPracticeResult();
+            return;
+        }
+        kanaPracticeState.answered = false;
+        const item = kanaPracticeState.queue[0];
+        kanaPracticeState.current = item;
+        const isHard = kanaPracticeState.difficulty === 'dificil';
+
+        const feedbackPanel = document.getElementById('kana-feedback-panel');
+        feedbackPanel.className = 'feedback-panel';
+        feedbackPanel.style.display = 'none';
+
+        document.getElementById('kana-question-glyph').innerText = item.kana;
+        document.getElementById('kana-question-label').innerText = isHard ? 'Escribe cómo se pronuncia esta letra' : '¿Cómo se pronuncia esta letra?';
+        document.getElementById('kana-question-audio-btn').style.display = isHard ? 'none' : 'flex';
+
+        const solved = kanaSolvedCount();
+        document.getElementById('kana-practice-count').innerText = `${solved}/${kanaPracticeState.totalUnique}`;
+        document.getElementById('kana-practice-progress').style.width = `${(solved / kanaPracticeState.totalUnique) * 100}%`;
+
+        const optionsContainer = document.getElementById('kana-options-container');
+        const inputArea = document.getElementById('kana-input-area');
+
+        if (isHard) {
+            optionsContainer.style.display = 'none';
+            optionsContainer.innerHTML = '';
+            inputArea.style.display = 'block';
+            const input = document.getElementById('kana-answer-input');
+            input.value = '';
+            input.classList.remove('is-wrong', 'is-correct');
+            input.disabled = false;
+            setTimeout(() => input.focus(), 50);
+        } else {
+            inputArea.style.display = 'none';
+            optionsContainer.style.display = 'grid';
+            // Opciones: la correcta + 3 distractores del mismo silabario, sin repetir romaji.
+            const fullList = getKanaFlatList(item.type);
+            const wrongPool = shuffleArray(fullList.filter(v => v.romaji !== item.romaji));
+            const seenRomaji = new Set([item.romaji]);
+            const wrongOptions = [];
+            for (const cand of wrongPool) {
+                if (wrongOptions.length >= 3) break;
+                if (seenRomaji.has(cand.romaji)) continue;
+                seenRomaji.add(cand.romaji);
+                wrongOptions.push(cand);
+            }
+            const options = shuffleArray([item, ...wrongOptions]);
+
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('div');
+                btn.className = 'kana-option-btn';
+                btn.innerText = opt.romaji;
+                btn.onclick = () => {
+                    if (opt.romaji === item.romaji) handleKanaAnswer(true, item, btn);
+                    else handleKanaWrongOption(item, btn);
+                };
+                optionsContainer.appendChild(btn);
+            });
+        }
+    }
+
+    // Normaliza formas comunes de escribir el mismo sonido en rōmaji para no
+    // penalizar al usuario por variantes válidas (shi/si, chi/ti, tsu/tu, ō/oo...).
+    function normalizeRomaji(text) {
+        return text
+            .replace(/ō/g, 'ou').replace(/ū/g, 'uu')
+            .replace(/^si$/, 'shi').replace(/^ti$/, 'chi').replace(/^tu$/, 'tsu')
+            .replace(/^hu$/, 'fu').replace(/^zi$/, 'ji').replace(/^di$/, 'ji')
+            .replace(/^du$/, 'zu');
+    }
+
+    // Autocomprobación en vivo mientras el usuario escribe (sin botón "Comprobar"):
+    // - Si lo escrito coincide con el romaji correcto → pasa solo a la siguiente.
+    // - Si lo escrito coincide con el romaji de OTRA sílaba real del mismo
+    //   silabario (es decir, es una sílaba existente pero incorrecta) → error,
+    //   se cuenta el fallo y se borra lo escrito.
+    // - Si lo escrito es solo un prefijo parcial de alguna sílaba válida (p.ej.
+    //   "s" antes de completar "shi", o "k" antes de "ka") no se marca error
+    //   todavía: el usuario sigue escribiendo con normalidad.
+    function checkKanaTextInput() {
+        const item = kanaPracticeState.current;
+        if (!item || kanaPracticeState.answered) return;
+        const input = document.getElementById('kana-answer-input');
+        const raw = normalizeRomaji(input.value.trim().toLowerCase());
+        if (!raw) return;
+
+        const correctNorm = normalizeRomaji(item.romaji);
+        if (raw === correctNorm) {
+            handleKanaAnswer(true, item, null);
+            return;
+        }
+
+        // Si lo escrito es todavía un prefijo válido de la respuesta correcta
+        // (p.ej. "n" mientras se escribe "no"), no marcamos error aunque esa
+        // "n" coincida también con otra sílaba completa (como "ん").
+        if (correctNorm.startsWith(raw)) return;
+
+        // ¿Es una sílaba real (de todo el silabario, no solo de esta fila) pero distinta?
+        const fullList = getKanaFlatList(item.type);
+        const matchesRealSyllable = fullList.some(v => normalizeRomaji(v.romaji) === raw);
+        if (!matchesRealSyllable) return; // sigue siendo un prefijo válido en construcción
+
+        // Es una sílaba existente pero incorrecta: error.
+        kanaPracticeState.answered = true; // evita doble disparo mientras se limpia
+        input.classList.add('is-wrong');
+        input.disabled = true;
+        playWrongSound();
+        const st = kanaStats[kanaPracticeState.type];
+        st.attempts++;
+        st.wrong++;
+        st.mistakeCounts[item.kana] = (st.mistakeCounts[item.kana] || 0) + 1;
+        kanaPracticeState.results[item.kana].failedCount++;
+        saveKanaStats();
+        setTimeout(() => {
+            input.classList.remove('is-wrong');
+            input.value = '';
+            input.disabled = false;
+            kanaPracticeState.answered = false;
+            input.focus();
+        }, 550);
+    }
+
+    function handleKanaAnswer(isCorrect, item, buttonElement) {
+        if (kanaPracticeState.answered) return;
+        kanaPracticeState.answered = true;
+
+        const isHard = kanaPracticeState.difficulty === 'dificil';
+        const st = kanaStats[kanaPracticeState.type];
+        st.attempts++;
+
+        // Saca la pregunta actual de la cabeza de la cola.
+        kanaPracticeState.queue.shift();
+        const res = kanaPracticeState.results[item.kana];
+        // En este punto solo se llega con isCorrect = true en modo difícil
+        // (el fallo se gestiona aparte en checkKanaTextInput sin pasar por
+        // aquí), así que solo hace falta contemplar el caso de acierto.
+        st.correct++;
+        res.finalCorrect = true;
+        saveKanaStats();
+
+        if (isHard) {
+            // Modo difícil: acertar avanza solo, sin panel ni botón.
+            const input = document.getElementById('kana-answer-input');
+            input.classList.add('is-correct');
+            input.disabled = true;
+            playCorrectSound();
+            setTimeout(() => speakKana(item.kana), 80);
+            setTimeout(() => generateKanaQuestion(), 550);
+            return;
+        }
+
+        // Modo fácil: se muestra el panel de feedback con botón "Continuar".
+        document.querySelectorAll('#kana-options-container .kana-option-btn').forEach(b => b.classList.add('disabled'));
+        const feedbackPanel = document.getElementById('kana-feedback-panel');
+        const titleEl = document.getElementById('kana-feedback-title');
+        const answerEl = document.getElementById('kana-feedback-answer');
+        if (buttonElement) buttonElement.classList.add('is-correct');
+        playCorrectSound();
+        feedbackPanel.className = 'feedback-panel correct';
+        titleEl.innerHTML = '✓ ¡Correcto!';
+        answerEl.innerText = `${item.kana} — ${item.romaji}`;
+        feedbackPanel.style.display = 'flex';
+        setTimeout(() => speakKana(item.kana), 100);
+    }
+
+    // Fallo en modo fácil (opción múltiple incorrecta): se llama directamente
+    // desde el onclick del botón de opción, separado de handleKanaAnswer
+    // porque en modo fácil sí necesita mostrar el panel de error + Continuar.
+    function handleKanaWrongOption(item, buttonElement) {
+        if (kanaPracticeState.answered) return;
+        kanaPracticeState.answered = true;
+        document.querySelectorAll('#kana-options-container .kana-option-btn').forEach(b => b.classList.add('disabled'));
+
+        const st = kanaStats[kanaPracticeState.type];
+        st.attempts++;
+        st.wrong++;
+        st.mistakeCounts[item.kana] = (st.mistakeCounts[item.kana] || 0) + 1;
+        kanaPracticeState.results[item.kana].failedCount++;
+        saveKanaStats();
+
+        buttonElement.classList.add('is-wrong');
+        document.querySelectorAll('#kana-options-container .kana-option-btn').forEach(b => {
+            if (b.innerText === item.romaji) b.classList.add('is-correct');
+        });
+        playWrongSound();
+
+        const feedbackPanel = document.getElementById('kana-feedback-panel');
+        const titleEl = document.getElementById('kana-feedback-title');
+        const answerEl = document.getElementById('kana-feedback-answer');
+        feedbackPanel.className = 'feedback-panel wrong';
+        titleEl.innerHTML = '✕ Incorrecto';
+        answerEl.innerText = `${item.kana} — ${item.romaji}`;
+        feedbackPanel.style.display = 'flex';
+
+        // La sílaba fallada vuelve a la cola, pero al final del todo, para
+        // que el usuario la vea de nuevo más adelante en esta misma sesión.
+        kanaPracticeState.queue.shift();
+        kanaPracticeState.queue.push(item);
+        setTimeout(() => speakKana(item.kana), 100);
+    }
+
+    function skipKanaQuestion() {
+        if (kanaPracticeState.answered) return;
+        const item = kanaPracticeState.current;
+        if (!item) return;
+        playSound('click');
+        // Saltar no cuenta como fallo ni como acierto: simplemente se manda al
+        // final de la cola para preguntarla más tarde.
+        kanaPracticeState.queue.shift();
+        kanaPracticeState.queue.push(item);
+        generateKanaQuestion();
+    }
+
+    function nextKanaQuestion() {
+        playSound('click');
+        generateKanaQuestion();
+    }
+
+    function repeatKanaAudio() {
+        if (kanaPracticeState.current) speakKana(kanaPracticeState.current.kana);
+    }
+
+    function showKanaPracticeResult() {
+        playCompletionSound();
+        const results = kanaPracticeState.results;
+        const totalChars = Object.keys(results).length;
+        const totalFails = Object.values(results).reduce((sum, r) => sum + r.failedCount, 0);
+        const totalAttempts = totalChars + totalFails;
+        const pct = totalAttempts > 0 ? Math.round((totalChars / totalAttempts) * 100) : 100;
+
+        document.getElementById('kana-result-score').innerText = `${pct}%`;
+        document.getElementById('kana-result-sub').innerText = `${totalChars} letras dominadas · ${totalFails} fallo${totalFails === 1 ? '' : 's'} en total`;
+
+        const grid = document.getElementById('kana-result-grid');
+        grid.innerHTML = '';
+        Object.entries(results).forEach(([kana, r]) => {
+            const tile = document.createElement('div');
+            // Verde solo si no tuvo NINGÚN fallo en toda la sesión; si falló
+            // alguna vez (aunque luego acertase), se marca en rojo, tal como
+            // se pide: "si no sale verde a la primera, cuenta como fallo".
+            const wasClean = r.failedCount === 0;
+            tile.className = `kana-result-tile ${wasClean ? 'correct' : 'wrong'}`;
+            tile.innerHTML = `<span class="kr-glyph">${kana}</span><span class="kr-romaji">${r.romaji}${r.failedCount > 0 ? ' ⨯' + r.failedCount : ''}</span>`;
+            grid.appendChild(tile);
+        });
+
+        const backBtn = document.getElementById('kana-result-back-btn');
+        backBtn.onclick = () => showScreen('kana-vocab');
+
+        showScreen('kana-result');
+    }
+
+    // --- ESTADÍSTICAS DE KANA (integradas en "Mis estadísticas") --- //
+    function renderKanaStatsBlock() {
+        const container = document.getElementById('stats-kana');
+        if (!container) return;
+        container.innerHTML = '';
+
+        ['hiragana', 'katakana'].forEach(type => {
+            const st = kanaStats[type];
+            const label = type === 'hiragana' ? 'あ Hiragana' : 'ア Katakana';
+            const total = st.correct + st.wrong;
+            const pct = total > 0 ? Math.round((st.correct / total) * 100) : 0;
+
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = `
+                <div style="font-weight:700; margin-bottom:4px;">${label}</div>
+                <div class="kana-stats-row">
+                    <span>Intentos totales</span><strong>${st.attempts}</strong>
+                </div>
+                <div class="kana-stats-row">
+                    <span>Aciertos</span><strong style="color:var(--correct);">${st.correct}</strong>
+                </div>
+                <div class="kana-stats-row">
+                    <span>Fallos</span>
+                    <span class="kana-fail-badge">${st.wrong}</span>
+                </div>
+                <div class="kana-stats-row">
+                    <span>% de acierto</span><strong>${pct}%</strong>
+                </div>
+            `;
+            container.appendChild(wrapper);
+        });
+
+        // Letras más falladas (top 5 combinando ambos silabarios).
+        const allMistakes = [];
+        ['hiragana', 'katakana'].forEach(type => {
+            Object.entries(kanaStats[type].mistakeCounts).forEach(([kana, count]) => {
+                allMistakes.push({ kana, count, type });
+            });
+        });
+        allMistakes.sort((a, b) => b.count - a.count);
+        if (allMistakes.length > 0) {
+            const hardest = document.createElement('div');
+            hardest.innerHTML = `<div style="font-weight:700; margin:10px 0 6px;">🔴 Letras más falladas</div>`;
+            const list = document.createElement('div');
+            list.style.display = 'flex';
+            list.style.flexDirection = 'column';
+            list.style.gap = '6px';
+            allMistakes.slice(0, 5).forEach(m => {
+                const row = document.createElement('div');
+                row.className = 'kana-stats-row';
+                row.innerHTML = `<span>${m.kana} <span style="color:var(--text-muted); font-size:12px;">(${m.type})</span></span><span class="kana-fail-badge">${m.count} fallo${m.count === 1 ? '' : 's'}</span>`;
+                list.appendChild(row);
+            });
+            hardest.appendChild(list);
+            container.appendChild(hardest);
+        }
+    }
+
     window.addEventListener('scroll', updateScrollTopButton, { passive: true });
 
     // Init
     window.onload = () => {
         loadData();
+        loadKanaStats();
         // Si el modo coreano está activo, esperamos a que termine de cargar
         // el vocabulario coreano antes de pintar la pantalla de inicio, para
         // que no aparezca un instante en japonés y luego cambie de golpe.
