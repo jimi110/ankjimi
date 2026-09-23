@@ -2486,6 +2486,10 @@ function showView(viewId, opts = {}) {
   // para que los botones "Otra vez"/"Bien" queden siempre visibles abajo en
   // vez de cortados; el resto de vistas siguen con scroll de página normal.
   document.getElementById('app').classList.toggle('study-active', viewId === 'view-study');
+  // Avisa a la app principal para que oculte su menú inferior mientras se
+  // está estudiando un mazo (más espacio y sin un menú de fondo que no
+  // sirve de nada durante la sesión); se restaura solo al salir de esta vista.
+  notifyParentStudyState(viewId === 'view-study');
   if (hasBack) {
     // Si al pulsar "atrás" se vuelve directamente a la lista de mazos (el
     // inicio de la sección Anki), lo llamamos "Salir"; si en cambio queda
@@ -2589,6 +2593,17 @@ function notifyParentModalState(open) {
   try {
     if (window.parent && window.parent !== window && typeof window.parent.setAnkiModalDimmed === 'function') {
       window.parent.setAnkiModalDimmed(open);
+    }
+  } catch (e) { /* se ignora si se abre suelta, fuera del iframe */ }
+}
+
+// Avisa a la app principal (mismo origen) de si se está en la vista de
+// estudio, para que oculte/muestre su menú inferior a juego (mismo mecanismo
+// que ya usa la app principal al ocultarlo durante la práctica de Temarios/Kana).
+function notifyParentStudyState(studying) {
+  try {
+    if (window.parent && window.parent !== window && typeof window.parent.setAnkiStudyActive === 'function') {
+      window.parent.setAnkiStudyActive(studying);
     }
   } catch (e) { /* se ignora si se abre suelta, fuera del iframe */ }
 }

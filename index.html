@@ -7941,8 +7941,10 @@
     function updateBottomNav(screenId) {
         const nav = document.getElementById('bottom-nav');
         if (!nav) return;
-        // Durante la práctica se oculta para no chocar con el panel de feedback
-        if (screenId === 'practice' || screenId === 'kana-practice') { nav.style.display = 'none'; return; }
+        // Durante la práctica se oculta para no chocar con el panel de feedback.
+        // Lo mismo mientras se está estudiando un mazo de Anki (aviso que llega
+        // desde el iframe vía window.setAnkiStudyActive, ver más abajo).
+        if (screenId === 'practice' || screenId === 'kana-practice' || (screenId === 'anki' && ankiStudyActive)) { nav.style.display = 'none'; return; }
         nav.style.display = 'flex';
 
         let activeTab = 'home';
@@ -8708,6 +8710,15 @@
         if (nav) nav.classList.toggle('anki-modal-dimmed', !!active);
         if (fab) fab.classList.toggle('anki-modal-dimmed', !!active);
         document.body.classList.toggle('anki-modal-dimmed', !!active);
+    };
+
+    // Llamado desde dentro del iframe de Anki (mismo origen) al entrar o salir
+    // de la vista de estudio de un mazo, para ocultar el menú inferior igual
+    // que ya se hace durante la práctica de Temarios/Kana (ver updateBottomNav).
+    let ankiStudyActive = false;
+    window.setAnkiStudyActive = function(active) {
+        ankiStudyActive = !!active;
+        if (currentScreenId === 'anki') updateBottomNav('anki');
     };
 
     // --- MODAL DE INFORMACIÓN (Ajustes) --- //
