@@ -2181,6 +2181,19 @@
         if (customInput && prefs.customThemeColor) customInput.value = prefs.customThemeColor;
     }
 
+    // Bug conocido de Safari en iOS: cuando un overlay `position:fixed; inset:0`
+    // que cubre también la franja de la barra de estado (notch) se oculta,
+    // Safari a veces no repinta esa franja hasta que hay un scroll, un giro
+    // de pantalla o se recarga la página, dejándola gris "pegada" ahí. Forzar
+    // un cambio de transform de ida y vuelta obliga a recomponer toda la
+    // página y soluciona el artefacto sin que se note nada visualmente.
+    function fixIOSStatusBarRepaint() {
+        requestAnimationFrame(() => {
+            document.documentElement.style.webkitTransform = 'translateZ(0)';
+            requestAnimationFrame(() => { document.documentElement.style.webkitTransform = ''; });
+        });
+    }
+
     function toggleSettingsPanel() {
         const panel = document.getElementById('settings-panel');
         const overlay = document.getElementById('settings-overlay');
@@ -2189,11 +2202,13 @@
         overlay.classList.toggle('open', isOpen);
         fab.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         if (isOpen) { renderThemeGrid(); updateSettingsAnkiSection(currentScreenId); }
+        else { fixIOSStatusBarRepaint(); }
     }
     function closeSettingsPanel() {
         document.getElementById('settings-panel').classList.remove('open');
         document.getElementById('settings-overlay').classList.remove('open');
         document.getElementById('settings-fab').setAttribute('aria-expanded', 'false');
+        fixIOSStatusBarRepaint();
     }
 
     // Muestra u oculta la sección "⭐ Anki" del panel de Ajustes según la
