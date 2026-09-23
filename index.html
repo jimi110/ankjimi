@@ -2184,14 +2184,15 @@
     // Bug conocido de Safari en iOS: cuando un overlay `position:fixed; inset:0`
     // que cubre también la franja de la barra de estado (notch) se oculta,
     // Safari a veces no repinta esa franja hasta que hay un scroll, un giro
-    // de pantalla o se recarga la página, dejándola gris "pegada" ahí. Forzar
-    // un cambio de transform de ida y vuelta obliga a recomponer toda la
-    // página y soluciona el artefacto sin que se note nada visualmente.
+    // de pantalla o se recarga la página, dejándola gris "pegada" ahí. Se
+    // fuerza el repintado con un pequeño "nudge" de scroll (1px y vuelta),
+    // que no toca el fondo de esa franja (a diferencia de aplicar un
+    // transform al <html>, que rompe el contexto de los elementos fixed y
+    // hacía que se viese negro en vez del color del tema).
     function fixIOSStatusBarRepaint() {
-        requestAnimationFrame(() => {
-            document.documentElement.style.webkitTransform = 'translateZ(0)';
-            requestAnimationFrame(() => { document.documentElement.style.webkitTransform = ''; });
-        });
+        const y = window.scrollY;
+        window.scrollTo(0, y + 1);
+        requestAnimationFrame(() => window.scrollTo(0, y));
     }
 
     function toggleSettingsPanel() {
