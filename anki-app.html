@@ -138,17 +138,16 @@ body {
   top: 0;
   background: var(--paper);
   z-index: 10;
-  border-bottom: 1px solid var(--line);
 }
 .topbar #btn-back { grid-column: 1; justify-self: start; }
-.topbar #btn-open-info { grid-column: 3; justify-self: end; }
 
 .topbar h1 {
   grid-column: 2;
-  font-family: var(--font-card);
+  font-family: var(--font-ui-sans);
   font-weight: 700;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   margin: 0;
+  padding-top: 4px;
   letter-spacing: 0.2px;
   text-align: center;
   white-space: nowrap;
@@ -173,21 +172,6 @@ body {
 }
 .icon-btn:hover { background: var(--bg-secondary); }
 .icon-btn.hidden { visibility: hidden; }
-
-/* Puntito rojo de aviso sobre el botón de Ajustes (⚙️) y sobre "Información"
-   dentro del panel de Ajustes, para animar al usuario a leer la información
-   al menos una vez. Desaparece en cuanto se abre. */
-#btn-open-info { position: relative; }
-.info-badge-dot {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #ff3b30;
-}
-#btn-open-info .info-badge-dot { top: 6px; right: 10px; }
 
 /* ---------------- Vistas ---------------- */
 #views {
@@ -957,8 +941,7 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
   <!-- ============ BARRA SUPERIOR ============ -->
   <header class="topbar">
     <button id="btn-back" class="icon-btn hidden" aria-label="Volver">←</button>
-    <h1 id="topbar-title">Ankジミー</h1>
-    <button id="btn-open-info" class="icon-btn" aria-label="Información">ℹ️<span id="info-btn-dot" class="info-badge-dot" style="display:none;"></span></button>
+    <h1 id="topbar-title">⭐ Ankジミー</h1>
   </header>
 
   <main id="views">
@@ -974,14 +957,6 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
       <div class="fab-row">
         <button id="btn-new-deck" class="btn secondary">+ Nuevo mazo</button>
         <button id="btn-import-apkg" class="btn primary">Importar .apkg</button>
-      </div>
-
-      <div class="fab-row" style="margin-top:10px;">
-        <button id="btn-export-backup" class="btn secondary">💾 Exportar copia</button>
-        <button id="btn-import-backup" class="btn secondary">📂 Restaurar copia</button>
-      </div>
-      <div class="fab-row" style="margin-top:10px;">
-        <button id="btn-wipe-all" class="btn danger">🗑️ Borrar todos los datos</button>
       </div>
     </section>
 
@@ -1085,35 +1060,6 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
   </main>
 
   <!-- ============ MODAL: INFORMACIÓN ============ -->
-  <div id="info-modal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-title">
-    <div class="info-dialog">
-      <button class="info-close" aria-label="Cerrar información" id="btn-close-info">×</button>
-      <h2 id="info-title" class="info-title">ℹ️ Información</h2>
-
-      <p class="info-text">Esta app está inspirada en el flujo de aprendizaje de ANKI.</p>
-
-      <p class="info-text">
-        Si vienes de mi otra app buscando otra herramienta para mejorar tu aprendizaje de
-        japonés 🇯🇵, te recomiendo importar este mazo de 1.5k palabras:
-      </p>
-      <p class="info-text" style="margin-bottom:2px;"><strong>🔗 Mazo en AnkiWeb</strong></p>
-      <a class="info-link" href="https://ankiweb.net/shared/info/1196762551" target="_blank" rel="noopener noreferrer">https://ankiweb.net/shared/info/1196762551</a>
-
-      <p class="info-text">Créditos al autor original del mazo y a AnkiWeb 🙏</p>
-
-      <p class="info-text">
-        Si te está gustando la app y quieres apoyar el proyecto ❤️, puedes pasarte por mi
-        canal de YouTube:
-      </p>
-      <p class="info-text" style="margin-bottom:2px;"><strong>🎥 YouTube</strong></p>
-      <a class="info-link" href="https://www.youtube.com/@jimi11_" target="_blank" rel="noopener noreferrer">https://www.youtube.com/@jimi11_</a>
-
-      <p class="info-text" style="margin-top:14px; padding:10px 12px; border-radius:12px; background:var(--bad-soft); color:var(--bad); font-weight:600;">⚠️ <strong>Aviso:</strong> las palabras nuevas que no estudies hoy no desaparecen. Se acumulan para el día siguiente junto con las nuevas de ese día.</p>
-
-      <p class="info-gambatte">がんばれ！💪</p>
-    </div>
-  </div>
-
   <!-- ============ MODAL: LÍMITE DE NUEVAS POR DÍA ============ -->
   <div id="deck-limits-modal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="deck-limits-title">
     <div class="info-dialog">
@@ -3371,8 +3317,13 @@ async function renderStats(deckId) {
 // ---------------------------------------------------------------------
 // Ajustes: backup / restauración / borrado
 // ---------------------------------------------------------------------
+// Estas tres acciones ya no tienen botón propio dentro de la app: la app
+// principal (日本語 — Vocabulario Japonés) las muestra en su panel de Ajustes,
+// solo mientras la pestaña "Anki" está activa, y las invoca aquí dentro a
+// través de window.AnkiAppActions (ver más abajo) usando el mismo modal
+// genérico (showModal) de esta app para los mensajes y confirmaciones.
 
-document.getElementById('btn-export-backup').addEventListener('click', async () => {
+async function runExportBackup() {
   showModal({ message: 'Generando copia de seguridad...', progress: true });
   try {
     await window.ImportExport.exportBackup(updateModalProgress);
@@ -3380,11 +3331,11 @@ document.getElementById('btn-export-backup').addEventListener('click', async () 
   } catch (err) {
     showModal({ message: `Error al exportar: ${err.message}`, actions: [{ label: 'Cerrar', style: 'secondary' }] });
   }
-});
+}
 
-document.getElementById('btn-import-backup').addEventListener('click', () => {
+function runImportBackup() {
   document.getElementById('file-backup').click();
-});
+}
 
 document.getElementById('file-backup').addEventListener('change', async (e) => {
   const file = e.target.files[0];
@@ -3413,7 +3364,7 @@ document.getElementById('file-backup').addEventListener('change', async (e) => {
   });
 });
 
-document.getElementById('btn-wipe-all').addEventListener('click', () => {
+function runWipeAll() {
   showModal({
     message: '¿Borrar TODOS los mazos, tarjetas e historial? Esta acción no se puede deshacer.',
     actions: [
@@ -3430,7 +3381,15 @@ document.getElementById('btn-wipe-all').addEventListener('click', () => {
       },
     ],
   });
-});
+}
+
+// Acciones invocables desde fuera del iframe (panel de Ajustes de la app
+// principal). Solo se ejecutan cuando la pestaña "Anki" está activa.
+window.AnkiAppActions = {
+  exportBackup: runExportBackup,
+  importBackup: runImportBackup,
+  wipeAll: runWipeAll,
+};
 
 // ---------------------------------------------------------------------
 // Apariencia (varios temas + personalizado con color autoajustado)
@@ -3672,37 +3631,6 @@ function applyFuriganaPref() {
 }
 
 // ---------------------------------------------------------------------
-// Modal de información
-// ---------------------------------------------------------------------
-
-// Muestra/oculta el puntito rojo de aviso sobre "Información" (ℹ️) en la
-// barra superior, según si el usuario ya la ha abierto alguna vez.
-function updateInfoBadgeDots() {
-  const btnDot = document.getElementById('info-btn-dot');
-  const show = getConfig().infoSeen ? 'none' : 'block';
-  if (btnDot) btnDot.style.display = show;
-}
-
-function openInfoModal() {
-  document.getElementById('info-modal').classList.add('visible');
-  playSound('secondary');
-  if (!getConfig().infoSeen) {
-    setConfig({ infoSeen: true });
-    updateInfoBadgeDots();
-  }
-}
-function closeInfoModal() {
-  document.getElementById('info-modal').classList.remove('visible');
-  playSound('click');
-}
-
-document.getElementById('btn-open-info').addEventListener('click', openInfoModal);
-document.getElementById('btn-close-info').addEventListener('click', closeInfoModal);
-document.getElementById('info-modal').addEventListener('click', (e) => {
-  if (e.target.id === 'info-modal') closeInfoModal();
-});
-
-// ---------------------------------------------------------------------
 // Inicialización
 // ---------------------------------------------------------------------
 
@@ -3711,7 +3639,6 @@ async function init() {
   applyLayout();
   applySoundPref();
   applyFuriganaPref();
-  updateInfoBadgeDots();
   await window.DB.openDB();
   await refreshDeckList();
 
@@ -3725,6 +3652,20 @@ async function init() {
 // app está abierta en su pestaña, este evento los reaplica al instante.
 window.addEventListener('storage', (e) => {
   if (e.key !== CONFIG_KEY && e.key !== null) return;
+  applyTheme();
+  applyLayout();
+  applySoundPref();
+  applyFuriganaPref();
+});
+
+// El evento 'storage' de arriba no siempre llega con fiabilidad entre un
+// documento y el iframe que aloja (depende del navegador y de si el iframe
+// ya estaba cargado). La app principal, además, avisa directamente con
+// postMessage cada vez que cambian los ajustes compartidos; esto es lo que
+// hace que el tema, el tamaño y el sonido reaccionen al instante aquí dentro.
+window.addEventListener('message', (e) => {
+  if (e.origin !== window.location.origin) return;
+  if (!e.data || e.data.type !== 'ankjimi-prefs-changed') return;
   applyTheme();
   applyLayout();
   applySoundPref();
