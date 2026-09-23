@@ -1584,6 +1584,10 @@
             <div class="kana-result-score" id="kana-result-score">0%</div>
             <p class="kana-result-sub" id="kana-result-sub">0 aciertos de 0</p>
         </div>
+        <div style="max-width:320px; margin:0 auto 18px;">
+            <div class="kana-stats-row"><span>⏱️ Tiempo total</span><strong id="kana-result-time">0:00</strong></div>
+            <div class="kana-stats-row"><span>⚡ Media por letra</span><strong id="kana-result-avg">0.0 s</strong></div>
+        </div>
         <div class="kana-result-grid" id="kana-result-grid"></div>
         <div class="center-btn-wrap">
             <button class="btn" id="kana-result-back-btn">Volver al vocabulario</button>
@@ -8908,6 +8912,7 @@
             totalUnique: list.length,
             current: null,
             answered: false,
+            startTime: Date.now(),
             results: {}
         };
         list.forEach(item => {
@@ -8959,8 +8964,9 @@
             const input = document.getElementById('kana-answer-input');
             input.value = '';
             input.classList.remove('is-wrong', 'is-correct');
-            input.disabled = false;
-            setTimeout(() => input.focus(), 50);
+            if (document.activeElement !== input) {
+                setTimeout(() => input.focus(), 50);
+            }
         } else {
             inputArea.style.display = 'none';
             optionsContainer.style.display = 'grid';
@@ -9035,7 +9041,9 @@
         // Es una sílaba existente pero incorrecta: error.
         kanaPracticeState.answered = true; // evita doble disparo mientras se limpia
         input.classList.add('is-wrong');
-        input.disabled = true;
+        // (no se deshabilita el input, por el mismo motivo que en el acierto:
+        // evitar que el teclado táctil se cierre y se tenga que volver a
+        // tocar el campo para seguir escribiendo)
         playWrongSound();
         const st = kanaStats[kanaPracticeState.type];
         st.attempts++;
@@ -9046,9 +9054,7 @@
         setTimeout(() => {
             input.classList.remove('is-wrong');
             input.value = '';
-            input.disabled = false;
             kanaPracticeState.answered = false;
-            input.focus();
         }, 550);
     }
 
@@ -9071,10 +9077,13 @@
         saveKanaStats();
 
         if (isHard) {
-            // Modo difícil: acertar avanza solo, sin panel ni botón.
+            // Modo difícil: acertar avanza solo, sin panel ni botón. No se
+            // deshabilita el input para que el teclado táctil se mantenga
+            // siempre abierto entre una letra y otra (para poder hacer
+            // speedrun sin que el teclado se cierre y haya que volver a
+            // tocar el campo).
             const input = document.getElementById('kana-answer-input');
             input.classList.add('is-correct');
-            input.disabled = true;
             playCorrectSound();
             setTimeout(() => speakKana(item.kana), 80);
             setTimeout(() => generateKanaQuestion(), 550);
@@ -9152,6 +9161,14 @@
         if (kanaPracticeState.current) speakKana(kanaPracticeState.current.kana);
     }
 
+    // Da formato "m:ss" a una duración en milisegundos.
+    function formatKanaDuration(ms) {
+        const totalSec = Math.round(ms / 1000);
+        const min = Math.floor(totalSec / 60);
+        const sec = totalSec % 60;
+        return `${min}:${sec.toString().padStart(2, '0')}`;
+    }
+
     function showKanaPracticeResult() {
         playCompletionSound();
         const results = kanaPracticeState.results;
@@ -9162,6 +9179,13 @@
 
         document.getElementById('kana-result-score').innerText = `${pct}%`;
         document.getElementById('kana-result-sub').innerText = `${totalChars} letras dominadas · ${totalFails} fallo${totalFails === 1 ? '' : 's'} en total`;
+
+        // Cronómetro de la sesión: tiempo total y media por letra, para poder
+        // comparar velocidad entre intentos (modo speedrun).
+        const elapsedMs = kanaPracticeState.startTime ? (Date.now() - kanaPracticeState.startTime) : 0;
+        const avgSec = totalChars > 0 ? (elapsedMs / totalChars) / 1000 : 0;
+        document.getElementById('kana-result-time').innerText = formatKanaDuration(elapsedMs);
+        document.getElementById('kana-result-avg').innerText = `${avgSec.toFixed(1)} s`;
 
         const grid = document.getElementById('kana-result-grid');
         grid.innerHTML = '';
