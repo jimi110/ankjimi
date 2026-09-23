@@ -1857,7 +1857,6 @@
         const subtitleEl = document.getElementById('app-title-subtitle');
         if (titleEl) titleEl.textContent = prefs.koreanMode ? '한국어' : '日本語';
         if (subtitleEl) subtitleEl.textContent = prefs.koreanMode ? 'Vocabulario coreano' : 'Vocabulario japonés';
-        document.title = prefs.koreanMode ? '한국어 — Vocabulario Coreano' : '日本語 — Vocabulario Japonés';
     }
 
     // Algunos títulos de temario mencionan literalmente "japonés/japonesa/Japón"
@@ -7058,7 +7057,7 @@
     // portada principal (con el buscador y el listado de niveles), sin importar
     // en qué nivel/temario/teoría se encontrara el usuario.
     function goToTemarios() {
-        if (currentScreenId === 'review' || currentScreenId === 'review-category' || currentScreenId === 'stats') {
+        if (currentScreenId === 'review' || currentScreenId === 'review-category' || currentScreenId === 'stats' || currentScreenId === 'anki' || currentScreenId === 'kana' || currentScreenId === 'kana-vocab' || currentScreenId === 'kana-practice' || currentScreenId === 'kana-result') {
             showScreen(lastTopicsScreen);
         } else {
             showScreen('home', true);
