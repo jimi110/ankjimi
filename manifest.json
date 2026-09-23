@@ -1,7 +1,7 @@
 {
   "name": "Ankジミー",
   "short_name": "Ankジミー",
-  "description": "Aplicación para aprender japonés",
+  "description": "Aplicación para aprender japonés: vocabulario, kana y repaso espaciado con Anki integrado.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
