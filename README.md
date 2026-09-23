@@ -1,2 +1,2 @@
 # ankjimi
-My own ANKI version
+Mi propia app para aprender japones, disfutala es gratis.
