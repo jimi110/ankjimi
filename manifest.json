@@ -1,7 +1,7 @@
 {
-  "name": "日本語 — Vocabulario Japonés",
-  "short_name": "日本語",
-  "description": "Aplicación para aprender vocabulario japonés",
+  "name": "Ankジミー",
+  "short_name": "Ankジミー",
+  "description": "Aplicación para aprender japonés",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
