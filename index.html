@@ -82,6 +82,17 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
+        /* <html> no hereda las variables que redefine body.dark-theme (no es
+           descendiente suyo), así que sin esto se quedaba siempre blanco en
+           los márgenes/rebote de scroll aunque el resto de la app fuera oscura. */
+        html {
+            background-color: var(--bg-color);
+            transition: background-color 0.3s;
+        }
+        html:has(body.dark-theme) {
+            background-color: #131f24;
+        }
+
         /* --- CONTENEDOR PRINCIPAL Y LAYOUTS --- */
         #app {
             margin: 0 auto;
@@ -1120,7 +1131,7 @@
         </div>
         <div class="settings-panel-body">
             <div class="settings-section" id="general-info-section">
-                <button type="button" class="settings-action-btn" onclick="openInfoModal()">ℹ️ Información<span id="info-btn-dot" class="info-badge-dot" style="display:none;"></span></button>
+                <button type="button" id="info-open-btn" class="settings-action-btn" onclick="openInfoModal()">ℹ️ Información<span id="info-btn-dot" class="info-badge-dot" style="display:none;"></span></button>
             </div>
 
             <div class="settings-section" id="anki-settings-section" style="display:none;">
@@ -1379,6 +1390,7 @@
             </button>
             <button class="bottom-nav-item" data-nav="anki" onclick="showScreen('anki')">
                 <span class="bottom-nav-icon">⭐</span><span>Anki</span>
+                <span id="anki-badge-dot" class="review-badge-dot" style="display:none;"></span>
             </button>
         </div>
     </nav>
@@ -1458,6 +1470,11 @@
     // de Ajustes (⚙️) y sobre "Información" dentro del panel, para animar a
     // leerlo al menos una vez.
     let hasSeenInfoModal = false;
+    // Nº de tarjetas de Anki pendientes de repasar/practicar hoy (en todos los
+    // mazos importados), calculado dentro del iframe de Anki y comunicado aquí
+    // mediante window.updateAnkiBadgeFromIframe. Se usa para el puntito rojo
+    // sobre "⭐ Anki" en el menú inferior.
+    let ankiDueCount = 0;
 
     function loadData() {
         try {
@@ -1534,6 +1551,7 @@
         applySearchPlaceholder();
         applyInfoModalText();
         updateInfoBadgeDots();
+        updateAnkiBadge();
         // El furigana es un recurso exclusivo de la escritura japonesa (kanji
         // + lectura en hiragana): en coreano no tiene sentido, así que se
         // oculta el interruptor mientras el modo coreano esté activo.
@@ -1925,22 +1943,46 @@
 
     // Muestra u oculta la sección "⭐ Anki" del panel de Ajustes según la
     // pestaña activa: sus acciones (exportar/restaurar/borrar) solo tienen
-    // sentido mientras se está viendo la app de Anki.
+    // sentido mientras se está viendo la app de Anki. Mientras tanto, el
+    // botón "ℹ️ Información" se traslada dentro de esta sección (arriba del
+    // todo, justo bajo el título "⭐ Anki") para que la info mostrada
+    // coincida con lo que se está viendo, en vez de quedar suelta encima.
     function updateSettingsAnkiSection(screenId) {
         const section = document.getElementById('anki-settings-section');
+        const generalSection = document.getElementById('general-info-section');
+        const infoBtn = document.getElementById('info-open-btn');
         if (section) section.style.display = screenId === 'anki' ? 'block' : 'none';
+        if (screenId === 'anki') {
+            // Se inserta justo DESPUÉS del título "⭐ Anki" (no antes), para
+            // que quede claramente dentro del bloque, como primer botón.
+            const title = section ? section.querySelector('.settings-section-title') : null;
+            if (infoBtn && section) {
+                if (title && title.nextSibling) section.insertBefore(infoBtn, title.nextSibling);
+                else section.appendChild(infoBtn);
+            }
+            if (generalSection) generalSection.style.display = 'none';
+        } else {
+            if (infoBtn && generalSection) generalSection.appendChild(infoBtn);
+            if (generalSection) generalSection.style.display = '';
+        }
     }
 
     // Ejecuta una acción (exportBackup / importBackup / wipeAll) dentro del
     // iframe de Anki, expuesta por éste en window.AnkiAppActions. El iframe
     // ya muestra sus propios mensajes y confirmaciones con su modal interno.
+    // Cerramos primero el panel de Ajustes: al estar por encima del iframe en
+    // apilamiento (z-index), su modal de confirmación quedaba tapado/abajo
+    // del todo mientras el panel seguía abierto.
     function callAnkiAction(actionName) {
-        const iframe = document.getElementById('anki-iframe');
-        const win = iframe && iframe.contentWindow;
-        const actions = win && win.AnkiAppActions;
-        if (actions && typeof actions[actionName] === 'function') {
-            actions[actionName]();
-        }
+        closeSettingsPanel();
+        setTimeout(() => {
+            const iframe = document.getElementById('anki-iframe');
+            const win = iframe && iframe.contentWindow;
+            const actions = win && win.AnkiAppActions;
+            if (actions && typeof actions[actionName] === 'function') {
+                actions[actionName]();
+            }
+        }, 300);
     }
 
     // Reaccionar a cambios del tema del sistema operativo cuando el modo es 'auto'
@@ -6683,6 +6725,7 @@
         if (screenId === 'stats') renderStats();
         if (screenId === 'anki') loadAnkiApp();
         applyInfoModalText();
+        updateInfoBadgeDots();
         updateSettingsAnkiSection(screenId);
         updateBottomNav(screenId);
         const settingsFab = document.getElementById('settings-fab');
@@ -7602,6 +7645,7 @@
         const homeLabel = document.getElementById('bottom-nav-home-label');
         if (homeLabel) homeLabel.innerText = (lastTopicsScreen === 'home') ? 'Niveles' : 'Temarios';
         updateReviewBadge();
+        updateAnkiBadge();
     }
 
     function recordMistake(wordObj) {
@@ -8306,21 +8350,50 @@
     }
 
     // Muestra/oculta los puntitos de aviso sobre el botón de Ajustes (⚙️) y
-    // sobre "Información" dentro del panel, según si el usuario ya ha
-    // abierto alguna vez el modal de Información.
+    // sobre "Información" dentro del panel. Mientras se está en la pestaña de
+    // Anki usan su propio aviso (prefs.infoSeen, compartido con anki-app.html
+    // vía 'nihongoAppPrefs'), independiente del de la app principal.
     function updateInfoBadgeDots() {
         const fabDot = document.getElementById('settings-info-dot');
         const btnDot = document.getElementById('info-btn-dot');
-        const show = hasSeenInfoModal ? 'none' : 'block';
+        const seen = currentScreenId === 'anki' ? !!prefs.infoSeen : hasSeenInfoModal;
+        const show = seen ? 'none' : 'block';
         if (fabDot) fabDot.style.display = show;
         if (btnDot) btnDot.style.display = show;
     }
+
+    // Puntito rojo sobre "⭐ Anki" en el menú inferior. Sale si: (a) hay
+    // tarjetas pendientes de repasar/practicar hoy en algún mazo importado, o
+    // (b) el usuario todavía no ha abierto la información específica de Anki
+    // (primera vez), para guiarle a Ajustes > Anki > Información.
+    function updateAnkiBadge() {
+        const dot = document.getElementById('anki-badge-dot');
+        if (!dot) return;
+        const showFirstTime = !prefs.infoSeen;
+        dot.style.display = (ankiDueCount > 0 || showFirstTime) ? 'block' : 'none';
+    }
+
+    // Llamado desde dentro del iframe de Anki (mismo origen) cada vez que
+    // cambia el nº de tarjetas pendientes hoy, para mantener el puntito
+    // actualizado sin esperar a que se visite la pestaña.
+    window.updateAnkiBadgeFromIframe = function(count) {
+        ankiDueCount = Number(count) || 0;
+        updateAnkiBadge();
+    };
 
     // --- MODAL DE INFORMACIÓN (Ajustes) --- //
     function openInfoModal() {
         document.getElementById('info-modal').classList.add('visible');
         if (typeof playSound === 'function') playSound('click');
-        if (!hasSeenInfoModal) {
+        if (currentScreenId === 'anki') {
+            if (!prefs.infoSeen) {
+                prefs.infoSeen = true;
+                saveData();
+                notifyAnkiPrefsChanged();
+                updateInfoBadgeDots();
+                updateAnkiBadge();
+            }
+        } else if (!hasSeenInfoModal) {
             hasSeenInfoModal = true;
             try { localStorage.setItem('nihongoInfoSeen', '1'); } catch(e) {}
             updateInfoBadgeDots();
@@ -8365,6 +8438,10 @@
         if (ankiAppLoaded) return;
         const iframe = document.getElementById('anki-iframe');
         if (iframe) {
+            // Refuerzo extra: en cuanto el iframe termina de cargar, le
+            // reenviamos los ajustes actuales (tema, tamaño, sonido) por si
+            // los leyó antes de que localStorage estuviera del todo listo.
+            iframe.addEventListener('load', notifyAnkiPrefsChanged);
             iframe.src = 'anki-app.html';
             ankiAppLoaded = true;
         }
@@ -8385,6 +8462,10 @@
             updateScrollTopButton();
             updateBottomNav('home');
         });
+        // Precarga en segundo plano (oculta) la app de Anki, sin esperar a que
+        // el usuario visite esa pestaña, solo para poder calcular cuanto antes
+        // el puntito de aviso de tarjetas pendientes sobre "⭐ Anki".
+        setTimeout(loadAnkiApp, 1200);
     };
 </script>
 

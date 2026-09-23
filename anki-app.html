@@ -54,6 +54,11 @@
   color-scheme: light;
 }
 
+/* Las variables del tema oscuro se aplican tanto en <body> como en <html>:
+   así <html> (que no es descendiente de <body> y por tanto no hereda sus
+   variables) también puede pintarse oscuro y no se queda blanco en los
+   márgenes/rebote de scroll. */
+html.theme-dark,
 body.theme-dark {
   --paper: #131f24;
   --paper-raised: #18252b;
@@ -82,6 +87,14 @@ body.theme-dark {
 html, body {
   height: 100%;
   margin: 0;
+}
+
+/* El fondo también se fija en <html>, no solo en <body>: así el "rebote"
+   de scroll en iOS/Android (overscroll) y cualquier margen fuera del body
+   muestran el color del tema en vez de quedarse siempre en blanco. */
+html {
+  background: var(--paper);
+  transition: background-color 0.2s ease;
 }
 
 body {
@@ -145,7 +158,7 @@ body {
   grid-column: 2;
   font-family: var(--font-ui-sans);
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   margin: 0;
   padding-top: 4px;
   letter-spacing: 0.2px;
@@ -2597,6 +2610,10 @@ async function refreshDeckList() {
   listEl.querySelectorAll('.deck-row').forEach((el) => el.remove());
   hint.classList.toggle('hidden', decks.length > 0);
 
+  // Suma de tarjetas realmente pendientes hoy en todos los mazos, para
+  // avisar en la app principal (puntito rojo sobre "⭐ Anki").
+  let totalPendingToday = 0;
+
   for (const deck of decks) {
     const counts = await computeDeckCounts(deck.id);
     const row = document.createElement('div');
@@ -2611,6 +2628,8 @@ async function refreshDeckList() {
       ? savedQueue.length
       : (finishedToday ? 0 : counts.pendingPreview);
 
+    totalPendingToday += pending;
+
     row.innerHTML = `
       <div>
         <div class="deck-name">${escapeHtml(deck.name)}</div>
@@ -2623,7 +2642,22 @@ async function refreshDeckList() {
     `;    row.addEventListener('click', () => openDeckDetail(deck.id));
     listEl.appendChild(row);
   }
+
+  notifyParentDueCount(totalPendingToday);
 }
+
+// Avisa a la app principal (mismo origen, por eso se puede llamar tal cual)
+// de cuántas tarjetas quedan pendientes hoy en total, para el puntito rojo
+// sobre "⭐ Anki" en su menú inferior. Si esta página no está dentro de un
+// iframe de esa app (se abrió suelta), simplemente no hace nada.
+function notifyParentDueCount(total) {
+  try {
+    if (window.parent && window.parent !== window && typeof window.parent.updateAnkiBadgeFromIframe === 'function') {
+      window.parent.updateAnkiBadgeFromIframe(total);
+    }
+  } catch (e) { /* iframe de otro origen o app principal sin esa función: se ignora */ }
+}
+
 
 function escapeHtml(str) {
   const div = document.createElement('div');
@@ -3526,19 +3560,40 @@ function clearGeneratedVars() {
 /** Aplica el tema guardado: 'light'/'dark' usan el CSS fijo; el resto generan su paleta. */
 function applyTheme() {
   const cfg = getConfig();
-  const theme = cfg.theme || 'light';
+  // Si el tema guardado no es ninguno de los reconocidos (dato antiguo,
+  // corrupto o de una versión distinta), usamos 'light' en vez de dejar la
+  // app a medio pintar en blanco.
+  const knownThemes = ['light', 'dark', 'custom', ...Object.keys(THEME_BASE_COLORS)];
+  const theme = knownThemes.includes(cfg.theme) ? cfg.theme : 'light';
   const root = document.documentElement;
   clearGeneratedVars();
+  // La clase de tema se aplica a <html> Y a <body>: <html> no es descendiente
+  // de <body>, así que sin esto sus estilos (fondo, rebote de scroll en
+  // móvil, etc.) nunca verían las variables del tema oscuro y quedarían
+  // siempre en blanco aunque el resto de la app cambie de color.
+  root.classList.remove('theme-light', 'theme-dark');
   document.body.classList.remove('theme-light', 'theme-dark');
 
-  if (theme === 'light') { document.body.classList.add('theme-light'); return; }
-  if (theme === 'dark')  { document.body.classList.add('theme-dark'); return; }
+  if (theme === 'light') {
+    root.classList.add('theme-light');
+    document.body.classList.add('theme-light');
+    return;
+  }
+  if (theme === 'dark')  {
+    root.classList.add('theme-dark');
+    document.body.classList.add('theme-dark');
+    return;
+  }
 
   // Temas generados dinámicamente a partir de un color base (incluye 'custom').
+  root.classList.add('theme-light');
   document.body.classList.add('theme-light');
   const baseColor = theme === 'custom' ? (cfg.customThemeColor || '#1cb0f6') : THEME_BASE_COLORS[theme];
   const isDark = theme === 'custom' ? relativeLuminance(baseColor) < 0.4 : false;
-  if (isDark) { document.body.classList.remove('theme-light'); document.body.classList.add('theme-dark'); }
+  if (isDark) {
+    root.classList.remove('theme-light'); root.classList.add('theme-dark');
+    document.body.classList.remove('theme-light'); document.body.classList.add('theme-dark');
+  }
   const palette = generatePaletteFromColor(baseColor, isDark);
   Object.entries(palette).forEach(([k, v]) => root.style.setProperty(k, v));
   root.dataset.generatedTheme = '1';
