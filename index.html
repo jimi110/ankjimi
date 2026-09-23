@@ -343,6 +343,13 @@
             pointer-events: none;
             transition: filter 0.2s ease;
         }
+        /* En layouts anchos (PC), fuera del recuadro de 900px queda el fondo
+           de <body>/<html> a la vista; sin esto se quedaba blanco a los
+           lados mientras el resto de la app se oscurecía con el modal. */
+        body.anki-modal-dimmed,
+        html:has(body.anki-modal-dimmed) {
+            background-color: #6e6e6e;
+        }
 
         /* --- OVERLAY --- */
         .settings-overlay {
@@ -1626,7 +1633,7 @@
             <button class="bottom-nav-item" data-nav="stats" onclick="showScreen('stats')">
                 <span class="bottom-nav-icon">📊</span><span>Estadísticas</span>
             </button>
-            <button class="bottom-nav-item" data-nav="anki" onclick="showScreen('anki')">
+            <button class="bottom-nav-item" data-nav="anki" onclick="openAnkiTab()">
                 <span class="bottom-nav-icon">⭐</span><span>Anki</span>
                 <span id="anki-badge-dot" class="review-badge-dot" style="display:none;"></span>
             </button>
@@ -2269,6 +2276,19 @@
                 actions[actionName]();
             }
         }, 300);
+    }
+
+    // Pestaña "Anki" del menú inferior: además de mostrar la pantalla, le
+    // pide a la app de Anki que vuelva a la lista de mazos (su inicio) si no
+    // estaba ya ahí, igual que el icono "home" de cualquier app.
+    function openAnkiTab() {
+        showScreen('anki');
+        const iframe = document.getElementById('anki-iframe');
+        const win = iframe && iframe.contentWindow;
+        const actions = win && win.AnkiAppActions;
+        if (actions && typeof actions.goToDeckList === 'function') {
+            actions.goToDeckList();
+        }
     }
 
     // Reaccionar a cambios del tema del sistema operativo cuando el modo es 'auto'
@@ -8683,6 +8703,7 @@
         const fab = document.getElementById('settings-fab');
         if (nav) nav.classList.toggle('anki-modal-dimmed', !!active);
         if (fab) fab.classList.toggle('anki-modal-dimmed', !!active);
+        document.body.classList.toggle('anki-modal-dimmed', !!active);
     };
 
     // --- MODAL DE INFORMACIÓN (Ajustes) --- //

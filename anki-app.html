@@ -143,16 +143,42 @@ body {
 /* ---------------- Barra superior ---------------- */
 .topbar {
   display: grid;
-  grid-template-columns: 44px 1fr 44px;
+  /* La 1ª columna pasa a "auto": con el botón de atrás como texto plano
+     ("← Salir"/"← Volver", igual que en Temarios) puede ser más ancho que
+     los 44px de un icono, y así no se superpone con el título centrado. */
+  grid-template-columns: auto 1fr 44px;
   align-items: center;
   padding: 14px 16px;
-  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  /* Un poco más de aire arriba del título (además de la safe-area), para
+     que no quede tan pegado al borde superior. */
+  padding-top: calc(34px + env(safe-area-inset-top, 0px));
   position: sticky;
   top: 0;
   background: var(--paper);
   z-index: 10;
 }
 .topbar #btn-back { grid-column: 1; justify-self: start; }
+/* Mismo estilo exacto que el botón "← Salir"/"← Volver" (.btn-back) del
+   apartado de Temarios en la app principal: texto plano, sin círculo ni
+   fondo, con la flecha integrada en el propio texto. */
+#btn-back {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 8px 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  font-family: var(--font-ui-sans);
+}
+#btn-back:hover { background: none; }
+#btn-back.hidden { visibility: hidden; }
 
 .topbar h1 {
   grid-column: 2;
@@ -916,7 +942,7 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
 @media (max-width: 719px) {
   .topbar {
     padding: 8px 14px;
-    padding-top: calc(8px + env(safe-area-inset-top, 0px));
+    padding-top: calc(26px + env(safe-area-inset-top, 0px));
   }
 
   #views {
@@ -953,7 +979,9 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
 
   <!-- ============ BARRA SUPERIOR ============ -->
   <header class="topbar">
-    <button id="btn-back" class="icon-btn hidden" aria-label="Volver">←</button>
+    <button id="btn-back" class="hidden" aria-label="Volver">
+      <span id="btn-back-label">← Volver</span>
+    </button>
     <h1 id="topbar-title">⭐ Ankジミー</h1>
   </header>
 
@@ -2404,7 +2432,17 @@ function showView(viewId, opts = {}) {
   document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
   document.getElementById(viewId).classList.add('active');
   document.getElementById('topbar-title').textContent = opts.title || VIEW_TITLES[viewId] || '';
-  document.getElementById('btn-back').classList.toggle('hidden', !VIEWS_WITH_BACK.has(viewId));
+  const hasBack = VIEWS_WITH_BACK.has(viewId);
+  document.getElementById('btn-back').classList.toggle('hidden', !hasBack);
+  if (hasBack) {
+    // Si al pulsar "atrás" se vuelve directamente a la lista de mazos (el
+    // inicio de la sección Anki), lo llamamos "Salir"; si en cambio queda
+    // otro apartado intermedio de por medio, lo llamamos "Volver". Mismo
+    // texto exacto que usa el botón de Temarios en la app principal.
+    const label = backStack.length <= 2 ? '← Salir' : '← Volver';
+    document.getElementById('btn-back-label').textContent = label;
+    document.getElementById('btn-back').setAttribute('aria-label', label.replace('← ', ''));
+  }
   window.scrollTo(0, 0);
 }
 
@@ -3437,6 +3475,18 @@ window.AnkiAppActions = {
   exportBackup: runExportBackup,
   importBackup: runImportBackup,
   wipeAll: runWipeAll,
+  // Vuelve a la lista de mazos (el inicio de la app), desde donde sea que
+  // esté. La llama la app principal al pulsar la pestaña "Anki" del menú
+  // inferior, para que siempre te lleve al inicio si no estabas ya ahí.
+  goToDeckList: async function goToDeckList() {
+    if (backStack.length === 1 && backStack[0] === 'view-decks') return;
+    if (document.getElementById('view-study').classList.contains('active') && state.studyQueue.length > 0) {
+      await persistStudySessionQueue(state.studyQueue);
+    }
+    backStack = ['view-decks'];
+    showView('view-decks');
+    await refreshDeckList();
+  },
 };
 
 // ---------------------------------------------------------------------
