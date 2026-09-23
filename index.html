@@ -1495,7 +1495,7 @@
         <h2 style="font-size:16px; margin-top:28px;">Temarios</h2>
         <div id="stats-topics" style="display:flex; flex-direction:column; gap:10px;"></div>
 
-        <h2 style="font-size:16px; margin-top:28px;">🈴 Kana (hiragana / katakana)</h2>
+        <h2 style="font-size:16px; margin-top:28px;" id="stats-kana-title">🈴 Kana (hiragana / katakana)</h2>
         <div id="stats-kana" style="display:flex; flex-direction:column; gap:14px;"></div>
     </div>
 
@@ -1601,7 +1601,7 @@
                 <span class="bottom-nav-icon">🔁</span><span>Repasar</span>
                 <span id="review-badge-dot" class="review-badge-dot" style="display:none;"></span>
             </button>
-            <button class="bottom-nav-item" data-nav="kana" onclick="showScreen('kana')">
+            <button class="bottom-nav-item" data-nav="kana" id="bottom-nav-kana-item" onclick="showScreen('kana')">
                 <span class="bottom-nav-icon">🈴</span><span>Kana</span>
             </button>
             <button class="bottom-nav-item" data-nav="stats" onclick="showScreen('stats')">
@@ -1799,6 +1799,15 @@
         // oculta el interruptor mientras el modo coreano esté activo.
         const furiganaSection = document.getElementById('furigana-section');
         if (furiganaSection) furiganaSection.style.display = prefs.koreanMode ? 'none' : 'block';
+
+        // El módulo de Kana (hiragana/katakana) es exclusivo del japonés: en
+        // modo coreano se oculta del menú inferior, y si el usuario estaba
+        // dentro de alguna de sus pantallas se le devuelve al inicio.
+        const kanaNavItem = document.getElementById('bottom-nav-kana-item');
+        if (kanaNavItem) kanaNavItem.style.display = prefs.koreanMode ? 'none' : 'flex';
+        if (prefs.koreanMode && ['kana', 'kana-vocab', 'kana-practice', 'kana-result'].includes(currentScreenId)) {
+            showScreen('home');
+        }
 
         // El iframe de Anki comparte los ajustes vía localStorage, pero el
         // evento 'storage' no siempre llega con fiabilidad entre documentos
@@ -9177,6 +9186,15 @@
     function renderKanaStatsBlock() {
         const container = document.getElementById('stats-kana');
         if (!container) return;
+        const title = document.getElementById('stats-kana-title');
+        // El apartado de Kana no aplica al modo coreano: se oculta entero.
+        if (prefs.koreanMode) {
+            container.style.display = 'none';
+            if (title) title.style.display = 'none';
+            return;
+        }
+        container.style.display = 'flex';
+        if (title) title.style.display = 'block';
         container.innerHTML = '';
 
         ['hiragana', 'katakana'].forEach(type => {
