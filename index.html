@@ -332,6 +332,18 @@
         .settings-fab:hover { transform: rotate(20deg) scale(1.05); border-color: var(--primary); }
         .settings-fab:active { transform: rotate(20deg) scale(0.95); }
 
+        /* Cuando la app de Anki (dentro del iframe) muestra su modal de
+           confirmación (copia de seguridad / borrar datos), oscurecemos
+           también el menú inferior y el botón de ajustes: ellos viven fuera
+           del iframe, así que sin esto se quedaban totalmente iluminados y
+           se veía un borde feo justo donde terminaba el recuadro de Anki. */
+        .bottom-nav.anki-modal-dimmed,
+        .settings-fab.anki-modal-dimmed {
+            filter: brightness(0.45);
+            pointer-events: none;
+            transition: filter 0.2s ease;
+        }
+
         /* --- OVERLAY --- */
         .settings-overlay {
             position: fixed;
@@ -714,7 +726,10 @@
             justify-content: center;
             background: var(--card-bg);
             border-top: 1px solid var(--border);
-            padding-bottom: env(safe-area-inset-bottom);
+            /* Un poco de aire extra además de la safe-area: en móviles sin
+               "isla"/gesto (o donde env() resuelve a 0) los iconos quedaban
+               pegados al borde inferior de la pantalla. */
+            padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
         }
         .bottom-nav-inner { display: flex; width: 100%; max-width: 900px; }
         .bottom-nav-item {
@@ -725,7 +740,7 @@
             flex-direction: column;
             align-items: center;
             gap: 3px;
-            padding: 12px 4px 14px;
+            padding: 12px 4px 16px;
             color: var(--text-muted);
             font-size: 12px;
             font-weight: 600;
@@ -8658,6 +8673,16 @@
     window.updateAnkiBadgeFromIframe = function(count) {
         ankiDueCount = Number(count) || 0;
         updateAnkiBadge();
+    };
+
+    // Llamado desde dentro del iframe de Anki (mismo origen) cuando abre o
+    // cierra su modal de confirmación, para oscurecer en el mismo instante
+    // el menú inferior y el botón de ajustes (ver CSS .anki-modal-dimmed).
+    window.setAnkiModalDimmed = function(active) {
+        const nav = document.getElementById('bottom-nav');
+        const fab = document.getElementById('settings-fab');
+        if (nav) nav.classList.toggle('anki-modal-dimmed', !!active);
+        if (fab) fab.classList.toggle('anki-modal-dimmed', !!active);
     };
 
     // --- MODAL DE INFORMACIÓN (Ajustes) --- //

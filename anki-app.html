@@ -2388,10 +2388,10 @@ const state = {
 // ---------------------------------------------------------------------
 
 const VIEW_TITLES = {
-  'view-decks': 'Ankジミー',
+  'view-decks': '⭐ Ankジミー',
   'view-deck-detail': '',
   'view-study': 'Estudiando',
-  'view-session-done': 'Ankジミー',
+  'view-session-done': '⭐ Ankジミー',
   'view-add-card': 'Nueva tarjeta',
   'view-stats': 'Estadísticas',
 };
@@ -2477,6 +2477,7 @@ function showModal({ message, progress = false, actions = [], input = null }) {
   }
 
   overlay.classList.remove('hidden');
+  notifyParentModalState(true);
 }
 
 function updateModalProgress(text) {
@@ -2487,6 +2488,19 @@ function updateModalProgress(text) {
 
 function hideModal() {
   document.getElementById('modal-overlay').classList.add('hidden');
+  notifyParentModalState(false);
+}
+
+// Avisa a la app principal (mismo origen) cuando se abre/cierra este modal de
+// confirmación, para que oscurezca también el menú inferior y el botón de
+// ajustes (que viven fuera del iframe y, si no, se quedaban sin oscurecer,
+// dejando un borde feo justo donde termina la app de Anki).
+function notifyParentModalState(open) {
+  try {
+    if (window.parent && window.parent !== window && typeof window.parent.setAnkiModalDimmed === 'function') {
+      window.parent.setAnkiModalDimmed(open);
+    }
+  } catch (e) { /* se ignora si se abre suelta, fuera del iframe */ }
 }
 
 // ---------------------------------------------------------------------
@@ -3523,7 +3537,12 @@ function relativeLuminance(hex) {
 
 /** Genera la paleta completa de variables CSS de Ankjimi a partir de un color base. */
 function generatePaletteFromColor(baseColor, isDark) {
-  const paper       = isDark ? shade(baseColor, 12, 0.55) : shade(baseColor, 100, 0);
+  // El fondo de página lleva un toque del color base (igual que --bg-color
+  // en index.html); las tarjetas/superficies elevadas sí quedan en blanco
+  // puro. Antes aquí el fondo también era blanco puro en temas claros, por
+  // lo que la app de Anki se veía "más blanca" que el resto de la app con
+  // el mismo tema (p. ej. rosa pastel) en vez de heredar su tono.
+  const paper       = isDark ? shade(baseColor, 12, 0.55) : shade(baseColor, 97, 0.35);
   const paperRaised = isDark ? shade(baseColor, 15, 0.5)  : shade(baseColor, 100, 0);
   const bgSecondary = isDark ? shade(baseColor, 17, 0.5)  : shade(baseColor, 96, 0.4);
   const line        = isDark ? shade(baseColor, 30, 0.4)  : shade(baseColor, 88, 0.4);
