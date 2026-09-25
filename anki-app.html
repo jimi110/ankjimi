@@ -22,6 +22,7 @@
    ========================================================= */
 :root {
   --paper: #ffffff;
+  --paper-rgb: 255, 255, 255;
   --paper-raised: #ffffff;
   --bg-secondary: #f7f9fa;
   --ink: #3c3c3c;
@@ -61,6 +62,7 @@
 html.theme-dark,
 body.theme-dark {
   --paper: #131f24;
+  --paper-rgb: 19, 31, 36;
   --paper-raised: #18252b;
   --bg-secondary: #202f36;
   --ink: #ffffff;
@@ -130,6 +132,7 @@ body {
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
+  position: relative;
 }
 #app.study-active #views {
   flex: 1;
@@ -141,14 +144,65 @@ body {
   height: 100%;
 }
 #app.study-active #view-study.view.active {
-  display: flex;
-  flex-direction: column;
+  position: relative;
   height: 100%;
-  padding: 14px 16px 0;
+  padding: 0;
 }
+
+/* La cabecera (← Salir + "Estudiando") y el contador "X restantes" forman
+   un único bloque de cristal esmerilado continuo (misma opacidad y blur
+   en los dos, sin costura entre ellos), en vez de un cuadrado blanco
+   opaco. Solo el borde final (pegado a la tarjeta) se desvanece. */
+#app.study-active .topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: rgba(var(--paper-rgb), 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+#app.study-active #view-study .study-progress {
+  position: relative;
+  z-index: 15;
+  margin: 0;
+  margin-top: var(--study-top-h, 90px);
+  padding: 8px 16px 16px;
+  background: rgba(var(--paper-rgb), 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+/* Franja decorativa pegada justo debajo del contador: aquí sí se
+   desvanece de opaco a transparente, sin tocar el texto/botón reales
+   (que quedan siempre 100% legibles arriba, en la barra sólida). */
+#app.study-active #view-study .study-progress::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 30px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(var(--paper-rgb), 0.82), rgba(var(--paper-rgb), 0));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent);
+          mask-image: linear-gradient(to bottom, #000, transparent);
+}
+
+/* La tarjeta ocupa ahora todo el alto disponible (de borde a borde), por
+   detrás de la cabecera y de los botones de abajo, para que al hacer
+   scroll el texto se vea asomar difuminado tras el cristal en vez de
+   quedar oculto de golpe. */
 #app.study-active #view-study .card-area {
-  flex: 1;
-  min-height: 0;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  padding: 0 16px;
+  padding-top: var(--study-header-h, 150px);
+  padding-bottom: var(--study-bottom-h, 150px);
   overflow-y: auto;
   /* Oculta la barra de scroll visualmente sin quitar el scroll en sí
      (queda disponible con rueda/gesto de arrastre, más limpio visualmente
@@ -157,12 +211,35 @@ body {
   -ms-overflow-style: none;
 }
 #app.study-active #view-study .card-area::-webkit-scrollbar { display: none; }
-#app.study-active #view-study .study-progress {
-  flex-shrink: 0;
-}
+
+/* Los botones "Otra vez"/"Bien" flotan igual, pegados abajo, con el mismo
+   cristal esmerilado, siempre 100% opacos/legibles; el desvanecido va en
+   una franja decorativa pegada justo encima, no en los botones. */
 #app.study-active #view-study .study-controls {
-  flex-shrink: 0;
-  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  margin-top: 0;
+  padding: 24px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+  background: rgba(var(--paper-rgb), 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+#app.study-active #view-study .study-controls::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 30px;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(var(--paper-rgb), 0.82), rgba(var(--paper-rgb), 0));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  -webkit-mask-image: linear-gradient(to top, #000, transparent);
+          mask-image: linear-gradient(to top, #000, transparent);
 }
 
 /* Modos de tamaño de la app, elegibles en Ajustes. "Auto" usa un ancho
@@ -2486,6 +2563,7 @@ function showView(viewId, opts = {}) {
   // para que los botones "Otra vez"/"Bien" queden siempre visibles abajo en
   // vez de cortados; el resto de vistas siguen con scroll de página normal.
   document.getElementById('app').classList.toggle('study-active', viewId === 'view-study');
+  if (viewId === 'view-study') requestAnimationFrame(syncStudyOverlayHeights);
   // Avisa a la app principal para que oculte su menú inferior mientras se
   // está estudiando un mazo (más espacio y sin un menú de fondo que no
   // sirve de nada durante la sesión); se restaura solo al salir de esta vista.
@@ -2518,6 +2596,36 @@ function goBack() {
     if (prev === 'view-deck-detail') refreshDeckDetail();
   }
 }
+
+// ---------------------------------------------------------------------
+// Cabecera y pie de la vista de estudio: cristal esmerilado (blur) que
+// flota sobre la tarjeta. Medimos su alto real (varía por dispositivo,
+// safe-area, y según si se muestran los botones "Otra vez"/"Bien") y lo
+// exponemos como variables CSS para que la tarjeta reserve el hueco justo
+// y el difuminado quede siempre bien encajado, sin huecos ni solapes.
+function syncStudyOverlayHeights() {
+  const app = document.getElementById('app');
+  if (!app.classList.contains('study-active')) return;
+  const topbarEl = document.querySelector('.topbar');
+  const progressEl = document.querySelector('#view-study .study-progress');
+  const controlsEl = document.querySelector('#view-study .study-controls');
+  if (!topbarEl || !progressEl || !controlsEl) return;
+  const topH = topbarEl.offsetHeight;
+  const headerH = topH + progressEl.offsetHeight + 30;
+  const bottomH = controlsEl.offsetHeight + 30;
+  if (topH) app.style.setProperty('--study-top-h', topH + 'px');
+  if (headerH) app.style.setProperty('--study-header-h', headerH + 'px');
+  if (bottomH) app.style.setProperty('--study-bottom-h', bottomH + 'px');
+}
+
+if (typeof ResizeObserver !== 'undefined') {
+  const studyOverlayObserver = new ResizeObserver(() => syncStudyOverlayHeights());
+  ['.topbar', '#view-study .study-progress', '#view-study .study-controls'].forEach((sel) => {
+    const el = document.querySelector(sel);
+    if (el) studyOverlayObserver.observe(el);
+  });
+}
+window.addEventListener('resize', syncStudyOverlayHeights);
 
 document.getElementById('btn-back').addEventListener('click', async () => {
   if (document.getElementById('view-study').classList.contains('active') && state.studyQueue.length > 0) {
