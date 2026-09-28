@@ -1223,8 +1223,7 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
  * y devuelve una nueva versión actualizada. Esto permite testear y
  * modificar el algoritmo de forma aislada.
  *
- * Soporta las 4 respuestas clásicas de Anki: 'again' (otra vez), 'hard'
- * (difícil), 'good' (bien) y 'easy' (fácil).
+ * Solo soporta dos respuestas: 'again' (otra vez) y 'good' (bien).
  *
  * MODELO DE TARJETA (campos relevantes para el SRS):
  * {
@@ -1243,22 +1242,24 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
  */
 
 const SRS_DEFAULT_CONFIG = Object.freeze({
-  learningStepsMinutes: [1, 10],
-  relearningStepsMinutes: [10],
+  learningStepsMinutes: [1, 10],      // Nueva: Otra vez → 1 min, Bien → 10 min, Bien → gradúa
+  relearningStepsMinutes: [10],       // Review + Otra vez → 10 min y vuelve a review
   graduatingIntervalDays: 1,
-  easyIntervalDays: 4,
   startingEase: 2500,
-  easeBonusGood: 0,
-  easeBonusEasy: 150,
-  easePenaltyHard: 150,
-  easePenaltyAgain: 200,
+  easeBonusGood: 15,                  // pequeña deriva al alza por cada Bien en review
+  easePenaltyAgain: 200,              // penalización por lapso
   minEase: 1300,
-  hardIntervalMultiplier: 1.2,
-  easyBonusMultiplier: 1.3,
+  maxEase: 3000,
+  minGrowthFactor: 1.2,               // el intervalo nunca crece menos que esto
+  lapseIntervalMultiplier: 0.4,       // al recuperarse de un lapso conserva el 40% del intervalo previo
+  maxLateBonusRatio: 1,               // el retraso solo puede añadir hasta 1× el intervalo (a razón de 1/2 por día tarde)
+  fuzzMinDays: 7,                     // fuzz solo en intervalos largos
   fuzzRatio: 0.05,
   leechThreshold: 8,
   maxIntervalDays: 365 * 2,
 });
+
+const SRS_DAY_MIN = 24 * 60;
 
 function nowMs() {
   return Date.now();
@@ -1268,11 +1269,49 @@ function minutesToMs(min) {
   return min * 60 * 1000;
 }
 
+/** Inicio (00:00 local) del día que queda `days` días después de `fromMs`. */
+function startOfDayAfterDays(fromMs, days) {
+  const d = new Date(fromMs);
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() + Math.max(0, Math.round(days)));
+  return d.getTime();
+}
+
+function srsNum(value, fallback) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : fallback;
+}
+
+/**
+ * Fuzz seguro: solo para intervalos largos, en días enteros, nunca < 1 día
+ * ni > maxIntervalDays. fuzzRatio = 0 desactiva la variación (usado en preview).
+ */
 function applyFuzz(intervalMinutes, config) {
-  if (intervalMinutes < 24 * 60) return intervalMinutes;
-  const fuzz = intervalMinutes * config.fuzzRatio;
-  const delta = (Math.random() * 2 - 1) * fuzz;
-  return Math.max(1, Math.round(intervalMinutes + delta));
+  const maxMin = config.maxIntervalDays * SRS_DAY_MIN;
+  const base = Math.min(Math.max(srsNum(intervalMinutes, 0), 0), maxMin);
+  if (base < config.fuzzMinDays * SRS_DAY_MIN || !(config.fuzzRatio > 0)) return Math.round(base);
+  const days = base / SRS_DAY_MIN;
+  const delta = (Math.random() * 2 - 1) * days * config.fuzzRatio;
+  const fuzzedDays = Math.min(config.maxIntervalDays, Math.max(1, Math.round(days + delta)));
+  return fuzzedDays * SRS_DAY_MIN;
+}
+
+/** Normaliza campos SRS de tarjetas antiguas/corruptas sin borrar historial. */
+function sanitizeSrsCard(card, config, now) {
+  const c = { ...card };
+  const validStates = ['new', 'learning', 'review', 'relearning'];
+  if (!validStates.includes(c.state)) c.state = (srsNum(c.intervalMinutes, 0) >= SRS_DAY_MIN ? 'review' : 'new');
+  let ease = srsNum(c.easeFactor, config.startingEase);
+  if (ease > 0 && ease < 100) ease *= 1000; // por si algún valor antiguo estaba en escala 2.5
+  c.easeFactor = Math.min(config.maxEase, Math.max(config.minEase, Math.round(ease)));
+  c.intervalMinutes = Math.min(Math.max(srsNum(c.intervalMinutes, 0), 0), config.maxIntervalDays * SRS_DAY_MIN);
+  c.learningStep = Math.max(0, Math.floor(srsNum(c.learningStep, 0)));
+  for (const k of ['reps', 'lapses', 'correctCount', 'wrongCount']) {
+    c[k] = Math.max(0, Math.floor(srsNum(c[k], 0)));
+  }
+  c.due = srsNum(c.due, now);
+  if (c.lapseIntervalMinutes != null) c.lapseIntervalMinutes = Math.max(0, srsNum(c.lapseIntervalMinutes, 0));
+  return c;
 }
 
 function createNewCardState() {
@@ -1296,13 +1335,16 @@ function createNewCardState() {
 }
 
 /**
+ * Programa el siguiente repaso. Solo existen dos respuestas: 'again' y 'good'.
  * @param {object} card
- * @param {'again'|'hard'|'good'|'easy'} answer
+ * @param {'again'|'good'} answer
  * @param {object} [config]
  */
 function scheduleNextReview(card, answer, config = SRS_DEFAULT_CONFIG) {
   const now = nowMs();
-  const next = { ...card, lastReview: now };
+  const next = sanitizeSrsCard(card, config, now);
+  if (answer !== 'again' && answer !== 'good') return next; // respuesta no válida: sin cambios
+  next.lastReview = now;
 
   // Las tarjetas importadas que nunca se han estudiado en Ankジミー
   // comienzan como nuevas aunque Anki las tuviera en review.
@@ -1318,136 +1360,121 @@ function scheduleNextReview(card, answer, config = SRS_DEFAULT_CONFIG) {
     next.easeFactor = config.startingEase;
   }
 
-  if (answer === 'again') {
-    next.wrongCount += 1;
-  } else {
-    next.correctCount += 1;
-  }
+  if (answer === 'again') next.wrongCount += 1;
+  else next.correctCount += 1;
 
+  const setShortStep = (stepMin) => {
+    next.intervalMinutes = stepMin;
+    next.due = now + minutesToMs(stepMin);
+  };
+  const graduate = (intervalMin) => {
+    const maxMin = config.maxIntervalDays * SRS_DAY_MIN;
+    const min = Math.min(maxMin, Math.max(SRS_DAY_MIN, Math.round(intervalMin)));
+    next.state = 'review';
+    next.queue = 'review';
+    next.learningStep = 0;
+    next.intervalMinutes = min;
+    // Revisiones de días: vencen al empezar ese día (como Anki), no a la hora exacta.
+    next.due = startOfDayAfterDays(now, min / SRS_DAY_MIN);
+  };
+
+  // ---------- NEW / LEARNING ----------
   if (next.state === 'new' || next.state === 'learning') {
     next.state = 'learning';
     next.queue = 'learning';
+    const steps = config.learningStepsMinutes;
 
     if (answer === 'again') {
       next.learningStep = 0;
-      const stepMin = config.learningStepsMinutes[0];
-      next.intervalMinutes = stepMin;
-      next.due = now + minutesToMs(stepMin);
+      setShortStep(steps[0]);
       return next;
     }
-
-    if (answer === 'easy') {
-      next.state = 'review';
-      next.queue = 'review';
-      next.learningStep = 0;
-      next.reps += 1;
-      const easyMin = config.easyIntervalDays * 24 * 60;
-      next.intervalMinutes = applyFuzz(easyMin, config);
-      next.due = now + minutesToMs(next.intervalMinutes);
+    const idx = next.learningStep + 1;
+    if (idx < steps.length) {
+      next.learningStep = idx;
+      setShortStep(steps[idx]);
       return next;
     }
-
-    const steps = config.learningStepsMinutes;
-    const nextStepIndex = answer === 'hard' ? next.learningStep : next.learningStep + 1;
-
-    if (nextStepIndex < steps.length) {
-      next.learningStep = nextStepIndex;
-      const stepMin = steps[nextStepIndex];
-      next.intervalMinutes = stepMin;
-      next.due = now + minutesToMs(stepMin);
-      return next;
-    }
-
-    next.state = 'review';
-    next.queue = 'review';
-    next.learningStep = 0;
     next.reps += 1;
-    const graduatingMin = config.graduatingIntervalDays * 24 * 60;
-    next.intervalMinutes = applyFuzz(graduatingMin, config);
-    next.due = now + minutesToMs(next.intervalMinutes);
+    graduate(applyFuzz(config.graduatingIntervalDays * SRS_DAY_MIN, config));
     return next;
   }
 
+  // ---------- RELEARNING ----------
   if (next.state === 'relearning') {
     next.queue = 'learning';
-
-    if (answer === 'again') {
-      next.learningStep = 0;
-      const stepMin = config.relearningStepsMinutes[0];
-      next.intervalMinutes = stepMin;
-      next.due = now + minutesToMs(stepMin);
-      return next;
-    }
-
     const steps = config.relearningStepsMinutes;
-    const nextStepIndex = answer === 'hard' ? next.learningStep : next.learningStep + 1;
-    if (nextStepIndex < steps.length) {
-      next.learningStep = nextStepIndex;
-      const stepMin = steps[nextStepIndex];
-      next.intervalMinutes = stepMin;
-      next.due = now + minutesToMs(stepMin);
-      return next;
-    }
-
-    next.state = 'review';
-    next.queue = 'review';
-    next.learningStep = 0;
-    const minDays = 1;
-    next.intervalMinutes = applyFuzz(minDays * 24 * 60, config);
-    next.due = now + minutesToMs(next.intervalMinutes);
-    return next;
-  }
-
-  if (next.state === 'review') {
-    const currentDays = Math.max(1, next.intervalMinutes / (24 * 60));
 
     if (answer === 'again') {
-      next.lapses += 1;
-      next.easeFactor = Math.max(config.minEase, next.easeFactor - config.easePenaltyAgain);
-      next.state = 'relearning';
-      next.queue = 'learning';
       next.learningStep = 0;
-      const stepMin = config.relearningStepsMinutes[0];
-      next.intervalMinutes = stepMin;
-      next.due = now + minutesToMs(stepMin);
-      next.isLeech = next.lapses > 0 && next.lapses % config.leechThreshold === 0;
+      setShortStep(steps[0]);
       return next;
     }
-
-    if (answer === 'hard') {
-      next.reps += 1;
-      next.easeFactor = Math.max(config.minEase, next.easeFactor - config.easePenaltyHard);
-      let newDays = currentDays * config.hardIntervalMultiplier;
-      newDays = Math.min(newDays, config.maxIntervalDays);
-      next.intervalMinutes = applyFuzz(Math.round(newDays * 24 * 60), config);
-      next.due = now + minutesToMs(next.intervalMinutes);
+    const idx = next.learningStep + 1;
+    if (idx < steps.length) {
+      next.learningStep = idx;
+      setShortStep(steps[idx]);
       return next;
     }
-
-    if (answer === 'easy') {
-      next.reps += 1;
-      next.easeFactor = Math.min(4000, next.easeFactor + config.easeBonusEasy);
-      let newDays = currentDays * (next.easeFactor / 1000) * config.easyBonusMultiplier;
-      newDays = Math.min(newDays, config.maxIntervalDays);
-      next.intervalMinutes = applyFuzz(Math.round(newDays * 24 * 60), config);
-      next.due = now + minutesToMs(next.intervalMinutes);
-      return next;
-    }
-
+    // Recuperada: vuelve a review conservando parte del intervalo previo al lapso.
     next.reps += 1;
-    next.easeFactor = Math.min(4000, next.easeFactor + config.easeBonusGood);
-    let newDays = currentDays * (next.easeFactor / 1000);
-    newDays = Math.min(newDays, config.maxIntervalDays);
-    next.intervalMinutes = applyFuzz(Math.round(newDays * 24 * 60), config);
-    next.due = now + minutesToMs(next.intervalMinutes);
+    const prevDays = srsNum(next.lapseIntervalMinutes, 0) / SRS_DAY_MIN;
+    const days = Math.max(1, Math.round(prevDays * config.lapseIntervalMultiplier));
+    graduate(applyFuzz(days * SRS_DAY_MIN, config));
     return next;
   }
 
+  // ---------- REVIEW ----------
+  const currentDays = Math.max(1, next.intervalMinutes / SRS_DAY_MIN);
+
+  if (answer === 'again') {
+    next.lapses += 1;
+    next.lapseIntervalMinutes = next.intervalMinutes; // recordamos el intervalo previo al fallo
+    next.easeFactor = Math.max(config.minEase, next.easeFactor - config.easePenaltyAgain);
+    next.state = 'relearning';
+    next.queue = 'learning';
+    next.learningStep = 0;
+    setShortStep(config.relearningStepsMinutes[0]);
+    next.isLeech = next.lapses > 0 && next.lapses % config.leechThreshold === 0;
+    return next;
+  }
+
+  // Bien en review: el retraso aporta como mucho +50%/día tarde hasta 1× el intervalo.
+  const daysLate = Math.max(0, (now - srsNum(card.due, now)) / (SRS_DAY_MIN * 60 * 1000));
+  const lateBonus = Math.min(daysLate / 2, currentDays * config.maxLateBonusRatio);
+
+  next.easeFactor = Math.min(config.maxEase, next.easeFactor + config.easeBonusGood);
+  next.reps += 1;
+
+  // Historial: la proporción de lapsos frena el crecimiento.
+  const lapseRatio = next.lapses / Math.max(1, next.reps + next.lapses);
+  const historyMod = Math.max(0.7, 1 - 0.6 * lapseRatio);
+  const factor = Math.max(config.minGrowthFactor, (next.easeFactor / 1000) * historyMod);
+
+  let newDays = (currentDays + lateBonus) * factor;
+  newDays = Math.max(newDays, currentDays + 1);          // siempre crece
+  newDays = Math.min(newDays, config.maxIntervalDays);
+  let newMin = applyFuzz(Math.round(newDays) * SRS_DAY_MIN, config);
+  newMin = Math.max(newMin, Math.min(config.maxIntervalDays, Math.floor(currentDays) + 1) * SRS_DAY_MIN);
+  next.state = 'review';
+  next.queue = 'review';
+  next.learningStep = 0;
+  next.intervalMinutes = newMin;
+  next.due = startOfDayAfterDays(now, newMin / SRS_DAY_MIN);
   return next;
 }
 
 function isCardDue(card, atMs = nowMs()) {
-  return card.due <= atMs;
+  let due = Number(card.due);
+  if (!Number.isFinite(due)) return true;
+  // Las revisiones de días vencen desde el inicio de su día (también las
+  // guardadas antes con hora exacta), para que salgan por la mañana.
+  if (card.state === 'review' && Number(card.intervalMinutes) >= SRS_DAY_MIN) {
+    const d = new Date(due);
+    d.setHours(0, 0, 0, 0);
+    due = d.getTime();
+  }
+  return due <= atMs;
 }
 
 function formatInterval(minutes) {
@@ -2679,11 +2706,19 @@ async function ensureDailyRelease(deck) {
     const cards = await window.DB.getCardsByDeck(deck.id);
     const stillNew = cards.filter((c) => c.state === 'new').length;
 
-    // Nuevo día: se añaden 10 (o el límite configurado) al saldo anterior.
-    // Ejemplo: quedaron 4 ayer -> hoy pasan a ser 14.
+    // Nuevo día: se añaden 10 (o el límite configurado) al saldo anterior por
+    // CADA día transcurrido (aunque no se abriera la app), hasta el tope.
+    // Ejemplo: quedaron 5 ayer -> hoy pasan a ser 15.
+    let daysElapsed = 1;
+    if (deck.lastReleaseDate) {
+      const [y1, m1, d1] = String(deck.lastReleaseDate).split('-').map(Number);
+      const [y2, m2, d2] = today.split('-').map(Number);
+      const diff = Math.round((Date.UTC(y2, m2 - 1, d2) - Date.UTC(y1, m1 - 1, d1)) / 86400000);
+      if (Number.isFinite(diff)) daysElapsed = Math.max(1, diff);
+    }
     deck.newReleasedTotal = Math.min(
       maxAccumulated,
-      Math.max(0, orDefault(deck.newReleasedTotal, 0)) + currentPerDay,
+      Math.max(0, orDefault(deck.newReleasedTotal, 0)) + currentPerDay * daysElapsed,
       stillNew
     );
     deck.lastReleaseDate = today;
@@ -2773,7 +2808,7 @@ async function refreshDeckList() {
     // la sesión de hoy, mostramos lo disponible para empezar. Después de
     // terminarla, queda en 0 hasta el siguiente día.
     const finishedToday = deck.studySessionFinishedDate === todayKey();
-    const pending = deck.studySessionActive && savedQueue.length > 0
+    const pending = hasLiveSession(deck)
       ? savedQueue.length
       : (finishedToday ? 0 : counts.pendingPreview);
 
@@ -2905,9 +2940,7 @@ async function refreshDeckDetail() {
 
   // Si hay una sesión empezada, "Pendientes" es exactamente lo que queda
   // en esa sesión y se conserva incluso aunque el usuario salga del mazo.
-  const hasSavedSession = deck.studySessionActive &&
-    Array.isArray(deck.studySessionQueue) &&
-    deck.studySessionQueue.length > 0;
+  const hasSavedSession = hasLiveSession(deck);
 
   // Si hay una sesión abierta, "Pendientes" es exactamente lo que queda.
   // Si hoy ya se terminó, queda en 0. Si aún no se ha empezado hoy,
@@ -3061,13 +3094,20 @@ async function persistStudySessionQueue(queue) {
 
   deck.studySessionQueue = queue.map((item) => item.card.id);
   deck.studySessionActive = queue.length > 0;
+  deck.studySessionDate = todayKey();
   await window.DB.updateDeck(deck);
+}
+
+/** Una sesión guardada solo es válida el mismo día en que se creó. */
+function hasLiveSession(deck) {
+  return !!deck && deck.studySessionActive === true &&
+    Array.isArray(deck.studySessionQueue) && deck.studySessionQueue.length > 0 &&
+    deck.studySessionDate === todayKey();
 }
 
 /** Recupera una sesión guardada usando los IDs persistidos en el mazo. */
 async function restoreStudySession(deck) {
-  if (!deck || !deck.studySessionActive || !Array.isArray(deck.studySessionQueue)) return null;
-  if (deck.studySessionQueue.length === 0) return null;
+  if (!hasLiveSession(deck)) return null;
 
   const cards = await window.DB.getCardsByDeck(deck.id);
   const cardById = new Map(cards.map((card) => [card.id, card]));
@@ -3129,6 +3169,7 @@ async function startStudySession() {
 
     if (queue.length > 0) {
       deck.studySessionActive = true;
+      deck.studySessionDate = todayKey();
       deck.studySessionQueue = queue.map((item) => item.card.id);
       await window.DB.updateDeck(deck);
     }
@@ -3211,10 +3252,36 @@ async function renderCardField(rawHtml) {
  * que el audio termina de sonar (o falla), para poder encadenar reproducciones
  * en secuencia sin que se solapen.
  */
+let _currentAudio = null;
+let _audioResolve = null;
+let _audioToken = 0;
+
+/** Para el audio que esté sonando y libera a quien lo esperaba. */
+function _stopCurrentAudio() {
+  if (_currentAudio) {
+    try { _currentAudio.pause(); _currentAudio.currentTime = 0; } catch (e) { /* ignorar */ }
+    _currentAudio = null;
+  }
+  if (_audioResolve) {
+    const r = _audioResolve;
+    _audioResolve = null;
+    r();
+  }
+}
+
+/** Para todo el audio y cancela cualquier secuencia pendiente (palabra → frase). */
+function stopAllAudio() {
+  _audioToken++;
+  _stopCurrentAudio();
+}
+
 async function playAudioFile(fileName, waitForEnd = false) {
+  const tokenAtStart = _audioToken;
   const url = await resolveMediaUrl(fileName);
-  if (!url) return;
+  if (!url || tokenAtStart !== _audioToken) return;
+  _stopCurrentAudio(); // nunca dos audios a la vez
   const audio = new Audio(url);
+  _currentAudio = audio;
 
   if (!waitForEnd) {
     audio.play().catch(() => {
@@ -3226,7 +3293,11 @@ async function playAudioFile(fileName, waitForEnd = false) {
   }
 
   await new Promise((resolve) => {
-    const done = () => resolve();
+    _audioResolve = resolve;
+    const done = () => {
+      if (_audioResolve === resolve) _audioResolve = null;
+      resolve();
+    };
     audio.addEventListener('ended', done, { once: true });
     audio.addEventListener('error', done, { once: true });
     audio.play().catch(done);
@@ -3238,6 +3309,7 @@ function wireAudioButtons(container) {
   container.querySelectorAll('.audio-btn[data-audio]').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
+      stopAllAudio();
       playAudioFile(btn.getAttribute('data-audio'));
     });
   });
@@ -3265,16 +3337,22 @@ async function playRevealSequence(frontEl) {
   const wordBtn = audioButtons[0] || null;
   const sentenceBtn = audioButtons[1] || null;
 
+  stopAllAudio();
+  const myToken = _audioToken;
+
   if (wordBtn) {
     await playAudioFile(wordBtn.getAttribute('data-audio'), true);
   }
+  if (myToken !== _audioToken) return;
   await wait(500);
+  if (myToken !== _audioToken) return;
   if (sentenceBtn) {
     await playAudioFile(sentenceBtn.getAttribute('data-audio'), true);
   }
 }
 
 async function showNextCard() {
+  stopAllAudio();
   document.getElementById('answer-buttons').classList.add('hidden');
   document.getElementById('btn-show-answer').classList.remove('hidden');
   document.getElementById('card-back').classList.add('hidden');
@@ -3304,18 +3382,13 @@ async function showNextCard() {
     await persistStudySessionQueue(state.studyQueue);
   }
 
-  // Precalcular las etiquetas de los 2 botones con el intervalo estimado.
-  const previewCard = (card.importedFromAnki && card.lastReview == null)
-    ? { ...card, state: 'new', queue: 'new', intervalMinutes: 0, learningStep: 0 }
-    : card;
-
+  // Precalcular las etiquetas de los 2 botones con el MISMO algoritmo que se
+  // guarda al responder (sin fuzz para que la etiqueta sea estable).
+  const previewConfig = { ...window.SRS.DEFAULT_CONFIG, fuzzRatio: 0 };
   for (const answer of ['again', 'good']) {
-    const preview = window.SRS.scheduleNextReview(previewCard, answer);
-    const previewMinutes = previewCard.state === 'new'
-      ? (answer === 'again' ? 1 : 10)
-      : preview.intervalMinutes;
+    const preview = window.SRS.scheduleNextReview(card, answer, previewConfig);
     document.getElementById(answer + '-eta').textContent =
-      window.SRS.formatInterval(previewMinutes);
+      window.SRS.formatInterval(preview.intervalMinutes);
   }
 
   // El frente ya no suena solo al mostrarse la tarjeta; el audio empieza al
@@ -3352,6 +3425,7 @@ async function consumeNewDailyQuota(card) {
 }
 
 async function answerCurrentCard(answer) {
+  stopAllAudio();
   const item = state.studyQueue.shift();
   if (!item) return;
   const { card } = item;
