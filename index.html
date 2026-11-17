@@ -5374,6 +5374,17 @@
             if (t === 'auto') t = systemPrefersDark() ? 'dark' : 'light';
             const color = prefs.customThemeColor || '#1cb0f6';
             w.eval(`prefs.theme=${JSON.stringify(t)};prefs.customThemeColor=${JSON.stringify(color)};applyPrefs();`);
+            // Sentido contrario: si se cambia la apariencia dentro del recorrido, se aplica también a la app.
+            if (!w.__themeHooked) {
+                w.__themeHooked = true;
+                const orig = w.setPref;
+                w.setPref = function (k, v) {
+                    orig.apply(this, arguments);
+                    if (k !== 'theme') return;
+                    if (v === 'custom') setCustomThemeColor(w.eval('prefs.customThemeColor'));
+                    else setPref('theme', v);
+                };
+            }
         } catch (e) {}
     }
     function closeRecorrido() {
