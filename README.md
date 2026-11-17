@@ -1,7 +1,7 @@
 # Ankジミー (Ankjimi)
 Mi propia app para aprender japones, disfutala es gratis.
 
-### RECOMIENDO LEER EL RECORRIDO POR VERSIONES
+### [RECOMIENDO LEER EL RECORRIDO POR VERSIONES](https://jimi110.github.io/ankjimi/recorrido.html)
 
 Apartados disponibles:
 
