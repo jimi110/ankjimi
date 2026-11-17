@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ankジミー · Recorrido por versiones</title>
+<style>
+
+        /* --- VARIABLES GLOBALES (TEMA CLARO POR DEFECTO) --- */
+        :root {
+            --bg-color: #ffffff;
+            --bg-secondary: #f7f9fa;
+            --text-main: #3c3c3c;
+            --text-muted: #777777;
+            --primary: #1cb0f6;
+            --primary-hover: #1899d6;
+            --primary-shadow: #1899d6;
+            --correct: #58cc02;
+            --correct-bg: #d7ffb8;
+            --wrong: #ff4b4b;
+            --wrong-bg: #ffdfe0;
+            --border: #e5e5e5;
+            --shadow: 0 4px 0 rgba(229, 229, 229, 1);
+            --shadow-active: 0 0 0 rgba(229, 229, 229, 1);
+            --card-bg: #ffffff;
+            --ruby-color: #1cb0f6;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition: all 0.2s ease;
+        }
+
+        /* --- TEMA OSCURO --- */
+        body.dark-theme {
+            --bg-color: #131f24;
+            --bg-secondary: #202f36;
+            --text-main: #ffffff;
+            --text-muted: #afafaf;
+            --primary: #1cb0f6;
+            --primary-shadow: #1899d6;
+            --correct: #58cc02;
+            --correct-bg: #1a3300;
+            --wrong: #ff4b4b;
+            --wrong-bg: #3a1111;
+            --border: #37464f;
+            --shadow: 0 4px 0 #182b33;
+            --shadow-active: 0 0 0 #182b33;
+            --card-bg: #18252b;
+            --ruby-color: #1cb0f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            overflow-y: scroll;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* <html> no hereda las variables que redefine body.dark-theme (no es
+           descendiente suyo), así que sin esto se quedaba siempre blanco en
+           los márgenes/rebote de scroll aunque el resto de la app fuera oscura. */
+        html {
+            background-color: var(--bg-color);
+            transition: background-color 0.3s;
+        }
+        html:has(body.dark-theme) {
+            background-color: #131f24;
+        }
+
+        /* --- CONTENEDOR PRINCIPAL Y LAYOUTS --- */
+        #app {
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-color);
+            position: relative;
+            transition: max-width 0.3s ease;
+        }
+
+        /* Modos de diseño */
+        #app.layout-mobile { max-width: 480px; }
+        #app.layout-pc { max-width: 900px; }
+        #app.layout-auto { max-width: 900px; } /* Auto usa max-width grande y se ajusta con media queries */
+
+        .screen {
+            display: none;
+            padding: 24px;
+            padding-bottom: 90px; /* espacio para el menú inferior fijo */
+            flex-direction: column;
+            flex-grow: 1;
+            animation: fadeIn 0.3s ease;
+        }
+        .screen.active { display: flex; }
+
+        #screen-anki.active {
+            padding: 0;
+            padding-bottom: 0;
+            height: calc(100vh - 90px);
+            height: calc(100dvh - 90px);
+        }
+        #screen-anki #anki-iframe { flex-grow: 1; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- TIPOGRAFÍA --- */
+        h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; text-align: center; }
+        h2 { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+        p.subtitle { color: var(--text-muted); font-size: 15px; text-align: center; margin-bottom: 24px; }
+
+        /* --- TÍTULO DE LA APP (pantalla inicial) --- */
+        .app-title-kanji {
+            font-family: var(--font-family);
+            font-weight: 800;
+            font-size: 52px;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        .app-title-kanji:hover {
+            transform: scale(0.96) translateY(2px);
+        }
+        .app-title-kanji.kanji-bounce {
+            animation: kanjiBounce 0.4s cubic-bezier(.4,0,.2,1);
+        }
+        @keyframes kanjiBounce {
+            0%   { transform: scale(0.9) translateY(3px); }
+            50%  { transform: scale(1.08) translateY(-4px); }
+            75%  { transform: scale(0.98) translateY(1px); }
+            100% { transform: scale(1) translateY(0); }
+        }
+        .app-title-subtitle {
+            font-family: var(--font-family);
+            font-weight: 700;
+            font-size: 17px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 56px;
+        }
+        
+        /* --- FURIGANA (Hiragana sobre Kanji) --- */
+        ruby { ruby-align: center; }
+        rt { font-size: 0.55em; color: var(--ruby-color); font-weight: 600; user-select: none; line-height: 1; transform: translateY(-2px); }
+
+        /* --- CONTROLES SUPERIORES (Settings) --- */
+        .settings-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .segmented-control {
+            display: flex;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            padding: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .seg-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .seg-btn:hover { color: var(--text-main); }
+        .seg-btn.active {
+            background: var(--card-bg);
+            color: var(--text-main);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* --- Selección de grupos de kana para el test (chips multi-selección) --- */
+        .kana-group-toggle-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 16px; }
+        .kana-group-chip {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .kana-group-chip.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+        /* --- GRÁFICO DE PALABRAS PRACTICADAS POR DÍA --- */
+        .practice-chart-scroll {
+            overflow-x: auto;
+            overflow-y: visible;
+            padding-top: 26px;
+            margin-top: -26px;
+        }
+        .practice-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 140px;
+            padding: 8px 4px 0;
+            border-bottom: 1px solid var(--border);
+            min-width: 100%;
+        }
+        .practice-chart.dense { min-width: max-content; }
+        .practice-chart-bar-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+            min-width: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+        .practice-chart-tooltip {
+            position: absolute;
+            top: -26px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            background: var(--text-main);
+            color: var(--bg-color);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 7px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            z-index: 5;
+        }
+        .practice-chart-tooltip.visible {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        .practice-chart-bar {
+            width: 100%;
+            max-width: 18px;
+            background: var(--primary);
+            border-radius: 3px 3px 0 0;
+            transition: var(--transition);
+        }
+        .practice-chart-labels {
+            display: flex;
+            gap: 4px;
+            padding: 6px 4px 0;
+            min-width: 100%;
+        }
+        .practice-chart-labels.dense { min-width: max-content; }
+        .practice-chart-label {
+            flex: 1;
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            min-width: 10px;
+        }
+        .practice-chart-empty {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+            padding: 24px 0;
+        }
+
+        .header-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        /* --- BOTÓN FLOTANTE DE AJUSTES --- */
+        .settings-fab {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 1001;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            transition: var(--transition);
+        }
+        .settings-fab:hover { transform: rotate(20deg) scale(1.05); border-color: var(--primary); }
+        .settings-fab:active { transform: rotate(20deg) scale(0.95); }
+
+        /* Cuando la app de Anki (dentro del iframe) muestra su modal de
+           confirmación (copia de seguridad / borrar datos), oscurecemos
+           también el menú inferior y el botón de ajustes: ellos viven fuera
+           del iframe, así que sin esto se quedaban totalmente iluminados y
+           se veía un borde feo justo donde terminaba el recuadro de Anki. */
+        .bottom-nav.anki-modal-dimmed,
+        .settings-fab.anki-modal-dimmed {
+            filter: brightness(0.45);
+            pointer-events: none;
+            transition: filter 0.2s ease;
+        }
+        /* En layouts anchos (PC), fuera del recuadro de 900px queda el fondo
+           de <body>/<html> a la vista; sin esto se quedaba blanco a los
+           lados mientras el resto de la app se oscurecía con el modal. */
+        body.anki-modal-dimmed,
+        html:has(body.anki-modal-dimmed) {
+            background-color: #6e6e6e;
+        }
+
+        /* --- OVERLAY --- */
+        .settings-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease;
+            z-index: 1002;
+        }
+        .settings-overlay.open { opacity: 1; visibility: visible; }
+
+        /* --- PANEL DE AJUSTES --- */
+        .settings-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 340px;
+            max-width: 88vw;
+            background: var(--card-bg);
+            border-left: 1px solid var(--border);
+            box-shadow: -8px 0 24px rgba(0,0,0,0.15);
+            z-index: 1003;
+            transform: translateX(100%);
+            transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .settings-panel.open { transform: translateX(0); }
+
+        .settings-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 20px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .settings-panel-header h3 { font-size: 18px; font-weight: 700; }
+
+        .settings-close-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .settings-close-btn:hover { background: var(--wrong-bg); color: var(--wrong); border-color: var(--wrong); }
+
+        .settings-panel-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .settings-section-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .settings-section { margin-bottom: 26px; }
+        .settings-section:last-child { margin-bottom: 4px; }
+
+        .panel-seg { width: 100%; }
+        .panel-seg .seg-btn { flex: 1; text-align: center; }
+
+        .settings-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+        }
+        .settings-action-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .settings-action-btn + .settings-action-btn { margin-top: 8px; }
+        .settings-action-btn.danger:hover { border-color: var(--wrong); color: var(--wrong); background: var(--wrong-bg); }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--border);
+            background: var(--bg-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+        }
+        .theme-option:hover { border-color: var(--primary); transform: translateY(-1px); }
+        .theme-option:active { transform: translateY(0); }
+        .theme-option.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 25%, transparent);
+        }
+        .theme-option[data-theme-id="custom"] { grid-column: 1 / -1; }
+
+        .theme-swatch {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-swatch.split {
+            background: linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #1b2a3d 50%, #1b2a3d 100%);
+        }
+
+        .theme-option-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+        .theme-option-check {
+            margin-left: auto;
+            font-size: 14px;
+            color: var(--primary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .theme-option.active .theme-option-check { opacity: 1; }
+
+        .custom-color-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 14px;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+        .custom-color-row label { font-size: 13px; font-weight: 600; color: var(--text-main); }
+        .custom-color-input {
+            width: 44px;
+            height: 32px;
+            border: none;
+            border-radius: 8px;
+            padding: 0;
+            cursor: pointer;
+            background: none;
+        }
+
+        @media (max-width: 480px) {
+            .settings-panel { width: 100%; max-width: 100%; }
+            .theme-grid { grid-template-columns: 1fr 1fr; }
+            /* El botón flotante de Ajustes (fixed, top-right) queda por encima del
+               header sticky de Teoría; reservamos espacio a la derecha para que
+               el título "Teoría" no quede tapado/mezclado con el botón. */
+            .header-controls.sticky-header { padding-right: 64px; }
+        }
+
+        /* Cabecera fija: usada en pantallas con listas largas (p.ej. Teoría)
+           para que el botón de volver siga siempre visible al hacer scroll */
+        .header-controls.sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--bg-color);
+            margin: -24px -24px 20px -24px;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+        
+        .btn-back {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* --- BOTONES PRINCIPALES --- */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            padding: 16px 24px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 0 var(--primary-shadow);
+            transition: transform 0.1s, box-shadow 0.1s;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-shadow); }
+        .btn.outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        .btn.outline:active { box-shadow: var(--shadow-active); }
+
+        /* --- GRID DE TEMARIOS --- */
+        .level-section { margin-bottom: 22px; }
+        .level-section:last-child { margin-bottom: 4px; }
+        .level-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .level-header-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .level-header-title .level-header-count {
+            font-weight: 500;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-left: 6px;
+        }
+        .level-progress-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .level-progress-bar {
+            width: 64px;
+            height: 6px;
+            border-radius: 4px;
+            background: var(--border);
+            overflow: hidden;
+        }
+        .level-progress-bar-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        .level-progress-pct {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 32px;
+            text-align: right;
+        }
+        .level-empty {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        .topics-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: 1fr;
+        }
+        
+        /* Comportamiento Grid según Layout */
+        #app.layout-pc .topics-grid { grid-template-columns: repeat(2, 1fr); }
+        @media (min-width: 768px) {
+            #app.layout-auto .topics-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* El menú de niveles (portada) siempre en lista de 1 columna, ordenada,
+           aunque el resto de rejillas de temarios usen 2 columnas en PC/Auto. */
+        #app.layout-pc .levels-grid,
+        #app.layout-auto .levels-grid,
+        #app.layout-mobile .levels-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .topic-card {
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .topic-card:active { transform: translateY(4px); box-shadow: var(--shadow-active); }
+
+        .topic-icon {
+            font-size: 32px; width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--bg-secondary); border-radius: var(--radius-md);
+        }
+        .topic-info { flex-grow: 1; }
+        .topic-title { font-weight: 700; font-size: 16px; color: var(--text-main); margin-bottom: 4px; }
+        .topic-stats { font-size: 13px; color: var(--text-muted); }
+        .global-search { margin: 0 auto 28px; width: 100%; max-width: 620px; }
+        .global-search label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+        .global-search-input { width: 100%; border: 2px solid var(--border); border-radius: var(--radius-md); background: var(--card-bg); color: var(--text-main); padding: 14px 16px; font-size: 16px; outline: none; }
+        .global-search-input:focus { border-color: var(--primary); }
+        .search-results { display: none; margin-top: 12px; }
+        .search-results.visible { display: block; }
+        .search-load-more { margin-top: 8px; }
+
+        /* --- BOTÓN FLOTANTE "SUBIR ARRIBA" --- */
+        .scroll-top-btn {
+            position: fixed;
+            left: 50%;
+            /* Subido para no solaparse con el menú inferior, que ahora es
+               un poco más alto (más margen para que los iconos no queden
+               pegados al borde de la pantalla). */
+            bottom: 86px;
+            transform: translateX(-50%) translateY(16px);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: #fff;
+            border: none;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .scroll-top-btn.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+        .scroll-top-btn:active { transform: translateX(-50%) scale(0.92); }
+        /* --- MENÚ INFERIOR GLOBAL --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 15;
+            display: flex;
+            justify-content: center;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border);
+            /* Un poco de aire extra además de la safe-area: en móviles sin
+               "isla"/gesto (o donde env() resuelve a 0) los iconos quedaban
+               pegados al borde inferior de la pantalla. */
+            padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+        }
+        .bottom-nav-inner { display: flex; width: 100%; max-width: 900px; }
+        .bottom-nav-item {
+            flex: 1;
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 12px 4px 16px;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        .bottom-nav-item .bottom-nav-icon { font-size: 23px; }
+        .bottom-nav-item.active { color: var(--primary); }
+
+        /* Puntito rojo de aviso sobre "Repasar" cuando hay palabras pendientes */
+        .review-badge-dot {
+            position: absolute;
+            top: 4px;
+            right: calc(50% - 22px);
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #ff3b30;
+        }
+
+        /* Puntito rojo de aviso sobre el botón de Ajustes (⚙️) y sobre el botón
+           "Información" dentro del panel de Ajustes, para animar al usuario a
+           leer la información al menos una vez. Desaparece en cuanto se abre.
+           Mismo estilo y tamaño que .review-badge-dot. */
+        .info-badge-dot {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #ff3b30;
+        }
+        .settings-action-btn { position: relative; }
+        .settings-action-btn .info-badge-dot { top: 6px; right: 10px; }
+
+        /* --- FILAS DE PALABRAS EN "REPASAR ERRORES" --- */
+        .review-word-row {
+            display: flex; align-items: center; gap: 12px;
+            border: 2px solid var(--border); border-radius: var(--radius-md);
+            padding: 12px; background: var(--card-bg);
+        }
+        .review-word-emoji { font-size: 22px; }
+        .review-word-main { flex-grow: 1; }
+        .review-word-jp { font-weight: 700; font-size: 16px; }
+        .review-word-es { font-size: 13px; color: var(--text-muted); }
+        .review-word-badge { font-size: 12px; font-weight: 700; color: var(--wrong); background: var(--wrong-bg); padding: 4px 8px; border-radius: var(--radius-sm); white-space: nowrap; cursor: pointer; }
+        .review-word-badge:hover { background: var(--correct-bg); color: var(--correct); }
+
+        /* --- TARJETAS DE ESTADÍSTICAS --- */
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        @media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(3, 1fr); } }
+        .stat-card {
+            border: 2px solid var(--border); border-radius: var(--radius-md);
+            background: var(--card-bg); padding: 14px; text-align: center;
+        }
+        .stat-card .stat-value { font-size: 22px; font-weight: 700; color: var(--primary); }
+        .stat-card .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+        /* Tarjeta de "Racha actual": color naranja fijo, independiente del tema/apariencia elegido */
+        .stat-card.stat-card-streak { background: #ffd699; border-color: #ff9500; }
+        .stat-card.stat-card-streak .stat-value { color: #ff9500; }
+        .stat-card.stat-card-streak .stat-label { color: #ff9500; }
+
+        /* --- PANTALLA DE ESTADÍSTICAS: pestañas y diseño compacto --- */
+        .stats-header { text-align: center; margin: 4px 0 14px; }
+        .stats-header h2 { font-size: 22px; margin-bottom: 2px; }
+        .stats-header p.subtitle { margin: 0; font-size: 13px; }
+
+        .stats-tabs {
+            display: flex; gap: 4px; margin-bottom: 16px; padding: 4px;
+            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md);
+        }
+        .stats-tab {
+            flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 2px;
+            padding: 7px 2px; border: none; border-radius: var(--radius-sm); background: transparent;
+            color: var(--text-muted); font-family: var(--font-family); font-size: 11.5px; font-weight: 700;
+            cursor: pointer; transition: var(--transition);
+        }
+        .stats-tab-icon { font-size: 18px; line-height: 1; }
+        .stats-tab:hover { color: var(--text-main); }
+        .stats-tab.active { background: var(--card-bg); color: var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+        .stats-panel { display: none; }
+        .stats-panel.active { display: block; animation: fadeIn 0.25s ease; }
+
+        .stats-grid.stats-grid-compact { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .stats-grid-compact .stat-card { padding: 10px 6px; display: flex; flex-direction: column; justify-content: center; }
+        .stats-grid-compact .stat-card .stat-value { font-size: 20px; }
+        .stats-grid-compact .stat-card .stat-label { font-size: 11px; margin-top: 2px; line-height: 1.25; }
+
+        .stats-chart-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 18px 0 10px; }
+        .stats-chart-head h3 { font-size: 13px; font-weight: 700; margin: 0; }
+        .stats-chart-head .segmented-control { flex: 0 0 auto; }
+        .stats-chart-head .seg-btn { white-space: nowrap; padding: 5px 10px; }
+        #screen-stats .practice-chart { height: 110px; }
+
+        .stats-caption { font-size: 13px; color: var(--text-muted); margin: 0 0 10px 2px; }
+
+        .stats-level-group { border: 2px solid var(--border); border-radius: var(--radius-md); background: var(--card-bg); margin-bottom: 10px; overflow: hidden; }
+        .stats-level-group > summary {
+            list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px;
+            padding: 12px 14px; font-weight: 700; font-size: 14px;
+        }
+        .stats-level-group > summary::-webkit-details-marker { display: none; }
+        .stats-level-group > summary::after { content: '›'; font-size: 22px; line-height: 1; color: var(--text-muted); transition: transform 0.2s ease; }
+        .stats-level-group[open] > summary::after { transform: rotate(90deg); }
+        .stats-level-count { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--text-muted); }
+        .stats-topic-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-top: 1px solid var(--border); }
+        .stats-topic-icon {
+            flex: 0 0 auto; width: 34px; height: 34px; font-size: 20px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--bg-secondary); border-radius: var(--radius-sm);
+        }
+        .stats-topic-main { flex: 1; min-width: 0; }
+        .stats-topic-title { font-weight: 700; font-size: 14px; }
+        .stats-topic-sub { font-size: 12px; color: var(--text-muted); }
+        .stats-topic-bar { height: 4px; border-radius: 2px; background: var(--border); margin-top: 5px; overflow: hidden; }
+        .stats-topic-bar > div { height: 100%; background: var(--primary); border-radius: 2px; }
+
+        .stats-kana-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .stats-kana-card { border: 2px solid var(--border); border-radius: var(--radius-md); background: var(--card-bg); padding: 10px 12px; }
+        .stats-kana-card-title { font-weight: 700; margin-bottom: 2px; }
+        .stats-kana-card .kana-stats-row { padding: 6px 0; font-size: 13px; }
+        .stats-kana-hard-title { font-weight: 700; margin: 16px 0 8px; }
+        .stats-kana-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .stats-kana-chip {
+            display: flex; align-items: center; gap: 6px; padding: 5px 12px;
+            border: 2px solid var(--border); border-radius: 999px; background: var(--card-bg); font-size: 14px; font-weight: 700;
+        }
+        .stats-kana-chip small { font-weight: 500; font-size: 11px; color: var(--text-muted); }
+        .stats-kana-chip .kana-fail-badge { font-size: 12px; }
+
+        .search-summary { color: var(--text-muted); font-size: 13px; margin: 0 0 10px 2px; }
+        .search-result-list { display: grid; gap: 8px; }
+        .search-word-card { display: flex; align-items: center; gap: 12px; border: 2px solid var(--border); border-radius: var(--radius-md); padding: 12px; background: var(--card-bg); }
+        .search-word-main { flex: 1; min-width: 0; }
+        .search-word-ja { font-size: 19px; font-weight: 700; color: var(--primary); }
+        .search-word-es { font-size: 14px; font-weight: 600; }
+        .search-word-topic { font-size: 12px; color: var(--text-muted); }
+        .dict-button { flex: 0 0 auto; width: 40px; height: 40px; border: 2px solid var(--border); border-radius: 50%; background: var(--bg-secondary); color: var(--primary); font-size: 18px; cursor: pointer; }
+        .dict-button:hover { border-color: var(--primary); }
+
+        /* --- BOTÓN "AÑADIR A REPASO" EN CADA PALABRA DE TEORÍA --- */
+        .word-review-btn {
+            flex: 0 0 auto; width: 36px; height: 36px; border: 2px solid var(--border); border-radius: 50%;
+            background: var(--bg-secondary); color: var(--text-muted); font-size: 15px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .word-review-btn:hover { border-color: var(--primary); }
+        .word-review-btn.active { border-color: var(--primary); color: var(--primary); }
+        .audio-button { color: var(--correct); }
+        .progress-indicator {
+            font-size: 13px; font-weight: 600; background: var(--bg-secondary);
+            padding: 4px 8px; border-radius: var(--radius-sm); color: var(--primary);
+            cursor: pointer;
+        }
+        .progress-indicator:hover { background: var(--wrong-bg); color: var(--wrong); }
+
+        /* --- TEORÍA --- */
+        .theory-list { display: grid; gap: 12px; grid-template-columns: 1fr; padding-bottom: 24px; }
+        #app.layout-pc .theory-list { grid-template-columns: repeat(2, 1fr); }
+        @media (min-width: 768px) { #app.layout-auto .theory-list { grid-template-columns: repeat(2, 1fr); } }
+        
+        .word-card {
+            border: 2px solid var(--border); border-radius: var(--radius-lg);
+            padding: 16px; background: var(--card-bg); cursor: pointer;
+            transition: var(--transition); overflow: hidden;
+        }
+        .word-card:active { background: var(--bg-secondary); }
+
+        .word-header { display: flex; align-items: center; gap: 16px; }
+        .word-emoji { font-size: 28px; }
+        .word-main { flex-grow: 1; }
+        .word-spanish { font-weight: 700; font-size: 15px; }
+        .word-kanji-preview { font-size: 20px; font-weight: bold; color: var(--primary); margin-bottom: 2px; }
+        
+        .word-details {
+            display: none; margin-top: 16px; padding-top: 16px;
+            border-top: 2px dashed var(--border); animation: fadeIn 0.2s ease;
+        }
+        .word-card.expanded .word-details { display: block; }
+
+        @keyframes wordHighlightGlow {
+            0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 85%, transparent); border-color: var(--primary); }
+            50% { box-shadow: 0 0 22px 10px color-mix(in srgb, var(--primary) 55%, transparent); border-color: var(--primary); }
+            100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 0%, transparent); border-color: var(--border); }
+        }
+        .word-card.highlight-flash { animation: wordHighlightGlow 1.6s ease-out; }
+        
+        .detail-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .detail-label { color: var(--text-muted); }
+        .detail-value { font-weight: 600; font-size: 16px; }
+        
+        .btn-audio {
+            background: var(--bg-secondary); border: none; border-radius: 50%;
+            width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+            font-size: 20px; cursor: pointer; margin: 12px auto 0; color: var(--primary);
+        }
+
+        /* --- DICCIONARIO --- */
+        .dictionary-modal { position: fixed; inset: 0; z-index: 20; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, 0.48); }
+        .dictionary-modal.visible { display: flex; }
+        .dictionary-dialog { position: relative; width: min(560px, 100%); max-height: 80vh; overflow-y: auto; background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.25); }
+        .dictionary-close { position: absolute; right: 14px; top: 12px; border: none; background: transparent; color: var(--text-muted); font-size: 28px; cursor: pointer; }
+        .dictionary-title { padding-right: 36px; font-size: 24px; color: var(--primary); margin-bottom: 6px; }
+        .dictionary-reading { color: var(--text-muted); margin-bottom: 16px; }
+        .dictionary-status { color: var(--text-muted); }
+        .dictionary-sense { padding: 12px 0; border-top: 1px solid var(--border); }
+        .dictionary-pos { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+        .dictionary-definition { font-weight: 600; }
+        .dictionary-info-note { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-style: italic; }
+        .dictionary-link { display: inline-block; margin-top: 18px; color: var(--primary); font-weight: 700; }
+
+        /* --- MODAL DE INFORMACIÓN (Ajustes) --- */
+        .info-modal { position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, 0.48); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+        .info-modal.visible { display: flex; }
+        .info-dialog { position: relative; width: min(560px, 100%); max-height: 80vh; overflow-y: auto; background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.25); }
+        .info-close { position: absolute; right: 14px; top: 12px; border: none; background: transparent; color: var(--text-muted); font-size: 28px; cursor: pointer; line-height: 1; }
+        .info-title { padding-right: 36px; font-size: 22px; color: var(--primary); margin-bottom: 14px; }
+        .info-subtitle { font-size: 15px; font-weight: 700; margin: 18px 0 8px; color: var(--text-main); }
+        .info-subtitle:first-of-type { margin-top: 0; }
+        .info-text { font-size: 14px; line-height: 1.55; color: var(--text-main); margin-bottom: 8px; }
+        .info-link { display: block; color: var(--primary); font-weight: 600; word-break: break-word; margin: 4px 0 10px; text-decoration: underline; }
+        .info-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+        .info-gambatte { text-align: center; font-weight: 700; font-size: 15px; margin-top: 18px; color: var(--primary); }
+        .info-easter-egg { text-align: center; font-size: 11px; font-style: italic; color: var(--text-muted); opacity: 0.6; margin-top: 10px; }
+
+        /* ==================== SISTEMA GACHA JLPT ==================== */
+        .gacha-blur-target { transition: filter 0.4s ease; }
+        .gacha-blur-target.blurred { pointer-events: none; user-select: none; }
+
+        .gacha-overlay {
+            position: fixed; inset: 0; z-index: 3000;
+            display: none; align-items: center; justify-content: center;
+            background: rgba(8,5,18,0.45);
+            backdrop-filter: blur(14px) brightness(0.65);
+            -webkit-backdrop-filter: blur(14px) brightness(0.65);
+            overflow: hidden;
+        }
+        .gacha-overlay.active { display: flex; animation: gachaFadeIn 0.35s ease; }
+        @keyframes gachaFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .gacha-stage {
+            position: relative; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            max-width: 620px; max-height: 620px; margin: auto;
+        }
+
+        .gacha-star {
+            position: absolute;
+            font-size: 44px;
+            line-height: 1;
+            opacity: 0;
+            color: #ffffff;
+            transform: translate(-50%, -50%) scale(0.2) rotate(-25deg);
+            filter: drop-shadow(0 0 6px rgba(255,215,0,0.7));
+            will-change: transform, opacity, left, top;
+            transition: left 0.9s cubic-bezier(.3,1.4,.5,1), top 0.9s cubic-bezier(.3,1.4,.5,1),
+                        transform 0.9s cubic-bezier(.3,1.4,.5,1), opacity 0.5s ease,
+                        color 0.7s ease, filter 0.7s ease;
+        }
+        .gacha-star.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            animation: gachaStarPop 0.55s cubic-bezier(.25,1.6,.4,1);
+        }
+        .gacha-star.gathered {
+            transform: translate(-50%, -50%) scale(1.15) rotate(0deg);
+        }
+        .gacha-star.burst {
+            animation: gachaStarBurst 0.6s ease forwards;
+        }
+        @keyframes gachaStarPop {
+            0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.2) rotate(-25deg); }
+            60%  { opacity: 1; transform: translate(-50%, -50%) scale(1.35) rotate(8deg); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+        }
+        @keyframes gachaStarBurst {
+            0%   { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+            40%  { opacity: 1; transform: translate(-50%, -50%) scale(1.7); filter: drop-shadow(0 0 24px rgba(255,255,255,0.95)); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+        }
+
+        .gacha-flash {
+            position: absolute; inset: 0; border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0; pointer-events: none;
+        }
+        .gacha-flash.play { animation: gachaFlash 0.7s ease forwards; }
+        @keyframes gachaFlash {
+            0%   { opacity: 0; transform: scale(0.2); }
+            35%  { opacity: 1; transform: scale(1.4); }
+            100% { opacity: 0; transform: scale(2.2); }
+        }
+
+        .gacha-particle {
+            position: absolute; left: 50%; top: 50%;
+            width: 4px; height: 4px; border-radius: 50%;
+            background: #ffe27a;
+            opacity: 0;
+            box-shadow: 0 0 5px 1px rgba(255,226,122,0.6);
+        }
+        .gacha-particle.fly {
+            animation: gachaParticleFly 0.9s ease-out forwards;
+        }
+        @keyframes gachaParticleFly {
+            0%   { opacity: 1; transform: translate(-50%, -50%) translate(0,0) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--gpx), var(--gpy)) scale(0.3); }
+        }
+
+        .gacha-result {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 6px; opacity: 0; pointer-events: none; text-align: center;
+        }
+        .gacha-result.show {
+            opacity: 1; pointer-events: auto;
+            animation: gachaResultIn 0.7s cubic-bezier(.25,1.5,.4,1) forwards;
+        }
+        @keyframes gachaResultIn {
+            0%   { opacity: 0; transform: scale(0.4); }
+            60%  { opacity: 1; transform: scale(1.12); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .gacha-result-badge { font-family: var(--font-family); font-size: 15px; font-weight: 700; letter-spacing: 1px; color: var(--primary); text-transform: uppercase; }
+        .gacha-result-level { font-family: var(--font-family); font-weight: 700; font-size: 40px; color: #fff; }
+        .gacha-result-sub { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 600; }
+        .gacha-result-hint { margin-top: 18px; font-size: 12px; color: rgba(255,255,255,0.55); }
+        .gacha-level-emoji {
+            font-size: 64px; line-height: 1;
+            margin: 10px 0 4px;
+            opacity: 1;
+            animation: gachaDotPop 0.6s cubic-bezier(.25,1.6,.4,1);
+        }
+        @keyframes gachaDotPop {
+            0%   { transform: scale(0.3); opacity: 0; }
+            60%  { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Segunda fase del resultado: temario asignado, dentro del propio Gacha */
+        .gacha-topic-icon {
+            font-size: 56px;
+            margin: 8px 0 4px;
+            opacity: 1;
+            animation: gachaDotPop 0.6s cubic-bezier(.25,1.6,.4,1);
+        }
+        .gacha-continue-hint {
+            margin-top: 22px;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.3px;
+            animation: gachaContinuePulse 1.6s ease-in-out infinite;
+        }
+        @keyframes gachaContinuePulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+
+        /* Rareza: a más estrellas, colores y glow más intensos */
+        .gacha-stage[data-rarity="1"] .gacha-star, .gacha-stage[data-rarity="2"] .gacha-star { color: #eef2fb; }
+        .gacha-stage[data-rarity="3"] .gacha-star, .gacha-stage[data-rarity="4"] .gacha-star { color: #ffe27a; filter: drop-shadow(0 0 12px rgba(255,215,0,0.85)); }
+        .gacha-stage[data-rarity="5"] .gacha-star { color: #ffcf4d; filter: drop-shadow(0 0 18px rgba(255,190,60,0.95)); }
+        .gacha-stage[data-rarity="6"] .gacha-star { color: #ff8a5c; filter: drop-shadow(0 0 22px rgba(255,110,60,1)); }
+        .gacha-stage[data-rarity="6"] .gacha-result-level { color: #ffdcb0; }
+        .gacha-stage[data-rarity="5"] .gacha-flash.play, .gacha-stage[data-rarity="6"] .gacha-flash.play { animation-duration: 0.9s; }
+
+        /* Evento especial: 1% de posibilidad por estrella de que salga morada;
+           si ocurre, todas las estrellas contagian ese color morado. */
+        .gacha-stage.gacha-purple-event .gacha-star { color: #c46bff; filter: drop-shadow(0 0 20px rgba(196,90,255,0.95)); }
+        .gacha-stage.gacha-purple-event .gacha-flash.play { animation-duration: 0.9s; }
+
+        @media (max-width: 480px) {
+            .gacha-star { font-size: 34px; }
+            .gacha-result-level { font-size: 34px; }
+        }
+
+        /* Insignias (palabra común, niveles JLPT...) */
+        .dictionary-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+        .dictionary-badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+        .dictionary-badge.common { background: var(--correct-bg); color: var(--correct); }
+        .dictionary-badge.jlpt { background: var(--bg-secondary); color: var(--text-muted); border: 1px solid var(--border); }
+
+        /* Otras formas de escritura (p.ej. こんにちは / こんにちわ) */
+        .dictionary-otherforms { margin: 4px 0 16px; padding: 10px 12px; background: var(--bg-secondary); border-radius: var(--radius-sm); font-size: 15px; }
+        .dictionary-otherforms-title { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-bottom: 6px; font-weight: 700; }
+
+        .dictionary-status a.dictionary-link { margin-top: 12px; }
+        .dictionary-status p { margin-bottom: 4px; }
+
+        /* --- PRÁCTICA --- */
+        .practice-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+        .progress-bar-container { flex-grow: 1; height: 16px; background: var(--border); border-radius: 8px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s ease; border-radius: 8px; }
+
+        .question-container { text-align: center; margin-bottom: 40px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .question-label { color: var(--text-muted); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+        .question-word { font-size: 40px; font-weight: 700; color: var(--text-main); }
+
+        /* Modo "Completa el hueco": la frase es más larga que una palabra suelta,
+           así que usa un tamaño de letra menor y permite varias líneas. */
+        .question-word.sentence-mode { font-size: 26px; line-height: 1.7; font-weight: 600; padding: 0 6px; }
+        .question-blank { display: inline-block; min-width: 60px; color: var(--primary); font-weight: 800; border-bottom: 3px solid var(--primary); }
+        .question-translation { color: var(--text-muted); font-size: 15px; margin-top: 14px; text-align: center; padding: 0 12px; }
+
+        /* Botón para mostrar/ocultar la traducción de apoyo en "Completa el hueco" */
+        .btn-translation-toggle {
+            background: var(--bg-secondary); border: 2px solid var(--border); border-radius: var(--radius-sm);
+            color: var(--text-muted); font-size: 13px; font-weight: 700; padding: 8px 14px;
+            cursor: pointer; margin: 16px auto 0; transition: var(--transition);
+        }
+        .btn-translation-toggle:hover { border-color: var(--primary); color: var(--primary); }
+
+        .options-container { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; width: 100%; }
+        
+        .option-btn {
+            background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-lg);
+            padding: 18px; font-size: 22px; font-weight: 600; text-align: center; cursor: pointer;
+            box-shadow: var(--shadow); transition: var(--transition); color: var(--text-main);
+        }
+        .option-btn.es-text { font-size: 18px; } /* Más pequeño para respuestas largas en español */
+        .option-btn:active { transform: translateY(4px); box-shadow: var(--shadow-active); }
+        .option-btn.disabled { pointer-events: none; }
+
+        /* --- FEEDBACK --- */
+        .feedback-panel {
+            position: fixed; bottom: 0; left: 0; width: 100%; padding: 24px; display: none;
+            flex-direction: column; gap: 16px; animation: slideUp 0.3s ease; z-index: 10;
+        }
+
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        
+        /* FIX de animación: Usamos una animación que mantiene el centrado en el eje X para evitar el salto */
+        @keyframes slideUpCenter {
+            from { transform: translate(-50%, 100%); }
+            to { transform: translate(-50%, 0); }
+        }
+
+        #app.layout-pc .feedback-panel { border-radius: 16px 16px 0 0; width: 100%; max-width: inherit; left: 50%; transform: translateX(-50%); animation: slideUpCenter 0.3s ease; }
+        @media (min-width: 768px) { #app.layout-auto .feedback-panel { border-radius: 16px 16px 0 0; width: 100%; max-width: inherit; left: 50%; transform: translateX(-50%); animation: slideUpCenter 0.3s ease; } }
+        
+        .feedback-panel.correct { background-color: var(--correct-bg); border-top: 2px solid var(--correct); display: flex; }
+        .feedback-panel.correct .feedback-title { color: var(--correct); }
+        .feedback-panel.correct .btn-next { background-color: var(--correct); box-shadow: 0 4px 0 #46a302; }
+        
+        .feedback-panel.wrong { background-color: var(--wrong-bg); border-top: 2px solid var(--wrong); display: flex; }
+        .feedback-panel.wrong .feedback-title { color: var(--wrong); }
+        .feedback-panel.wrong .btn-next { background-color: var(--wrong); box-shadow: 0 4px 0 #cc3a3a; }
+
+        .feedback-title { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .feedback-answer { font-size: 18px; color: var(--text-main); font-weight: 600; }
+        
+        .pad-bottom { padding-bottom: 160px; }
+
+        /* --- RESULTADOS --- */
+        .result-header { text-align: center; margin-bottom: 32px; }
+        .result-score { font-size: 48px; font-weight: 700; color: var(--primary); margin: 16px 0; }
+        .result-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .result-item { display: flex; align-items: center; padding: 12px; border-radius: var(--radius-sm); background: var(--bg-secondary); font-size: 15px; }
+        .result-item.correct .res-icon { color: var(--correct); }
+        .result-item.wrong { background: var(--wrong-bg); }
+        .result-item.wrong .res-icon { color: var(--wrong); }
+        .res-icon { font-weight: bold; width: 24px; font-size: 18px; }
+        .res-word { flex-grow: 1; font-weight: 600; font-size: 16px;}
+        .res-meaning { color: var(--text-muted); font-size: 14px;}
+        .center-btn-wrap { max-width: 400px; margin: 0 auto; width: 100%; }
+
+        /* --- MÓDULO KANA (hiragana / katakana) --- */
+        .kana-choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 480px; margin: 0 auto; }
+        .kana-choice-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 22px 12px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .kana-choice-card:active { box-shadow: var(--shadow-active); transform: translateY(4px); }
+        .kana-choice-glyph { font-size: 40px; margin-bottom: 8px; }
+        .kana-choice-title { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
+        .kana-choice-sub { color: var(--text-muted); font-size: 12.5px; }
+
+        .kana-section-title { font-size: 14px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin: 22px 0 10px; }
+        .kana-section-title:first-of-type { margin-top: 4px; }
+
+        .kana-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+        @media (max-width: 380px) { .kana-grid { grid-template-columns: repeat(4, 1fr); } }
+        .kana-tile {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 10px 4px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        .kana-tile:active { background: var(--bg-secondary); transform: translateY(2px); }
+        .kana-tile-glyph { font-size: 22px; font-weight: 700; line-height: 1.15; }
+        .kana-tile-romaji { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+        .kana-tile-audio { position: absolute; top: 2px; right: 4px; font-size: 10px; opacity: 0.55; }
+        .kana-tile.empty { visibility: hidden; pointer-events: none; }
+
+        .kana-practice-topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+        .kana-progress-bar-track { flex-grow: 1; height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; }
+        .kana-progress-bar-fill { height: 100%; background: var(--primary); border-radius: 4px; transition: width 0.25s ease; }
+        .kana-progress-count { font-size: 13px; color: var(--text-muted); font-weight: 700; white-space: nowrap; }
+
+        .kana-question-card { text-align: center; margin: 22px 0 30px; }
+        .kana-question-glyph { font-size: 96px; font-weight: 700; line-height: 1; }
+        .kana-question-label { color: var(--text-muted); font-size: 14px; margin-top: 10px; }
+        .kana-audio-btn {
+            margin: 14px auto 0; display: flex; align-items: center; justify-content: center;
+            width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--border);
+            background: var(--card-bg); font-size: 20px; cursor: pointer; color: var(--primary);
+        }
+        .kana-audio-btn:active { background: var(--bg-secondary); }
+
+        .kana-options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 480px; margin: 0 auto; width: 100%; }
+        .kana-option-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px 8px;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+        .kana-option-btn:active { box-shadow: var(--shadow-active); transform: translateY(4px); }
+        .kana-option-btn.disabled { pointer-events: none; }
+        .kana-option-btn.is-correct { border-color: var(--correct); background: var(--correct-bg); color: var(--text-main); }
+        .kana-option-btn.is-wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--text-main); }
+
+        .kana-result-score { text-align: center; font-size: 42px; font-weight: 800; color: var(--primary); margin: 10px 0 4px; }
+        .kana-result-sub { text-align: center; color: var(--text-muted); margin-bottom: 22px; }
+        .kana-result-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 24px; }
+        @media (max-width: 380px) { .kana-result-grid { grid-template-columns: repeat(5, 1fr); } }
+        .kana-result-tile {
+            border-radius: var(--radius-sm);
+            padding: 8px 2px;
+            text-align: center;
+            font-weight: 700;
+        }
+        .kana-result-tile.correct { background: var(--correct-bg); color: var(--correct); }
+        .kana-result-tile.wrong { background: var(--wrong-bg); color: var(--wrong); }
+        .kana-result-tile .kr-glyph { font-size: 18px; display: block; }
+        .kana-result-tile .kr-romaji { font-size: 10px; opacity: 0.85; }
+
+        .kana-stats-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+        .kana-stats-row:last-child { border-bottom: none; }
+        .kana-fail-badge { color: var(--wrong); font-size: 14px; font-weight: 700; }
+        .kana-text-input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 18px;
+            text-align: center;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-family: var(--font-family);
+        }
+        .kana-text-input:focus { outline: none; border-color: var(--primary); }
+        .kana-text-input.is-wrong { border-color: var(--wrong); background: var(--wrong-bg); }
+        .kana-text-input.is-correct { border-color: var(--correct); background: var(--correct-bg); }
+
+    
+/* ===== Añadidos de la página de recorrido ===== */
+#screen-home{padding-bottom:0}
+.app-title-subtitle{margin-bottom:32px}
+.nofuri rt{visibility:hidden}
+.demo .segmented-control .seg-btn{flex:1;text-align:center}
+.scroll-top-btn{bottom:24px}
+.settings-panel:not(.open){box-shadow:none}
+.ver{scroll-margin-top:12px;border:2px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);background:var(--card-bg);margin-bottom:12px;overflow:hidden}
+.ver-head{display:flex;align-items:center;gap:12px;width:100%;padding:16px;background:none;border:0;cursor:pointer;color:inherit;font:inherit;text-align:left}
+.ver-head:focus-visible{outline:3px solid var(--primary);outline-offset:-3px}
+.badge{background:var(--c,var(--primary));color:#fff;font-weight:800;font-size:14px;border-radius:var(--radius-sm);padding:6px 10px;min-width:58px;text-align:center}
+.ver-t{flex:1;font-weight:700;font-size:16px}
+.chev{color:var(--text-muted);transition:transform .2s}
+.ver.open .chev{transform:rotate(180deg)}
+.ver-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+.ver.open .ver-wrap{grid-template-rows:1fr}
+.ver-body{overflow:hidden;min-height:0;visibility:hidden;transition:visibility 0s .25s}
+.ver.open .ver-body{visibility:visible;transition-delay:0s}
+.ver-in{padding:0 16px 16px}
+.ver-in p{color:var(--text-muted);font-size:15px;margin-bottom:10px}
+.ver-in h4{font-size:14px;font-weight:700;margin:16px 0 6px}
+.ver-in ul{margin:0 0 8px 20px;font-size:15px}
+.ver-in li{margin-bottom:3px}
+.ver-in code{background:var(--bg-secondary);padding:1px 6px;border-radius:6px;font-size:13px}
+.demo{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;margin-top:16px}
+.demo-label{font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:12px}
+.demo .question-container{margin-bottom:16px}
+.demo .options-container{margin-bottom:12px}
+.demo .btn{margin:0}
+.demo .feedback-panel{position:static;animation:none;border-radius:12px;padding:14px;margin-bottom:12px;width:100%;transform:none}
+.sec-title{margin:32px 0 12px}
+.obj{max-width:640px;margin:32px auto 0}
+.obj p{margin-bottom:12px;font-size:16px}
+.phil{margin-top:40px;border-top:2px solid var(--border);padding-top:30px}
+.phil h2{font-size:24px;text-align:center;margin-bottom:18px}
+.phil p{max-width:640px;margin:0 auto 14px;font-size:16px}
+.tools{max-width:640px;margin:18px auto}
+.tool{border:2px solid var(--border);border-radius:var(--radius-md);margin-bottom:8px;box-shadow:var(--shadow);background:var(--card-bg)}
+.tool button{width:100%;background:none;border:0;padding:12px 14px;text-align:left;font-weight:700;font-size:15px;cursor:pointer;color:inherit;font-family:inherit}
+.tool div{display:none;padding:0 14px 12px;font-size:14.5px;color:var(--text-muted)}
+.tool.open div{display:block}
+.final{text-align:center;font-weight:800;font-size:22px;margin:30px auto 0;max-width:560px;color:var(--primary)}
+.tools ul{margin:0 0 0 20px;font-size:16px}.tools li{margin-bottom:10px}
+/* Fix pantalla completa: dentro de las demos el panel de feedback es un bloque normal.
+   Las reglas globales de #app.layout-* (left:50% + translateX(-50%)) lo desplazaban. */
+#app .demo .feedback-panel{position:static!important;left:auto!important;right:auto!important;bottom:auto!important;width:100%!important;max-width:none!important;transform:none!important;animation:none!important;border-radius:12px!important;padding:14px;margin-bottom:12px}
+.badge{white-space:nowrap}
+html{overflow-anchor:none}
+.ver.noanim .ver-wrap,.ver.noanim .ver-body{transition:none!important}
+.phil ul{max-width:640px;margin:0 auto 14px;padding-left:20px;font-size:16px}
+.phil li{margin-bottom:10px}
+/* Los botones sin color propio usaban el negro del navegador: ahora siguen el tema elegido */
+button{color:var(--text-main)}
+.kana-option-btn{color:var(--text-main)}
+/* Título de la app: un poco más pequeño y en cursiva */
+.app-title-kanji{font-size:46px;font-style:normal}
+.end-space{height:max(200px,30vh)}
+.end-note{text-align:center;font-size:12px;line-height:1.8;letter-spacing:.06em;color:var(--text-muted);opacity:.8;margin:0}
+.end-space-2{height:140px}
+</style>
+</head>
+<body>
+<button id="settings-fab" class="settings-fab" aria-label="Ajustes" aria-expanded="false">⚙️</button>
+<div id="settings-overlay" class="settings-overlay"></div>
+<div id="settings-panel" class="settings-panel" role="dialog" aria-modal="true" aria-label="Ajustes">
+  <div class="settings-panel-header"><h3>⚙️ Ajustes</h3><button class="settings-close-btn" id="settings-close" aria-label="Cerrar ajustes">✕</button></div>
+  <div class="settings-panel-body">
+    <div class="settings-section"><div class="settings-section-title">🎨 Apariencia</div>
+      <div class="theme-grid" id="theme-grid"></div>
+      <div id="custom-color-row" class="custom-color-row" style="display:none;"><label for="custom-color-input">Elige tu color base</label><input type="color" id="custom-color-input" class="custom-color-input" value="#1cb0f6"></div>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="layout-auto">
+  <div id="screen-home" class="screen active">
+    <h1 class="app-title-kanji" role="button" tabindex="0" onclick="this.classList.remove('kanji-bounce');void this.offsetWidth;this.classList.add('kanji-bounce')" style="cursor:pointer;">Ankジミー</h1>
+    <p class="subtitle app-title-subtitle">Recorrido por versiones</p>
+
+    <h2>Versiones</h2>
+    <div id="list"></div>
+
+    <h2 class="sec-title">Mejoras generales incorporadas a lo largo del desarrollo</h2>
+    <div id="general"></div>
+
+    <section class="obj">
+      <h2>Objetivo del proyecto</h2>
+      <div id="obj"></div>
+    </section>
+
+    <section class="phil" id="filosofia">
+      <h2>Filosofía del proyecto</h2>
+      <div id="fil"></div>
+    </section>
+    <div class="end-space"></div>
+    <p class="end-note">頑張って ✦ Gracias por llegar hasta el final.<br>Que disfrutes aprendiendo.</p>
+    <div class="end-space-2"></div>
+  </div>
+</div>
+<button id="scroll-top" class="scroll-top-btn" aria-label="Volver al principio">↑</button>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const say=t=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';speechSynthesis.speak(u)}catch(e){}};
+const shuffle=a=>[...a].sort(()=>Math.random()-.5);
+const W=[['水','みず','mizu','agua','Naturaleza'],['猫','ねこ','neko','gato','Animales'],['食べる','たべる','taberu','comer','Verbos'],['学校','がっこう','gakkou','escuela','Lugares'],['友達','ともだち','tomodachi','amigo','Personas'],['先生','せんせい','sensei','profesor','Personas']];
+const rb=w=>`<ruby>${w[0]}<rt>${w[1]}</rt></ruby>`;
+document.addEventListener('click',e=>{const s=e.target.closest('[data-say]');if(s)say(s.dataset.say)});
+
+/* ---------- Contenido (copiado del historial de versiones) ---------- */
+const MD="## v0.1 — El comienzo\n\nLa primera versión de la aplicación. Todo comenzó con una idea bastante sencilla: crear una herramienta que permitiera estudiar vocabulario japonés de una manera cómoda y accesible.\n\nLa aplicación contaba únicamente con un título y una colección de palabras sueltas que el usuario podía consultar, estudiar, escuchar mediante audio y practicar a través de pequeños tests.\n\nEra una versión muy básica, pero ya contenía la esencia de lo que acabaría convirtiéndose en el proyecto actual.\n\n## v0.2 — Ampliando el vocabulario\n\nSe incorporó una cantidad considerable de vocabulario nuevo, aumentando las posibilidades de estudio.\n\nTambién se añadió un pequeño panel de ajustes situado justo debajo del título principal, desde el que se podían modificar algunas opciones de la aplicación.\n\nTodavía no existía una interfaz propia de ajustes ni una estructura visual especialmente desarrollada.\n\n## v0.3 — Primeras opciones de personalización\n\nSe incorporaron nuevas opciones de configuración, entre ellas la posibilidad de modificar el color de la aplicación y activar o desactivar el furigana, además de otros ajustes de visualización y funcionamiento.\n\nEl vocabulario continuó creciendo con la incorporación de nuevas categorías y temáticas.\n\nAl aumentar considerablemente la cantidad de palabras, surgió la necesidad de organizarlas mejor. Por ello, se comenzó a agrupar el vocabulario en diferentes temarios, aunque todavía no existía el sistema de niveles que conocemos actualmente.\n\n## v0.4 — Nace el sistema de repaso\n\nTras utilizar la aplicación durante un tiempo, detecté que estudiar vocabulario y realizar tests no era suficiente para memorizar correctamente todas las palabras.\n\nPor ello, se incorporó uno de los primeros sistemas orientados a reforzar el aprendizaje: **Repasar**.\n\nEste apartado permitía recuperar las palabras que se habían fallado durante los tests y volver a practicarlas, evitando que los errores quedaran olvidados.\n\nTambién se reorganizó por completo el acceso a los ajustes. El pequeño panel inicial desapareció y fue sustituido por un botón situado en la esquina superior derecha, que desplegaba su propia interfaz de configuración.\n\n## v0.4.1 — Búsqueda global\n\nSe añadió una barra de búsqueda multidimensional y multilingüe, permitiendo localizar palabras de una forma mucho más rápida y cómoda.\n\n## v0.5 — Preparando la primera publicación\n\nEsta fue la versión inmediatamente anterior a la primera publicación de la aplicación.\n\nLa principal incorporación fue el apartado **Mis estadísticas**, que permitía al usuario consultar información sobre su actividad y rendimiento durante el estudio.\n\nTambién se continuó ampliando el vocabulario disponible, preparando la aplicación para convertirse en una herramienta más completa.\n\n## v0.5.1 – v0.5.3 — Estabilización y mejoras\n\nDurante estas versiones se trabajó principalmente en corregir errores y mejorar los sistemas que ya existían.\n\nEntre los cambios más importantes destacan:\n\nMejoras en el apartado Mis estadísticas. Incorporación de un gráfico para visualizar las palabras practicadas diariamente. Información más detallada sobre las palabras acertadas y falladas. Mejoras en el seguimiento de los resultados. Posibilidad de marcar temarios como completados y eliminar esa marca cuando fuera necesario.\n\nFueron versiones dedicadas a pulir la experiencia de uso y preparar el terreno para una actualización mucho más ambiciosa.\n\n## v1.0 — Una nueva estructura de aprendizaje\n\nLa aplicación ya contaba con una estructura bastante definida, pero había aparecido un problema: navegar entre los aproximadamente 40 temarios y las más de 1.300 palabras disponibles comenzaba a resultar tedioso.\n\nLa solución fue introducir una organización por niveles, permitiendo acceder al contenido de una forma mucho más ordenada.\n\nSe incorporaron las siguientes categorías:\n\nN5 Principiante. N5 Avanzado. N4. N3. N2. N1. Extras.\n\nAdemás, esta actualización incorporó numerosas mejoras:\n\n**Sistema de búsqueda mejorado:** se optimizó la búsqueda global para facilitar la localización de vocabulario.\n\n**Más de 2.100 frases de ejemplo:** se añadieron múltiples oraciones para las palabras, permitiendo practicar el vocabulario dentro de contextos reales. También se incorporó la opción de activar o desactivar los ejercicios de completar huecos desde los ajustes.\n\n**Navegación mejorada:** se añadió un botón flotante que permite regresar rápidamente a la parte superior de la página, algo especialmente útil al navegar por temarios extensos.\n\n**Información de la aplicación:** se incorporó un apartado informativo dentro de los ajustes con información relevante para el usuario.\n\n**Incorporación del coreano:** una de las mayores novedades fue la incorporación del vocabulario japonés traducido al coreano, ampliando enormemente el alcance de la aplicación y permitiendo trabajar con dos idiomas diferentes.\n\n**Nuevos ajustes:** se añadieron opciones adicionales para personalizar las prácticas, incluyendo la posibilidad de activar o desactivar los ejercicios de completar huecos.\n\n**Gestión del progreso:** se incorporó una opción para reiniciar y borrar el progreso general de la aplicación.\n\n**Identidad propia:** se añadió un icono personalizado y la aplicación pasó a distribuirse también como una aplicación web instalable (PWA), tanto en dispositivos móviles como en ordenadores.\n\nEsta actualización supuso el paso de un proyecto sencillo a una aplicación mucho más estructurada y preparada para su uso diario.\n\n## v1.1 — Mejoras de navegación\n\nSe corrigieron varios errores relacionados con la posición de desplazamiento de la página al navegar entre los diferentes paneles y pantallas de la aplicación.\n\nEl objetivo era conseguir una experiencia de navegación más fluida y evitar que el usuario perdiera su posición constantemente.\n\n## v2.0 — La aplicación empieza a convertirse en algo más grande\n\nAquí es donde el proyecto empezó a cambiar de verdad.\n\n**En esta misma etapa también cambió el nombre de la aplicación.** Hasta entonces se llamaba **日本語 (Nihongo)**, pero a partir de esta versión pasó a llamarse **Ankジミー**, el nombre con el que continúa hoy.\n\nMe di cuenta de que ya no quería que la aplicación fuese simplemente una ayuda para consultar vocabulario. Quería convertirla en una herramienta de estudio completa, capaz de acompañar al usuario durante todo su aprendizaje.\n\n**Progreso real:** se implementó un sistema de seguimiento del aprendizaje mucho más preciso, con porcentajes de progreso por nivel y por temario, calculados en función de las palabras que el usuario realmente había aprendido.\n\n**La llegada de Anki:** esta fue probablemente una de las incorporaciones más ambiciosas de toda la historia del proyecto.\n\nAnki comenzó siendo una aplicación independiente que tenía pensado desarrollar por separado. Sin embargo, finalmente decidí integrarla dentro de la aplicación principal.\n\nFue un trabajo especialmente complejo, ya que implicaba unir dos sistemas de estudio diferentes sin perder su funcionamiento individual.\n\nEl resultado fue un apartado propio de Anki, inspirado en el funcionamiento de la aplicación original, pero desarrollado por mí y con una interfaz y experiencia de uso más sencillas y accesibles.\n\nSu objetivo es proporcionar una dirección de estudio más clara, fomentar la constancia y permitir memorizar vocabulario mediante un sistema de repetición espaciada.\n\nA día de hoy, considero que es una de las mejores y más importantes funciones de toda la aplicación.\n\n## v2.1 – v2.2 — Mejoras de Anki\n\nEstas versiones estuvieron dedicadas principalmente a corregir errores y perfeccionar la integración de Anki dentro de la aplicación principal.\n\nSe realizaron mejoras en la comunicación entre ambos sistemas y en el funcionamiento de la repetición espaciada.\n\nTambién se incorporaron y ajustaron diferentes opciones de personalización para que cada usuario pudiera adaptar el sistema de estudio a sus preferencias.\n\n## v3.0 — Aprender desde cero: llega Kana\n\nAl utilizar Anki y el resto de herramientas de la aplicación, detecté una limitación importante: para aprovechar correctamente el contenido japonés era necesario conocer, como mínimo, hiragana y katakana.\n\nEsto suponía una barrera para las personas que estaban empezando completamente desde cero.\n\nPor ello, decidí incorporar un apartado específico de **Kana**, desde el que aprender hiragana y katakana sin necesidad de salir de la aplicación.\n\nEl objetivo era ofrecer una forma eficiente y accesible de familiarizarse con los dos silabarios japoneses y eliminar esa barrera inicial.\n\nEl aprendizaje de kanji no se incorporó en este apartado, ya que considero que se trabaja mejor mediante el uso de Anki y la repetición espaciada.\n\n## v3.1 — Estabilización de Kana\n\nSe corrigieron diferentes errores relacionados con el nuevo apartado de aprendizaje de hiragana y katakana, mejorando su funcionamiento general.\n\n## v3.2 — Sistema Gacha\n\nSe incorporó una nueva función interactiva: un sistema Gacha integrado directamente en el título de la aplicación.\n\nAl pulsarlo, el sistema selecciona aleatoriamente un temario entre todos los disponibles.\n\nCada temario cuenta con una rareza determinada, de manera que los contenidos más difíciles tienen una probabilidad de aparición más especial.\n\nTambién se desarrolló una pequeña animación de presentación con efectos visuales, estrellas y diferentes niveles de rareza, convirtiendo la selección de temarios en una experiencia más entretenida.\n\nUna forma diferente de descubrir contenido y encontrar nuevos retos de estudio.\n\n## v3.3 — Estabilización general\n\nSe realizó una revisión general de la aplicación para corregir errores, mejorar la estabilidad y perfeccionar el funcionamiento de los diferentes apartados.\n\nEl objetivo era conseguir una base sólida antes de continuar incorporando nuevas funcionalidades.\n\n## v3.4 — Rediseño de Mis estadísticas\n\nCon el paso del tiempo, las estadísticas habían ido acumulando cada vez más información, así que decidí reorganizar el apartado para que ofreciera una visión mucho más completa del aprendizaje y, sobre todo, fuera más fácil de consultar.\n\nAmplié el resumen general para mostrar la racha actual de días de estudio, el porcentaje total de aciertos, las prácticas completadas, las preguntas acertadas y falladas, los temarios practicados y las palabras practicadas y acertadas. También añadí información sobre las palabras que siguen pendientes de repaso.\n\nMejoré el seguimiento diario con un gráfico renovado que permite consultar la actividad de los últimos 7 o 30 días. Así resulta más sencillo observar la constancia y ver cómo cambia la actividad con el tiempo.\n\nTambién incorporé estadísticas por niveles y temarios, con las prácticas realizadas, los porcentajes de acierto y barras de progreso. Los niveles se pueden desplegar para consultar con más detalle cada temario.\n\nOtra parte importante fue el apartado de palabras difíciles. Quería poder identificar cuáles eran las palabras que más errores acumulaban y que necesitaban más atención, conectando esa información con el sistema general de repaso.\n\nPor último, integré las estadísticas de Kana en el mismo espacio. Ahora se pueden consultar los intentos, aciertos, fallos y porcentajes de hiragana y katakana, además de identificar los cinco caracteres que más se fallan. De esta manera, las estadísticas dejaron de centrarse únicamente en el vocabulario y pasaron a reflejar mejor el conjunto de herramientas de aprendizaje.\n\n## v4.0 — Kana evoluciona: llega la gramática japonesa\n\nEsta actualización amplía considerablemente las posibilidades del apartado Kana.\n\nHasta ahora, este apartado estaba centrado principalmente en aprender hiragana y katakana. Sin embargo, aprender a reconocer los caracteres es solamente el primer paso para poder construir y comprender japonés.\n\nPor ello, se incorporaron dos nuevos apartados:\n\n**Creación de oraciones:** ahora es posible aprender a construir oraciones y formular frases en japonés siguiendo sus reglas gramaticales y estructuras básicas.\n\n**Conectores:** se añadió un apartado dedicado a aprender a unir diferentes frases y oraciones entre sí, permitiendo construir expresiones más completas y naturales.\n\nCon estas incorporaciones, Kana deja de ser únicamente una herramienta para aprender los silabarios y comienza a convertirse en un espacio de aprendizaje mucho más completo, que permite avanzar desde el reconocimiento de caracteres hasta la construcción de expresiones en japonés.";
+const GENERAL="## Personalización y ajustes\n\nA lo largo del desarrollo fui añadiendo diferentes opciones para que cada persona pudiera adaptar la aplicación a su manera de estudiar. Se incorporaron varios temas visuales —claro, oscuro, azul, beige, gris, rosa pastel y personalizado— y la posibilidad de elegir un color propio. También fui ajustando el diseño para que se adaptara tanto a móviles como a ordenadores, con selección automática o manual del formato.\n\nDesde los ajustes se puede activar o desactivar el furigana, controlar el sonido, decidir si se quieren practicar ejercicios de completar huecos y seleccionar la dificultad de los ejercicios de Kana. También se puede cambiar entre el vocabulario japonés y el coreano, con los textos y la búsqueda adaptados al idioma elegido.\n\n## Vocabulario, teoría y práctica\n\nEl vocabulario terminó organizándose en niveles JLPT y temarios temáticos. Las fichas permiten consultar la escritura japonesa, su lectura, el significado y la categoría, y desplegar más información cuando hace falta. También se puede escuchar la pronunciación y aprender las palabras dentro de frases de ejemplo, en lugar de estudiarlas siempre de forma aislada.\n\nPara practicar, fui incorporando ejercicios de traducción en ambas direcciones, reconocimiento mediante romaji y ejercicios de completar huecos en frases. La intención era ofrecer distintas maneras de trabajar el mismo contenido y ayudar a que las palabras se fueran asentando.\n\n## Búsqueda global y diccionario\n\nComo el vocabulario fue creciendo, la búsqueda global se convirtió en una herramienta cada vez más importante. Permite localizar palabras sin tener que entrar en cada temario y buscar a partir de la escritura japonesa, el romaji o la traducción. Los resultados muestran información de la palabra y el temario al que pertenece.\n\nTambién incorporé accesos al diccionario desde los resultados y las fichas, para consultar lecturas, formas alternativas de escritura, significados y categorías gramaticales cuando esos datos están disponibles. Para ampliar la información del vocabulario japonés, se puede acceder a Jisho.org y, en el modo coreano, al diccionario de Naver.\n\n## Sistema de repaso\n\nEl sistema de repaso nació para que los errores no se quedaran atrás. La aplicación registra las palabras que se fallan y lleva un seguimiento de los errores acumulados por cada una. Las palabras pendientes se organizan por temario, de manera que se puede practicar una categoría concreta o repasar todo lo pendiente.\n\nTambién se pueden retirar palabras del apartado cuando ya no se quieran estudiar allí. El estado de repaso se mantiene relacionado con las fichas de teoría, y el acceso está disponible desde el menú inferior con un aviso visual cuando hay palabras esperando para ser repasadas.\n\n## Anki integrado\n\nAnki tiene su propia pestaña dentro de la aplicación, desde la que se puede estudiar mediante tarjetas y repetición espaciada sin abandonar la interfaz principal. Los mazos y las sesiones de repaso conviven con el resto de herramientas, y el módulo comparte algunas preferencias, como el tema, el tamaño de pantalla y el sonido.\n\nTambién hay un indicador visual para avisar de que existen tarjetas pendientes y opciones de gestión de datos y copias de seguridad desde los ajustes de la integración, cuando están disponibles en el módulo de Anki.\n\n## Estadísticas y seguimiento\n\nLas estadísticas han ido creciendo junto con la aplicación. Ahora reúnen información sobre la racha de estudio, el porcentaje de aciertos, las prácticas completadas, las preguntas acertadas y falladas, y las palabras practicadas, aprendidas o pendientes de repaso.\n\nAdemás del gráfico de actividad diaria, que permite consultar los últimos 7 o 30 días, se pueden revisar los resultados por niveles y temarios e identificar las palabras que acumulan más errores. Kana también tiene sus propias estadísticas, con intentos, aciertos, fallos y porcentajes de hiragana y katakana, además de los cinco caracteres que más se fallan.\n\n## Kana\n\nEl apartado Kana reúne el aprendizaje de Hiragana y Katakana. Los caracteres están organizados por grupos —básicos, Dakuten y Handakuten, yōon y contracciones— y aparecen junto a su lectura en romaji. Al tocarlos se puede escuchar su pronunciación y también hay ejercicios para comprobar el reconocimiento de los silabarios.\n\nSe puede elegir la dificultad de práctica y, con la evolución de la versión 4.0, el apartado también permite empezar a trabajar con la construcción de oraciones y los conectores gramaticales.\n\n## Guardado del progreso\n\nUna parte importante era que el esfuerzo de estudio no se perdiera al cerrar la aplicación. Por eso se incorporó el guardado de las preferencias personales, el progreso, las estadísticas, las palabras pendientes de repaso y los registros de práctica de Kana.\n\nLos datos se recuperan al volver a abrir la aplicación en el mismo navegador y dispositivo. Esto no significa que exista una sincronización automática entre distintos dispositivos. También se incluyó una opción para restablecer el progreso desde los ajustes.\n\n## Navegación e interfaz\n\nLa navegación fue evolucionando hasta contar con un menú inferior desde el que se puede acceder rápidamente a Niveles/Temarios, Repasar, Estadísticas, Anki y Kana. Se añadieron indicadores visuales para avisos, información pendiente y tarjetas de Anki, además de conservar la posición de desplazamiento cuando corresponde.\n\nTambién se incorporó el botón flotante para volver al principio, junto con el panel de ajustes y las ventanas de información y diccionario. Todo ello se fue adaptando para que la interfaz funcionara cómodamente tanto en pantallas pequeñas como grandes.\n\n## Instalación y organización técnica\n\nLa aplicación se preparó como PWA para poder instalarse en dispositivos y navegadores compatibles. Para ello se incorporaron el manifiesto de instalación, los iconos necesarios y el registro de un Service Worker en los navegadores compatibles.\n\nCon el crecimiento del proyecto también tuve que organizar mejor su estructura interna. Separé el código principal de los datos del vocabulario, que quedaron organizados en `vocab-ja.json` para japonés y `vocab-ko.json` para coreano. Separar temarios, palabras y frases de ejemplo facilita ampliar el contenido sin tener que rehacer el código principal. También es importante mantener los identificadores de las palabras para que el progreso y los errores sigan asociados a cada entrada.";
+const OBJ="Cuando empecé, solo quería tener una pequeña herramienta que me sirviera como diccionario de vocabulario japonés: algo compacto, sencillo y cómodo para consultar y practicar palabras. No tenía pensado construir una plataforma tan grande. La idea fue creciendo a medida que encontraba cosas que echaba en falta y pensaba en cómo podía incorporarlas.\n\nCon el tiempo fui reuniendo en el mismo sitio vocabulario, ejercicios, pronunciación, frases de ejemplo, repaso de errores, estadísticas, Kana, Anki y, más adelante, gramática y construcción de oraciones. Cada nueva parte nació de una necesidad o de una idea que quería probar, y poco a poco todas acabaron formando parte de una misma experiencia.\n\nMi objetivo terminó siendo crear una aplicación que pudiera acompañar desde los primeros pasos con el japonés hasta formas de estudio más completas, sin tener que depender de un montón de herramientas separadas.";
+const FIL="La idea principal era crear una aplicación pequeña y compacta que funcionase como un diccionario de vocabulario japonés. Eso era todo al principio: tener las palabras a mano, poder consultarlas y practicar un poco.\n\nPero la idea fue creciendo. Cada vez que se me ocurría algo que podía mejorar el aprendizaje, intentaba encontrar la manera de incorporarlo. Lo que iba a ser un diccionario terminó convirtiéndose en un proyecto mucho más ambicioso, en el que fui reuniendo herramientas que normalmente están repartidas entre varias aplicaciones diferentes.\n\n**¿Por qué tener varias aplicaciones para estudiar cuando podía intentar reunirlo todo en una sola?**\n\nAsí fueron llegando el vocabulario y sus ejercicios, el sistema de repaso, las estadísticas, Kana y Anki con repetición espaciada. Más adelante también llegaron la construcción de oraciones y los conectores. No quería que fueran funciones sueltas sin relación entre sí; quería que cada parte tuviera su lugar y que todas pudieran complementarse.\n\nLas herramientas que forman parte del proyecto tienen objetivos diferentes:\n\n- **Vocabulario y práctica:** aprender palabras de cualquier temario, poner a prueba lo aprendido mediante diferentes tipos de ejercicios y volver a practicar aquello que más cuesta recordar.\n- **Repaso inteligente:** no limitarse a memorizar una palabra una vez, sino tener la posibilidad de volver sobre los errores, reforzar los conocimientos y consolidar poco a poco lo aprendido.\n- **Kana:** un apartado dedicado a Hiragana y Katakana que reúne diferentes recursos para aprender los silabarios, escuchar su pronunciación, practicar su escritura y mejorar la velocidad de reconocimiento.\n- **Anki:** un sistema de aprendizaje mediante tarjetas y repetición espaciada, pensado para memorizar grandes cantidades de información de una forma rápida y eficiente. Una herramienta potentísima que complementa perfectamente el resto de la aplicación.\n- **Estadísticas y seguimiento:** poder observar el progreso, descubrir qué se ha aprendido, identificar los puntos débiles y comprobar cómo mejora el usuario con el paso del tiempo.\n\nUna de las cosas que más me importa es que todo esté reunido en una misma aplicación, de forma gratuita y sin molestias. La idea es no tener que saltar de una plataforma a otra ni necesitar una aplicación distinta para cada parte del aprendizaje.\n\nTampoco quería que, por tener muchas herramientas, la aplicación se volviera complicada de utilizar. Desde el principio me ha gustado la idea de mantenerla compacta y accesible, aunque por dentro haya ido creciendo muchísimo.\n\nSeguramente todavía quedan muchas cosas por mejorar y nuevas ideas que se podrían añadir. Y eso también forma parte de lo bonito del proyecto: ha ido evolucionando poco a poco, sin que tuviera que existir desde el principio un plan cerrado de todo lo que acabaría siendo.\n\nPor eso le tengo tanto cariño a este proyecto. Porque empezó siendo una pequeña herramienta que quería tener para mí y terminó convirtiéndose en algo mucho más grande, hecho poco a poco, incorporando ideas y buscando que cada mejora tuviera sentido.\n\nAl final, Ankジミー reúne en un mismo lugar muchas de las herramientas que me habría gustado tener desde el principio. Y me hace ilusión pensar que también pueda servirle a otras personas que quieran aprender japonés.\n\n**Una sola aplicación, muchas herramientas y un proyecto que ha ido creciendo poco a poco.**";
+const inl=s=>s.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/`(.+?)`/g,'<code>$1</code>');
+function parse(md){const out=[];let c=null;const fl=()=>{if(c&&c.l.length){c.h+='<ul>'+c.l.map(x=>`<li>${inl(x)}</li>`).join('')+'</ul>';c.l=[]}};
+ md.trim().split('\n').forEach(l=>{
+  if(l.startsWith('## ')){fl();const t=l.slice(3),m=t.match(/^(v[\d.]+)(?: – (v[\d.]+))? — (.*)$/);c=m?{id:m[1],label:m[1]+(m[2]?' – '+m[2]:''),title:m[3],h:'',l:[]}:{id:'',label:'',title:t,h:'',l:[]};out.push(c)}
+  else if(l.startsWith('- ')){c.l.push(l.slice(2))}
+  else if(l.trim()){fl();c.h+=`<p>${inl(l)}</p>`}});
+ fl();return out}
+function blocks(md,fin){const L=md.trim().split('\n').filter(x=>x.trim());let h='',ul=[];const fl=()=>{if(ul.length){h+='<ul>'+ul.map(x=>`<li>${inl(x)}</li>`).join('')+'</ul>';ul=[]}};
+ L.forEach((l,i)=>{if(l.startsWith('- '))ul.push(l.slice(2));else{fl();if(fin&&i==L.length-1)h+=`<div class="final">${inl(l).replace(/^<b>|<\/b>$/g,'')}</div>`;else h+=`<p>${inl(l)}</p>`}});fl();return h}
+
+/* ---------- Demos (con los mismos componentes de la app) ---------- */
+const D={};
+D.furi=e=>{e.innerHTML=`<div class="demo-label">Furigana</div><div class="segmented-control" style="max-width:220px;margin:0 auto 14px"><button class="seg-btn active" data-f="1">あ ON</button><button class="seg-btn" data-f="0">あ OFF</button></div><div class="question-word sentence-mode" style="text-align:center"><ruby>日本語<rt>にほんご</rt></ruby>を<ruby>勉強<rt>べんきょう</rt></ruby>します</div>`;
+ e.onclick=x=>{const b=x.target.closest('[data-f]');if(!b)return;e.querySelectorAll('.seg-btn').forEach(s=>s.classList.toggle('active',s==b));e.classList.toggle('nofuri',b.dataset.f==='0')}};
+D.search=e=>{e.innerHTML=`<div class="global-search" style="margin:0"><label for="gs">🔎 Buscar en todo el vocabulario</label><input id="gs" class="global-search-input" type="search" placeholder="Escribe japonés, romaji o español…" autocomplete="off"><div class="search-results" id="gr"></div></div>`;
+ $('#gs',e).oninput=x=>{const q=x.target.value.trim().toLowerCase(),r=$('#gr',e);const m=q?W.filter(w=>w.slice(0,4).join(' ').toLowerCase().includes(q)):[];r.classList.toggle('visible',!!q);
+  r.innerHTML=`<p class="search-summary">${m.length} resultado${m.length==1?'':'s'}</p><div class="search-result-list">${m.map(w=>`<div class="search-word-card"><div class="search-word-main"><div class="search-word-ja">${rb(w)}</div><div class="search-word-es">${w[3]}</div><div class="search-word-topic">${w[4]}</div></div><button class="dict-button audio-button" data-say="${w[1]}" aria-label="Escuchar">🔊</button></div>`).join('')}</div>`}};
+const series=Array.from({length:30},(_,i)=>(i*37%23)+5);
+function chart(days){const t=new Date(),en=[];for(let i=days-1;i>=0;i--){const d=new Date(t);d.setDate(d.getDate()-i);en.push({c:series[30-days+(days-1-i)],d})}
+ const mx=Math.max(...en.map(x=>x.c)),ev=days>7?5:1,dn=days>7?' dense':'';
+ return`<div class="practice-chart-scroll"><div class="practice-chart${dn}">${en.map(x=>`<div class="practice-chart-bar-wrap" data-bar><div class="practice-chart-tooltip">${x.c}</div><div class="practice-chart-bar" style="height:${Math.max(Math.round(x.c/mx*100),4)}%"></div></div>`).join('')}</div><div class="practice-chart-labels${dn}">${en.map((x,i)=>`<div class="practice-chart-label">${(en.length-1-i)%ev==0?x.d.getDate()+'/'+(x.d.getMonth()+1):''}</div>`).join('')}</div></div>`}
+const bars=e=>e.addEventListener('click',x=>{const b=x.target.closest('[data-bar]');if(!b)return;const t=$('.practice-chart-tooltip',b),on=t.classList.contains('visible');e.querySelectorAll('.practice-chart-tooltip').forEach(y=>y.classList.remove('visible'));if(!on)t.classList.add('visible')});
+D.chart=e=>{e.innerHTML=`<div class="demo-label">Palabras practicadas por día · toca una barra</div>${chart(7)}`;bars(e)};
+const QS=[{l:'Japonés → español',q:'猫',o:['Gato','Agua','Escuela'],a:'Gato',es:1},{l:'Español → japonés',q:'Escuela',o:['学校','水','猫'],a:'学校'},{l:'Romaji → escritura japonesa',q:'mizu',o:['水','先生','猫'],a:'水'},{l:'Completa el hueco',q:'私は<span class="question-blank">&nbsp;&nbsp;&nbsp;</span>を飲みます',o:['水','猫','学校'],a:'水',s:1}];
+D.quiz=(e,st)=>{let i=0,ok=0,ko=0;const draw=()=>{const q=QS[i%4];e.innerHTML=(st?`<div class="stats-grid stats-grid-compact" style="margin-bottom:14px"><div class="stat-card"><div class="stat-value">${ok}</div><div class="stat-label">Acertadas</div></div><div class="stat-card"><div class="stat-value">${ko}</div><div class="stat-label">Falladas</div></div><div class="stat-card"><div class="stat-value">${ok+ko?Math.round(ok/(ok+ko)*100):0}%</div><div class="stat-label">Aciertos</div></div></div>`:'<div class="demo-label">Tipos de pregunta</div>')+`<div class="question-container"><div class="question-label">${q.l}</div><div class="question-word${q.s?' sentence-mode':''}">${q.q}</div></div><div class="options-container">${q.o.map(o=>`<button class="option-btn${q.es?' es-text':''}" data-o="${o}">${o}</button>`).join('')}</div><div id="fb"></div>`};
+ draw();e.onclick=x=>{const q=QS[i%4],b=x.target.closest('[data-o]');
+  if(b&&!e.dataset.done){e.dataset.done=1;const g=b.dataset.o===q.a;g?ok++:ko++;e.querySelectorAll('.option-btn').forEach(o=>{o.classList.add('disabled');if(o.dataset.o===q.a)o.style.cssText='border-color:var(--correct);background:var(--correct-bg)';else if(o===b)o.style.cssText='border-color:var(--wrong);background:var(--wrong-bg)'});
+   $('#fb',e).innerHTML=`<div class="feedback-panel ${g?'correct':'wrong'}"><div class="feedback-title">${g?'✓ ¡Correcto!':'✗ Incorrecto'}</div>${g?'':`<div class="feedback-answer">Respuesta: ${q.a}</div>`}<button class="btn btn-next" data-n>Continuar</button></div>`}
+  else if(x.target.closest('[data-n]')){delete e.dataset.done;i++;draw()}}};
+D.qstats=e=>D.quiz(e,1);
+D.niveles=e=>{const L=[['N5 Principiante',2,[['👋','Saludos','12 palabras'],['👨‍👩‍👧','Familia','18 palabras']]],['N5 Avanzado',1,[['🍣','Comida','24 palabras']]]];
+ e.innerHTML='<div class="demo-label">Niveles y temarios</div>'+L.map(l=>`<div class="level-section"><div class="level-header"><div class="level-header-title">${l[0]}<span class="level-header-count">${l[1]} temario${l[1]>1?'s':''}</span></div><div class="level-progress-wrap"><div class="level-progress-bar"><div class="level-progress-bar-fill" style="width:${l[1]*20}%"></div></div><span class="level-progress-pct">${l[1]*20}%</span></div></div><div class="topics-grid">${l[2].map(t=>`<div class="topic-card"><div class="topic-icon">${t[0]}</div><div class="topic-info"><div class="topic-title">${t[1]}</div><div class="topic-stats">${t[2]}</div></div></div>`).join('')}</div></div>`).join('')};
+const KB=[...'あいうえおかきくけこ'],KR='a i u e o ka ki ku ke ko'.split(' '),KD=[...'がぎぐげござじずぜぞ'],KDR='ga gi gu ge go za ji zu ze zo'.split(' '),KY=['きゃ','きゅ','きょ','しゃ','しゅ','しょ','ちゃ','ちゅ','ちょ','にゃ'],KYR='kya kyu kyo sha shu sho cha chu cho nya'.split(' ');
+const KG=[['Básico',KB,KR],['Dakuten y Handakuten',KD,KDR],['Yōon y contracciones',KY,KYR]];
+const kata=s=>[...s].map(c=>String.fromCharCode(c.charCodeAt(0)+0x60)).join('');
+D.kana=e=>{let s='h';const draw=()=>{e.innerHTML=`<div class="demo-label">Toca un carácter para oírlo</div><div class="kana-choice-grid" style="margin-bottom:6px">${[['h','あ','Hiragana','ひらがな'],['k','ア','Katakana','カタカナ']].map(c=>`<div class="kana-choice-card" data-s="${c[0]}" style="${s==c[0]?'border-color:var(--primary)':''}"><div class="kana-choice-glyph">${c[1]}</div><div class="kana-choice-title">${c[2]}</div><div class="kana-choice-sub">${c[3]}</div></div>`).join('')}</div>`+KG.map(([n,c,r])=>`<div class="kana-section-title">${n}</div><div class="kana-grid">${c.map((x,i)=>`<div class="kana-tile" data-say="${x}"><span class="kana-tile-audio">🔊</span><div class="kana-tile-glyph">${s=='k'?kata(x):x}</div><div class="kana-tile-romaji">${r[i]}</div></div>`).join('')}</div>`).join('')};
+ draw();e.onclick=x=>{const c=x.target.closest('[data-s]');if(c){s=c.dataset.s;draw()}}};
+D.kquiz=e=>{let n=0,ok=0;const T=5;const next=()=>{if(n>=T){const p=Math.round(ok/T*100);e.innerHTML=`<div class="kana-result-score">${p}%</div><p class="kana-result-sub">${ok} aciertos de ${T}</p><button class="btn" data-r>Repetir</button>`;return}
+ const i=Math.floor(Math.random()*10),o=shuffle([i,...shuffle(KB.map((_,j)=>j).filter(j=>j!=i)).slice(0,3)]);
+ e.innerHTML=`<div class="kana-practice-topbar"><div class="kana-progress-bar-track"><div class="kana-progress-bar-fill" style="width:${n/T*100}%"></div></div><div class="kana-progress-count">${n}/${T}</div></div><div class="kana-question-card"><div class="kana-question-glyph">${KB[i]}</div><div class="kana-question-label">¿Cómo se pronuncia esta letra?</div></div><div class="kana-options-grid">${o.map(j=>`<button class="kana-option-btn" data-j="${j}" data-i="${i}">${KR[j]}</button>`).join('')}</div>`};
+ next();e.onclick=x=>{if(x.target.closest('[data-r]')){n=ok=0;next();return}const b=x.target.closest('[data-j]');if(!b)return;const g=b.dataset.j===b.dataset.i;n++;if(g)ok++;e.querySelectorAll('.kana-option-btn').forEach(o=>{o.classList.add('disabled');if(o.dataset.j===o.dataset.i)o.classList.add('is-correct')});if(!g)b.classList.add('is-wrong');setTimeout(next,700)}};
+D.stats=e=>{let tab='s',days=7;const draw=()=>{e.innerHTML=`<div class="stats-tabs"><button class="stats-tab${tab=='s'?' active':''}" data-t="s"><span class="stats-tab-icon">📊</span>Resumen</button><button class="stats-tab${tab=='k'?' active':''}" data-t="k"><span class="stats-tab-icon">あ</span>Kana</button></div>`+(tab=='s'?`<div class="stats-grid stats-grid-compact"><div class="stat-card stat-card-streak"><div class="stat-value">🔥 5</div><div class="stat-label">Racha actual</div></div><div class="stat-card"><div class="stat-value">82%</div><div class="stat-label">Aciertos</div></div><div class="stat-card"><div class="stat-value">34</div><div class="stat-label">Prácticas</div></div></div><div class="stats-chart-head"><h3>Palabras por día</h3><div class="segmented-control"><button class="seg-btn${days==7?' active':''}" data-d="7">7 días</button><button class="seg-btn${days==30?' active':''}" data-d="30">30 días</button></div></div>${chart(days)}`:`<div class="stats-kana-grid">${[['Hiragana',46,38,8],['Katakana',30,21,9]].map(k=>`<div class="stats-kana-card"><div class="stats-kana-card-title">${k[0]}</div><div class="kana-stats-row"><span>Intentos</span><strong>${k[1]}</strong></div><div class="kana-stats-row"><span>Aciertos</span><strong style="color:var(--correct)">${k[2]}</strong></div><div class="kana-stats-row"><span>Fallos</span><span class="kana-fail-badge">${k[3]}</span></div></div>`).join('')}</div><div class="stats-kana-hard-title">Los 5 que más fallas</div><div class="stats-kana-chips">${[['し','shi',4],['ツ','tsu',3],['ぬ','nu',3],['シ','shi',2],['め','me',2]].map(c=>`<span class="stats-kana-chip">${c[0]}<small>${c[1]}</small><span class="kana-fail-badge">${c[2]}</span></span>`).join('')}</div>`)};
+ draw();e.onclick=x=>{const t=x.target.closest('[data-t]'),d=x.target.closest('[data-d]');if(t){tab=t.dataset.t;draw()}if(d){days=+d.dataset.d;draw()}}};
+const DM={'v0.3':['furi'],'v0.4.1':['search'],'v0.5.1':['chart','qstats'],'v1.0':['niveles','quiz'],'v3.0':['kana'],'v3.1':['kquiz'],'v3.4':['stats']};
+const COL={'0':'#8e9aa5','1':'#1cb0f6','2':'#58cc02','3':'#a560f2','4':'#ff9500'};
+
+/* ---------- Tarjetas desplegables ---------- */
+function build(el,items){el.innerHTML=items.map(v=>`<article class="ver" ${v.id?`id="${v.id}"`:''} style="--c:${v.id?COL[v.id[1]]:'#8e9aa5'}"><button class="ver-head" aria-expanded="false">${v.id?`<span class="badge">${v.label}</span>`:''}<span class="ver-t">${v.title}</span><span class="chev">▾</span></button><div class="ver-wrap"><div class="ver-body"><div class="ver-in">${v.h}${(DM[v.id]||[]).map(d=>`<div class="demo" data-demo="${d}"></div>`).join('')}</div></div></div></article>`).join('');
+ el.onclick=x=>{const h=x.target.closest('.ver-head');if(h)toggle(h.parentElement)}}
+function toggle(v,force){
+ const head=v.querySelector('.ver-head');
+ const willOpen=force!==undefined?force:!v.classList.contains('open');
+ if(willOpen){
+  const top0=head.getBoundingClientRect().top;
+  const others=[...document.querySelectorAll('.ver.open')].filter(x=>x!==v);
+  const above=others.some(x=>x.compareDocumentPosition(v)&Node.DOCUMENT_POSITION_FOLLOWING);
+  others.forEach(x=>{x.classList.remove('open');x.querySelector('.ver-head').setAttribute('aria-expanded','false')});
+  v.classList.add('open');head.setAttribute('aria-expanded','true');
+  v.querySelectorAll('.demo').forEach(d=>{if(!d.dataset.ready){d.dataset.ready=1;D[d.dataset.demo](d)}});
+  /* Si el que se cierra está por encima, mientras ambos se animan mantenemos la cabecera pulsada fija en pantalla (fotograma a fotograma) */
+  if(above){const t0=performance.now();(function keep(){const d=head.getBoundingClientRect().top-top0;if(d)window.scrollBy(0,d);if(performance.now()-t0<340)requestAnimationFrame(keep)})()}
+  if(v.id){try{history.replaceState(null,'','#'+v.id)}catch(e){}}
+ }else{v.classList.remove('open');head.setAttribute('aria-expanded','false')}}
+build($('#list'),parse(MD));build($('#general'),parse(GENERAL));$('#obj').innerHTML=blocks(OBJ);$('#fil').innerHTML=blocks(FIL,1);
+let hs='';try{hs=decodeURIComponent(location.hash.slice(1))}catch(e){}
+if(hs){const v=document.getElementById(hs);if(v&&v.classList.contains('ver')){toggle(v,true);setTimeout(()=>v.scrollIntoView({block:'start'}),50)}}
+
+/* ---------- Subir arriba ---------- */
+const up=$('#scroll-top');addEventListener('scroll',()=>up.classList.toggle('visible',scrollY>500),{passive:true});
+up.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+/* ---------- Ajustes (copiados de la app) ---------- */
+const THEME_BASE_COLORS={light:'#1cb0f6',dark:'#1cb0f6',blue:'#2563eb',beige:'#a98a5e',gray:'#6b7280',pink:'#e8a1c4'};
+const THEME_META=[['light','Claro'],['dark','Oscuro'],['blue','Azul'],['beige','Beige'],['gray','Gris'],['pink','Rosa pastel'],['custom','Personalizado']];
+function hexToRgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return{r:(n>>16)&255,g:(n>>8)&255,b:n&255}}
+function rgbToHex(r,g,b){const c=v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0');return`#${c(r)}${c(g)}${c(b)}`}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let h,s,l=(mx+mn)/2;if(mx===mn){h=s=0}else{const d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);switch(mx){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4}h/=6}return{h:h*360,s:s*100,l:l*100}}
+function hslToRgb(h,s,l){h/=360;s/=100;l/=100;let r,g,b;if(s===0){r=g=b=l}else{const f=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p};const q=l<.5?l*(1+s):l+s-l*s,p=2*l-q;r=f(p,q,h+1/3);g=f(p,q,h);b=f(p,q,h-1/3)}return{r:r*255,g:g*255,b:b*255}}
+function shade(hex,L,sm=1){const{r,g,b}=hexToRgb(hex);const o=rgbToHsl(r,g,b);const c=hslToRgb(o.h,Math.max(0,Math.min(100,o.s*sm)),Math.max(0,Math.min(100,L)));return rgbToHex(c.r,c.g,c.b)}
+function relLum(hex){const{r,g,b}=hexToRgb(hex);const f=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)};return .2126*f(r)+.7152*f(g)+.0722*f(b)}
+function palette(base,mode){const d=mode==='dark';const bg=d?shade(base,12,.55):shade(base,97,.35),bg2=d?shade(base,17,.5):shade(base,95,.4),card=d?shade(base,15,.5):shade(base,100,0),bd=d?shade(base,30,.4):shade(base,88,.4),pr=shade(base,d?62:50,1);
+ return{'--bg-color':bg,'--bg-secondary':bg2,'--card-bg':card,'--border':bd,'--primary':pr,'--text-main':relLum(bg)>.45?'#33302c':'#f5f5f5','--text-muted':d?shade(base,65,.15):shade(base,40,.2),'--shadow':d?`0 4px 0 ${shade(base,8,.5)}`:`0 4px 0 ${bd}`}}
+const GEN=['--bg-color','--bg-secondary','--card-bg','--border','--primary','--text-main','--text-muted','--shadow'];
+const defPrefs={theme:'light',customThemeColor:'#1cb0f6'};
+let prefs={...defPrefs};
+try{prefs={...defPrefs,...JSON.parse(localStorage.getItem('ankjimi-recorrido-prefs')||'{}')}}catch(e){}
+function applyTheme(){const root=document.documentElement;GEN.forEach(v=>root.style.removeProperty(v));const t=prefs.theme;
+ if(t==='light'){document.body.classList.remove('dark-theme');return}
+ if(t==='dark'){document.body.classList.add('dark-theme');return}
+ document.body.classList.remove('dark-theme');
+ const base=t==='custom'?prefs.customThemeColor:THEME_BASE_COLORS[t];
+ const pal=palette(base,t==='custom'&&relLum(base)<.4?'dark':'light');
+ Object.entries(pal).forEach(([k,v])=>root.style.setProperty(k,v))}
+function renderThemeGrid(){$('#theme-grid').innerHTML=THEME_META.map(([id,l])=>{const bg=id==='custom'?prefs.customThemeColor:id==='light'?'#ffffff':id==='dark'?'#131f24':THEME_BASE_COLORS[id];
+ return`<button type="button" class="theme-option${prefs.theme===id?' active':''}" data-pref="theme" data-value="${id}" data-theme-id="${id}"><span class="theme-swatch" style="background:${bg}"></span><span class="theme-option-label">${l}</span><span class="theme-option-check">✓</span></button>`}).join('');
+ $('#custom-color-row').style.display=prefs.theme==='custom'?'flex':'none';$('#custom-color-input').value=prefs.customThemeColor}
+
+function applyPrefs(){applyTheme();renderThemeGrid()}
+function setPref(k,v){prefs[k]=v;try{localStorage.setItem('ankjimi-recorrido-prefs',JSON.stringify(prefs))}catch(e){}applyPrefs()}
+function togglePanel(open){const p=$('#settings-panel');const o=p.classList.toggle('open',open);$('#settings-overlay').classList.toggle('open',o);$('#settings-fab').setAttribute('aria-expanded',o);if(o)$('.settings-panel-body').scrollTop=0}
+$('#settings-fab').onclick=()=>togglePanel();
+$('#settings-close').onclick=$('#settings-overlay').onclick=()=>togglePanel(false);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')togglePanel(false)});
+$('#settings-panel').addEventListener('click',e=>{const b=e.target.closest('[data-pref][data-value]');if(b)setPref(b.dataset.pref,b.dataset.value)});
+$('#custom-color-input').addEventListener('input',e=>{prefs.customThemeColor=e.target.value;setPref('theme','custom')});
+applyPrefs();
+
+</script>
+</body>
+</html>
