@@ -1182,6 +1182,11 @@
         .option-btn:active { transform: translateY(4px); box-shadow: var(--shadow-active); }
         .option-btn.disabled { pointer-events: none; }
 
+        /* --- RECORRIDO POR VERSIONES --- */
+        .rec-overlay { position: fixed; inset: 0; z-index: 5000; display: none; flex-direction: column; background: var(--bg-color); }
+        .rec-overlay.open { display: flex; }
+        .rec-bar { display:flex; align-items:center; gap:10px; padding: 10px 14px; border-bottom: 2px solid var(--border); background: var(--bg-color); }
+        .rec-title { font-weight: 800; font-size: 15px; color: var(--text-main); }
         /* --- FORMAR FRASES --- */
         .fr-card-wide { grid-column: 1 / -1; display:flex; align-items:center; gap:14px; text-align:left; }
         .fr-card-wide .kana-choice-glyph { font-size: 30px; margin:0; }
@@ -1518,6 +1523,10 @@
                 <button type="button" class="settings-action-btn" onclick="refreshProgressData(this)">🔄 Actualizar progreso</button>
                 <button type="button" class="settings-action-btn danger" onclick="resetStatsProgress(this)">🗑️ Borrar progreso de estadísticas</button>
             </div>
+
+            <div class="settings-section">
+                <button type="button" class="settings-action-btn" onclick="openRecorrido()">📜 Recorrido por versiones</button>
+            </div>
         </div>
     </div>
     
@@ -1708,6 +1717,15 @@
 
     <div id="screen-anki" class="screen" style="padding:0; max-width:none;">
         <iframe id="anki-iframe" title="Anki" style="border:0; width:100%; height:100%; display:block;"></iframe>
+    </div>
+
+    <!-- RECORRIDO POR VERSIONES (recorrido.html en un visor a pantalla completa) -->
+    <div id="recorrido-overlay" class="rec-overlay" role="dialog" aria-modal="true" aria-label="Recorrido por versiones">
+        <div class="rec-bar">
+            <button class="btn-back" onclick="closeRecorrido()">← Salir</button>
+            <span class="rec-title">📜 Recorrido por versiones</span>
+        </div>
+        <iframe id="recorrido-iframe" title="Recorrido por versiones" style="border:0; width:100%; flex:1; display:block; background:var(--bg-color);"></iframe>
     </div>
 
     <!-- PANTALLA: MENÚ KANA (elegir hiragana / katakana) -->
@@ -5337,6 +5355,32 @@
         }).join('');
         container.innerHTML = `<div class="stats-kana-grid">${cards}</div>${hardestHTML}<div class="stats-kana-hard-title">🧩 Frases y oraciones</div><div class="stats-kana-grid">${frCards}</div>`;
     }
+
+    // ===================== RECORRIDO POR VERSIONES ===================== //
+    function openRecorrido() {
+        if (typeof closeSettingsPanel === 'function') closeSettingsPanel();
+        const ov = document.getElementById('recorrido-overlay'), fr = document.getElementById('recorrido-iframe');
+        if (!fr.getAttribute('src')) { fr.addEventListener('load', syncRecorridoTheme); fr.src = 'recorrido.html'; }
+        else syncRecorridoTheme();
+        ov.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    // El recorrido es una página aparte con sus propios ajustes: le pasamos el tema de la app
+    // (sin guardarlo en los suyos) para que se vea siempre con la misma apariencia.
+    function syncRecorridoTheme() {
+        try {
+            const w = document.getElementById('recorrido-iframe').contentWindow;
+            let t = prefs.theme || 'light';
+            if (t === 'auto') t = systemPrefersDark() ? 'dark' : 'light';
+            const color = prefs.customThemeColor || '#1cb0f6';
+            w.eval(`prefs.theme=${JSON.stringify(t)};prefs.customThemeColor=${JSON.stringify(color)};applyPrefs();`);
+        } catch (e) {}
+    }
+    function closeRecorrido() {
+        document.getElementById('recorrido-overlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('recorrido-overlay').classList.contains('open')) closeRecorrido(); });
 
     // ===================== FORMAR FRASES / JUNTAR ORACIONES ===================== //
     // Un único módulo con dos "modos" (mismo diseño, distintos datos).
