@@ -1,0 +1,855 @@
+{
+  "version": 2,
+  "idioma": "ja",
+  "titulo": "Conectores y enlaces del japonés — edición revisada",
+  "descripcion": "66 ejercicios revisados para enlazar palabras, expresiones e ideas en japonés. Incluye conectores conversacionales y escritos, partículas y estructuras de enlace para expresar adición, secuencia, causa, consecuencia, contraste, condición, concesión, tiempo, finalidad, explicación y alternativa. Los bloques se mezclan en la interfaz, no en este archivo. Algunas expresiones son formales o propias de textos escritos; otras son coloquiales y se usan entre personas de confianza.",
+  "total": 66,
+  "reparto": {
+    "basico": 26,
+    "intermedio": 32,
+    "especializado": 8
+  },
+  "idiomas_no_disponibles": {
+    "ko": "Las frases todavía no están disponibles para este idioma."
+  },
+  "frases": [
+    {
+      "id": 1,
+      "nivel": "basico",
+      "categoria": "adicion",
+      "es": "Ayer fui de compras y después también vi una película.",
+      "ja": "昨日は買い物に行った。そして、映画も見た。",
+      "lectura": "きのうは かいものに いった。そして、えいがも みた。",
+      "bloques": [
+        "昨日は買い物に行った。",
+        "そして、",
+        "映画も見た。"
+      ]
+    },
+    {
+      "id": 2,
+      "nivel": "basico",
+      "categoria": "secuencia",
+      "es": "Primero cenamos y después vimos una película.",
+      "ja": "先にご飯を食べた。それから、映画を見た。",
+      "lectura": "さきに ごはんを たべた。それから、えいがを みた。",
+      "bloques": [
+        "先にご飯を食べた。",
+        "それから、",
+        "映画を見た。"
+      ]
+    },
+    {
+      "id": 3,
+      "nivel": "basico",
+      "categoria": "adicion",
+      "es": "Esta tienda es barata. Además, la comida está rica.",
+      "ja": "この店は安い。それに、料理もおいしい。",
+      "lectura": "このみせは やすい。それに、りょうりも おいしい。",
+      "bloques": [
+        "この店は安い。",
+        "それに、",
+        "料理もおいしい。"
+      ]
+    },
+    {
+      "id": 4,
+      "nivel": "basico",
+      "categoria": "adicion",
+      "es": "Tengo que comprar leche. Ah, y también pan.",
+      "ja": "牛乳を買わないと。あと、パンも。",
+      "lectura": "ぎゅうにゅうを かわないと。あと、パンも。",
+      "bloques": [
+        "牛乳を",
+        "買わないと。",
+        "あと、",
+        "パンも。"
+      ]
+    },
+    {
+      "id": 5,
+      "nivel": "basico",
+      "categoria": "contraste",
+      "es": "Quería ir, pero al final no pude.",
+      "ja": "行きたかった。でも、行けなかった。",
+      "lectura": "いきたかった。でも、いけなかった。",
+      "bloques": [
+        "行きたかった。",
+        "でも、",
+        "行けなかった。"
+      ]
+    },
+    {
+      "id": 6,
+      "nivel": "basico",
+      "categoria": "contraste",
+      "es": "Está un poco lejos, pero vamos andando.",
+      "ja": "ちょっと遠いけど、歩いて行こう。",
+      "lectura": "ちょっと とおいけど、あるいて いこう。",
+      "bloques": [
+        "ちょっと遠い",
+        "けど、",
+        "歩いて行こう。"
+      ]
+    },
+    {
+      "id": 7,
+      "nivel": "basico",
+      "categoria": "causa_consecuencia",
+      "es": "Mañana tengo un examen, así que hoy voy a estudiar.",
+      "ja": "明日テストがある。だから、今日は勉強する。",
+      "lectura": "あした テストが ある。だから、きょうは べんきょうする。",
+      "bloques": [
+        "明日テストがある。",
+        "だから、",
+        "今日は勉強する。"
+      ]
+    },
+    {
+      "id": 8,
+      "nivel": "basico",
+      "categoria": "causa_consecuencia",
+      "es": "Perdí el tren y por eso llegué tarde.",
+      "ja": "電車に乗り遅れた。それで、遅刻した。",
+      "lectura": "でんしゃに のりおくれた。それで、ちこくした。",
+      "bloques": [
+        "電車に乗り遅れた。",
+        "それで、",
+        "遅刻した。"
+      ]
+    },
+    {
+      "id": 9,
+      "nivel": "basico",
+      "categoria": "causa",
+      "es": "Como estoy cansado, hoy me vuelvo a casa.",
+      "ja": "疲れたから、今日は帰る。",
+      "lectura": "つかれたから、きょうは かえる。",
+      "bloques": [
+        "疲れた",
+        "から、",
+        "今日は帰る。"
+      ]
+    },
+    {
+      "id": 10,
+      "nivel": "basico",
+      "categoria": "causa",
+      "es": "Como mañana trabajo, hoy no puedo ir.",
+      "ja": "明日仕事なので、今日は行けません。",
+      "lectura": "あした しごとなので、きょうは いけません。",
+      "bloques": [
+        "明日仕事",
+        "なので、",
+        "今日は行けません。"
+      ]
+    },
+    {
+      "id": 11,
+      "nivel": "basico",
+      "categoria": "orden",
+      "es": "Primero, abre la aplicación.",
+      "ja": "まず、アプリを開いて。",
+      "lectura": "まず、アプリを ひらいて。",
+      "bloques": [
+        "まず、",
+        "アプリを開いて。"
+      ]
+    },
+    {
+      "id": 12,
+      "nivel": "basico",
+      "categoria": "orden",
+      "es": "Después, pulsa este botón.",
+      "ja": "次に、このボタンを押して。",
+      "lectura": "つぎに、このボタンを おして。",
+      "bloques": [
+        "次に、",
+        "このボタンを押して。"
+      ]
+    },
+    {
+      "id": 13,
+      "nivel": "basico",
+      "categoria": "orden",
+      "es": "Por último, guarda los cambios.",
+      "ja": "最後に、変更を保存して。",
+      "lectura": "さいごに、へんこうを ほぞんして。",
+      "bloques": [
+        "最後に、",
+        "変更を保存して。"
+      ]
+    },
+    {
+      "id": 14,
+      "nivel": "basico",
+      "categoria": "ejemplo",
+      "es": "Me gustan los deportes. Por ejemplo, el fútbol.",
+      "ja": "スポーツが好き。例えば、サッカーとか。",
+      "lectura": "スポーツが すき。たとえば、サッカーとか。",
+      "bloques": [
+        "スポーツが好き。",
+        "例えば、",
+        "サッカーとか。"
+      ]
+    },
+    {
+      "id": 15,
+      "nivel": "basico",
+      "categoria": "resumen",
+      "es": "No tengo dinero. Es decir, no puedo comprarlo.",
+      "ja": "お金がない。つまり、買えない。",
+      "lectura": "おかねが ない。つまり、かえない。",
+      "bloques": [
+        "お金がない。",
+        "つまり、",
+        "買えない。"
+      ]
+    },
+    {
+      "id": 16,
+      "nivel": "basico",
+      "categoria": "informacion_adicional",
+      "es": "Por cierto, ¿cuántos años tienes?",
+      "ja": "ちなみに、何歳？",
+      "lectura": "ちなみに、なんさい？",
+      "bloques": [
+        "ちなみに、",
+        "何歳？"
+      ]
+    },
+    {
+      "id": 17,
+      "nivel": "basico",
+      "categoria": "cambio_de_tema",
+      "es": "Por cierto, ¿qué vas a hacer mañana?",
+      "ja": "ところで、明日は何する？",
+      "lectura": "ところで、あしたは なにする？",
+      "bloques": [
+        "ところで、",
+        "明日は何する？"
+      ]
+    },
+    {
+      "id": 18,
+      "nivel": "basico",
+      "categoria": "alternativa",
+      "es": "¿Quieres té o prefieres café?",
+      "ja": "お茶にする？それとも、コーヒー？",
+      "lectura": "おちゃに する？それとも、コーヒー？",
+      "bloques": [
+        "お茶にする？",
+        "それとも、",
+        "コーヒー？"
+      ]
+    },
+    {
+      "id": 19,
+      "nivel": "basico",
+      "categoria": "alternativa",
+      "es": "Puedes solicitarlo por internet o por teléfono.",
+      "ja": "申し込みはウェブまたは電話でできます。",
+      "lectura": "もうしこみは ウェブ または でんわで できます。",
+      "bloques": [
+        "申し込みは",
+        "ウェブ",
+        "または",
+        "電話でできます。"
+      ]
+    },
+    {
+      "id": 20,
+      "nivel": "basico",
+      "categoria": "tiempo",
+      "es": "Después de comer, voy a salir.",
+      "ja": "ご飯を食べてから、出かける。",
+      "lectura": "ごはんを たべてから、でかける。",
+      "bloques": [
+        "ご飯を食べてから、",
+        "出かける。"
+      ]
+    },
+    {
+      "id": 21,
+      "nivel": "basico",
+      "categoria": "tiempo",
+      "es": "Antes de dormir, me ducho.",
+      "ja": "寝る前に、シャワーを浴びる。",
+      "lectura": "ねるまえに、シャワーを あびる。",
+      "bloques": [
+        "寝る前に、",
+        "シャワーを浴びる。"
+      ]
+    },
+    {
+      "id": 22,
+      "nivel": "basico",
+      "categoria": "tiempo",
+      "es": "Llámame después de clase.",
+      "ja": "授業のあとで、電話して。",
+      "lectura": "じゅぎょうの あとで、でんわして。",
+      "bloques": [
+        "授業のあとで、",
+        "電話して。"
+      ]
+    },
+    {
+      "id": 23,
+      "nivel": "intermedio",
+      "categoria": "tiempo",
+      "es": "Cuando tengo tiempo, leo libros.",
+      "ja": "時間があるとき、本を読む。",
+      "lectura": "じかんが あるとき、ほんを よむ。",
+      "bloques": [
+        "時間があるとき、",
+        "本を読む。"
+      ]
+    },
+    {
+      "id": 24,
+      "nivel": "intermedio",
+      "categoria": "condicion",
+      "es": "Si mañana hace buen tiempo, vamos al parque.",
+      "ja": "もし明日晴れたら、公園に行こう。",
+      "lectura": "もし あした はれたら、こうえんに いこう。",
+      "bloques": [
+        "もし",
+        "明日晴れたら、",
+        "公園に行こう。"
+      ]
+    },
+    {
+      "id": 25,
+      "nivel": "intermedio",
+      "categoria": "condicion",
+      "es": "Si te gusta el anime, deberías probar a ver este.",
+      "ja": "アニメが好きなら、これを見てみて。",
+      "lectura": "アニメが すきなら、これを みてみて。",
+      "bloques": [
+        "アニメが好き",
+        "なら、",
+        "これを見てみて。"
+      ]
+    },
+    {
+      "id": 26,
+      "nivel": "intermedio",
+      "categoria": "condicion",
+      "es": "Si tengo tiempo, iré.",
+      "ja": "時間があれば、行くよ。",
+      "lectura": "じかんが あれば、いくよ。",
+      "bloques": [
+        "時間があれば、",
+        "行くよ。"
+      ]
+    },
+    {
+      "id": 27,
+      "nivel": "intermedio",
+      "categoria": "condicion",
+      "es": "Si pulsas este botón, la pantalla cambia.",
+      "ja": "このボタンを押すと、画面が変わる。",
+      "lectura": "このボタンを おすと、がめんが かわる。",
+      "bloques": [
+        "このボタンを押すと、",
+        "画面が変わる。"
+      ]
+    },
+    {
+      "id": 28,
+      "nivel": "intermedio",
+      "categoria": "concesion",
+      "es": "Aunque esté ocupado, iré.",
+      "ja": "忙しくても、行くよ。",
+      "lectura": "いそがしくても、いくよ。",
+      "bloques": [
+        "忙しくても、",
+        "行くよ。"
+      ]
+    },
+    {
+      "id": 29,
+      "nivel": "intermedio",
+      "categoria": "contraste",
+      "es": "Se lo expliqué, pero no me entiende.",
+      "ja": "説明したのに、分かってくれない。",
+      "lectura": "せつめいしたのに、わかってくれない。",
+      "bloques": [
+        "説明した",
+        "のに、",
+        "分かってくれない。"
+      ]
+    },
+    {
+      "id": 30,
+      "nivel": "intermedio",
+      "categoria": "simultaneidad",
+      "es": "Escucho música mientras estudio.",
+      "ja": "音楽を聞きながら、勉強する。",
+      "lectura": "おんがくを ききながら、べんきょうする。",
+      "bloques": [
+        "音楽を聞きながら、",
+        "勉強する。"
+      ]
+    },
+    {
+      "id": 31,
+      "nivel": "intermedio",
+      "categoria": "adicion_motivos",
+      "es": "Este sitio es barato y está cerca, así que suelo venir.",
+      "ja": "ここは安いし、近いし、よく来る。",
+      "lectura": "ここは やすいし、ちかいし、よく くる。",
+      "bloques": [
+        "ここは安いし、",
+        "近いし、",
+        "よく来る。"
+      ]
+    },
+    {
+      "id": 32,
+      "nivel": "intermedio",
+      "categoria": "ejemplos_de_acciones",
+      "es": "Los fines de semana veo películas y juego a videojuegos, entre otras cosas.",
+      "ja": "週末は映画を見たり、ゲームをしたりする。",
+      "lectura": "しゅうまつは えいがを みたり、ゲームを したりする。",
+      "bloques": [
+        "週末は",
+        "映画を見たり、",
+        "ゲームをしたりする。"
+      ]
+    },
+    {
+      "id": 33,
+      "nivel": "intermedio",
+      "categoria": "adicion",
+      "es": "Ese restaurante es barato. Además, está buenísimo.",
+      "ja": "あの店は安い。しかも、おいしい。",
+      "lectura": "あのみせは やすい。しかも、おいしい。",
+      "bloques": [
+        "あの店は安い。",
+        "しかも、",
+        "おいしい。"
+      ]
+    },
+    {
+      "id": 34,
+      "nivel": "intermedio",
+      "categoria": "adicion",
+      "es": "Esta aplicación es muy útil. Además, es gratis.",
+      "ja": "このアプリはとても便利だ。さらに、無料で使える。",
+      "lectura": "このアプリは とても べんりだ。さらに、むりょうで つかえる。",
+      "bloques": [
+        "このアプリはとても便利だ。",
+        "さらに、",
+        "無料で使える。"
+      ]
+    },
+    {
+      "id": 35,
+      "nivel": "intermedio",
+      "categoria": "adicion",
+      "es": "Hoy hace frío. Encima, también está lloviendo.",
+      "ja": "今日は寒い。そのうえ、雨も降っている。",
+      "lectura": "きょうは さむい。そのうえ、あめも ふっている。",
+      "bloques": [
+        "今日は寒い。",
+        "そのうえ、",
+        "雨も降っている。"
+      ]
+    },
+    {
+      "id": 36,
+      "nivel": "intermedio",
+      "categoria": "contraste",
+      "es": "Lo intenté. Sin embargo, no salió bien.",
+      "ja": "やってみた。しかし、うまくいかなかった。",
+      "lectura": "やってみた。しかし、うまく いかなかった。",
+      "bloques": [
+        "やってみた。",
+        "しかし、",
+        "うまくいかなかった。"
+      ]
+    },
+    {
+      "id": 37,
+      "nivel": "intermedio",
+      "categoria": "contraste",
+      "es": "Este trabajo está bien pagado. Por otro lado, es muy estresante.",
+      "ja": "この仕事は給料がいい。一方で、かなり大変だ。",
+      "lectura": "このしごとは きゅうりょうが いい。いっぽうで、かなり たいへんだ。",
+      "bloques": [
+        "この仕事は給料がいい。",
+        "一方で、",
+        "かなり大変だ。"
+      ]
+    },
+    {
+      "id": 38,
+      "nivel": "intermedio",
+      "categoria": "contraste_inesperado",
+      "es": "Pensaba que sería fácil. Pero resultó ser difícil.",
+      "ja": "簡単だと思っていた。ところが、難しかった。",
+      "lectura": "かんたんだと おもっていた。ところが、むずかしかった。",
+      "bloques": [
+        "簡単だと思っていた。",
+        "ところが、",
+        "難しかった。"
+      ]
+    },
+    {
+      "id": 39,
+      "nivel": "intermedio",
+      "categoria": "contraste",
+      "es": "Le avisé. Aun así, no vino.",
+      "ja": "連絡した。それなのに、来なかった。",
+      "lectura": "れんらくした。それなのに、こなかった。",
+      "bloques": [
+        "連絡した。",
+        "それなのに、",
+        "来なかった。"
+      ]
+    },
+    {
+      "id": 40,
+      "nivel": "intermedio",
+      "categoria": "consecuencia",
+      "es": "El tren se retrasó. Por ese motivo, llegué tarde.",
+      "ja": "電車が遅れた。そのため、遅刻した。",
+      "lectura": "でんしゃが おくれた。そのため、ちこくした。",
+      "bloques": [
+        "電車が遅れた。",
+        "そのため、",
+        "遅刻した。"
+      ]
+    },
+    {
+      "id": 41,
+      "nivel": "intermedio",
+      "categoria": "resultado",
+      "es": "Entrenó todos los días. Como resultado, ganó el campeonato.",
+      "ja": "毎日練習した。その結果、優勝した。",
+      "lectura": "まいにち れんしゅうした。そのけっか、ゆうしょうした。",
+      "bloques": [
+        "毎日練習した。",
+        "その結果、",
+        "優勝した。"
+      ]
+    },
+    {
+      "id": 42,
+      "nivel": "intermedio",
+      "categoria": "consecuencia_decision",
+      "es": "No sabía qué hacer. Así que decidí preguntarle.",
+      "ja": "どうすればいいか分からなかった。そこで、聞いてみることにした。",
+      "lectura": "どうすれば いいか わからなかった。そこで、きいてみる ことにした。",
+      "bloques": [
+        "どうすればいいか分からなかった。",
+        "そこで、",
+        "聞いてみることにした。"
+      ]
+    },
+    {
+      "id": 43,
+      "nivel": "intermedio",
+      "categoria": "concesion",
+      "es": "Estaba lloviendo. Aun así, salí.",
+      "ja": "雨が降っていた。それでも、出かけた。",
+      "lectura": "あめが ふっていた。それでも、でかけた。",
+      "bloques": [
+        "雨が降っていた。",
+        "それでも、",
+        "出かけた。"
+      ]
+    },
+    {
+      "id": 44,
+      "nivel": "intermedio",
+      "categoria": "causa",
+      "es": "Gracias a ti, pude terminarlo.",
+      "ja": "あなたのおかげで、終わらせることができた。",
+      "lectura": "あなたの おかげで、おわらせる ことが できた。",
+      "bloques": [
+        "あなたのおかげで、",
+        "終わらせることができた。"
+      ]
+    },
+    {
+      "id": 45,
+      "nivel": "intermedio",
+      "categoria": "causa_negativa",
+      "es": "Por tu culpa, perdí el autobús.",
+      "ja": "君のせいで、バスに乗り遅れた。",
+      "lectura": "きみの せいで、バスに のりおくれた。",
+      "bloques": [
+        "君のせいで、",
+        "バスに乗り遅れた。"
+      ]
+    },
+    {
+      "id": 46,
+      "nivel": "intermedio",
+      "categoria": "finalidad",
+      "es": "Estudio japonés para trabajar en Japón.",
+      "ja": "日本で働くために、日本語を勉強している。",
+      "lectura": "にほんで はたらくために、にほんごを べんきょうしている。",
+      "bloques": [
+        "日本で働くために、",
+        "日本語を勉強している。"
+      ]
+    },
+    {
+      "id": 47,
+      "nivel": "intermedio",
+      "categoria": "finalidad",
+      "es": "Para no olvidarlo, lo he apuntado en el móvil.",
+      "ja": "忘れないように、スマホにメモした。",
+      "lectura": "わすれないように、スマホに メモした。",
+      "bloques": [
+        "忘れないように、",
+        "スマホにメモした。"
+      ]
+    },
+    {
+      "id": 48,
+      "nivel": "especializado",
+      "categoria": "comparacion",
+      "es": "A mí me gusta el café. En cambio, a mi amigo le gusta el té negro.",
+      "ja": "私はコーヒーが好きだ。それに対して、友達は紅茶が好きだ。",
+      "lectura": "わたしは コーヒーが すきだ。それに たいして、ともだちは こうちゃが すきだ。",
+      "bloques": [
+        "私はコーヒーが好きだ。",
+        "それに対して、",
+        "友達は紅茶が好きだ。"
+      ]
+    },
+    {
+      "id": 49,
+      "nivel": "especializado",
+      "categoria": "contraste_reformulacion",
+      "es": "Este método no es sencillo. De hecho, es bastante difícil.",
+      "ja": "この方法は簡単じゃない。むしろ、かなり難しい。",
+      "lectura": "このほうほうは かんたんじゃない。むしろ、かなり むずかしい。",
+      "bloques": [
+        "この方法は簡単じゃない。",
+        "むしろ、",
+        "かなり難しい。"
+      ]
+    },
+    {
+      "id": 50,
+      "nivel": "especializado",
+      "categoria": "resumen",
+      "es": "En resumen, significa que hoy no podemos ir.",
+      "ja": "要するに、今日は行けないってことだ。",
+      "lectura": "ようするに、きょうは いけないって ことだ。",
+      "bloques": [
+        "要するに、",
+        "今日は行けないってことだ。"
+      ]
+    },
+    {
+      "id": 51,
+      "nivel": "especializado",
+      "categoria": "concesion",
+      "es": "Aunque es caro, aun así quiero comprarlo.",
+      "ja": "高いとはいえ、買いたい。",
+      "lectura": "たかいとはいえ、かいたい。",
+      "bloques": [
+        "高いとはいえ、",
+        "買いたい。"
+      ]
+    },
+    {
+      "id": 52,
+      "nivel": "especializado",
+      "categoria": "intensificacion",
+      "es": "A pesar de que estaba lloviendo, salió.",
+      "ja": "雨が降っていたにもかかわらず、出かけた。",
+      "lectura": "あめが ふっていたにも かかわらず、でかけた。",
+      "bloques": [
+        "雨が降っていた",
+        "にもかかわらず、",
+        "出かけた。"
+      ]
+    },
+    {
+      "id": 53,
+      "nivel": "especializado",
+      "categoria": "explicacion_causa",
+      "es": "No puedo ir. Y es que mañana tengo un examen.",
+      "ja": "行けない。なぜなら、明日テストがあるからだ。",
+      "lectura": "いけない。なぜなら、あした テストが あるからだ。",
+      "bloques": [
+        "行けない。",
+        "なぜなら、",
+        "明日テストがあるからだ。"
+      ]
+    },
+    {
+      "id": 54,
+      "nivel": "especializado",
+      "categoria": "hipotesis",
+      "es": "Si eso fuera verdad, tendríamos un problema.",
+      "ja": "それが本当だとしたら、大変なことになる。",
+      "lectura": "それが ほんとうだとしたら、たいへんな ことに なる。",
+      "bloques": [
+        "それが本当だとしたら、",
+        "大変なことになる。"
+      ]
+    },
+    {
+      "id": 55,
+      "nivel": "especializado",
+      "categoria": "explicacion",
+      "es": "No puedo ir. Y es que mañana tengo un examen.",
+      "ja": "行けない。というのも、明日テストがあるからだ。",
+      "lectura": "いけない。というのも、あした テストが あるからだ。",
+      "bloques": [
+        "行けない。",
+        "というのも、",
+        "明日テストがあるからだ。"
+      ]
+    },
+    {
+      "id": 56,
+      "nivel": "basico",
+      "categoria": "secuencia_acciones",
+      "es": "Me levanto, me lavo la cara y voy al colegio.",
+      "ja": "朝起きて、顔を洗って、学校に行く。",
+      "lectura": "あさ おきて、かおを あらって、がっこうに いく。",
+      "bloques": [
+        "朝起きて、",
+        "顔を洗って、",
+        "学校に行く。"
+      ]
+    },
+    {
+      "id": 57,
+      "nivel": "basico",
+      "categoria": "adicion_conversacional",
+      "es": "Ah, y también tengo que comprar huevos.",
+      "ja": "あ、それと、卵も買わなきゃ。",
+      "lectura": "あ、それと、たまごも かわなきゃ。",
+      "bloques": [
+        "あ、",
+        "それと、",
+        "卵も買わなきゃ。"
+      ]
+    },
+    {
+      "id": 58,
+      "nivel": "basico",
+      "categoria": "transicion_conversacional",
+      "es": "Bueno, ¡hasta mañana!",
+      "ja": "じゃあ、また明日！",
+      "lectura": "じゃあ、また あした！",
+      "bloques": [
+        "じゃあ、",
+        "また明日！"
+      ]
+    },
+    {
+      "id": 59,
+      "nivel": "intermedio",
+      "categoria": "consecuencia_condicional",
+      "es": "¿Vas en coche? En ese caso, voy contigo.",
+      "ja": "車で行くの？それなら、私も一緒に行く。",
+      "lectura": "くるまで いくの？それなら、わたしも いっしょに いく。",
+      "bloques": [
+        "車で行くの？",
+        "それなら、",
+        "私も一緒に行く。"
+      ]
+    },
+    {
+      "id": 60,
+      "nivel": "intermedio",
+      "categoria": "secuencia_resultado_inesperado",
+      "es": "Abrí la puerta. Entonces, salió un gato.",
+      "ja": "ドアを開けた。すると、猫が出てきた。",
+      "lectura": "ドアを あけた。すると、ねこが でてきた。",
+      "bloques": [
+        "ドアを開けた。",
+        "すると、",
+        "猫が出てきた。"
+      ]
+    },
+    {
+      "id": 61,
+      "nivel": "intermedio",
+      "categoria": "excepcion_aclaracion",
+      "es": "Aquí puedes hacer fotos. Eso sí, no uses el flash.",
+      "ja": "ここで写真を撮ってもいい。ただし、フラッシュは使わないで。",
+      "lectura": "ここで しゃしんを とっても いい。ただし、フラッシュは つかわないで。",
+      "bloques": [
+        "ここで写真を撮ってもいい。",
+        "ただし、",
+        "フラッシュは使わないで。"
+      ]
+    },
+    {
+      "id": 62,
+      "nivel": "intermedio",
+      "categoria": "alternativa_compensacion",
+      "es": "Hoy no puedo ir. A cambio, mañana sí.",
+      "ja": "今日は行けない。そのかわり、明日なら行けるよ。",
+      "lectura": "きょうは いけない。そのかわり、あしたなら いけるよ。",
+      "bloques": [
+        "今日は行けない。",
+        "そのかわり、",
+        "明日なら行けるよ。"
+      ]
+    },
+    {
+      "id": 63,
+      "nivel": "intermedio",
+      "categoria": "adicion_estructura",
+      "es": "No solo habla japonés, sino también coreano.",
+      "ja": "彼は日本語だけでなく、韓国語も話せる。",
+      "lectura": "かれは にほんごだけでなく、かんこくごも はなせる。",
+      "bloques": [
+        "彼は日本語だけでなく、",
+        "韓国語も",
+        "話せる。"
+      ]
+    },
+    {
+      "id": 64,
+      "nivel": "intermedio",
+      "categoria": "contraste_conjuncion",
+      "es": "Hoy no puedo ir, pero mañana sí.",
+      "ja": "今日は行けないが、明日なら行ける。",
+      "lectura": "きょうは いけないが、あしたなら いける。",
+      "bloques": [
+        "今日は行けない",
+        "が、",
+        "明日なら行ける。"
+      ]
+    },
+    {
+      "id": 65,
+      "nivel": "basico",
+      "categoria": "alternativa_correccion",
+      "es": "No quiero café; prefiero té.",
+      "ja": "コーヒーじゃなくて、お茶がいい。",
+      "lectura": "コーヒーじゃなくて、おちゃが いい。",
+      "bloques": [
+        "コーヒー",
+        "じゃなくて、",
+        "お茶がいい。"
+      ]
+    },
+    {
+      "id": 66,
+      "nivel": "intermedio",
+      "categoria": "accion_sin_hacer_otra",
+      "es": "Fui al colegio sin desayunar.",
+      "ja": "朝ご飯を食べずに、学校に行った。",
+      "lectura": "あさごはんを たべずに、がっこうに いった。",
+      "bloques": [
+        "朝ご飯を食べずに、",
+        "学校に行った。"
+      ]
+    }
+  ]
+}

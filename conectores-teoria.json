@@ -1,0 +1,837 @@
+{
+ "grupos": [
+  {
+   "id": "conectores",
+   "titulo": "Conectores"
+  }
+ ],
+ "lecciones": [
+  {
+   "id": "adicion",
+   "grupo": "conectores",
+   "icono": "➕",
+   "titulo": "Sumar ideas: そして · それに · しかも",
+   "explicacion": [
+    "そして: suma neutra («y luego / y además»). Sirve para casi todo.",
+    "それに: añade otro punto, positivo o negativo («además»). Muy natural hablando.",
+    "しかも / さらに / そのうえ: suman algo todavía más fuerte («y encima»). さらに es más formal.",
+    "あと / それと: coloquiales, para añadir un elemento más mientras hablas («ah, y también»)."
+   ],
+   "ejemplos": [
+    {
+     "ja": "この店は安い。それに、料理もおいしい。",
+     "lectura": "kono mise wa yasui. sore ni, ryōri mo oishii",
+     "es": "Esta tienda es barata. Además, la comida está rica."
+    },
+    {
+     "ja": "あの店は安い。しかも、おいしい。",
+     "lectura": "ano mise wa yasui. shikamo, oishii",
+     "es": "Aquel sitio es barato. Y encima está rico."
+    },
+    {
+     "ja": "牛乳を買わないと。あと、パンも。",
+     "lectura": "gyūnyū o kawanai to. ato, pan mo",
+     "es": "Tengo que comprar leche. Ah, y también pan."
+    }
+   ],
+   "ejercicios": [
+    {
+     "id": "adicion-1",
+     "p": "¿Qué conector es el «y encima» más fuerte?",
+     "ja": "",
+     "ops": [
+      "しかも",
+      "でも",
+      "だから"
+     ],
+     "ok": 0,
+     "exp": "しかも suma algo aún mejor (o peor)."
+    },
+    {
+     "id": "adicion-2",
+     "p": "Estás de compras y recuerdas algo más. ¿Qué dices?",
+     "ja": "牛乳を買わないと。＿、パンも。",
+     "ops": [
+      "あと",
+      "しかし",
+      "なぜなら"
+     ],
+     "ok": 0,
+     "exp": "あと es coloquial para añadir algo."
+    },
+    {
+     "id": "adicion-3",
+     "p": "Completa: 今日は寒い。＿、雨も降っている。",
+     "ja": "今日は寒い。＿、雨も降っている。",
+     "ops": [
+      "そのうえ",
+      "ところで",
+      "それとも"
+     ],
+     "ok": 0,
+     "exp": "そのうえ = encima, además."
+    },
+    {
+     "id": "adicion-4",
+     "p": "¿Cuál es más formal?",
+     "ja": "",
+     "ops": [
+      "さらに",
+      "それに",
+      "あと"
+     ],
+     "ok": 0,
+     "exp": "さらに es más propio de textos o presentaciones."
+    },
+    {
+     "id": "adicion-5",
+     "p": "Para sumar un punto sin más: «Hace frío. Además, llueve»",
+     "ja": "",
+     "ops": [
+      "それに",
+      "それから",
+      "つまり"
+     ],
+     "ok": 0,
+     "exp": "それに añade otro dato a la misma idea."
+    }
+   ]
+  },
+  {
+   "id": "secuencia",
+   "grupo": "conectores",
+   "icono": "🔢",
+   "titulo": "Orden y secuencia: それから · まず · 次に · 〜てから",
+   "explicacion": [
+    "それから: «y después», sigue el orden de las acciones.",
+    "まず → 次に → 最後に: «primero → después → por último». Perfectos para dar instrucciones.",
+    "Verbo+てから: «después de hacer». 食べてから、出かける。",
+    "Verbo+て une acciones en cadena: 朝起きて、顔を洗って、学校に行く。"
+   ],
+   "ejemplos": [
+    {
+     "ja": "先にご飯を食べた。それから、映画を見た。",
+     "lectura": "saki ni gohan o tabeta. sorekara, eiga o mita",
+     "es": "Primero cenamos. Después vimos una película."
+    },
+    {
+     "ja": "まず、アプリを開いて。",
+     "lectura": "mazu, apuri o hiraite",
+     "es": "Primero, abre la aplicación."
+    },
+    {
+     "ja": "ご飯を食べてから、出かける。",
+     "lectura": "gohan o tabete kara, dekakeru",
+     "es": "Después de comer, salgo."
+    }
+   ],
+   "ejercicios": [
+    {
+     "id": "secuencia-1",
+     "p": "¿Con qué empiezas una serie de pasos?",
+     "ja": "",
+     "ops": [
+      "まず",
+      "最後に",
+      "それとも"
+     ],
+     "ok": 0,
+     "exp": "まず = primero."
+    },
+    {
+     "id": "secuencia-2",
+     "p": "¿Cuál cierra la serie?",
+     "ja": "",
+     "ops": [
+      "最後に",
+      "次に",
+      "まず"
+     ],
+     "ok": 0,
+     "exp": "最後に = por último."
+    },
+    {
+     "id": "secuencia-3",
+     "p": "«Después de comer» es…",
+     "ja": "",
+     "ops": [
+      "ご飯を食べてから",
+      "ご飯を食べる前に",
+      "ご飯を食べないで"
+     ],
+     "ok": 0,
+     "exp": "〜てから = después de hacer."
+    },
+    {
+     "id": "secuencia-4",
+     "p": "Une las acciones: 朝起き＿、顔を洗って",
+     "ja": "朝起き＿、顔を洗って、学校に行く。",
+     "ops": [
+      "て",
+      "から",
+      "ので"
+     ],
+     "ok": 0,
+     "exp": "La forma て enlaza acciones en orden."
+    },
+    {
+     "id": "secuencia-5",
+     "p": "«Antes de dormir» es…",
+     "ja": "",
+     "ops": [
+      "寝る前に",
+      "寝てから",
+      "寝たあとで"
+     ],
+     "ok": 0,
+     "exp": "〜前に = antes de."
+    }
+   ]
+  },
+  {
+   "id": "causa",
+   "grupo": "conectores",
+   "icono": "🔗",
+   "titulo": "Causa y consecuencia: から · だから · それで · なので",
+   "explicacion": [
+    "〜から: «porque / así que». Detrás de la CAUSA: 疲れたから、帰る。",
+    "だから: «por eso». Abre una frase nueva con la consecuencia.",
+    "それで: «y por eso» al contar lo que pasó. なので: más suave y educado que から.",
+    "そのため / その結果: formales («por ese motivo / como resultado»). そこで: «así que decidí…».",
+    "〜おかげで: gracias a (bueno). 〜せいで: por culpa de (malo).",
+    "なぜなら / というのも: «y es que…», escritos; siempre terminan en からだ."
+   ],
+   "ejemplos": [
+    {
+     "ja": "明日テストがある。だから、今日は勉強する。",
+     "lectura": "ashita tesuto ga aru. dakara, kyō wa benkyō suru",
+     "es": "Mañana tengo examen, así que hoy estudio."
+    },
+    {
+     "ja": "疲れたから、今日は帰る。",
+     "lectura": "tsukareta kara, kyō wa kaeru",
+     "es": "Como estoy cansado, hoy me voy a casa."
+    },
+    {
+     "ja": "あなたのおかげで、終わらせることができた。",
+     "lectura": "anata no okage de, owaraseru koto ga dekita",
+     "es": "Gracias a ti, pude terminarlo."
+    }
+   ],
+   "ejercicios": [
+    {
+     "id": "causa-1",
+     "p": "En 疲れた＿、帰る。 ¿qué va detrás de la causa?",
+     "ja": "疲れた＿、帰る。",
+     "ops": [
+      "から",
+      "けど",
+      "とか"
+     ],
+     "ok": 0,
+     "exp": "から se pega a la causa."
+    },
+    {
+     "id": "causa-2",
+     "p": "«Mañana tengo examen. Por eso estudio.»",
+     "ja": "明日テストがある。＿、勉強する。",
+     "ops": [
+      "だから",
+      "でも",
+      "それとも"
+     ],
+     "ok": 0,
+     "exp": "だから introduce la consecuencia."
+    },
+    {
+     "id": "causa-3",
+     "p": "Algo malo por culpa de alguien: 君＿＿で、遅れた",
+     "ja": "君＿＿で、遅れた。",
+     "ops": [
+      "のせい",
+      "のおかげ",
+      "のため"
+     ],
+     "ok": 0,
+     "exp": "せい = culpa; おかげ = gracias a."
+    },
+    {
+     "id": "causa-4",
+     "p": "Para dar un motivo formal: «Y es que mañana tengo examen»",
+     "ja": "行けない。＿、明日テストがあるからだ。",
+     "ops": [
+      "なぜなら",
+      "それに",
+      "ちなみに"
+     ],
+     "ok": 0,
+     "exp": "なぜなら siempre acaba con から."
+    },
+    {
+     "id": "causa-5",
+     "p": "Después de una situación, tomas una decisión: «Así que decidí preguntar»",
+     "ja": "",
+     "ops": [
+      "そこで",
+      "しかも",
+      "それとも"
+     ],
+     "ok": 0,
+     "exp": "そこで introduce una acción como respuesta."
+    },
+    {
+     "id": "causa-6",
+     "p": "¿Cuál es más educado que から?",
+     "ja": "",
+     "ops": [
+      "なので",
+      "だから",
+      "けど"
+     ],
+     "ok": 0,
+     "exp": "なので suena más suave."
+    }
+   ]
+  },
+  {
+   "id": "contraste",
+   "grupo": "conectores",
+   "icono": "⚖️",
+   "titulo": "Contraste: でも · けど · しかし · のに",
+   "explicacion": [
+    "でも: «pero», coloquial y muy común al inicio de frase.",
+    "けど / が: «pero» pegado a la frase. が es más formal.",
+    "しかし: «sin embargo», formal o escrito.",
+    "のに: «a pesar de que…» con sorpresa o queja.",
+    "ところが: «pero resultó que…» (inesperado). それなのに: «y aun así…».",
+    "一方で / それに対して: «por otro lado / en cambio», para comparar. むしろ: «más bien, de hecho».",
+    "ただし: «eso sí», pone una limitación."
+   ],
+   "ejemplos": [
+    {
+     "ja": "行きたかった。でも、行けなかった。",
+     "lectura": "ikitakatta. demo, ikenakatta",
+     "es": "Quería ir, pero no pude."
+    },
+    {
+     "ja": "簡単だと思っていた。ところが、難しかった。",
+     "lectura": "kantan da to omotte ita. tokoroga, muzukashikatta",
+     "es": "Pensaba que sería fácil. Pero resultó difícil."
+    },
+    {
+     "ja": "ここで写真を撮ってもいい。ただし、フラッシュは使わないで。",
+     "lectura": "koko de shashin o totte mo ii. tadashi, furasshu wa tsukawanaide",
+     "es": "Aquí puedes hacer fotos. Eso sí, sin flash."
+    }
+   ],
+   "ejercicios": [
+    {
+     "id": "contraste-1",
+     "p": "¿Cuál es el «pero» más coloquial?",
+     "ja": "",
+     "ops": [
+      "でも",
+      "しかし",
+      "一方で"
+     ],
+     "ok": 0,
+     "exp": "でも es el del día a día."
+    },
+    {
+     "id": "contraste-2",
+     "p": "¿Cuál suena a texto formal?",
+     "ja": "",
+     "ops": [
+      "しかし",
+      "けど",
+      "でも"
+     ],
+     "ok": 0,
+     "exp": "しかし = sin embargo."
+    },
+    {
+     "id": "contraste-3",
+     "p": "説明した＿＿、分かってくれない。(sorpresa/queja)",
+     "ja": "説明した＿＿、分かってくれない。",
+     "ops": [
+      "のに",
+      "から",
+      "ので"
+     ],
+     "ok": 0,
+     "exp": "のに = a pesar de que."
+    },
+    {
+     "id": "contraste-4",
+     "p": "Poner una condición: «Eso sí, sin flash»",
+     "ja": "",
+     "ops": [
+      "ただし",
+      "つまり",
+      "そして"
+     ],
+     "ok": 0,
+     "exp": "ただし limita lo dicho."
+    },
+    {
+     "id": "contraste-5",
+     "p": "«Pensaba que sería fácil. Pero resultó difícil.»",
+     "ja": "簡単だと思っていた。＿、難しかった。",
+     "ops": [
+      "ところが",
+      "だから",
+      "または"
+     ],
+     "ok": 0,
+     "exp": "ところが indica un resultado inesperado."
+    },
+    {
+     "id": "contraste-6",
+     "p": "Dos aspectos opuestos: «Por otro lado»",
+     "ja": "",
+     "ops": [
+      "一方で",
+      "最後に",
+      "あと"
+     ],
+     "ok": 0,
+     "exp": "一方で compara dos caras."
+    }
+   ]
+  },
+  {
+   "id": "condicion",
+   "grupo": "conectores",
+   "icono": "🔀",
+   "titulo": "Condiciones: たら · ば · と · なら",
+   "explicacion": [
+    "〜たら: «si / cuando». もし明日晴れたら、公園に行こう。",
+    "〜ば: «si», condición general: 時間があれば、行くよ。",
+    "〜と: resultado natural, «cuando A, siempre B»: ボタンを押すと、画面が変わる。",
+    "〜なら: «si es así», retoma lo que dice el otro: アニメが好きなら、これを見て。",
+    "それなら: «en ese caso». それが本当だとしたら: «si eso fuera verdad».",
+    "もし refuerza cualquier condicional y va al principio."
+   ],
+   "ejemplos": [
+    {
+     "ja": "もし明日晴れたら、公園に行こう。",
+     "lectura": "moshi ashita haretara, kōen ni ikō",
+     "es": "Si mañana hace sol, vamos al parque."
+    },
+    {
+     "ja": "このボタンを押すと、画面が変わる。",
+     "lectura": "kono botan o osu to, gamen ga kawaru",
+     "es": "Si pulsas este botón, cambia la pantalla."
+    },
+    {
+     "ja": "車で行くの？それなら、私も一緒に行く。",
+     "lectura": "kuruma de iku no? sore nara, watashi mo issho ni iku",
+     "es": "¿Vas en coche? En ese caso, voy contigo."
+    }
+   ],
+   "ejercicios": [
+    {
+     "id": "condicion-1",
+     "p": "Resultado natural: ボタンを押＿＿、画面が変わる",
+     "ja": "ボタンを押＿＿、画面が変わる。",
+     "ops": [
+      "すと",
+      "すなら",
+      "したら"
+     ],
+     "ok": 0,
+     "exp": "〜と: A ocurre, y B ocurre siempre."
+    },
+    {
+     "id": "condicion-2",
+     "p": "Retomas lo que dice el otro: «¿Vas en coche? ＿、yo también voy».",
+     "ja": "車で行くの？＿、私も行く。",
+     "ops": [
+      "それなら",
+      "それから",
+      "それで"
+     ],
+     "ok": 0,
+     "exp": "それなら = en ese caso."
+    },
+    {
+     "id": "condicion-3",
+     "p": "¿Qué palabra refuerza una hipótesis?",
+     "ja": "",
+     "ops": [
+      "もし",
+      "ところで",
+      "まず"
+     ],
+     "ok": 0,
+     "exp": "もし + たら/ば = si acaso."
+    },
+    {
+     "id": "condicion-4",
+     "p": "時間があ＿＿、行くよ。 (condición general)",
+     "ja": "時間があ＿＿、行くよ。",
+     "ops": [
+      "れば",
+      "ながら",
+      "ために"
+     ],
+     "ok": 0,
+     "exp": "〜ば = si."
+    },
+    {
+     "id": "condicion-5",
+     "p": "«Si te gusta el anime, mira esto» usa…",
+     "ja": "アニメが好き＿＿、これを見て。",
+     "ops": [
+      "なら",
+      "のに",
+      "から"
+     ],
+     "ok": 0,
+     "exp": "〜なら retoma lo que sabes."
+    }
+   ]
+  },
+  {
+   "id": "concesion",
+   "grupo": "conectores",
+   "icono": "🛡️",
+   "titulo": "Concesión: ても · それでも · とはいえ",
+   "explicacion": [
+    "〜ても: «aunque». 忙しくても、行くよ。",
+    "それでも: «aun así», haces algo a pesar de lo anterior.",
+    "高いとはいえ: «aunque sea caro», algo formal.",
+    "にもかかわらず: «a pesar de», muy formal/escrito."
+   ],
+   "ejemplos": [
+    {
+     "ja": "雨が降っていた。それでも、出かけた。",
+     "lectura": "ame ga futte ita. soredemo, dekaketa",
+     "es": "Llovía. Aun así, salí."
+    },
+    {
+     "ja": "忙しくても、行くよ。",
+     "lectura": "isogashikutemo, iku yo",
+     "es": "Aunque esté ocupado, iré."
+    },
+    {
+     "ja": "高いとはいえ、買いたい。",
+     "lectura": "takai to wa ie, kaitai",
+     "es": "Aunque es caro, quiero comprarlo."
+    }
+   ],
+   "ejercicios": [
+    {
+     "id": "concesion-1",
+     "p": "«Aunque esté ocupado, iré»",
+     "ja": "忙しく＿＿、行くよ。",
+     "ops": [
+      "ても",
+      "たら",
+      "ながら"
+     ],
+     "ok": 0,
+     "exp": "〜ても = aunque."
+    },
+    {
+     "id": "concesion-2",
+     "p": "«Estaba lloviendo. Aun así, salí.»",
+     "ja": "雨が降っていた。＿＿、出かけた。",
+     "ops": [
+      "それでも",
+      "それで",
+      "それから"
+     ],
+     "ok": 0,
+     "exp": "それでも = aun así."
+    },
+    {
+     "id": "concesion-3",
+     "p": "¿Cuál es el más formal?",
+     "ja": "",
+     "ops": [
+      "にもかかわらず",
+      "けど",
+      "でも"
+     ],
+     "ok": 0,
+     "exp": "にもかかわらず pertenece a textos formales."
+    },
+    {
+     "id": "concesion-4",
+     "p": "«Aunque es caro, lo quiero»",
+     "ja": "",
+     "ops": [
+      "高いとはいえ、買いたい",
+      "高いから、買いたい",
+      "高いし、買いたい"
+     ],
+     "ok": 0,
+     "exp": "〜とはいえ concede y sigue adelante."
+    }
+   ]
+  },
+  {
+   "id": "tiempo",
+   "grupo": "conectores",
+   "icono": "⏱️",
+   "titulo": "Tiempo: とき · ながら · 前に · あとで",
+   "explicacion": [
+    "〜とき: «cuando». 時間があるとき、本を読む。",
+    "〜ながら: «mientras» (dos acciones a la vez).",
+    "〜前に: «antes de»; 〜あとで: «después de».",
+    "〜たり〜たりする: hacer cosas como… y…; すると: «y entonces» (resultado inmediato)."
+   ],
+   "ejemplos": [
+    {
+     "ja": "音楽を聞きながら、勉強する。",
+     "lectura": "ongaku o kikinagara, benkyō suru",
+     "es": "Estudio escuchando música."
+    },
+    {
+     "ja": "寝る前に、シャワーを浴びる。",
+     "lectura": "neru mae ni, shawā o abiru",
+     "es": "Antes de dormir, me ducho."
+    },
+    {
+     "ja": "ドアを開けた。すると、猫が出てきた。",
+     "lectura": "doa o aketa. suruto, neko ga dete kita",
+     "es": "Abrí la puerta. Entonces, salió un gato."
+    }
+   ],
+   "ejercicios": [
+    {
+     "id": "tiempo-1",
+     "p": "Dos acciones a la vez: 音楽を聞き＿＿、勉強する",
+     "ja": "音楽を聞き＿＿、勉強する。",
+     "ops": [
+      "ながら",
+      "から",
+      "ても"
+     ],
+     "ok": 0,
+     "exp": "〜ながら = mientras."
+    },
+    {
+     "id": "tiempo-2",
+     "p": "«Antes de dormir»",
+     "ja": "",
+     "ops": [
+      "寝る前に",
+      "寝たあとで",
+      "寝ながら"
+     ],
+     "ok": 0,
+     "exp": "前に = antes."
+    },
+    {
+     "id": "tiempo-3",
+     "p": "«Después de clase» es…",
+     "ja": "",
+     "ops": [
+      "授業のあとで",
+      "授業の前に",
+      "授業のとき"
+     ],
+     "ok": 0,
+     "exp": "あとで = después."
+    },
+    {
+     "id": "tiempo-4",
+     "p": "«Abrí la puerta. Entonces, salió un gato.»",
+     "ja": "ドアを開けた。＿＿、猫が出てきた。",
+     "ops": [
+      "すると",
+      "しかも",
+      "または"
+     ],
+     "ok": 0,
+     "exp": "すると = y entonces."
+    },
+    {
+     "id": "tiempo-5",
+     "p": "Ejemplos de acciones: 映画を見＿＿、ゲームをしたりする",
+     "ja": "映画を見＿＿、ゲームをしたりする。",
+     "ops": [
+      "たり",
+      "ながら",
+      "から"
+     ],
+     "ok": 0,
+     "exp": "〜たり〜たり = cosas como…"
+    }
+   ]
+  },
+  {
+   "id": "alternativa",
+   "grupo": "conectores",
+   "icono": "🔄",
+   "titulo": "Alternativas y reformulación: それとも · つまり · じゃなくて",
+   "explicacion": [
+    "それとも: «¿o…?» en una pregunta: お茶にする？それとも、コーヒー？",
+    "または: «o (bien)», más formal/escrito.",
+    "つまり / 要するに: «es decir / en resumen».",
+    "そのかわり: «a cambio». じゃなくて: «no… sino…». 〜ずに: «sin hacer».",
+    "〜だけでなく: «no solo… sino también»."
+   ],
+   "ejemplos": [
+    {
+     "ja": "お茶にする？それとも、コーヒー？",
+     "lectura": "ocha ni suru? sore tomo, kōhī?",
+     "es": "¿Té? ¿O café?"
+    },
+    {
+     "ja": "お金がない。つまり、買えない。",
+     "lectura": "okane ga nai. tsumari, kaenai",
+     "es": "No tengo dinero. Es decir, no puedo comprarlo."
+    },
+    {
+     "ja": "コーヒーじゃなくて、お茶がいい。",
+     "lectura": "kōhī janakute, ocha ga ii",
+     "es": "No café, prefiero té."
+    }
+   ],
+   "ejercicios": [
+    {
+     "id": "alternativa-1",
+     "p": "Pregunta con alternativa: お茶にする？＿＿、コーヒー？",
+     "ja": "お茶にする？＿＿、コーヒー？",
+     "ops": [
+      "それとも",
+      "それから",
+      "それで"
+     ],
+     "ok": 0,
+     "exp": "それとも ofrece una alternativa."
+    },
+    {
+     "id": "alternativa-2",
+     "p": "Reformular: «Es decir…»",
+     "ja": "",
+     "ops": [
+      "つまり",
+      "ところで",
+      "あと"
+     ],
+     "ok": 0,
+     "exp": "つまり resume lo anterior."
+    },
+    {
+     "id": "alternativa-3",
+     "p": "«No café, sino té»",
+     "ja": "コーヒー＿＿＿、お茶がいい。",
+     "ops": [
+      "じゃなくて",
+      "なので",
+      "ずに"
+     ],
+     "ok": 0,
+     "exp": "じゃなくて corrige."
+    },
+    {
+     "id": "alternativa-4",
+     "p": "«Sin desayunar» es…",
+     "ja": "",
+     "ops": [
+      "朝ご飯を食べずに",
+      "朝ご飯を食べてから",
+      "朝ご飯を食べながら"
+     ],
+     "ok": 0,
+     "exp": "〜ずに = sin hacer."
+    },
+    {
+     "id": "alternativa-5",
+     "p": "«No solo japonés, también coreano»",
+     "ja": "日本語＿＿＿＿、韓国語も話せる。",
+     "ops": [
+      "だけでなく",
+      "だけで",
+      "じゃなくて"
+     ],
+     "ok": 0,
+     "exp": "〜だけでなく = no solo."
+    }
+   ]
+  },
+  {
+   "id": "tema",
+   "grupo": "conectores",
+   "icono": "💬",
+   "titulo": "Cambiar de tema y ejemplos",
+   "explicacion": [
+    "ところで: «por cierto», cambia de tema.",
+    "ちなみに: «a propósito», añade un dato de pasada.",
+    "例えば: «por ejemplo». じゃあ: «bueno», para cerrar o pasar a otra cosa.",
+    "Con ellos la conversación fluye sin cortes."
+   ],
+   "ejemplos": [
+    {
+     "ja": "ところで、明日は何する？",
+     "lectura": "tokoro de, ashita wa nani suru?",
+     "es": "Por cierto, ¿qué haces mañana?"
+    },
+    {
+     "ja": "ちなみに、何歳？",
+     "lectura": "chinami ni, nan sai?",
+     "es": "A propósito, ¿cuántos años tienes?"
+    },
+    {
+     "ja": "じゃあ、また明日！",
+     "lectura": "jā, mata ashita!",
+     "es": "Bueno, ¡hasta mañana!"
+    }
+   ],
+   "ejercicios": [
+    {
+     "id": "tema-1",
+     "p": "Cambias de tema: «Por cierto…»",
+     "ja": "",
+     "ops": [
+      "ところで",
+      "つまり",
+      "それに"
+     ],
+     "ok": 0,
+     "exp": "ところで abre otro tema."
+    },
+    {
+     "id": "tema-2",
+     "p": "Añades un dato de pasada: «A propósito…»",
+     "ja": "",
+     "ops": [
+      "ちなみに",
+      "しかし",
+      "だから"
+     ],
+     "ok": 0,
+     "exp": "ちなみに es un extra."
+    },
+    {
+     "id": "tema-3",
+     "p": "«Por ejemplo» es…",
+     "ja": "",
+     "ops": [
+      "例えば",
+      "要するに",
+      "一方で"
+     ],
+     "ok": 0,
+     "exp": "例えば introduce un ejemplo."
+    },
+    {
+     "id": "tema-4",
+     "p": "Para despedirte: ＿＿、また明日！",
+     "ja": "＿＿、また明日！",
+     "ops": [
+      "じゃあ",
+      "なぜなら",
+      "むしろ"
+     ],
+     "ok": 0,
+     "exp": "じゃあ cierra la charla."
+    }
+   ]
+  }
+ ]
+}

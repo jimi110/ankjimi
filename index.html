@@ -1215,6 +1215,55 @@
         .fr-w { border-bottom: 2px dotted var(--primary); cursor: pointer; }
         .fr-pop { position: fixed; z-index: 1200; max-width: 280px; background: var(--card-bg); color: var(--text-main); border: 2px solid var(--primary); border-radius: var(--radius-md); padding: 8px 12px; font-size: 14px; box-shadow: 0 8px 22px rgba(0,0,0,.25); }
         .fr-pop b { font-size: 17px; } .fr-pop i { color: var(--text-muted); font-style: normal; font-size: 12.5px; }
+        .fr-tabs { display:flex; gap:8px; justify-content:center; margin: 8px 0 14px; }
+        .fr-item { display:flex; align-items:center; gap:10px; background: var(--card-bg); border:2px solid var(--border); border-radius: var(--radius-md); padding: 10px 14px; margin-bottom: 8px; cursor:pointer; box-shadow: var(--shadow); }
+        .fr-item.done { opacity:.6; }
+        .fr-item .fr-item-main { flex:1; min-width:0; font-weight:700; }
+        .fr-item .fr-item-sub { font-weight:500; font-size:13px; color: var(--text-muted); }
+        .fr-check { color: var(--correct); font-weight:800; font-size:18px; }
+        .fr-opts { display:flex; flex-direction:column; gap:10px; max-width:420px; margin: 18px auto 0; }
+        .fr-opt { background: var(--card-bg); border:2px solid var(--border); border-radius: var(--radius-md); padding: 14px; font-size: 18px; font-weight:700; color: var(--text-main); cursor:pointer; box-shadow: var(--shadow); font-family: inherit; }
+        .fr-opt.good { border-color: var(--correct); background: var(--correct-bg); }
+        .fr-opt.bad { border-color: var(--wrong); background: var(--wrong-bg); }
+        .fr-ex { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 10px 14px; margin: 8px 0; }
+        .fr-ex b { font-size: 20px; cursor:pointer; }
+        .fr-hub { text-align:center; padding-top: 6px; }
+        .fr-hub-ico { font-size: 54px; line-height:1; }
+        .fr-hub h2 { font-size: 24px; margin: 6px 0 2px; }
+        .fr-play { width:100%; max-width:360px; font-size: 20px; padding: 18px 24px; margin: 12px auto 4px; display:block; }
+        .fr-tem-btn { width:100%; max-width:360px; margin: 18px auto 0; display:block; }
+        .fr-bar { height: 10px; background: var(--border); border-radius: 6px; overflow:hidden; max-width: 360px; margin: 12px auto 4px; }
+        .fr-bar-fill { height:100%; background: var(--correct); border-radius:6px; transition: width .4s ease; }
+        .fr-bar-txt { font-size: 13px; color: var(--text-muted); }
+        .fr-hl { color: var(--primary); font-weight: 700; }
+        .fr-acc { background: var(--card-bg); border:2px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 12px; box-shadow: var(--shadow); overflow:hidden; transition: border-color .25s ease, box-shadow .25s ease; }
+        .fr-acc.open { border-color: var(--primary); }
+        .fr-acc-head { width:100%; display:flex; align-items:center; gap:12px; padding: 14px; background:none; border:none; cursor:pointer; text-align:left; color: var(--text-main); font-family: inherit; }
+        .fr-acc-ico { width:44px; height:44px; border-radius: 14px; background: var(--bg-secondary); display:flex; align-items:center; justify-content:center; font-size: 22px; flex:none; transition: transform .3s ease, background .3s ease; }
+        .fr-acc.open .fr-acc-ico { transform: rotate(-8deg) scale(1.08); background: var(--primary); }
+        .fr-acc-title { flex:1; min-width:0; font-weight: 800; font-size: 16px; display:flex; flex-direction:column; gap:5px; }
+        .fr-acc-title small { font-weight:600; color: var(--text-muted); font-size: 12px; }
+        .fr-acc-meter { height:6px; border-radius:4px; background: var(--border); overflow:hidden; display:block; }
+        .fr-acc-meter span { display:block; height:100%; background: var(--correct); border-radius:4px; }
+        .fr-acc-chev { font-size: 26px; color: var(--text-muted); transition: transform .3s ease; }
+        .fr-acc.open .fr-acc-chev { transform: rotate(90deg); color: var(--primary); }
+        .fr-acc-panel { display:grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+        .fr-acc.open .fr-acc-panel { grid-template-rows: 1fr; }
+        .fr-acc-inner { overflow:hidden; min-height:0; }
+        .fr-acc-content { padding: 0 16px 16px; }
+        .fr-points { margin: 0; padding: 0; list-style:none; }
+        .fr-points li { position:relative; padding: 6px 0 6px 20px; line-height:1.5; font-size: 14.5px; }
+        .fr-points li::before { content:''; position:absolute; left:2px; top:14px; width:8px; height:8px; border-radius:50%; background: var(--primary); }
+        .fr-acc .fr-acc-content > * { opacity:0; transform: translateY(8px); }
+        .fr-acc.open .fr-acc-content > * { animation: frIn .4s ease forwards; }
+        .fr-acc.open .fr-acc-content > *:nth-child(2) { animation-delay: .06s; }
+        .fr-acc.open .fr-acc-content > *:nth-child(3) { animation-delay: .12s; }
+        .fr-acc.open .fr-acc-content > *:nth-child(4) { animation-delay: .18s; }
+        .fr-acc.open .fr-acc-content > *:nth-child(5) { animation-delay: .24s; }
+        .fr-acc.open .fr-acc-content > *:nth-child(6) { animation-delay: .30s; }
+        @keyframes frIn { to { opacity:1; transform:none; } }
+        .fr-acc-go { width:100%; margin: 14px 0 0; }
+        .fr-ex { border-left: 4px solid var(--primary); }
         .fr-expr { text-align:center; margin: 24px 0; }
         .fr-expr-ja { font-size: 56px; font-weight:700; margin: 10px 0 4px; }
         .fr-expr-read { color: var(--text-muted); font-size: 15px; }
@@ -1424,15 +1473,6 @@
             </div>
 
             <div class="settings-section">
-                <div class="settings-section-title">🧩 Formar frases: traducción al tocar</div>
-                <div class="segmented-control panel-seg" id="frtap-controls">
-                    <button class="seg-btn active" data-value="true" onclick="setPref('frTapTranslate', true)">Activado</button>
-                    <button class="seg-btn" data-value="false" onclick="setPref('frTapTranslate', false)">Desactivado</button>
-                </div>
-                <p style="font-size:12.5px;color:var(--text-muted);margin:6px 2px 0;">Toca una palabra en español para ver su equivalente en japonés. En japonés, mantén pulsado un bloque (o toca las palabras de la respuesta) para ver su significado.</p>
-            </div>
-
-            <div class="settings-section">
                 <div class="settings-section-title">✏️ Completa el hueco</div>
                 <div class="segmented-control panel-seg" id="fillblank-controls">
                     <button class="seg-btn active" data-value="true" onclick="setPref('fillBlankEnabled', true)">Activado</button>
@@ -1453,6 +1493,14 @@
                 <div class="segmented-control panel-seg" id="kana-difficulty-controls">
                     <button class="seg-btn" data-value="facil" onclick="setPref('kanaDifficulty', 'facil')">🟢 Fácil</button>
                     <button class="seg-btn active" data-value="dificil" onclick="setPref('kanaDifficulty', 'dificil')">🔴 Difícil</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-section-title">🧩 Formar frases: traducción al tocar</div>
+                <div class="segmented-control panel-seg" id="frtap-controls">
+                    <button class="seg-btn active" data-value="true" onclick="setPref('frTapTranslate', true)">Activado</button>
+                    <button class="seg-btn" data-value="false" onclick="setPref('frTapTranslate', false)">Desactivado</button>
                 </div>
             </div>
 
@@ -1679,13 +1727,13 @@
                 <div class="kana-choice-title">Katakana</div>
                 <div class="kana-choice-sub">カタカナ</div>
             </div>
-            <div class="kana-choice-card fr-card-wide" onclick="openFrases()">
+            <div class="kana-choice-card fr-card-wide" onclick="openFrases('frases')">
                 <div class="kana-choice-glyph">🧩</div>
                 <div><div class="kana-choice-title">Formar frases</div><div class="kana-choice-sub">Ordena frases coloquiales de la calle</div></div>
             </div>
-            <div class="kana-choice-card fr-card-wide fr-card-soon">
+            <div class="kana-choice-card fr-card-wide" onclick="openFrases('conectores')">
                 <div class="kana-choice-glyph">🔗</div>
-                <div><div class="kana-choice-title">Juntar oraciones<span class="fr-soon-tag">Próximamente</span></div><div class="kana-choice-sub">Conecta oraciones de forma natural</div></div>
+                <div><div class="kana-choice-title">Juntar oraciones</div><div class="kana-choice-sub">Conecta oraciones de forma natural</div></div>
             </div>
         </div>
     </div>
@@ -1761,16 +1809,21 @@
         </div>
     </div>
 
-    <!-- PANTALLA: FORMAR FRASES -->
+    <!-- PANTALLA: FORMAR FRASES / JUNTAR ORACIONES (hub) -->
     <div id="screen-frases" class="screen pad-bottom">
         <div class="header-controls">
             <button class="btn-back" onclick="showScreen('kana')">← Volver</button>
         </div>
-        <div style="text-align:center; margin-bottom:10px;">
-            <h2 style="font-size:22px; margin-bottom:4px;">🧩 Formar frases</h2>
-            <p class="subtitle" style="margin-bottom:0;">Ordena frases coloquiales, como se habla en la calle</p>
-        </div>
         <div id="fr-body"></div>
+    </div>
+
+    <!-- PANTALLA: TEMARIO (teoría + lista) -->
+    <div id="screen-frases-temario" class="screen pad-bottom">
+        <div class="header-controls">
+            <button class="btn-back" onclick="frBackToHub()">← Volver</button>
+        </div>
+        <div style="text-align:center; margin-bottom:6px;"><h2 id="fr-tem-title" style="font-size:20px;">📖 Temario</h2></div>
+        <div id="fr-tem-body"></div>
     </div>
 
     <!-- PANTALLA: PRÁCTICA DE FORMAR FRASES -->
@@ -1799,7 +1852,7 @@
             <p class="kana-result-sub" id="fr-result-sub"></p>
         </div>
         <div class="center-btn-wrap" style="margin-top:18px;">
-            <button class="btn" onclick="showScreen('frases')">Volver a frases</button>
+            <button class="btn" onclick="frResultBack()">Continuar</button>
         </div>
     </div>
 
@@ -2015,7 +2068,7 @@
         // dentro de alguna de sus pantallas se le devuelve al inicio.
         const kanaNavItem = document.getElementById('bottom-nav-kana-item');
         if (kanaNavItem) kanaNavItem.style.display = prefs.koreanMode ? 'none' : 'flex';
-        if (prefs.koreanMode && ['kana', 'kana-vocab', 'kana-practice', 'kana-result', 'frases', 'frases-practice', 'frases-result'].includes(currentScreenId)) {
+        if (prefs.koreanMode && ['kana', 'kana-vocab', 'kana-practice', 'kana-result', 'frases', 'frases-temario', 'frases-practice', 'frases-result'].includes(currentScreenId)) {
             showScreen('home');
         }
 
@@ -2938,7 +2991,7 @@
     // portada principal (con el buscador y el listado de niveles), sin importar
     // en qué nivel/temario/teoría se encontrara el usuario.
     function goToTemarios() {
-        if (currentScreenId === 'review' || currentScreenId === 'review-category' || currentScreenId === 'stats' || currentScreenId === 'anki' || currentScreenId === 'kana' || currentScreenId === 'kana-vocab' || currentScreenId === 'kana-practice' || currentScreenId === 'kana-result' || currentScreenId === 'frases' || currentScreenId === 'frases-practice' || currentScreenId === 'frases-result') {
+        if (currentScreenId === 'review' || currentScreenId === 'review-category' || currentScreenId === 'stats' || currentScreenId === 'anki' || currentScreenId === 'kana' || currentScreenId === 'kana-vocab' || currentScreenId === 'kana-practice' || currentScreenId === 'kana-result' || currentScreenId === 'frases' || currentScreenId === 'frases-temario' || currentScreenId === 'frases-practice' || currentScreenId === 'frases-result') {
             showScreen(lastTopicsScreen);
         } else {
             showScreen('home', true);
@@ -3822,14 +3875,14 @@
         // Durante la práctica se oculta para no chocar con el panel de feedback.
         // Lo mismo mientras se está estudiando un mazo de Anki (aviso que llega
         // desde el iframe vía window.setAnkiStudyActive, ver más abajo).
-        if (screenId === 'practice' || screenId === 'kana-practice' || (screenId === 'anki' && ankiStudyActive)) { nav.style.display = 'none'; return; }
+        if (screenId === 'practice' || screenId === 'kana-practice' || screenId === 'frases-practice' || (screenId === 'anki' && ankiStudyActive)) { nav.style.display = 'none'; return; }
         nav.style.display = 'flex';
 
         let activeTab = 'home';
         if (screenId === 'review' || screenId === 'review-category') activeTab = 'review';
         else if (screenId === 'stats') activeTab = 'stats';
         else if (screenId === 'anki') activeTab = 'anki';
-        else if (screenId === 'kana' || screenId === 'kana-vocab' || screenId === 'kana-practice' || screenId === 'kana-result' || screenId === 'frases' || screenId === 'frases-practice' || screenId === 'frases-result') activeTab = 'kana';
+        else if (screenId === 'kana' || screenId === 'kana-vocab' || screenId === 'kana-practice' || screenId === 'kana-result' || screenId === 'frases' || screenId === 'frases-temario' || screenId === 'frases-practice' || screenId === 'frases-result') activeTab = 'kana';
         else if (screenId === 'result' && practiceState.isReview) activeTab = 'review';
 
         document.querySelectorAll('.bottom-nav-item').forEach(btn => {
@@ -4271,6 +4324,7 @@
         kanaStats.hiragana = { attempts: 0, correct: 0, wrong: 0, mistakeCounts: {} };
         kanaStats.katakana = { attempts: 0, correct: 0, wrong: 0, mistakeCounts: {} };
         saveKanaStats();
+        frResetAllStats();
         saveData();
         renderStats();
         if (btnElement) {
@@ -5268,86 +5322,276 @@
             </div>
         `;
 
-        container.innerHTML = `<div class="stats-kana-grid">${cards}</div>${hardestHTML}`;
+        const frCards = ['frases', 'conectores'].map(m => {
+            const st = frGetStats(m), md = FR_MODES[m];
+            const doneF = Object.keys(st.done).length, doneE = Object.keys(st.ex).length;
+            const pct = st.attempts > 0 ? Math.round((st.correct / st.attempts) * 100) : 0;
+            return `
+                <div class="stats-kana-card">
+                    <div class="stats-kana-card-title">${md.icono} ${md.titulo}</div>
+                    <div class="kana-stats-row"><span>${md.items[0].toUpperCase() + md.items.slice(1)} completadas</span><strong style="color:var(--correct);">${doneF} / ${st.totalF || md.fbF}</strong></div>
+                    <div class="kana-stats-row"><span>Ejercicios de teoría</span><strong>${doneE} / ${st.totalEx || md.fbE}</strong></div>
+                    <div class="kana-stats-row"><span>Intentos</span><strong>${st.attempts}</strong></div>
+                    <div class="kana-stats-row"><span>% de acierto</span><strong>${pct}%</strong></div>
+                </div>`;
+        }).join('');
+        container.innerHTML = `<div class="stats-kana-grid">${cards}</div>${hardestHTML}<div class="stats-kana-hard-title">🧩 Frases y oraciones</div><div class="stats-kana-grid">${frCards}</div>`;
     }
 
-    // ===================== FORMAR FRASES ===================== //
+    // ===================== FORMAR FRASES / JUNTAR ORACIONES ===================== //
+    // Un único módulo con dos "modos" (mismo diseño, distintos datos).
     const FR_LEVELS = [
         { id: 'basico', label: '🟢 Básico' },
         { id: 'intermedio', label: '🟡 Intermedio' },
         { id: 'especializado', label: '🔴 Especializado' },
         { id: 'mezcla', label: '🎲 Mezcla' }
     ];
-    let frData = null;          // { frases:[], bloques:{}, teoria:[] }
-    let frLevel = 'basico';
-    let frStats = { done: {}, attempts: 0, correct: 0 };
-    let frSession = null;
-    try { const s = localStorage.getItem('nihongoFrasesStats'); if (s) frStats = { ...frStats, ...JSON.parse(s) }; } catch (e) {}
-    function frSave() { try { localStorage.setItem('nihongoFrasesStats', JSON.stringify(frStats)); } catch (e) {} }
+    const FR_MODES = {
+        frases: { icono: '🧩', titulo: 'Formar frases', sub: 'Ordena frases coloquiales, como se habla en la calle', items: 'frases', lista: 'Mis frases', key: 'nihongoFrasesStats', fbF: 145, fbE: 31, files: ['frases-ja.json', 'frases-glosario.json', 'frases-teoria.json'], conn: false },
+        conectores: { icono: '🔗', titulo: 'Juntar oraciones', sub: 'Conecta oraciones de forma natural', items: 'oraciones', lista: 'Mis oraciones', key: 'nihongoConectoresStats', fbF: 66, fbE: 45, files: ['conectores-ja.json', 'conectores-glosario.json', 'conectores-teoria.json'], conn: true }
+    };
+    // Familias de conectores: un distractor nunca es de la misma familia que la respuesta
+    // (así no puede ser una alternativa igualmente válida).
+    function frFamily(cat) {
+        const c = String(cat || '');
+        if (/^adicion|informacion_adicional/.test(c)) return 'add';
+        if (/^secuencia|^orden|^tiempo|simultaneidad/.test(c)) return 'seq';
+        if (/^causa|^consecuencia_decision|^consecuencia$|^resultado|^explicacion|finalidad/.test(c)) return 'cause';
+        if (/^contraste|^concesion|intensificacion|excepcion|compensacion|comparacion/.test(c)) return 'contrast';
+        if (/^condicion|hipotesis|consecuencia_condicional/.test(c)) return 'cond';
+        if (/^alternativa/.test(c)) return 'alt';
+        return 'other';
+    }
+    let frMode = 'frases', frData = null, frStats = null, frLevel = 'basico', frTab = 'teoria', frOpenAcc = null;
+    const frDataBy = {}, frStatsBy = {};
+    function frNewStats() { return { done: {}, ex: {}, attempts: 0, correct: 0, level: 'basico' }; }
+    function frSetMode(m) {
+        frMode = m;
+        if (!frStatsBy[m]) {
+            frStatsBy[m] = frNewStats();
+            try { const s = localStorage.getItem(FR_MODES[m].key); if (s) frStatsBy[m] = { ...frNewStats(), ...JSON.parse(s) }; } catch (e) {}
+        }
+        frStats = frStatsBy[m]; frData = frDataBy[m] || null; frLevel = frStats.level || 'basico'; frOpenAcc = null;
+    }
+    // Estadísticas de un modo sin necesidad de haber cargado sus datos (para la pantalla de Estadísticas).
+    function frGetStats(m) {
+        if (frStatsBy[m]) return frStatsBy[m];
+        let st = frNewStats();
+        try { const raw = localStorage.getItem(FR_MODES[m].key); if (raw) st = { ...st, ...JSON.parse(raw) }; } catch (e) {}
+        return (frStatsBy[m] = st);
+    }
+    function frResetAllStats() {
+        Object.keys(FR_MODES).forEach(m => {
+            const old = frGetStats(m);
+            frStatsBy[m] = { ...frNewStats(), totalF: old.totalF, totalEx: old.totalEx, level: old.level };
+            try { localStorage.setItem(FR_MODES[m].key, JSON.stringify(frStatsBy[m])); } catch (e) {}
+        });
+        if (frStats) frStats = frStatsBy[frMode];
+    }
+    function frSave() { try { localStorage.setItem(FR_MODES[frMode].key, JSON.stringify(frStats)); } catch (e) {} }
     function frEsc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+    function frRich(t) { return frEsc(t).replace(/([぀-ヿ一-鿿～〜ー＿]+)/g, '<span class="fr-hl">$1</span>'); }
     function frShuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
     async function frLoad() {
         if (frData) return frData;
-        const [p, g] = await Promise.all([fetch('frases-ja.json'), fetch('frases-glosario.json')]);
-        if (!p.ok || !g.ok) throw new Error('No se pudieron cargar los archivos de frases');
-        const pj = await p.json(), gj = await g.json();
-        frData = { frases: pj.frases || [], bloques: gj.bloques || {}, teoria: gj.teoria || [] };
+        const fl = FR_MODES[frMode].files;
+        const rs = await Promise.all(fl.map(f => fetch(f)));
+        if (rs.some(r => !r.ok)) throw new Error('No se pudieron cargar los archivos');
+        const [pj, gj, tj] = await Promise.all(rs.map(r => r.json()));
+        const fam = {};   // bloque -> familias donde aparece
+        (pj.frases || []).forEach(f => f.bloques.forEach(b => { (fam[b] = fam[b] || new Set()).add(frFamily(f.categoria)); }));
+        frStats.totalF = (pj.frases || []).length; frStats.totalEx = (tj.lecciones || []).reduce((n, l) => n + l.ejercicios.length, 0); frSave();
+        frData = frDataBy[frMode] = { frases: pj.frases || [], bloques: gj.bloques || {}, grupos: tj.grupos || [], lecciones: tj.lecciones || [], fam };
         return frData;
     }
 
-    function openFrases() {
+    function openFrases(m) {
+        frSetMode(m || 'frases');
         showScreen('frases', true);
-        renderFrases();
+        renderFrasesHub();
     }
+    function frBackToHub() { showScreen('frases'); renderFrasesHub(); }
+    function frBackToList() { frBackToHub(); }
+    function openTemario(tab) {
+        if (tab) frTab = tab;
+        showScreen('frases-temario', true);
+        renderTemario();
+    }
+    function frBackToTemario() { showScreen('frases-temario'); renderTemario(); }
 
-    async function renderFrases() {
-        const body = document.getElementById('fr-body');
-        if (prefs.koreanMode) {
-            body.innerHTML = '<div class="fr-notice">🇰🇷<br><br>Las frases todavía no están disponibles para este idioma.</div>';
-            return;
+    function frNotice(el, html) { el.innerHTML = `<div class="fr-notice">${html}</div>`; }
+    function frKoreanNotice() { return '🇰🇷<br><br>Las frases todavía no están disponibles para este idioma.'; }
+
+    async function frEnsureData(el) {
+        if (prefs.koreanMode) { frNotice(el, frKoreanNotice()); return false; }
+        if (!frData) frNotice(el, 'Cargando…');
+        try { await frLoad(); return true; } catch (e) {
+            frNotice(el, 'No se pudieron cargar los archivos de esta sección. Comprueba que ' + FR_MODES[frMode].files.join(', ') + ' están junto a index.html.');
+            return false;
         }
-        body.innerHTML = '<div class="fr-notice">Cargando…</div>';
-        try { await frLoad(); } catch (e) {
-            body.innerHTML = '<div class="fr-notice">No se pudieron cargar las frases. Comprueba que frases-ja.json y frases-glosario.json están junto a index.html.</div>';
-            return;
-        }
-        const list = frData.frases;
-        const count = lvl => list.filter(f => lvl === 'mezcla' || f.nivel === lvl);
-        let h = '<div class="kana-section-title" style="text-align:center;">Teoría rápida</div>';
-        frData.teoria.forEach(t => {
-            h += `<details class="fr-theory"><summary>${t.icono} ${frEsc(t.titulo)}</summary><div class="fr-theory-body">${t.texto.map(x => '<p>' + frEsc(x) + '</p>').join('')}</div></details>`;
-        });
-        h += '<div class="kana-section-title" style="text-align:center;">Elige nivel</div><div class="fr-level-row">';
+    }
+    const frInLevel = lvl => frData.frases.filter(f => lvl === 'mezcla' || f.nivel === lvl);
+
+    // ---- HUB: jugar + dificultad arriba, sin scroll ----
+    async function renderFrasesHub() {
+        const m = FR_MODES[frMode], body = document.getElementById('fr-body');
+        if (!(await frEnsureData(body))) return;
+        const all = frInLevel(frLevel), done = all.filter(f => frStats.done[f.id]).length;
+        const pct = all.length ? Math.round(done / all.length * 100) : 0;
+        let h = `<div class="fr-hub"><div class="fr-hub-ico">${m.icono}</div><h2>${m.titulo}</h2><p class="subtitle">${m.sub}</p>
+            <button class="btn fr-play" onclick="startFrases()">▶️ Jugar</button>
+            <div class="kana-section-title" style="text-align:center;">Dificultad</div><div class="fr-level-row">`;
         FR_LEVELS.forEach(l => {
-            const all = count(l.id), done = all.filter(f => frStats.done[f.id]).length;
-            h += `<button type="button" class="kana-group-chip ${l.id === frLevel ? 'active' : ''}" onclick="frLevel='${l.id}';renderFrases()">${l.label} · ${done}/${all.length}</button>`;
+            const a = frInLevel(l.id), d = a.filter(f => frStats.done[f.id]).length;
+            h += `<button type="button" class="kana-group-chip ${l.id === frLevel ? 'active' : ''}" onclick="frPickLevel('${l.id}')">${l.label} · ${d}/${a.length}</button>`;
         });
-        h += '</div><div class="center-btn-wrap"><button class="btn" onclick="startFrases()">▶️ Practicar</button></div>';
+        h += `</div><div class="fr-bar"><div class="fr-bar-fill" style="width:${pct}%"></div></div><div class="fr-bar-txt">${done} de ${all.length} ${m.items} completadas</div>
+            <button class="btn outline fr-tem-btn" onclick="openTemario('teoria')">📖 Temario</button></div>`;
+        body.innerHTML = h;
+    }
+    function frPickLevel(id) { frLevel = id; frStats.level = id; frSave(); renderFrasesHub(); }
+
+    // ---- TEMARIO: teoría (desplegables) + lista de frases ----
+    async function renderTemario() {
+        const m = FR_MODES[frMode], body = document.getElementById('fr-tem-body');
+        document.getElementById('fr-tem-title').innerText = '📖 Temario · ' + m.titulo;
+        if (!(await frEnsureData(body))) return;
+        let h = `<div class="fr-tabs"><button type="button" class="kana-group-chip ${frTab === 'teoria' ? 'active' : ''}" onclick="frTab='teoria';renderTemario()">📖 Teoría</button><button type="button" class="kana-group-chip ${frTab === 'lista' ? 'active' : ''}" onclick="frTab='lista';renderTemario()">✅ ${m.lista}</button></div>`;
+        h += frTab === 'teoria' ? frRenderTheory() : frRenderPhrases();
         body.innerHTML = h;
     }
 
-    // Distractores: bloques de otras frases de la misma categoría (o cualquiera).
-    function frMakeChips(f) {
-        const correct = f.bloques.slice();
-        const extra = f.bloques.length === 2 ? 2 : 1;
-        const pool = [];
-        frData.frases.forEach(o => { if (o.id !== f.id) o.bloques.forEach(b => { if (o.bloques.length > 1 && !correct.includes(b) && !pool.includes(b)) pool.push(b); }); });
-        const same = pool.filter(b => frData.frases.some(o => o.categoria === f.categoria && o.bloques.includes(b)));
-        const picks = frShuffle(same.length >= extra ? same : pool).slice(0, extra);
-        return frShuffle(correct.concat(picks).map(t => ({ t })));
+    function frRenderTheory() {
+        let h = '<p class="subtitle" style="text-align:center;">Toca una lección: explicación, ejemplos y ejercicios para practicarla.</p>';
+        frData.lecciones.forEach((l, idx) => {
+            const d = l.ejercicios.filter(e => frStats.ex[e.id]).length, all = l.ejercicios.length, open = frOpenAcc === l.id;
+            h += `<div class="fr-acc ${open ? 'open' : ''}" data-id="${l.id}">
+                <button type="button" class="fr-acc-head" onclick="frToggleAcc('${l.id}')">
+                    <span class="fr-acc-ico">${l.icono}</span>
+                    <span class="fr-acc-title">${frEsc(l.titulo)}<span class="fr-acc-meter"><span style="width:${all ? d / all * 100 : 0}%"></span></span><small>${d === all ? '✓ ' : ''}${d}/${all} ejercicios</small></span>
+                    <span class="fr-acc-chev">›</span></button>
+                <div class="fr-acc-panel"><div class="fr-acc-inner"><div class="fr-acc-content">
+                    <ul class="fr-points">${l.explicacion.map(t => `<li>${frRich(t)}</li>`).join('')}</ul>
+                    <div class="kana-section-title" style="margin-top:14px;">Ejemplos</div>
+                    ${l.ejemplos.map(e => `<div class="fr-ex"><b onclick="speakJapanese('${e.ja.replace(/'/g, '')}')">${frEsc(e.ja)} 🔊</b><div class="fr-expr-read">${frEsc(e.lectura)}</div><div>${frEsc(e.es)}</div></div>`).join('')}
+                    <button class="btn fr-acc-go" onclick="startQuiz('${l.id}')">▶️ Practicar esta lección</button>
+                </div></div></div></div>`;
+        });
+        return h;
+    }
+    function frToggleAcc(id) {
+        const el = document.querySelector(`.fr-acc[data-id="${id}"]`); if (!el) return;
+        const willOpen = !el.classList.contains('open');
+        document.querySelectorAll('.fr-acc.open').forEach(x => x.classList.remove('open'));
+        frOpenAcc = willOpen ? id : null;
+        if (willOpen) { el.classList.add('open'); playSound('click'); setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 340); }
     }
 
-    function startFrases() {
-        let pool = frData.frases.filter(f => frLevel === 'mezcla' || f.nivel === frLevel);
-        pool = frShuffle(pool).sort((a, b) => (frStats.done[a.id] ? 1 : 0) - (frStats.done[b.id] ? 1 : 0)).slice(0, 10);
-        pool = frShuffle(pool);
-        frSession = { queue: pool.map(f => f.id), total: pool.length, firstTry: 0, seen: {}, retry: {}, expr: 0 };
+    function frRenderPhrases() {
+        const m = FR_MODES[frMode];
+        let h = '<div class="fr-level-row">';
+        FR_LEVELS.forEach(l => {
+            const a = frInLevel(l.id), d = a.filter(f => frStats.done[f.id]).length;
+            h += `<button type="button" class="kana-group-chip ${l.id === frLevel ? 'active' : ''}" onclick="frLevel='${l.id}';frStats.level=frLevel;frSave();renderTemario()">${l.label} · ${d}/${a.length}</button>`;
+        });
+        h += '</div>';
+        const cur = frInLevel(frLevel);
+        const pending = cur.filter(f => !frStats.done[f.id]), done = cur.filter(f => frStats.done[f.id]);
+        const item = f => `<div class="fr-item ${frStats.done[f.id] ? 'done' : ''}" onclick="startFrases(${f.id})"><div class="fr-item-main">${frEsc(f.es)}${frStats.done[f.id] ? `<div class="fr-item-sub">${frEsc(f.ja)}</div>` : ''}</div>${frStats.done[f.id] ? '<span class="fr-check">✓</span>' : '<span style="color:var(--text-muted)">›</span>'}</div>`;
+        h += `<div class="kana-section-title">Pendientes (${pending.length})</div>` + (pending.map(item).join('') || `<p class="subtitle">¡Todas completadas! 🎉</p>`);
+        h += `<div class="kana-section-title">Completadas (${done.length})</div>` + (done.map(item).join('') || '<p class="subtitle">Aún ninguna.</p>');
+        if (done.length) h += '<div class="center-btn-wrap" style="margin-top:14px;"><button class="btn outline" onclick="frResetLevel()">↺ Reiniciar este nivel</button></div>';
+        return h;
+    }
+
+    function frResetLevel() {
+        if (!confirm('¿Reiniciar el progreso de este nivel?')) return;
+        frInLevel(frLevel).forEach(f => delete frStats.done[f.id]);
+        frSave(); renderTemario();
+    }
+
+    function frResultBack() {
+        if (frSession && frSession.mode === 'quiz') { frTab = 'teoria'; frOpenAcc = frSession.lesson; frBackToTemario(); }
+        else frBackToHub();
+    }
+
+    function startQuiz(id) {
+        const l = frData.lecciones.find(x => x.id === id);
+        let ex = l.ejercicios.filter(e => !frStats.ex[e.id]);
+        if (!ex.length) ex = l.ejercicios.slice();      // todo completado: repaso
+        frSession = { mode: 'quiz', lesson: id, queue: frShuffle(ex).map(e => e.id), total: ex.length, firstTry: 0, seen: {}, retry: {}, expr: 0 };
         showScreen('frases-practice', true);
         frQuestion();
     }
 
-    function abortFrases() { if (confirm('¿Seguro que quieres salir de la práctica?')) showScreen('frases'); }
+    function frQuizQuestion() {
+        const l = frData.lecciones.find(x => x.id === frSession.lesson);
+        const ex = l.ejercicios.find(e => e.id === frSession.queue[0]);
+        frCur = null; frQuizEx = ex;
+        const opts = frShuffle(ex.ops.map((t, i) => ({ t, ok: i === ex.ok })));
+        frQuizOpts = opts;
+        document.getElementById('fr-stage').innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">${l.icono} ${frEsc(l.titulo)}</div><div class="fr-prompt-es" style="font-size:20px;">${frEsc(ex.p)}</div>${ex.ja ? `<div class="fr-expr-ja" style="font-size:34px;">${frEsc(ex.ja)}</div>` : ''}</div>
+            <div class="fr-opts">${opts.map((o, i) => `<button class="fr-opt" data-i="${i}" onclick="frAnswerQuiz(${i})">${frEsc(o.t)}</button>`).join('')}</div>`;
+    }
+    let frQuizEx = null, frQuizOpts = null, frQuizLocked = false;
+    function frAnswerQuiz(i) {
+        if (frQuizLocked) return; frQuizLocked = true;
+        const ok = frQuizOpts[i].ok, ex = frQuizEx;
+        document.querySelectorAll('.fr-opt').forEach((b, k) => { if (frQuizOpts[k].ok) b.classList.add('good'); else if (k === i) b.classList.add('bad'); b.disabled = true; });
+        frStats.attempts++;
+        if (ok) { frStats.correct++; frStats.ex[ex.id] = true; if (!frSession.retry[ex.id]) frSession.firstTry++; frSession.queue.shift(); playSound('correct'); }
+        else { frSession.retry[ex.id] = true; frSession.queue.push(frSession.queue.shift()); playSound('wrong'); }
+        frSave();
+        const fb = document.getElementById('fr-feedback');
+        fb.className = 'feedback-panel ' + (ok ? 'correct' : 'wrong'); fb.style.display = 'flex';
+        document.getElementById('fr-fb-title').innerText = ok ? '✓ ¡Correcto!' : '✗ No era esa';
+        document.getElementById('fr-fb-answer').innerHTML = `<div style="font-size:18px;font-weight:700;">${frEsc(frQuizOpts.find(o => o.ok).t)}</div>`;
+        document.getElementById('fr-fb-gloss').innerHTML = `<div class="fr-gloss-item"><span>${frEsc(ex.exp)}</span></div>`;
+    }
+
+    // Distractores: en frases, bloques de otras frases; en oraciones, conectores de otra familia.
+    function frMakeChips(f) {
+        const correct = f.bloques.slice();
+        const extra = f.bloques.length <= 2 ? 2 : 1;
+        let pool = [];
+        if (FR_MODES[frMode].conn) {
+            const mine = new Set(); f.bloques.forEach(b => (frData.fam[b] || []).forEach(x => mine.add(x)));
+            mine.add(frFamily(f.categoria));
+            Object.keys(frData.bloques).forEach(b => {
+                const g = frData.bloques[b]; if (!g[3] || correct.includes(b)) return;
+                const fams = [...(frData.fam[b] || [])];
+                if (fams.length && fams.every(x => !mine.has(x) || x === 'other')) pool.push(b);
+            });
+        } else {
+            const all = [];
+            frData.frases.forEach(o => { if (o.id !== f.id) o.bloques.forEach(b => { if (o.bloques.length > 1 && !correct.includes(b) && !all.includes(b)) all.push(b); }); });
+            const same = all.filter(b => frData.frases.some(o => o.categoria === f.categoria && o.bloques.includes(b)));
+            pool = same.length >= extra ? same : all;
+        }
+        const picks = frShuffle(pool).slice(0, extra);
+        return frShuffle(correct.concat(picks).map(t => ({ t })));
+    }
+
+    function startFrases(singleId) {
+        let pool;
+        if (singleId) pool = frData.frases.filter(f => f.id === singleId);
+        else {
+            pool = frInLevel(frLevel);
+            pool = frShuffle(pool).sort((a, b) => (frStats.done[a.id] ? 1 : 0) - (frStats.done[b.id] ? 1 : 0)).slice(0, 10);
+            pool = frShuffle(pool);
+        }
+        frSession = { mode: 'frases', single: !!singleId, queue: pool.map(f => f.id), total: pool.length, firstTry: 0, seen: {}, retry: {}, expr: 0 };
+        showScreen('frases-practice', true);
+        frQuestion();
+    }
+
+    function abortFrases() {
+        if (!confirm('¿Salir? Tu progreso ya está guardado.')) return;
+        if (frSession && frSession.mode === 'quiz') { frTab = 'teoria'; frOpenAcc = frSession.lesson; frBackToTemario(); }
+        else if (frSession && frSession.single) { frTab = 'lista'; frBackToTemario(); }
+        else frBackToHub();
+    }
 
     function frGloss(f, onlyNew) {
         return f.bloques.map(b => {
@@ -5396,7 +5640,14 @@
     let frCur = null, frState = null, frHints = false;
     function frQuestion() {
         const fb = document.getElementById('fr-feedback'); fb.className = 'feedback-panel'; fb.style.display = 'none';
+        frQuizLocked = false;
         if (frSession.queue.length === 0) return frFinish();
+        if (frSession.mode === 'quiz') {
+            const dn = frSession.total - new Set(frSession.queue).size;
+            document.getElementById('fr-progress').style.width = (dn / frSession.total * 100) + '%';
+            document.getElementById('fr-count').innerText = dn + '/' + frSession.total;
+            return frQuizQuestion();
+        }
         const id = frSession.queue[0];
         frCur = frData.frases.find(f => f.id === id);
         const done = frSession.total - new Set(frSession.queue).size;
@@ -5555,10 +5806,11 @@
 
     function frFinish() {
         playSound('complete');
+        if (frSession.mode === 'frases' && frSession.single) { frTab = 'lista'; frBackToTemario(); return; }
         const ordered = frSession.total - frSession.expr;
         const pct = ordered > 0 ? Math.round(frSession.firstTry / ordered * 100) : 100;
         document.getElementById('fr-result-score').innerText = pct + '%';
-        document.getElementById('fr-result-sub').innerText = `${frSession.firstTry} de ${ordered} frases a la primera` + (frSession.expr ? ` · ${frSession.expr} expresiones aprendidas` : '');
+        document.getElementById('fr-result-sub').innerText = `${frSession.firstTry} de ${ordered} ${frSession.mode === 'quiz' ? 'ejercicios' : 'frases'} a la primera` + (frSession.expr ? ` · ${frSession.expr} expresiones aprendidas` : '') + ' · Progreso guardado';
         showScreen('frases-result');
     }
 
