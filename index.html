@@ -1182,6 +1182,45 @@
         .option-btn:active { transform: translateY(4px); box-shadow: var(--shadow-active); }
         .option-btn.disabled { pointer-events: none; }
 
+        /* --- FORMAR FRASES --- */
+        .fr-card-wide { grid-column: 1 / -1; display:flex; align-items:center; gap:14px; text-align:left; }
+        .fr-card-wide .kana-choice-glyph { font-size: 30px; margin:0; }
+        .fr-card-soon { opacity: .6; cursor: default; }
+        .fr-soon-tag { font-size: 11px; font-weight:700; background: var(--bg-secondary); border:1px solid var(--border); border-radius: 20px; padding: 2px 8px; margin-left:6px; color: var(--text-muted); }
+        .fr-level-row { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin: 6px 0 14px; }
+        .fr-theory { background: var(--card-bg); border:2px solid var(--border); border-radius: var(--radius-md); margin-bottom:10px; box-shadow: var(--shadow); }
+        .fr-theory summary { padding: 12px 14px; font-weight:700; cursor:pointer; list-style:none; }
+        .fr-theory summary::-webkit-details-marker { display:none; }
+        .fr-theory .fr-theory-body { padding: 0 14px 12px; color: var(--text-main); font-size: 14.5px; line-height:1.5; }
+        .fr-theory .fr-theory-body p { margin: 6px 0; }
+        .fr-notice { text-align:center; background: var(--bg-secondary); border:2px dashed var(--border); border-radius: var(--radius-lg); padding: 28px 18px; color: var(--text-muted); margin-top: 20px; }
+        .fr-prompt { text-align:center; margin: 18px 0 8px; }
+        .fr-prompt-label { color: var(--text-muted); font-size: 13px; }
+        .fr-prompt-es { font-size: 24px; font-weight: 700; margin-top: 6px; }
+        .fr-slots { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin: 22px auto 18px; max-width:520px; padding-bottom:10px; }
+        .fr-slot { min-width: 70px; min-height: 54px; border: 2px dashed var(--border); border-radius: var(--radius-md); display:flex; align-items:center; justify-content:center; background: var(--bg-secondary); }
+        .fr-slot.over { border-color: var(--primary); background: var(--card-bg); }
+        .fr-tray { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:520px; margin: 0 auto; min-height:60px; padding: 12px 0; border-top: 2px solid var(--border); }
+        .fr-chip { background: var(--card-bg); border:2px solid var(--border); border-radius: var(--radius-md); padding: 8px 14px; font-size: 20px; font-weight:700; box-shadow: var(--shadow); cursor: grab; touch-action: none; user-select:none; -webkit-user-select:none; text-align:center; }
+        .fr-chip small { display:block; font-size: 11.5px; font-weight:500; color: var(--text-muted); margin-top:2px; }
+        .fr-chip.used { opacity: .25; pointer-events:none; box-shadow:none; }
+        .fr-chip.in-slot { box-shadow:none; border-color: var(--primary); }
+        .fr-chip.good { border-color: var(--correct); background: var(--correct-bg); }
+        .fr-chip.bad { border-color: var(--wrong); background: var(--wrong-bg); }
+        .fr-ghost { position: fixed; z-index: 1000; pointer-events:none; transform: translate(-50%,-60%) scale(1.08); box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+        .fr-gloss { text-align:left; max-height: 34vh; overflow:auto; margin-top: 8px; border-top: 1px solid rgba(0,0,0,.12); padding-top: 8px; }
+        .fr-gloss-item { display:flex; gap:10px; padding: 4px 0; font-size: 14px; color: var(--text-main); }
+        .fr-gloss-item b { min-width: 90px; font-size: 16px; }
+        .fr-gloss-item i { color: var(--text-muted); font-style: normal; font-size: 12.5px; display:block; }
+        .fr-w { border-bottom: 2px dotted var(--primary); cursor: pointer; }
+        .fr-pop { position: fixed; z-index: 1200; max-width: 280px; background: var(--card-bg); color: var(--text-main); border: 2px solid var(--primary); border-radius: var(--radius-md); padding: 8px 12px; font-size: 14px; box-shadow: 0 8px 22px rgba(0,0,0,.25); }
+        .fr-pop b { font-size: 17px; } .fr-pop i { color: var(--text-muted); font-style: normal; font-size: 12.5px; }
+        .fr-expr { text-align:center; margin: 24px 0; }
+        .fr-expr-ja { font-size: 56px; font-weight:700; margin: 10px 0 4px; }
+        .fr-expr-read { color: var(--text-muted); font-size: 15px; }
+        .fr-expr-es { font-size: 22px; font-weight:700; margin-top: 12px; }
+        .fr-expr-note { color: var(--text-muted); font-size: 14px; margin-top:8px; }
+
         /* --- FEEDBACK --- */
         .feedback-panel {
             position: fixed; bottom: 0; left: 0; width: 100%; padding: 24px; display: none;
@@ -1382,6 +1421,15 @@
                     <button class="seg-btn active" data-value="true" onclick="setPref('hiragana', true)">あ ON</button>
                     <button class="seg-btn" data-value="false" onclick="setPref('hiragana', false)">あ OFF</button>
                 </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-section-title">🧩 Formar frases: traducción al tocar</div>
+                <div class="segmented-control panel-seg" id="frtap-controls">
+                    <button class="seg-btn active" data-value="true" onclick="setPref('frTapTranslate', true)">Activado</button>
+                    <button class="seg-btn" data-value="false" onclick="setPref('frTapTranslate', false)">Desactivado</button>
+                </div>
+                <p style="font-size:12.5px;color:var(--text-muted);margin:6px 2px 0;">Toca una palabra en español para ver su equivalente en japonés. En japonés, mantén pulsado un bloque (o toca las palabras de la respuesta) para ver su significado.</p>
             </div>
 
             <div class="settings-section">
@@ -1631,6 +1679,14 @@
                 <div class="kana-choice-title">Katakana</div>
                 <div class="kana-choice-sub">カタカナ</div>
             </div>
+            <div class="kana-choice-card fr-card-wide" onclick="openFrases()">
+                <div class="kana-choice-glyph">🧩</div>
+                <div><div class="kana-choice-title">Formar frases</div><div class="kana-choice-sub">Ordena frases coloquiales de la calle</div></div>
+            </div>
+            <div class="kana-choice-card fr-card-wide fr-card-soon">
+                <div class="kana-choice-glyph">🔗</div>
+                <div><div class="kana-choice-title">Juntar oraciones<span class="fr-soon-tag">Próximamente</span></div><div class="kana-choice-sub">Conecta oraciones de forma natural</div></div>
+            </div>
         </div>
     </div>
 
@@ -1702,6 +1758,48 @@
         <div class="kana-result-grid" id="kana-result-grid"></div>
         <div class="center-btn-wrap">
             <button class="btn" id="kana-result-back-btn">Volver al vocabulario</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA: FORMAR FRASES -->
+    <div id="screen-frases" class="screen pad-bottom">
+        <div class="header-controls">
+            <button class="btn-back" onclick="showScreen('kana')">← Volver</button>
+        </div>
+        <div style="text-align:center; margin-bottom:10px;">
+            <h2 style="font-size:22px; margin-bottom:4px;">🧩 Formar frases</h2>
+            <p class="subtitle" style="margin-bottom:0;">Ordena frases coloquiales, como se habla en la calle</p>
+        </div>
+        <div id="fr-body"></div>
+    </div>
+
+    <!-- PANTALLA: PRÁCTICA DE FORMAR FRASES -->
+    <div id="screen-frases-practice" class="screen pad-bottom" style="padding-bottom:260px;">
+        <div class="kana-practice-topbar">
+            <button class="btn-back" style="padding:4px;" onclick="abortFrases()">✕</button>
+            <div class="kana-progress-bar-track"><div class="kana-progress-bar-fill" id="fr-progress" style="width:0%;"></div></div>
+            <div class="kana-progress-count" id="fr-count">0/0</div>
+        </div>
+        <div id="fr-stage"></div>
+        <div id="fr-feedback" class="feedback-panel" style="display:none;">
+            <div>
+                <div class="feedback-title" id="fr-fb-title"></div>
+                <div class="feedback-answer" id="fr-fb-answer" style="display:block;"></div>
+                <div class="fr-gloss" id="fr-fb-gloss"></div>
+            </div>
+            <button class="btn btn-next" onclick="frNext()" style="margin-bottom:0;">Continuar →</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA: RESULTADO DE FORMAR FRASES -->
+    <div id="screen-frases-result" class="screen">
+        <div style="text-align:center; margin-top:8px;">
+            <h2 style="font-size:22px; margin-bottom:4px;">📋 Resultado</h2>
+            <div class="kana-result-score" id="fr-result-score">0%</div>
+            <p class="kana-result-sub" id="fr-result-sub"></p>
+        </div>
+        <div class="center-btn-wrap" style="margin-top:18px;">
+            <button class="btn" onclick="showScreen('frases')">Volver a frases</button>
         </div>
     </div>
 
@@ -1779,7 +1877,7 @@
 
 <script>
     // --- 1. CONFIGURACIÓN Y LOCALSTORAGE --- //
-    let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true, customThemeColor: '#1cb0f6', koreanMode: false, fillBlankEnabled: true, kanaDifficulty: 'dificil' };
+    let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true, customThemeColor: '#1cb0f6', koreanMode: false, fillBlankEnabled: true, kanaDifficulty: 'dificil', frTapTranslate: true };
     let userProgress = {};
     // Errores pendientes de repaso: { [wordId]: { id, category, count, lastMissed } }
     let mistakes = {};
@@ -1898,6 +1996,7 @@
         updateSegControl('sound-controls', prefs.sound);
         updateSegControl('korean-mode-controls', prefs.koreanMode);
         updateSegControl('fillblank-controls', prefs.fillBlankEnabled);
+        updateSegControl('frtap-controls', prefs.frTapTranslate !== false);
         updateSegControl('kana-difficulty-controls', prefs.kanaDifficulty);
         renderThemeGrid();
         applyKoreanTitle();
@@ -1916,7 +2015,7 @@
         // dentro de alguna de sus pantallas se le devuelve al inicio.
         const kanaNavItem = document.getElementById('bottom-nav-kana-item');
         if (kanaNavItem) kanaNavItem.style.display = prefs.koreanMode ? 'none' : 'flex';
-        if (prefs.koreanMode && ['kana', 'kana-vocab', 'kana-practice', 'kana-result'].includes(currentScreenId)) {
+        if (prefs.koreanMode && ['kana', 'kana-vocab', 'kana-practice', 'kana-result', 'frases', 'frases-practice', 'frases-result'].includes(currentScreenId)) {
             showScreen('home');
         }
 
@@ -2820,7 +2919,7 @@
         updateSettingsAnkiSection(screenId);
         updateBottomNav(screenId);
         const settingsFab = document.getElementById('settings-fab');
-        if (settingsFab) settingsFab.style.display = (screenId === 'theory' || screenId === 'practice' || screenId === 'kana-practice') ? 'none' : 'flex';
+        if (settingsFab) settingsFab.style.display = (screenId === 'theory' || screenId === 'practice' || screenId === 'kana-practice' || screenId === 'frases-practice') ? 'none' : 'flex';
         // La teoría solo restaura el scroll si se vuelve a entrar al mismo
         // temario del que se salió; si es uno distinto, empieza desde arriba
         // y esa posición guardada deja de pertenecer a nadie hasta salir de nuevo.
@@ -2839,7 +2938,7 @@
     // portada principal (con el buscador y el listado de niveles), sin importar
     // en qué nivel/temario/teoría se encontrara el usuario.
     function goToTemarios() {
-        if (currentScreenId === 'review' || currentScreenId === 'review-category' || currentScreenId === 'stats' || currentScreenId === 'anki' || currentScreenId === 'kana' || currentScreenId === 'kana-vocab' || currentScreenId === 'kana-practice' || currentScreenId === 'kana-result') {
+        if (currentScreenId === 'review' || currentScreenId === 'review-category' || currentScreenId === 'stats' || currentScreenId === 'anki' || currentScreenId === 'kana' || currentScreenId === 'kana-vocab' || currentScreenId === 'kana-practice' || currentScreenId === 'kana-result' || currentScreenId === 'frases' || currentScreenId === 'frases-practice' || currentScreenId === 'frases-result') {
             showScreen(lastTopicsScreen);
         } else {
             showScreen('home', true);
@@ -3730,7 +3829,7 @@
         if (screenId === 'review' || screenId === 'review-category') activeTab = 'review';
         else if (screenId === 'stats') activeTab = 'stats';
         else if (screenId === 'anki') activeTab = 'anki';
-        else if (screenId === 'kana' || screenId === 'kana-vocab' || screenId === 'kana-practice' || screenId === 'kana-result') activeTab = 'kana';
+        else if (screenId === 'kana' || screenId === 'kana-vocab' || screenId === 'kana-practice' || screenId === 'kana-result' || screenId === 'frases' || screenId === 'frases-practice' || screenId === 'frases-result') activeTab = 'kana';
         else if (screenId === 'result' && practiceState.isReview) activeTab = 'review';
 
         document.querySelectorAll('.bottom-nav-item').forEach(btn => {
@@ -5170,6 +5269,297 @@
         `;
 
         container.innerHTML = `<div class="stats-kana-grid">${cards}</div>${hardestHTML}`;
+    }
+
+    // ===================== FORMAR FRASES ===================== //
+    const FR_LEVELS = [
+        { id: 'basico', label: '🟢 Básico' },
+        { id: 'intermedio', label: '🟡 Intermedio' },
+        { id: 'especializado', label: '🔴 Especializado' },
+        { id: 'mezcla', label: '🎲 Mezcla' }
+    ];
+    let frData = null;          // { frases:[], bloques:{}, teoria:[] }
+    let frLevel = 'basico';
+    let frStats = { done: {}, attempts: 0, correct: 0 };
+    let frSession = null;
+    try { const s = localStorage.getItem('nihongoFrasesStats'); if (s) frStats = { ...frStats, ...JSON.parse(s) }; } catch (e) {}
+    function frSave() { try { localStorage.setItem('nihongoFrasesStats', JSON.stringify(frStats)); } catch (e) {} }
+    function frEsc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+    function frShuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+    async function frLoad() {
+        if (frData) return frData;
+        const [p, g] = await Promise.all([fetch('frases-ja.json'), fetch('frases-glosario.json')]);
+        if (!p.ok || !g.ok) throw new Error('No se pudieron cargar los archivos de frases');
+        const pj = await p.json(), gj = await g.json();
+        frData = { frases: pj.frases || [], bloques: gj.bloques || {}, teoria: gj.teoria || [] };
+        return frData;
+    }
+
+    function openFrases() {
+        showScreen('frases', true);
+        renderFrases();
+    }
+
+    async function renderFrases() {
+        const body = document.getElementById('fr-body');
+        if (prefs.koreanMode) {
+            body.innerHTML = '<div class="fr-notice">🇰🇷<br><br>Las frases todavía no están disponibles para este idioma.</div>';
+            return;
+        }
+        body.innerHTML = '<div class="fr-notice">Cargando…</div>';
+        try { await frLoad(); } catch (e) {
+            body.innerHTML = '<div class="fr-notice">No se pudieron cargar las frases. Comprueba que frases-ja.json y frases-glosario.json están junto a index.html.</div>';
+            return;
+        }
+        const list = frData.frases;
+        const count = lvl => list.filter(f => lvl === 'mezcla' || f.nivel === lvl);
+        let h = '<div class="kana-section-title" style="text-align:center;">Teoría rápida</div>';
+        frData.teoria.forEach(t => {
+            h += `<details class="fr-theory"><summary>${t.icono} ${frEsc(t.titulo)}</summary><div class="fr-theory-body">${t.texto.map(x => '<p>' + frEsc(x) + '</p>').join('')}</div></details>`;
+        });
+        h += '<div class="kana-section-title" style="text-align:center;">Elige nivel</div><div class="fr-level-row">';
+        FR_LEVELS.forEach(l => {
+            const all = count(l.id), done = all.filter(f => frStats.done[f.id]).length;
+            h += `<button type="button" class="kana-group-chip ${l.id === frLevel ? 'active' : ''}" onclick="frLevel='${l.id}';renderFrases()">${l.label} · ${done}/${all.length}</button>`;
+        });
+        h += '</div><div class="center-btn-wrap"><button class="btn" onclick="startFrases()">▶️ Practicar</button></div>';
+        body.innerHTML = h;
+    }
+
+    // Distractores: bloques de otras frases de la misma categoría (o cualquiera).
+    function frMakeChips(f) {
+        const correct = f.bloques.slice();
+        const extra = f.bloques.length === 2 ? 2 : 1;
+        const pool = [];
+        frData.frases.forEach(o => { if (o.id !== f.id) o.bloques.forEach(b => { if (o.bloques.length > 1 && !correct.includes(b) && !pool.includes(b)) pool.push(b); }); });
+        const same = pool.filter(b => frData.frases.some(o => o.categoria === f.categoria && o.bloques.includes(b)));
+        const picks = frShuffle(same.length >= extra ? same : pool).slice(0, extra);
+        return frShuffle(correct.concat(picks).map(t => ({ t })));
+    }
+
+    function startFrases() {
+        let pool = frData.frases.filter(f => frLevel === 'mezcla' || f.nivel === frLevel);
+        pool = frShuffle(pool).sort((a, b) => (frStats.done[a.id] ? 1 : 0) - (frStats.done[b.id] ? 1 : 0)).slice(0, 10);
+        pool = frShuffle(pool);
+        frSession = { queue: pool.map(f => f.id), total: pool.length, firstTry: 0, seen: {}, retry: {}, expr: 0 };
+        showScreen('frases-practice', true);
+        frQuestion();
+    }
+
+    function abortFrases() { if (confirm('¿Seguro que quieres salir de la práctica?')) showScreen('frases'); }
+
+    function frGloss(f, onlyNew) {
+        return f.bloques.map(b => {
+            const g = frData.bloques[b] || ['', '', ''];
+            return `<div class="fr-gloss-item"><b>${frEsc(b)}</b><span>${frEsc(g[1])}<i>${frEsc(g[0])}${g[2] ? ' · ' + frEsc(g[2]) : ''}</i></span></div>`;
+        }).join('');
+    }
+
+    // ---- Traducción al tocar ----
+    function frTapOn() { return prefs.frTapTranslate !== false; }
+    function frNorm(t) { return String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zñ0-9 ]/g, ' '); }
+    function frStem(w) { return w.length > 5 ? w.slice(0, -1) : w; }
+    function frHidePop() { const p = document.getElementById('fr-pop'); if (p) p.remove(); }
+    function frShowPop(el, html) {
+        frHidePop();
+        const p = document.createElement('div'); p.id = 'fr-pop'; p.className = 'fr-pop'; p.innerHTML = html;
+        document.body.appendChild(p);
+        const r = el.getBoundingClientRect(), pw = p.offsetWidth;
+        p.style.left = Math.max(8, Math.min(window.innerWidth - pw - 8, r.left + r.width / 2 - pw / 2)) + 'px';
+        p.style.top = Math.min(window.innerHeight - p.offsetHeight - 8, r.bottom + 8) + 'px';
+        clearTimeout(frShowPop.t); frShowPop.t = setTimeout(frHidePop, 4500);
+    }
+    document.addEventListener('pointerdown', e => { if (!e.target.closest || !e.target.closest('.fr-w, .fr-chip')) frHidePop(); }, true);
+    function frBlockHtml(b) {
+        const g = frData.bloques[b] || ['', '', ''];
+        return `<div><b>${frEsc(b)}</b> <i>${frEsc(g[0])}</i><br>${frEsc(g[1])}${g[2] ? '<br><i>💡 ' + frEsc(g[2]) + '</i>' : ''}</div>`;
+    }
+    function frShowBlock(el, b) { frShowPop(el, frBlockHtml(b)); }
+    function frTapEs(el, word) {
+        const w = frStem(frNorm(word).trim());
+        const hits = frCur.bloques.filter(b => {
+            const g = frData.bloques[b]; if (!g) return false;
+            return frNorm(g[1]).split(' ').some(x => x && frStem(x) === w);
+        });
+        frShowPop(el, hits.length ? hits.map(frBlockHtml).join('') : `<i>«${frEsc(word)}» no tiene un bloque propio: forma parte de la expresión completa.</i>`);
+    }
+    function frSpanishHtml(es) {
+        if (!frTapOn()) return frEsc(es);
+        return es.split(/(\s+)/).map(t => /^\s+$/.test(t) || frNorm(t).trim().length < 3 ? frEsc(t) : `<span class="fr-w" data-es="${frEsc(t)}">${frEsc(t)}</span>`).join('');
+    }
+    document.addEventListener('click', e => {
+        const w = e.target.closest && e.target.closest('.fr-w'); if (!w || !frCur || !frData) return;
+        if (w.dataset.es !== undefined) frTapEs(w, w.dataset.es); else if (w.dataset.ja) frShowBlock(w, w.dataset.ja);
+    });
+
+    let frCur = null, frState = null, frHints = false;
+    function frQuestion() {
+        const fb = document.getElementById('fr-feedback'); fb.className = 'feedback-panel'; fb.style.display = 'none';
+        if (frSession.queue.length === 0) return frFinish();
+        const id = frSession.queue[0];
+        frCur = frData.frases.find(f => f.id === id);
+        const done = frSession.total - new Set(frSession.queue).size;
+        document.getElementById('fr-progress').style.width = (done / frSession.total * 100) + '%';
+        document.getElementById('fr-count').innerText = done + '/' + frSession.total;
+        const stage = document.getElementById('fr-stage');
+        const f = frCur;
+        if (f.bloques.length === 1) {
+            const g = frData.bloques[f.bloques[0]] || ['', '', ''];
+            stage.innerHTML = `<div class="fr-expr"><div class="fr-prompt-label">Expresión para aprender</div>
+                <div class="fr-expr-ja">${frEsc(f.ja)}</div><div class="fr-expr-read">${frEsc(f.lectura)} · ${frEsc(g[0])}</div>
+                <div class="fr-expr-es">${frSpanishHtml(f.es)}</div>${g[2] ? '<div class="fr-expr-note">💡 ' + frEsc(g[2]) + '</div>' : ''}
+                <button class="kana-audio-btn" onclick="speakJapanese('${f.ja.replace(/'/g, '')}')">🔊</button></div>
+                <div class="center-btn-wrap"><button class="btn" onclick="frExprDone()">Entendido →</button></div>`;
+            speakJapanese(f.ja);
+            return;
+        }
+        frState = { chips: frMakeChips(f), slots: new Array(f.bloques.length).fill(null), checked: false };
+        frHints = false;
+        stage.innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">Ordena la frase en japonés</div><div class="fr-prompt-es">${frSpanishHtml(f.es)}</div></div>
+            <div class="fr-slots" id="fr-slots"></div><div class="fr-tray" id="fr-tray"></div>
+            <div class="center-btn-wrap" style="margin-top:12px;"><button class="btn outline" id="fr-hint-btn" onclick="frToggleHints()" style="margin-bottom:8px;">👁️ Ver significados</button></div>
+            <div class="center-btn-wrap"><button class="btn" id="fr-check-btn" onclick="frCheck()" disabled style="opacity:.5">Comprobar</button></div>`;
+        frRender();
+    }
+
+    function frToggleHints() {
+        frHints = !frHints;
+        document.getElementById('fr-hint-btn').innerHTML = frHints ? '🙈 Ocultar significados' : '👁️ Ver significados';
+        frRender();
+    }
+
+    function frChipEl(i, where) {
+        const c = frState.chips[i];
+        const el = document.createElement('div');
+        el.className = 'fr-chip' + (where === 'slot' ? ' in-slot' : '');
+        const g = frData.bloques[c.t];
+        el.innerHTML = frEsc(c.t) + (frHints && g ? `<small>${frEsc(g[1])}</small>` : '');
+        el.dataset.chip = i; el.dataset.where = where;
+        el.addEventListener('pointerdown', frPointerDown);
+        return el;
+    }
+
+    function frRender() {
+        const slotsEl = document.getElementById('fr-slots'), tray = document.getElementById('fr-tray');
+        if (!slotsEl) return;
+        slotsEl.innerHTML = ''; tray.innerHTML = '';
+        frState.slots.forEach((ci, si) => {
+            const s = document.createElement('div'); s.className = 'fr-slot'; s.dataset.slot = si;
+            if (ci !== null) {
+                const el = frChipEl(ci, 'slot'); el.dataset.slotIndex = si;
+                if (frState.checked) el.classList.add(frState.chips[ci].t === frCur.bloques[si] ? 'good' : 'bad');
+                s.appendChild(el);
+            }
+            slotsEl.appendChild(s);
+        });
+        frState.chips.forEach((c, i) => {
+            const el = frChipEl(i, 'tray');
+            if (frState.slots.includes(i)) el.classList.add('used');
+            tray.appendChild(el);
+        });
+        const full = frState.slots.every(x => x !== null);
+        const btn = document.getElementById('fr-check-btn');
+        if (btn) { btn.disabled = !full || frState.checked; btn.style.opacity = (full && !frState.checked) ? 1 : .5; }
+    }
+
+    function frPlace(ci, slotIdx) {
+        const from = frState.slots.indexOf(ci);
+        const prev = frState.slots[slotIdx];
+        if (from >= 0) frState.slots[from] = prev;   // intercambio entre casillas
+        frState.slots[slotIdx] = ci;
+        playSound('click'); frRender();
+    }
+    function frRemove(slotIdx) { frState.slots[slotIdx] = null; playSound('click'); frRender(); }
+
+    let frDrag = null;
+    function frPointerDown(e) {
+        if (!frState || frState.checked) return;
+        const el = e.currentTarget;
+        frDrag = { el, ci: +el.dataset.chip, where: el.dataset.where, slotIndex: el.dataset.slotIndex !== undefined ? +el.dataset.slotIndex : -1, x: e.clientX, y: e.clientY, ghost: null };
+        frDrag.lp = null;
+        if (frTapOn()) {
+            const blk = frState.chips[frDrag.ci].t;
+            frDrag.lp = setTimeout(() => { if (frDrag && !frDrag.ghost) { frDrag.long = true; frShowBlock(el, blk); } }, 450);
+        }
+        window.addEventListener('pointermove', frPointerMove);
+        window.addEventListener('pointerup', frPointerUp);
+        window.addEventListener('pointercancel', frPointerUp);
+    }
+    function frPointerMove(e) {
+        if (!frDrag) return;
+        if (!frDrag.ghost && Math.hypot(e.clientX - frDrag.x, e.clientY - frDrag.y) > 6) {
+            const g = frDrag.el.cloneNode(true); g.classList.add('fr-ghost'); document.body.appendChild(g);
+            frDrag.ghost = g; frDrag.el.style.opacity = .3;
+        }
+        if (frDrag.ghost) {
+            e.preventDefault();
+            frDrag.ghost.style.left = e.clientX + 'px'; frDrag.ghost.style.top = e.clientY + 'px';
+            document.querySelectorAll('.fr-slot.over').forEach(s => s.classList.remove('over'));
+            const t = document.elementFromPoint(e.clientX, e.clientY);
+            const slot = t && t.closest && t.closest('.fr-slot'); if (slot) slot.classList.add('over');
+        }
+    }
+    function frPointerUp(e) {
+        window.removeEventListener('pointermove', frPointerMove);
+        window.removeEventListener('pointerup', frPointerUp);
+        window.removeEventListener('pointercancel', frPointerUp);
+        const d = frDrag; frDrag = null; if (!d) return;
+        clearTimeout(d.lp);
+        if (d.long && !d.ghost) return;   // pulsación larga: solo mostró el significado
+        document.querySelectorAll('.fr-slot.over').forEach(s => s.classList.remove('over'));
+        if (!d.ghost) {                      // toque simple
+            if (d.where === 'tray') { const i = frState.slots.indexOf(null); if (i >= 0) frPlace(d.ci, i); }
+            else frRemove(d.slotIndex);
+            return;
+        }
+        d.ghost.remove(); d.el.style.opacity = '';
+        const t = document.elementFromPoint(e.clientX, e.clientY);
+        const slot = t && t.closest && t.closest('.fr-slot');
+        if (slot) frPlace(d.ci, +slot.dataset.slot);
+        else if (d.where === 'slot') frRemove(d.slotIndex);
+        else frRender();
+    }
+
+    function frCheck() {
+        if (frState.checked) return;
+        frState.checked = true;
+        const f = frCur;
+        const ok = frState.slots.every((ci, i) => frState.chips[ci].t === f.bloques[i]);
+        frStats.attempts++;
+        const first = !frSession.retry[f.id];
+        if (ok) {
+            frStats.correct++; frStats.done[f.id] = true;
+            if (first) frSession.firstTry++;
+            frSession.queue.shift();
+            playSound('correct');
+        } else {
+            frSession.retry[f.id] = true;
+            frSession.queue.push(frSession.queue.shift());
+            playSound('wrong');
+        }
+        frSave(); frRender();
+        const fb = document.getElementById('fr-feedback');
+        fb.className = 'feedback-panel ' + (ok ? 'correct' : 'wrong'); fb.style.display = 'flex';
+        document.getElementById('fr-fb-title').innerText = ok ? '✓ ¡Correcto!' : '✗ Casi…';
+        document.getElementById('fr-fb-answer').innerHTML = `<div style="font-size:20px;font-weight:700;">${f.bloques.map(b => frTapOn() ? `<span class="fr-w" data-ja="${frEsc(b)}">${frEsc(b)}</span>` : frEsc(b)).join('')}</div><div style="font-size:13px;opacity:.8;">${frEsc(f.lectura)}</div>`;
+        document.getElementById('fr-fb-gloss').innerHTML = frGloss(f);
+        speakJapanese(f.ja);
+    }
+
+    function frExprDone() {
+        frStats.done[frCur.id] = true; frSession.expr++; frSave();
+        frSession.queue.shift(); playSound('primary'); frQuestion();
+    }
+    function frNext() { frQuestion(); }
+
+    function frFinish() {
+        playSound('complete');
+        const ordered = frSession.total - frSession.expr;
+        const pct = ordered > 0 ? Math.round(frSession.firstTry / ordered * 100) : 100;
+        document.getElementById('fr-result-score').innerText = pct + '%';
+        document.getElementById('fr-result-sub').innerText = `${frSession.firstTry} de ${ordered} frases a la primera` + (frSession.expr ? ` · ${frSession.expr} expresiones aprendidas` : '');
+        showScreen('frases-result');
     }
 
     window.addEventListener('scroll', updateScrollTopButton, { passive: true });
