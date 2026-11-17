@@ -1,6 +1,8 @@
 # ankjimi
 Mi propia app para aprender japones, disfutala es gratis.
 
+# RECOMIENDO LEER EL RECORRIDO POR VERSIONES
+
 Apartados disponibles:
 
 1. Vocabulario ordenado por niveles, más de 2mil palabras para aprender con ejercicios y frases de ejemplo, tanto en japones como koreano.
