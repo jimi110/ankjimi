@@ -1380,6 +1380,7 @@ button{color:var(--text-main)}
 mark.curio-hit{background:var(--primary);color:#fff;border-radius:4px;padding:0 3px}
 .curio-sentinel{height:1px}
 .curio-msg{color:var(--text-muted);font-size:14px;text-align:center;padding:18px 0}
+.curio-emo{font-size:.85em;opacity:.8;margin-right:6px}
 </style>
 </head>
 <body>
@@ -1486,6 +1487,8 @@ const DM={'v0.3':['furi'],'v0.4.1':['search'],'v0.5.1':['chart','qstats'],'v1.0'
 const CURIO_URL='curiosidades_japon.txt',CURIO_BATCH=15;
 const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const norm=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const TIT_EMO={"pocas papeleras en la calle": "🚯", "la basura depende de cada barrio": "🗑️", "el konbini lo hace casi todo": "🏪", "mas de 2,2 millones de maquinas de bebidas": "🥤", "el efectivo sigue siendo util": "💴", "las propinas no se esperan": "🙅", "el aperitivo que no pediste": "🍢", "en el onsen te lavas antes de entrar": "♨️", "tatuajes y banos termales": "🐉", "el metro no funciona toda la noche": "🌙", "quitarse los zapatos al entrar": "👟", "las reverencias": "🙇", "los palillos tienen sus normas": "🥢", "itadakimasu y gochisosama": "🙏", "sorber los fideos esta bien visto": "🍜", "dormir en publico: inemuri": "😴", "sellos personales: hanko": "📝", "los puestos de policia de barrio: koban": "👮", "se pueden enviar las maletas al hotel": "🧳", "impuestos incluidos en el precio": "🧾", "tax-free: cambio desde noviembre de 2026": "🛍️", "envolver regalos en las tiendas": "🎁", "omiyage: el regalo de viaje": "🎀", "fukubukuro: bolsas de la suerte": "🍀", "las multas para bicicletas: blue ticket": "🚲", "fumar en la calle puede estar restringido": "🚭", "beber en la calle no esta prohibido en general": "🍺", "alergenos: ocho de declaracion obligatoria": "🥜", "la salsa de soja suele llevar trigo": "🌾", "kabukicho y los captadores": "🌃", "roppongi tiene dos caras": "🎭", "golden gai: unos 280 bares diminutos": "🏮", "omoide yokocho": "🍶", "bares bajo las vias del tren": "🚉", "shimokitazawa": "🎸", "akihabara empezo como mercado negro": "🎮", "tsukiji no desaparecio": "🐟", "comiket: la gran cita de los creadores independientes": "📚", "los depachika": "🍰", "ano nuevo y hatsumode": "🎍", "osechi: la comida de ano nuevo": "🍱", "toshikoshi soba": "🔔", "cierres en ano nuevo": "🚪", "setsubun": "👹", "festival de la nieve de sapporo": "⛄", "hinamatsuri": "🎎", "golden week": "🗓️", "koinobori": "🎏", "tanabata": "🎋", "gion matsuri": "🎪", "fuegos artificiales de sumida": "🎆", "obon": "🕯️", "bon odori": "💃", "awa odori": "🪘", "shichi-go-san": "👘", "dia de la mayoria de edad": "🎉", "kfc por navidad": "🍗", "maletas grandes en el shinkansen": "🚄", "las tarjetas ic no sirven en todas partes": "💳", "deposito de las tarjetas ic": "🪙", "comer en trenes de larga distancia": "🥪", "ekiben: la comida de la estacion": "🥡", "marcas en el anden": "🟨", "vagones solo para mujeres": "🚺", "en el tren, sin llamadas": "📵", "objetos perdidos": "🎒", "taquillas y custodia de equipaje": "🔐", "la puerta del taxi se abre sola": "🚕", "pagar en el autobus": "🚌", "mas de 6.800 islas": "🏝️", "shinkansen: puntualidad": "⏱️", "ramen con maquina de tickets": "🎫", "cada region tiene su ramen": "🍥", "okonomiyaki de osaka y de hiroshima": "🥞", "osaka: kuidaore": "🦀", "takoyaki": "🐙", "no todo el te verde es igual": "🍵", "wagashi": "🍡", "natto": "🫘", "onigiri y su envoltorio": "🍙", "sushi de supermercado": "🍣", "huevo crudo": "🥚", "el wasabi puede no ser wasabi": "🌿", "agua gratis, pero no siempre": "🚰", "kissaten": "☕", "kit kat de sabores": "🍫", "kakigori": "🍧", "rezar en un santuario y en un templo": "👏", "no andes por el centro del torii": "🚷", "purificarse en el temizuya": "💧", "goshuin": "📒", "omikuji": "🔮", "omamori": "🧿", "maneki-neko": "🐱", "kintsugi": "🏺", "hojas otonales, de norte a sur": "🍁", "cerezos, de sur a norte": "🌳", "hanami": "🌸", "tsuyu": "☔", "tifones en septiembre": "🌀", "terremotos y alertas": "📳", "tsunami: no esperes a ver el mar": "🌊", "volcanes activos": "🌋", "monte fuji": "🗻", "osos en zonas rurales": "🐻", "parques nacionales": "🏞️", "nieve en el norte": "❄️", "okinawa es distinta": "🐠", "isla de los gatos": "😺", "tres sistemas de escritura": "✍️", "dialectos regionales": "🗣️", "numeros de mala suerte": "4️⃣", "sumo": "🤼", "furoshiki": "🧣", "maiko y geiko": "🪭", "banos publicos y su kit": "🧼", "banos con tecnologia": "🚽", "papel higienico al inodoro": "🧻"};
+const CAT_EMO={'vida cotidiana':'🏠','tokio':'🗼','festividades':'🎎','transporte':'🚆','comida':'🍣','templos y santuarios':'⛩️','naturaleza y clima':'🌸','lengua y cultura':'📖'};
 const ACC={a:'aáàäâã',e:'eéèëê',i:'iíìïî',o:'oóòöôõ',u:'uúùüû',n:'nñ',c:'cç'};
 function curioParse(txt){
  const L=txt.replace(/\r\n?/g,'\n').split('\n'),E=[];let cat='',cur=null;
@@ -1529,7 +1532,7 @@ D.curio=e=>{
  const more=()=>{
   if(shown>=view.length)return;
   const end=Math.min(shown+CURIO_BATCH,view.length);let h='';
-  for(let i=shown;i<end;i++){const x=E[view[i]];h+=curioMark(`<article class="curio-item">${x.c?`<div class="curio-cat">${esc(x.c)}</div>`:''}${x.t?`<h4>${inl(esc(x.t))}</h4>`:''}${curioBody(x.raw)}</article>`,terms)}
+  for(let i=shown;i<end;i++){const x=E[view[i]];h+=curioMark(`<article class="curio-item">${x.c?`<div class="curio-cat">${esc(x.c)}</div>`:''}${x.t?`<h4>${(TIT_EMO[norm(x.t)]||CAT_EMO[norm(x.c)])?`<span class="curio-emo">${TIT_EMO[norm(x.t)]||CAT_EMO[norm(x.c)]}</span>`:''}${inl(esc(x.t))}</h4>`:''}${curioBody(x.raw)}</article>`,terms)}
   $l.insertAdjacentHTML('beforeend',h);shown=end;
   if(io&&shown<view.length){io.unobserve($e);io.observe($e)}
  };
@@ -1577,7 +1580,7 @@ function toggle(v,force){
   if(above){const t0=performance.now();(function keep(){const d=head.getBoundingClientRect().top-top0;if(d)window.scrollBy(0,d);if(performance.now()-t0<340)requestAnimationFrame(keep)})()}
   if(v.id){try{history.replaceState(null,'','#'+v.id)}catch(e){}}
  }else{v.classList.remove('open');head.setAttribute('aria-expanded','false')}}
-build($('#list'),parse(MD));build($('#general'),parse(GENERAL));build($('#curio'),[{id:'curiosidades',label:'日本',title:'Curiosidades de Japón',h:'',l:[]}]);$('#obj').innerHTML=blocks(OBJ);$('#fil').innerHTML=blocks(FIL,1);
+build($('#list'),parse(MD));build($('#general'),parse(GENERAL));build($('#curio'),[{id:'curiosidades',label:'日本',title:'<span class="curio-emo">🗾</span>Curiosidades de Japón',h:'',l:[]}]);$('#obj').innerHTML=blocks(OBJ);$('#fil').innerHTML=blocks(FIL,1);
 let hs='';try{hs=decodeURIComponent(location.hash.slice(1))}catch(e){}
 if(hs){const v=document.getElementById(hs);if(v&&v.classList.contains('ver')){toggle(v,true);setTimeout(()=>v.scrollIntoView({block:'start'}),50)}}
 
