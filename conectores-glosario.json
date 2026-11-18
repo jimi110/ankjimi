@@ -3,905 +3,1213 @@
   "昨日は買い物に行った。": [
    "きのうはかいものにいった。",
    "Ayer fui de compras.",
-   ""
+   "",
+   0,
+   "kinou wa kaimono ni itta."
   ],
   "そして、": [
    "そして、",
    "Y (luego) / Y además",
    "Conector neutro para sumar acciones o ideas.",
-   1
+   1,
+   "soshite,"
   ],
   "映画も見た。": [
    "えいがもみた。",
    "También vi una película.",
-   "も = también."
+   "も = también.",
+   0,
+   "eiga mo mita."
   ],
   "先にご飯を食べた。": [
    "さきにごはんをたべた。",
    "Primero comimos.",
-   "先に = primero, antes."
+   "先に = primero, antes.",
+   0,
+   "saki ni gohan o tabeta."
   ],
   "それから、": [
    "それから、",
    "Y después / Luego",
    "Sigue el orden de acciones en el tiempo.",
-   1
+   1,
+   "sorekara,"
   ],
   "映画を見た。": [
    "えいがをみた。",
    "Vimos una película.",
-   ""
+   "",
+   0,
+   "eiga o mita."
   ],
   "この店は安い。": [
    "このみせはやすい。",
    "Esta tienda es barata.",
-   ""
+   "",
+   0,
+   "kono mise wa yasui."
   ],
   "それに、": [
    "それに、",
    "Además / Y encima",
    "Añade otro punto a favor (o en contra). Habitual al hablar.",
-   1
+   1,
+   "sore ni,"
   ],
   "料理もおいしい。": [
    "りょうりもおいしい。",
    "La comida también está rica.",
-   ""
+   "",
+   0,
+   "ryouri mo oishii."
   ],
   "牛乳を": [
    "ぎゅうにゅうを",
    "la leche (objeto)",
-   ""
+   "",
+   0,
+   "gyuunyuu o"
   ],
   "買わないと。": [
    "かわないと。",
    "tengo que comprar",
-   "~ないと = tengo que (coloquial)."
+   "~ないと = tengo que (coloquial).",
+   0,
+   "kawanai to."
   ],
   "あと、": [
    "あと、",
    "Y también / Ah, y…",
    "Para recordar algo más mientras hablas. Coloquial.",
-   1
+   1,
+   "ato,"
   ],
   "パンも。": [
    "パンも。",
    "También pan.",
-   ""
+   "",
+   0,
+   "pan mo."
   ],
   "行きたかった。": [
    "いきたかった。",
    "Quería ir.",
-   "~たかった = quería."
+   "~たかった = quería.",
+   0,
+   "ikitakatta."
   ],
   "でも、": [
    "でも、",
    "Pero",
    "Coloquial, el 'pero' del día a día.",
-   1
+   1,
+   "demo,"
   ],
   "行けなかった。": [
    "いけなかった。",
    "No pude ir.",
-   "行けなかった: potencial negativo pasado."
+   "行けなかった: potencial negativo pasado.",
+   0,
+   "ikenakatta."
   ],
   "ちょっと遠い": [
    "ちょっととおい",
    "Está un poco lejos",
-   ""
+   "",
+   0,
+   "chotto tooi"
   ],
   "けど、": [
    "けど、",
    "pero / aunque",
-   "Se pega a la frase anterior. Coloquial."
+   "Se pega a la frase anterior. Coloquial.",
+   0,
+   "kedo,"
   ],
   "歩いて行こう。": [
    "あるいていこう。",
    "vamos andando.",
-   "~て行く = ir haciendo algo. 行こう = vamos."
+   "~て行く = ir haciendo algo. 行こう = vamos.",
+   0,
+   "aruite ikou."
   ],
   "明日テストがある。": [
    "あしたテストがある。",
    "Mañana tengo un examen.",
-   ""
+   "",
+   0,
+   "ashita tesuto ga aru."
   ],
   "だから、": [
    "だから、",
    "Por eso / Así que",
    "Pone la consecuencia al principio de la frase nueva.",
-   1
+   1,
+   "dakara,"
   ],
   "今日は勉強する。": [
    "きょうはべんきょうする。",
    "Hoy voy a estudiar.",
-   ""
+   "",
+   0,
+   "kyou wa benkyou suru."
   ],
   "電車に乗り遅れた。": [
    "でんしゃにのりおくれた。",
    "Perdí el tren.",
-   "乗り遅れる = perder un transporte."
+   "乗り遅れる = perder un transporte.",
+   0,
+   "densha ni nori okureta."
   ],
   "それで、": [
    "それで、",
    "Y por eso / Entonces",
    "Cuenta lo que pasó como resultado.",
-   1
+   1,
+   "sorede,"
   ],
   "遅刻した。": [
    "ちこくした。",
    "Llegué tarde.",
-   ""
+   "",
+   0,
+   "chikoku shita."
   ],
   "疲れた": [
    "つかれた",
    "Estoy cansado",
-   ""
+   "",
+   0,
+   "tsukareta"
   ],
   "から、": [
    "から、",
    "porque / como",
-   "Va detrás de la causa: AだからB."
+   "Va detrás de la causa: AだからB.",
+   0,
+   "kara,"
   ],
   "今日は帰る。": [
    "きょうはかえる。",
    "Hoy me vuelvo a casa.",
-   ""
+   "",
+   0,
+   "kyou wa kaeru."
   ],
   "明日仕事": [
    "あしたしごと",
    "Mañana (hay) trabajo",
-   ""
+   "",
+   0,
+   "ashitashigoto"
   ],
   "なので、": [
    "なので、",
    "así que / como",
-   "Más suave y educado que から. Se pega a sustantivos y な-adj."
+   "Más suave y educado que から. Se pega a sustantivos y な-adj.",
+   0,
+   "nanode,"
   ],
   "今日は行けません。": [
    "きょうはいけません。",
    "Hoy no puedo ir.",
-   "Forma educada (ません)."
+   "Forma educada (ません).",
+   0,
+   "kyou wa ikemasen."
   ],
   "まず、": [
    "まず、",
    "Primero",
    "Abre una serie de pasos.",
-   1
+   1,
+   "mazu,"
   ],
   "アプリを開いて。": [
    "アプリをひらいて。",
    "Abre la aplicación.",
-   "~て = petición informal."
+   "~て = petición informal.",
+   0,
+   "apuri o hiraite."
   ],
   "次に、": [
    "つぎに、",
    "Después / A continuación",
    "Segundo paso de una serie.",
-   1
+   1,
+   "tsugini,"
   ],
   "このボタンを押して。": [
    "このボタンをおして。",
    "Pulsa este botón.",
-   ""
+   "",
+   0,
+   "kono botan o oshite."
   ],
   "最後に、": [
    "さいごに、",
    "Por último",
    "Cierra una serie.",
-   1
+   1,
+   "saigoni,"
   ],
   "変更を保存して。": [
    "へんこうをほぞんして。",
    "Guarda los cambios.",
-   ""
+   "",
+   0,
+   "henkou o hozon shite."
   ],
   "スポーツが好き。": [
    "スポーツがすき。",
    "Me gustan los deportes.",
-   ""
+   "",
+   0,
+   "supootsu ga suki."
   ],
   "例えば、": [
    "たとえば、",
    "Por ejemplo",
    "",
-   1
+   1,
+   "tatoeba,"
   ],
   "サッカーとか。": [
    "サッカーとか。",
    "(Por ejemplo) el fútbol y cosas así.",
-   "とか = cosas como…, coloquial."
+   "とか = cosas como…, coloquial.",
+   0,
+   "sakkaa to ka."
   ],
   "お金がない。": [
    "おかねがない。",
    "No tengo dinero.",
-   ""
+   "",
+   0,
+   "o kane ga nai."
   ],
   "つまり、": [
    "つまり、",
    "Es decir / O sea",
    "Resume o reformula lo anterior.",
-   1
+   1,
+   "tsumari,"
   ],
   "買えない。": [
    "かえない。",
    "No puedo comprarlo.",
-   "買える: potencial de 買う."
+   "買える: potencial de 買う.",
+   0,
+   "kaenai."
   ],
   "ちなみに、": [
    "ちなみに、",
    "Por cierto / A propósito",
    "Añade un dato aparte, de pasada.",
-   1
+   1,
+   "chinamini,"
   ],
   "何歳？": [
    "なんさい？",
    "¿Cuántos años (tienes)?",
-   ""
+   "",
+   0,
+   "nansai?"
   ],
   "ところで、": [
    "ところで、",
    "Por cierto / Cambiando de tema",
    "Cambia de tema.",
-   1
+   1,
+   "tokorode,"
   ],
   "明日は何する？": [
    "あしたはなにする？",
    "¿Qué vas a hacer mañana?",
-   ""
+   "",
+   0,
+   "ashita wa nani suru?"
   ],
   "お茶にする？": [
    "おちゃにする？",
    "¿Té?",
-   "~にする = elegir."
+   "~にする = elegir.",
+   0,
+   "ocha ni suru?"
   ],
   "それとも、": [
    "それとも、",
    "¿O (bien)…?",
    "Ofrece una alternativa en una pregunta.",
-   1
+   1,
+   "soretomo,"
   ],
   "コーヒー？": [
    "コーヒー？",
    "¿Café?",
-   ""
+   "",
+   0,
+   "koohii?"
   ],
   "申し込みは": [
    "もうしこみは",
    "En cuanto a la solicitud…",
-   ""
+   "",
+   0,
+   "moushikomi wa"
   ],
   "ウェブ": [
    "ウェブ",
    "web / internet",
-   ""
+   "",
+   0,
+   "webu"
   ],
   "または": [
    "または",
    "o (bien)",
    "Formal/escrito. En conversación se usa más か.",
-   1
+   1,
+   "matawa"
   ],
   "電話でできます。": [
    "でんわでできます。",
    "se puede hacer por teléfono.",
-   "で = medio. できます = se puede."
+   "で = medio. できます = se puede.",
+   0,
+   "denwa de dekimasu."
   ],
   "ご飯を食べてから、": [
    "ごはんをたべてから、",
    "Después de comer,",
-   "~てから = después de hacer."
+   "~てから = después de hacer.",
+   0,
+   "gohan o tabe tekara,"
   ],
   "出かける。": [
    "でかける。",
    "salgo.",
-   ""
+   "",
+   0,
+   "dekakeru."
   ],
   "寝る前に、": [
    "ねるまえに、",
    "Antes de dormir,",
-   "~前に = antes de."
+   "~前に = antes de.",
+   0,
+   "neru mae ni,"
   ],
   "シャワーを浴びる。": [
    "シャワーをあびる。",
    "me ducho.",
-   ""
+   "",
+   0,
+   "shawaa o abiru."
   ],
   "授業のあとで、": [
    "じゅぎょうのあとで、",
    "Después de clase,",
-   "~のあとで = después de."
+   "~のあとで = después de.",
+   0,
+   "jugyou no atode,"
   ],
   "電話して。": [
    "でんわして。",
    "llámame.",
-   ""
+   "",
+   0,
+   "denwa shite."
   ],
   "時間があるとき、": [
    "じかんがあるとき、",
    "Cuando tengo tiempo,",
-   "~とき = cuando."
+   "~とき = cuando.",
+   0,
+   "jikan ga aru toki,"
   ],
   "本を読む。": [
    "ほんをよむ。",
    "leo libros.",
-   ""
+   "",
+   0,
+   "hon o yomu."
   ],
   "もし": [
    "もし",
    "si (hipótesis)",
-   "Refuerza el condicional. Va al principio."
+   "Refuerza el condicional. Va al principio.",
+   0,
+   "moshi"
   ],
   "明日晴れたら、": [
    "あしたはれたら、",
    "si mañana hace sol,",
-   "~たら = si/cuando."
+   "~たら = si/cuando.",
+   0,
+   "ashitaharetara,"
   ],
   "公園に行こう。": [
    "こうえんにいこう。",
    "vamos al parque.",
-   ""
+   "",
+   0,
+   "kouen ni ikou."
   ],
   "アニメが好き": [
    "アニメがすき",
    "Te gusta el anime",
-   ""
+   "",
+   0,
+   "anime ga suki"
   ],
   "なら、": [
    "なら、",
    "si (es así)…",
-   "Retoma lo que dice el otro: «si es que…»."
+   "Retoma lo que dice el otro: «si es que…».",
+   0,
+   "nara,"
   ],
   "これを見てみて。": [
    "これをみてみて。",
    "prueba a ver esto.",
-   "~てみて = prueba a…"
+   "~てみて = prueba a…",
+   0,
+   "kore o mite mite."
   ],
   "時間があれば、": [
    "じかんがあれば、",
    "si tengo tiempo,",
-   "~ば = si (condición)."
+   "~ば = si (condición).",
+   0,
+   "jikan ga areba,"
   ],
   "行くよ。": [
    "いくよ。",
    "iré.",
-   ""
+   "",
+   0,
+   "iku yo."
   ],
   "このボタンを押すと、": [
    "このボタンをおすと、",
    "Si pulsas este botón,",
-   "~と = cuando A, siempre B (resultado natural)."
+   "~と = cuando A, siempre B (resultado natural).",
+   0,
+   "kono botan o osuto,"
   ],
   "画面が変わる。": [
    "がめんがかわる。",
    "la pantalla cambia.",
-   ""
+   "",
+   0,
+   "gamen ga kawaru."
   ],
   "忙しくても、": [
    "いそがしくても、",
    "Aunque esté ocupado,",
-   "~ても = aunque."
+   "~ても = aunque.",
+   0,
+   "isogashiku temo,"
   ],
   "説明した": [
    "せつめいした",
    "Se lo expliqué",
-   ""
+   "",
+   0,
+   "setsumei shita"
   ],
   "のに、": [
    "のに、",
    "y sin embargo / a pesar de que",
-   "Contraste con queja o sorpresa."
+   "Contraste con queja o sorpresa.",
+   0,
+   "noni,"
   ],
   "分かってくれない。": [
    "わかってくれない。",
    "no me entiende.",
-   "~てくれない = no lo hace (por mí)."
+   "~てくれない = no lo hace (por mí).",
+   0,
+   "wakatte kurenai."
   ],
   "音楽を聞きながら、": [
    "おんがくをききながら、",
    "Mientras escucho música,",
-   "~ながら = mientras (dos acciones a la vez)."
+   "~ながら = mientras (dos acciones a la vez).",
+   0,
+   "ongaku o kikinagara,"
   ],
   "勉強する。": [
    "べんきょうする。",
    "estudio.",
-   ""
+   "",
+   0,
+   "benkyou suru."
   ],
   "ここは安いし、": [
    "ここはやすいし、",
    "Este sitio es barato,",
-   "~し = enumera motivos."
+   "~し = enumera motivos.",
+   0,
+   "koko wa yasuishi,"
   ],
   "近いし、": [
    "ちかいし、",
    "está cerca,",
-   "~し: segundo motivo."
+   "~し: segundo motivo.",
+   0,
+   "chikaishi,"
   ],
   "よく来る。": [
    "よくくる。",
    "y vengo a menudo.",
-   ""
+   "",
+   0,
+   "yoku kuru."
   ],
   "週末は": [
    "しゅうまつは",
    "Los fines de semana,",
-   ""
+   "",
+   0,
+   "shuumatsu wa"
   ],
   "映画を見たり、": [
    "えいがをみたり、",
    "veo películas,",
-   "~たり~たり = hago cosas como… y…"
+   "~たり~たり = hago cosas como… y…",
+   0,
+   "eiga o mi tari,"
   ],
   "ゲームをしたりする。": [
    "ゲームをしたりする。",
    "juego a videojuegos, etc.",
-   ""
+   "",
+   0,
+   "geemu o shi tari suru."
   ],
   "あの店は安い。": [
    "あのみせはやすい。",
    "Aquel restaurante es barato.",
-   ""
+   "",
+   0,
+   "ano mise wa yasui."
   ],
   "しかも、": [
    "しかも、",
    "Y además / Y encima",
    "Suma algo aún más fuerte.",
-   1
+   1,
+   "shikamo,"
   ],
   "おいしい。": [
    "おいしい。",
    "Está rico.",
-   ""
+   "",
+   0,
+   "oishii."
   ],
   "このアプリはとても便利だ。": [
    "このアプリはとてもべんりだ。",
    "Esta aplicación es muy útil.",
-   ""
+   "",
+   0,
+   "kono apuri wa totemo benri da."
   ],
   "さらに、": [
    "さらに、",
    "Además / Todavía más",
    "Un poco más formal; suma y refuerza.",
-   1
+   1,
+   "sarani,"
   ],
   "無料で使える。": [
    "むりょうでつかえる。",
    "se puede usar gratis.",
-   ""
+   "",
+   0,
+   "muryou de tsukaeru."
   ],
   "今日は寒い。": [
    "きょうはさむい。",
    "Hoy hace frío.",
-   ""
+   "",
+   0,
+   "kyou wa samui."
   ],
   "そのうえ、": [
    "そのうえ、",
    "Encima / Además",
    "Suma algo más, a veces negativo.",
-   1
+   1,
+   "sonoue,"
   ],
   "雨も降っている。": [
    "あめもふっている。",
    "también está lloviendo.",
-   ""
+   "",
+   0,
+   "ame mo futte iru."
   ],
   "やってみた。": [
    "やってみた。",
    "Lo intenté.",
-   ""
+   "",
+   0,
+   "yatte mita."
   ],
   "しかし、": [
    "しかし、",
    "Sin embargo",
    "Formal/escrito.",
-   1
+   1,
+   "shikashi,"
   ],
   "うまくいかなかった。": [
    "うまくいかなかった。",
    "no salió bien.",
-   ""
+   "",
+   0,
+   "umaku ikanakatta."
   ],
   "この仕事は給料がいい。": [
    "このしごとはきゅうりょうがいい。",
    "Este trabajo está bien pagado.",
-   ""
+   "",
+   0,
+   "kono shigoto wa kyuuryou ga ii."
   ],
   "一方で、": [
    "いっぽうで、",
    "Por otro lado",
    "Contrasta dos aspectos.",
-   1
+   1,
+   "ippoude,"
   ],
   "かなり大変だ。": [
    "かなりたいへんだ。",
    "es bastante duro.",
-   ""
+   "",
+   0,
+   "kanari taihen da."
   ],
   "簡単だと思っていた。": [
    "かんたんだとおもっていた。",
    "Pensaba que sería fácil.",
-   ""
+   "",
+   0,
+   "kantan da to omotte ita."
   ],
   "ところが、": [
    "ところが、",
    "Pero (resultó que…)",
    "Contraste inesperado.",
-   1
+   1,
+   "tokoroga,"
   ],
   "難しかった。": [
    "むずかしかった。",
    "fue difícil.",
-   ""
+   "",
+   0,
+   "muzukashikatta."
   ],
   "連絡した。": [
    "れんらくした。",
    "Le avisé.",
-   ""
+   "",
+   0,
+   "renraku shita."
   ],
   "それなのに、": [
    "それなのに、",
    "Y aun así / Y sin embargo",
    "Queja: esperaba otro resultado.",
-   1
+   1,
+   "sorenanoni,"
   ],
   "来なかった。": [
    "こなかった。",
    "no vino.",
-   ""
+   "",
+   0,
+   "konakatta."
   ],
   "電車が遅れた。": [
    "でんしゃがおくれた。",
    "El tren se retrasó.",
-   ""
+   "",
+   0,
+   "densha ga okureta."
   ],
   "そのため、": [
    "そのため、",
    "Por ese motivo / Por eso",
    "Más formal que だから.",
-   1
+   1,
+   "sonotame,"
   ],
   "毎日練習した。": [
    "まいにちれんしゅうした。",
    "Entrenó todos los días.",
-   ""
+   "",
+   0,
+   "mainichirenshuu shita."
   ],
   "その結果、": [
    "そのけっか、",
    "Como resultado",
    "",
-   1
+   1,
+   "sonokekka,"
   ],
   "優勝した。": [
    "ゆうしょうした。",
    "ganó el campeonato.",
-   ""
+   "",
+   0,
+   "yuushou shita."
   ],
   "どうすればいいか分からなかった。": [
    "どうすればいいかわからなかった。",
    "No sabía qué hacer.",
-   ""
+   "",
+   0,
+   "dou sureba ii ka wakaranakatta."
   ],
   "そこで、": [
    "そこで、",
    "Así que / Entonces (decidí…)",
    "Introduce una decisión o acción tras una situación.",
-   1
+   1,
+   "sokode,"
   ],
   "聞いてみることにした。": [
    "きいてみることにした。",
    "decidí preguntarle.",
-   "~ことにする = decidir."
+   "~ことにする = decidir.",
+   0,
+   "kiite miru koto ni shita."
   ],
   "雨が降っていた。": [
    "あめがふっていた。",
    "Estaba lloviendo.",
-   ""
+   "",
+   0,
+   "ame ga futte ita."
   ],
   "それでも、": [
    "それでも、",
    "Aun así",
    "Hace algo a pesar de lo anterior.",
-   1
+   1,
+   "soredemo,"
   ],
   "出かけた。": [
    "でかけた。",
    "salí.",
-   ""
+   "",
+   0,
+   "dekaketa."
   ],
   "あなたのおかげで、": [
    "あなたのおかげで、",
    "Gracias a ti,",
-   "~おかげで = gracias a (resultado bueno)."
+   "~おかげで = gracias a (resultado bueno).",
+   0,
+   "anata no okagede,"
   ],
   "終わらせることができた。": [
    "おわらせることができた。",
    "pude terminarlo.",
-   ""
+   "",
+   0,
+   "owaraseru koto ga dekita."
   ],
   "君のせいで、": [
    "きみのせいで、",
    "Por tu culpa,",
-   "~せいで = por culpa de (resultado malo)."
+   "~せいで = por culpa de (resultado malo).",
+   0,
+   "kimi no seide,"
   ],
   "バスに乗り遅れた。": [
    "バスにのりおくれた。",
    "perdí el autobús.",
-   ""
+   "",
+   0,
+   "basu ni nori okureta."
   ],
   "日本で働くために、": [
    "にほんではたらくために、",
    "Para trabajar en Japón,",
-   "~ために = con el fin de."
+   "~ために = con el fin de.",
+   0,
+   "nihon de hataraku tameni,"
   ],
   "日本語を勉強している。": [
    "にほんごをべんきょうしている。",
    "estudio japonés.",
-   ""
+   "",
+   0,
+   "nihongo o benkyou shite iru."
   ],
   "忘れないように、": [
    "わすれないように、",
    "Para no olvidarlo,",
-   "~ように = para que / de modo que."
+   "~ように = para que / de modo que.",
+   0,
+   "wasurenai youni,"
   ],
   "スマホにメモした。": [
    "スマホにメモした。",
    "lo apunté en el móvil.",
-   ""
+   "",
+   0,
+   "sumaho ni memo shita."
   ],
   "私はコーヒーが好きだ。": [
    "わたしはコーヒーがすきだ。",
    "A mí me gusta el café.",
-   ""
+   "",
+   0,
+   "watashi wa koohii ga suki da."
   ],
   "それに対して、": [
    "それにたいして、",
    "En cambio / Por el contrario",
    "Compara dos cosas opuestas. Formal.",
-   1
+   1,
+   "sore nitaishite,"
   ],
   "友達は紅茶が好きだ。": [
    "ともだちはこうちゃがすきだ。",
    "a mi amigo le gusta el té negro.",
-   ""
+   "",
+   0,
+   "tomodachi wa koucha ga suki da."
   ],
   "この方法は簡単じゃない。": [
    "このほうほうはかんたんじゃない。",
    "Este método no es sencillo.",
-   ""
+   "",
+   0,
+   "kono houhou wa kantanja nai."
   ],
   "むしろ、": [
    "むしろ、",
    "De hecho / Más bien",
    "Corrige lo anterior con algo más fuerte.",
-   1
+   1,
+   "mushiro,"
   ],
   "かなり難しい。": [
    "かなりむずかしい。",
    "es bastante difícil.",
-   ""
+   "",
+   0,
+   "kanari muzukashii."
   ],
   "要するに、": [
    "ようするに、",
    "En resumen / En definitiva",
    "",
-   1
+   1,
+   "yousuruni,"
   ],
   "今日は行けないってことだ。": [
    "きょうはいけないってことだ。",
    "significa que hoy no podemos ir.",
-   "~ってこと = significa que (coloquial)."
+   "~ってこと = significa que (coloquial).",
+   0,
+   "kyou wa ikenaitte koto da."
   ],
   "高いとはいえ、": [
    "たかいとはいえ、",
    "Aunque es caro,",
-   "~とはいえ = aunque sea así (algo formal)."
+   "~とはいえ = aunque sea así (algo formal).",
+   0,
+   "takai towaie,"
   ],
   "買いたい。": [
    "かいたい。",
    "quiero comprarlo.",
-   ""
+   "",
+   0,
+   "kaitai."
   ],
   "雨が降っていた": [
    "あめがふっていた",
    "Estaba lloviendo",
-   ""
+   "",
+   0,
+   "ame ga futte ita"
   ],
   "にもかかわらず、": [
    "にもかかわらず、",
    "a pesar de que",
-   "Formal/escrito. Concesión fuerte."
+   "Formal/escrito. Concesión fuerte.",
+   0,
+   "nimokakawarazu,"
   ],
   "行けない。": [
    "いけない。",
    "No puedo ir.",
-   ""
+   "",
+   0,
+   "ikenai."
   ],
   "なぜなら、": [
    "なぜなら、",
    "Porque / Y es que",
    "Formal. Siempre termina con から.",
-   1
+   1,
+   "nazenara,"
   ],
   "明日テストがあるからだ。": [
    "あしたテストがあるからだ。",
    "mañana tengo un examen.",
-   "Acaba en からだ, que cierra la explicación."
+   "Acaba en からだ, que cierra la explicación.",
+   0,
+   "ashita tesuto ga arukara da."
   ],
   "それが本当だとしたら、": [
    "それがほんとうだとしたら、",
    "Si eso fuera verdad,",
-   "~としたら = suponiendo que."
+   "~としたら = suponiendo que.",
+   0,
+   "sore ga hontou da toshitara,"
   ],
   "大変なことになる。": [
    "たいへんなことになる。",
    "tendríamos un problema.",
-   ""
+   "",
+   0,
+   "taihenna koto ni naru."
   ],
   "というのも、": [
    "というのも、",
    "Y es que…",
    "Explica el motivo de lo anterior. Escrito.",
-   1
+   1,
+   "toiunomo,"
   ],
   "朝起きて、": [
    "あさおきて、",
    "Me levanto,",
-   "~て une acciones en secuencia."
+   "~て une acciones en secuencia.",
+   0,
+   "asaokite,"
   ],
   "顔を洗って、": [
    "かおをあらって、",
    "me lavo la cara",
-   ""
+   "",
+   0,
+   "kao o aratte,"
   ],
   "学校に行く。": [
    "がっこうにいく。",
    "y voy al colegio.",
-   ""
+   "",
+   0,
+   "gakkou ni iku."
   ],
   "あ、": [
    "あ、",
    "Ah,",
-   ""
+   "",
+   0,
+   "a,"
   ],
   "それと、": [
    "それと、",
    "Y también",
    "Muy coloquial, para añadir un elemento más.",
-   1
+   1,
+   "soreto,"
   ],
   "卵も買わなきゃ。": [
    "たまごもかわなきゃ。",
    "también tengo que comprar huevos.",
-   "~なきゃ = tengo que."
+   "~なきゃ = tengo que.",
+   0,
+   "tamago mo kawanakya."
   ],
   "じゃあ、": [
    "じゃあ、",
    "Bueno / Entonces",
    "Cierra o cambia de acción. Coloquial.",
-   1
+   1,
+   "jaa,"
   ],
   "また明日！": [
    "またあした！",
    "¡Hasta mañana!",
-   ""
+   "",
+   0,
+   "mata ashita!"
   ],
   "車で行くの？": [
    "くるまでいくの？",
    "¿Vas en coche?",
-   ""
+   "",
+   0,
+   "kuruma de iku no?"
   ],
   "それなら、": [
    "それなら、",
    "En ese caso",
    "Responde a lo que ha dicho el otro.",
-   1
+   1,
+   "sorenara,"
   ],
   "私も一緒に行く。": [
    "わたしもいっしょにいく。",
    "yo también voy contigo.",
-   ""
+   "",
+   0,
+   "watashi mo issho ni iku."
   ],
   "ドアを開けた。": [
    "ドアをあけた。",
    "Abrí la puerta.",
-   ""
+   "",
+   0,
+   "doa o aketa."
   ],
   "すると、": [
    "すると、",
    "Entonces / Y entonces",
    "Resultado inmediato, a menudo sorprendente.",
-   1
+   1,
+   "suruto,"
   ],
   "猫が出てきた。": [
    "ねこがでてきた。",
    "salió un gato.",
-   ""
+   "",
+   0,
+   "neko ga dete kita."
   ],
   "ここで写真を撮ってもいい。": [
    "ここでしゃしんをとってもいい。",
    "Aquí se pueden hacer fotos.",
-   "~てもいい = se puede."
+   "~てもいい = se puede.",
+   0,
+   "koko de shashin o to ttemo ii."
   ],
   "ただし、": [
    "ただし、",
    "Eso sí / Pero (con una condición)",
    "Pone una limitación.",
-   1
+   1,
+   "tadashi,"
   ],
   "フラッシュは使わないで。": [
    "フラッシュはつかわないで。",
    "no uses el flash.",
-   "~ないで = no hagas."
+   "~ないで = no hagas.",
+   0,
+   "furasshu wa tsukawanaide."
   ],
   "今日は行けない。": [
    "きょうはいけない。",
    "Hoy no puedo ir.",
-   ""
+   "",
+   0,
+   "kyou wa ikenai."
   ],
   "そのかわり、": [
    "そのかわり、",
    "A cambio",
    "Ofrece una compensación.",
-   1
+   1,
+   "sonokawari,"
   ],
   "明日なら行けるよ。": [
    "あしたならいけるよ。",
    "mañana sí puedo.",
-   ""
+   "",
+   0,
+   "ashita nara ikeru yo."
   ],
   "彼は日本語だけでなく、": [
    "かれはにほんごだけでなく、",
    "No solo habla japonés,",
-   "~だけでなく = no solo."
+   "~だけでなく = no solo.",
+   0,
+   "kare wa nihongo dakedenaku,"
   ],
   "韓国語も": [
    "かんこくごも",
    "también coreano,",
-   ""
+   "",
+   0,
+   "kankokugo mo"
   ],
   "話せる。": [
    "はなせる。",
    "(puede hablar).",
-   ""
+   "",
+   0,
+   "hanaseru."
   ],
   "今日は行けない": [
    "きょうはいけない",
    "Hoy no puedo ir",
-   ""
+   "",
+   0,
+   "kyou wa ikenai"
   ],
   "が、": [
    "が、",
    "pero",
-   "Más formal que けど. Se pega a la frase."
+   "Más formal que けど. Se pega a la frase.",
+   0,
+   "ga,"
   ],
   "明日なら行ける。": [
    "あしたならいける。",
    "mañana sí puedo.",
-   ""
+   "",
+   0,
+   "ashita nara ikeru."
   ],
   "コーヒー": [
    "コーヒー",
    "café",
-   ""
+   "",
+   0,
+   "koohii"
   ],
   "じゃなくて、": [
    "じゃなくて、",
    "no… sino…",
-   "Niega lo primero y corrige."
+   "Niega lo primero y corrige.",
+   0,
+   "janakute,"
   ],
   "お茶がいい。": [
    "おちゃがいい。",
    "prefiero té.",
-   ""
+   "",
+   0,
+   "ocha ga ii."
   ],
   "朝ご飯を食べずに、": [
    "あさごはんをたべずに、",
    "Sin desayunar,",
-   "~ずに = sin hacer."
+   "~ずに = sin hacer.",
+   0,
+   "asagohan o tabezu ni,"
   ],
   "学校に行った。": [
    "がっこうにいった。",
    "fui al colegio.",
-   ""
+   "",
+   0,
+   "gakkou ni itta."
   ]
  }
 }

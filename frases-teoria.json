@@ -1,36 +1,38 @@
 {
- "grupos": [
-  {
-   "id": "frases",
-   "titulo": "Formar frases"
-  }
- ],
  "lecciones": [
   {
    "id": "orden",
    "grupo": "frases",
+   "nivel": "basico",
    "icono": "🧩",
    "titulo": "Orden de las palabras",
+   "resumen": "El verbo siempre al final",
    "explicacion": [
-    "En japonés el verbo va SIEMPRE al final de la frase. Es como decir «yo agua bebo».",
-    "Orden habitual: tiempo → lugar → objeto → verbo. Ej.: 明日 家で 水を 飲む (mañana / en casa / agua / bebo).",
-    "Hablando, casi todo lo que se sobreentiende se omite (el «yo», partículas…), así que las frases quedan en 2 o 3 bloques cortos."
+    "El verbo va SIEMPRE al final de la frase. Es como decir «yo agua bebo».",
+    "Orden habitual: tiempo → lugar → objeto → verbo. 明日 家で 水を 飲む (ashita, ie de, mizu o, nomu) = mañana / en casa / agua / bebo.",
+    "En la calle se omite lo que se sobreentiende: el «yo» y muchas partículas. Por eso las frases suelen quedar en 2 o 3 bloques cortos.",
+    "Los complementos pueden cambiar de sitio si el verbo sigue al final: 今日 家にいる (kyou ie ni iru) y 家に 今日いる suenan bien."
    ],
    "ejemplos": [
     {
      "ja": "明日、会える？",
-     "lectura": "ashita, aeru?",
-     "es": "Mañana, ¿podemos vernos?"
+     "es": "Mañana, ¿podemos vernos?",
+     "romaji": "Asu, aeru?"
     },
     {
      "ja": "今、家にいるよ。",
-     "lectura": "ima, ie ni iru yo",
-     "es": "Ahora estoy en casa."
+     "es": "Ahora estoy en casa.",
+     "romaji": "Ima, ie ni iru yo."
     },
     {
      "ja": "電車が遅れてる。",
-     "lectura": "densha ga okureteru",
-     "es": "El tren va con retraso."
+     "es": "El tren va con retraso.",
+     "romaji": "Densha ga okureteru."
+    },
+    {
+     "ja": "財布忘れちゃった。",
+     "es": "Se me ha olvidado la cartera.",
+     "romaji": "Saifu wasurechatta."
     }
    ],
    "ejercicios": [
@@ -84,33 +86,136 @@
    ]
   },
   {
-   "id": "particulas",
+   "id": "preguntas",
    "grupo": "frases",
-   "icono": "🔗",
-   "titulo": "Partículas: は が を に で",
+   "nivel": "basico",
+   "icono": "❓",
+   "titulo": "Preguntas sin か",
+   "resumen": "Sube la entonación y listo",
    "explicacion": [
-    "は marca el tema («en cuanto a…»): 今日は無理。",
-    "が marca el sujeto: 電車が遅れてる。",
-    "を marca el objeto directo: 水をちょうだい。",
-    "に indica dónde está algo/alguien, el destino o la hora: 家にいる。",
-    "で indica dónde ocurre una acción: 外で食べる。",
-    "Hablando muchas desaparecen: 水ちょうだい = 水をちょうだい."
+    "Hablando basta con subir la entonación: 行く？ (iku?) = ¿vamos? No hace falta か (ka).",
+    "Se escribe ？ y se omite か. Con か suena más formal o seco.",
+    "Palabras clave: どこ (doko, dónde), 何 (nani, qué), なんで (nande, por qué), 何時 (nanji, qué hora), いくら (ikura, cuánto cuesta), いつ (itsu, cuándo), だれ (dare, quién).",
+    "Para pedir permiso o un momento: いい？ (ii?) y ちょっといい？ (chotto ii?)."
    ],
    "ejemplos": [
     {
-     "ja": "今日は無理。",
-     "lectura": "kyō wa muri",
-     "es": "Hoy no puedo."
+     "ja": "行く？",
+     "es": "¿Vamos?",
+     "romaji": "Iku?"
     },
     {
-     "ja": "家にいるよ。",
-     "lectura": "ie ni iru yo",
-     "es": "Estoy en casa."
+     "ja": "今どこ？",
+     "es": "¿Dónde estás ahora?",
+     "romaji": "Ima doko?"
     },
     {
-     "ja": "外で食べない？",
-     "lectura": "soto de tabenai?",
-     "es": "¿Comemos fuera?"
+     "ja": "これいくら？",
+     "es": "¿Cuánto cuesta esto?",
+     "romaji": "Kore ikura?"
+    },
+    {
+     "ja": "なんで？",
+     "es": "¿Por qué? / ¿Y eso?",
+     "romaji": "Nan de?"
+    }
+   ],
+   "ejercicios": [
+    {
+     "id": "preguntas-1",
+     "p": "¿Cómo preguntas «¿Vamos?» en la calle?",
+     "ja": "",
+     "ops": [
+      "行く？ con entonación ascendente",
+      "行く。 con entonación descendente"
+     ],
+     "ok": 0,
+     "exp": "Sube la entonación y se omite か."
+    },
+    {
+     "id": "preguntas-2",
+     "p": "¿Qué diferencia 大丈夫？ de 大丈夫。?",
+     "ja": "",
+     "ops": [
+      "La entonación y el signo",
+      "El verbo"
+     ],
+     "ok": 0,
+     "exp": "Pregunta vs afirmación."
+    },
+    {
+     "id": "preguntas-3",
+     "p": "¿Cuál es «¿dónde?»?",
+     "ja": "",
+     "ops": [
+      "どこ",
+      "いつ",
+      "だれ"
+     ],
+     "ok": 0,
+     "exp": "どこ = dónde."
+    },
+    {
+     "id": "preguntas-4",
+     "p": "¿Cuál es «¿por qué?» coloquial?",
+     "ja": "",
+     "ops": [
+      "なんで",
+      "どこで",
+      "いくら"
+     ],
+     "ok": 0,
+     "exp": "なんで = ¿por qué?"
+    },
+    {
+     "id": "preguntas-5",
+     "p": "何時？ significa…",
+     "ja": "何時？",
+     "ops": [
+      "¿Qué hora es?",
+      "¿Cuánto cuesta?",
+      "¿Quién es?"
+     ],
+     "ok": 0,
+     "exp": "何時 = qué hora."
+    }
+   ]
+  },
+  {
+   "id": "particulas",
+   "grupo": "frases",
+   "nivel": "basico",
+   "icono": "🔗",
+   "titulo": "Partículas: は が を に で",
+   "resumen": "Las piezas que unen las palabras",
+   "explicacion": [
+    "は (wa) marca el tema («en cuanto a…»): 今日は無理。(kyou wa muri) = hoy no puedo.",
+    "が (ga) marca el sujeto: 電車が遅れてる。(densha ga okureteru) = el tren va con retraso.",
+    "を (o) marca el objeto directo: 水をちょうだい。(mizu o choudai) = dame agua.",
+    "に (ni) indica dónde está algo o alguien, el destino o la hora: 家にいる。(ie ni iru) = estoy en casa.",
+    "で (de) indica dónde ocurre una acción o el medio: 外で食べる。(soto de taberu) = como fuera.",
+    "Hablando muchas desaparecen: 水ちょうだい = 水をちょうだい. Pero に y で casi nunca se omiten, porque cambian el sentido."
+   ],
+   "ejemplos": [
+    {
+     "ja": "今日はちょっと無理。",
+     "es": "Hoy no puedo, lo siento.",
+     "romaji": "Kyou wa chotto muri."
+    },
+    {
+     "ja": "今、家にいるよ。",
+     "es": "Estoy en casa ahora.",
+     "romaji": "Ima, ie ni iru yo."
+    },
+    {
+     "ja": "今日、外で食べない？",
+     "es": "¿Comemos fuera hoy?",
+     "romaji": "Kyou, soto de tabenai?"
+    },
+    {
+     "ja": "水ちょうだい。",
+     "es": "Pásame agua.",
+     "romaji": "Mizu choudai."
     }
    ],
    "ejercicios": [
@@ -190,30 +295,38 @@
   {
    "id": "finales",
    "grupo": "frases",
+   "nivel": "basico",
    "icono": "💬",
    "titulo": "Partículas finales: よ ね さ の かな",
+   "resumen": "Dan el tono a lo que dices",
    "explicacion": [
-    "よ: informa o enfatiza («¡te lo digo!»): 行くよ。",
-    "ね: busca acuerdo («¿verdad?»): 暑いね。",
-    "さ: relleno informal, como «¿sabes?»: 忙しくてさ。",
-    "の: pregunta suave o explicación: どうしたの？",
-    "かな: preguntarse a uno mismo: いいかな。"
+    "よ (yo) informa o enfatiza («¡te lo digo!»): 行くよ。(iku yo) = voy, ¿eh?",
+    "ね (ne) busca acuerdo («¿verdad?»): 暑いね。(atsui ne) = hace calor, ¿eh?",
+    "さ (sa) es un relleno informal, como «¿sabes?»: 忙しくてさ。(isogashikute sa) = es que ando liado, ¿sabes?",
+    "の (no) vuelve la pregunta suave y natural: どうしたの？(dou shita no?) = ¿qué te pasa?",
+    "かな (kana) es preguntarse a uno mismo: いいかな。(ii kana) = ¿estará bien?",
+    "って (tte) cita o retoma algo: これって何？(kore tte nani?) = esto, ¿qué es?"
    ],
    "ejemplos": [
     {
-     "ja": "行くよ。",
-     "lectura": "iku yo",
-     "es": "Voy (¡que lo sepas!)."
+     "ja": "いいよ！",
+     "es": "¡Vale!",
+     "romaji": "Ii yo!"
     },
     {
-     "ja": "暑いね。",
-     "lectura": "atsui ne",
-     "es": "Hace calor, ¿eh?"
+     "ja": "寒いね。",
+     "es": "Hace frío, ¿eh?",
+     "romaji": "Samui ne."
     },
     {
      "ja": "どうしたの？",
-     "lectura": "dō shita no?",
-     "es": "¿Qué te pasa?"
+     "es": "¿Qué te pasa?",
+     "romaji": "Dou shita no?"
+    },
+    {
+     "ja": "最近ちょっと忙しくてさ。",
+     "es": "Es que últimamente ando liado.",
+     "romaji": "Saikin chotto isogashikute sa."
     }
    ],
    "ejercicios": [
@@ -282,30 +395,38 @@
   {
    "id": "contracciones",
    "grupo": "frases",
+   "nivel": "intermedio",
    "icono": "✂️",
    "titulo": "Contracciones habladas",
+   "resumen": "Cómo se acorta el japonés hablado",
    "explicacion": [
-    "している → してる (ている pierde la い).",
-    "~てしまう → ~ちゃう; ~でしまう → ~じゃう. Indica algo hecho sin querer o del todo: 忘れちゃった。",
-    "~ておく → ~とく: 閉じとく, しとく。",
-    "のだ → んだ / んの: そうなんだ。",
-    "分からない → 分かんない (ない tras ん)."
+    "している → してる (shiteru): ている pierde la い. 何してる？ = ¿qué haces?",
+    "~てしまう → ~ちゃう (chau) / ~でしまう → ~じゃう (jau): algo que pasa sin querer o del todo. 忘れちゃった。(wasurechatta) = se me olvidó.",
+    "~ておく → ~とく (toku): hacer algo de antemano. やめとく。(yametoku) = mejor lo dejo.",
+    "のだ → んだ / んの: そうなんだ。(sou nanda) = ah, ¿sí? Explica o muestra interés.",
+    "分からない → 分かんない (wakannai): ない tras ら pasa a んない. Es muy frecuente.",
+    "Estas formas son normales hablando; en textos formales se escriben completas."
    ],
    "ejemplos": [
     {
      "ja": "何してる？",
-     "lectura": "nani shiteru?",
-     "es": "¿Qué haces?"
+     "es": "¿Qué haces?",
+     "romaji": "Nani shiteru?"
     },
     {
-     "ja": "忘れちゃった。",
-     "lectura": "wasurechatta",
-     "es": "Se me olvidó."
+     "ja": "寝坊しちゃった。",
+     "es": "Me he quedado dormido.",
+     "romaji": "Nebou shichatta."
     },
     {
-     "ja": "やめとく。",
-     "lectura": "yametoku",
-     "es": "Mejor lo dejo."
+     "ja": "先に敵を倒しとこう。",
+     "es": "Vamos a derrotar primero al enemigo.",
+     "romaji": "Saki ni teki o taoshitokou."
+    },
+    {
+     "ja": "全然分かんない。",
+     "es": "No tengo ni idea.",
+     "romaji": "Zenzen wakannai."
     }
    ],
    "ejercicios": [
@@ -386,28 +507,38 @@
   {
    "id": "jerga",
    "grupo": "frases",
+   "nivel": "intermedio",
    "icono": "🔥",
    "titulo": "Jerga y préstamos",
+   "resumen": "Palabras de calle que oirás mucho",
    "explicacion": [
-    "マジ (en serio), やばい (muy bueno o muy malo), めっちゃ (muy), じゃん (¿verdad?, «¡es que…!»).",
-    "ラグい viene de «lag»: muchas palabras inglesas se convierten en adjetivos con ~い.",
-    "Úsalas con amigos, no en situaciones formales."
+    "マジ (maji) = en serio. マジで？ = ¿en serio? Muy informal.",
+    "やばい (yabai) = fuerte. Puede ser genial o terrible: depende del contexto.",
+    "めっちゃ (meccha) = muy / un montón. めっちゃおいしい！ = ¡está buenísimo!",
+    "じゃん (jan) = «¿a que sí?». いいじゃん！ = ¡qué guay!",
+    "ラグい (ragui) viene del inglés «lag»: muchas palabras extranjeras se vuelven adjetivos con ~い.",
+    "Úsalas con amigos, no con un jefe ni en situaciones formales."
    ],
    "ejemplos": [
     {
      "ja": "マジで？",
-     "lectura": "maji de?",
-     "es": "¿En serio?"
+     "es": "¿En serio?",
+     "romaji": "Majide?"
     },
     {
      "ja": "めっちゃおいしい！",
-     "lectura": "meccha oishii",
-     "es": "¡Está riquísimo!"
+     "es": "¡Está buenísimo!",
+     "romaji": "Metcha oishii!"
     },
     {
      "ja": "いいじゃん！",
-     "lectura": "ii jan",
-     "es": "¡Está genial!"
+     "es": "¡Qué guay!",
+     "romaji": "Ii jan!"
+    },
+    {
+     "ja": "ちょっとラグくない？",
+     "es": "¿No va un poco lageado?",
+     "romaji": "Chotto ragu kunai?"
     }
    ],
    "ejercicios": [
@@ -469,94 +600,6 @@
      ],
      "ok": 0,
      "exp": "Es jerga informal."
-    }
-   ]
-  },
-  {
-   "id": "preguntas",
-   "grupo": "frases",
-   "icono": "❓",
-   "titulo": "Preguntas sin か",
-   "explicacion": [
-    "Hablando basta con subir la entonación: 行く？ = ¿vamos?",
-    "Se escribe ？ y se omite か.",
-    "Palabras clave: どこ (dónde), 何 (qué), なんで (por qué), 何時 (qué hora), いくら (cuánto cuesta)."
-   ],
-   "ejemplos": [
-    {
-     "ja": "行く？",
-     "lectura": "iku?",
-     "es": "¿Vamos?"
-    },
-    {
-     "ja": "なんで？",
-     "lectura": "nande?",
-     "es": "¿Por qué?"
-    },
-    {
-     "ja": "いくら？",
-     "lectura": "ikura?",
-     "es": "¿Cuánto cuesta?"
-    }
-   ],
-   "ejercicios": [
-    {
-     "id": "preguntas-1",
-     "p": "¿Cómo preguntas «¿Vamos?» en la calle?",
-     "ja": "",
-     "ops": [
-      "行く？ con entonación ascendente",
-      "行く。 con entonación descendente"
-     ],
-     "ok": 0,
-     "exp": "Sube la entonación y se omite か."
-    },
-    {
-     "id": "preguntas-2",
-     "p": "¿Qué diferencia 大丈夫？ de 大丈夫。?",
-     "ja": "",
-     "ops": [
-      "La entonación y el signo",
-      "El verbo"
-     ],
-     "ok": 0,
-     "exp": "Pregunta vs afirmación."
-    },
-    {
-     "id": "preguntas-3",
-     "p": "¿Cuál es «¿dónde?»?",
-     "ja": "",
-     "ops": [
-      "どこ",
-      "いつ",
-      "だれ"
-     ],
-     "ok": 0,
-     "exp": "どこ = dónde."
-    },
-    {
-     "id": "preguntas-4",
-     "p": "¿Cuál es «¿por qué?» coloquial?",
-     "ja": "",
-     "ops": [
-      "なんで",
-      "どこで",
-      "いくら"
-     ],
-     "ok": 0,
-     "exp": "なんで = ¿por qué?"
-    },
-    {
-     "id": "preguntas-5",
-     "p": "何時？ significa…",
-     "ja": "何時？",
-     "ops": [
-      "¿Qué hora es?",
-      "¿Cuánto cuesta?",
-      "¿Quién es?"
-     ],
-     "ok": 0,
-     "exp": "何時 = qué hora."
     }
    ]
   }

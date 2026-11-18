@@ -1,1749 +1,5814 @@
 {
-  "version": 3,
-  "idioma": "ja",
-  "titulo": "Frases japonesas coloquiales — edición ampliada",
-  "descripcion": "150 ejercicios para formar frases de japonés hablado cotidiano. Se priorizan expresiones naturales y útiles en conversaciones reales, con formas informales claramente identificables por su contexto. Los bloques se mezclan en la interfaz, no en este archivo.",
-  "total": 145,
-  "reparto": {
-    "basico": 70,
-    "intermedio": 60,
-    "especializado": 15
+ "version": 3,
+ "idioma": "ja",
+ "titulo": "Frases japonesas coloquiales — edición ampliada",
+ "descripcion": "150 ejercicios para formar frases de japonés hablado cotidiano. Se priorizan expresiones naturales y útiles en conversaciones reales, con formas informales claramente identificables por su contexto. Los bloques se mezclan en la interfaz, no en este archivo.",
+ "total": 145,
+ "reparto": {
+  "basico": 70,
+  "intermedio": 60,
+  "especializado": 15
+ },
+ "idiomas_no_disponibles": {
+  "ko": "Las frases todavía no están disponibles para este idioma."
+ },
+ "frases": [
+  {
+   "id": 1,
+   "nivel": "basico",
+   "categoria": "saludos",
+   "es": "¡Buenos días!",
+   "ja": "おはよう！",
+   "lectura": "おはよう！",
+   "bloques": [
+    "おはよう！"
+   ],
+   "romaji": "Ohayou!"
   },
-  "idiomas_no_disponibles": {
-    "ko": "Las frases todavía no están disponibles para este idioma."
+  {
+   "id": 2,
+   "nivel": "basico",
+   "categoria": "saludos",
+   "es": "¡Hola!",
+   "ja": "こんにちは！",
+   "lectura": "こんにちは！",
+   "bloques": [
+    "こんにちは！"
+   ],
+   "romaji": "Konnichiwa!"
   },
-  "frases": [
-    {
-      "id": 1,
-      "nivel": "basico",
-      "categoria": "saludos",
-      "es": "¡Buenos días!",
-      "ja": "おはよう！",
-      "lectura": "おはよう！",
-      "bloques": [
-        "おはよう！"
-      ]
-    },
-    {
-      "id": 2,
-      "nivel": "basico",
-      "categoria": "saludos",
-      "es": "¡Hola!",
-      "ja": "こんにちは！",
-      "lectura": "こんにちは！",
-      "bloques": [
-        "こんにちは！"
-      ]
-    },
-    {
-      "id": 3,
-      "nivel": "basico",
-      "categoria": "saludos",
-      "es": "¡Buen trabajo! / ¡Qué tal!",
-      "ja": "おつかれ！",
-      "lectura": "おつかれ！",
-      "bloques": [
-        "おつかれ！"
-      ]
-    },
-    {
-      "id": 4,
-      "nivel": "basico",
-      "categoria": "saludos",
-      "es": "¡Hasta luego!",
-      "ja": "またね！",
-      "lectura": "またね！",
-      "bloques": [
-        "またね！"
-      ]
-    },
-    {
-      "id": 5,
-      "nivel": "basico",
-      "categoria": "cortesia",
-      "es": "¡Gracias!",
-      "ja": "ありがとう！",
-      "lectura": "ありがとう！",
-      "bloques": [
-        "ありがとう！"
-      ]
-    },
-    {
-      "id": 6,
-      "nivel": "basico",
-      "categoria": "cortesia",
-      "es": "¡Perdón!",
-      "ja": "ごめん！",
-      "lectura": "ごめん！",
-      "bloques": [
-        "ごめん！"
-      ]
-    },
-    {
-      "id": 7,
-      "nivel": "basico",
-      "categoria": "amigos",
-      "es": "¿Qué tal?",
-      "ja": "元気？",
-      "lectura": "げんき？",
-      "bloques": [
-        "元気？"
-      ]
-    },
-    {
-      "id": 8,
-      "nivel": "basico",
-      "categoria": "amigos",
-      "es": "Estoy bien.",
-      "ja": "元気だよ。",
-      "lectura": "げんきだよ。",
-      "bloques": [
-        "元気だよ。"
-      ]
-    },
-    {
-      "id": 9,
-      "nivel": "basico",
-      "categoria": "amigos",
-      "es": "¿Estás bien?",
-      "ja": "大丈夫？",
-      "lectura": "だいじょうぶ？",
-      "bloques": [
-        "大丈夫？"
-      ]
-    },
-    {
-      "id": 10,
-      "nivel": "basico",
-      "categoria": "amigos",
-      "es": "Sí, estoy bien.",
-      "ja": "うん、大丈夫。",
-      "lectura": "うん、だいじょうぶ。",
-      "bloques": [
-        "うん、",
-        "大丈夫。"
-      ]
-    },
-    {
-      "id": 11,
-      "nivel": "basico",
-      "categoria": "rutina",
-      "es": "¿Qué haces ahora?",
-      "ja": "今何してる？",
-      "lectura": "いま なにしてる？",
-      "bloques": [
-        "今",
-        "何してる？"
-      ]
-    },
-    {
-      "id": 12,
-      "nivel": "basico",
-      "categoria": "rutina",
-      "es": "Estoy en casa ahora.",
-      "ja": "今、家にいるよ。",
-      "lectura": "いま、いえに いるよ。",
-      "bloques": [
-        "今、",
-        "家に",
-        "いるよ。"
-      ]
-    },
-    {
-      "id": 13,
-      "nivel": "basico",
-      "categoria": "amigos",
-      "es": "¿Dónde estás?",
-      "ja": "今どこ？",
-      "lectura": "いま どこ？",
-      "bloques": [
-        "今",
-        "どこ？"
-      ]
-    },
-    {
-      "id": 14,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "¿Ya has llegado?",
-      "ja": "もう着いた？",
-      "lectura": "もう ついた？",
-      "bloques": [
-        "もう",
-        "着いた？"
-      ]
-    },
-    {
-      "id": 15,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "Estoy yendo para allá.",
-      "ja": "今向かってる。",
-      "lectura": "いま むかってる。",
-      "bloques": [
-        "今",
-        "向かってる。"
-      ]
-    },
-    {
-      "id": 16,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "Espera un momento.",
-      "ja": "ちょっと待って。",
-      "lectura": "ちょっと まって。",
-      "bloques": [
-        "ちょっと",
-        "待って。"
-      ]
-    },
-    {
-      "id": 17,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "Voy enseguida.",
-      "ja": "すぐ行くよ。",
-      "lectura": "すぐ いくよ。",
-      "bloques": [
-        "すぐ",
-        "行くよ。"
-      ]
-    },
-    {
-      "id": 18,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "Ve tú primero.",
-      "ja": "先に行ってて。",
-      "lectura": "さきに いってて。",
-      "bloques": [
-        "先に",
-        "行ってて。"
-      ]
-    },
-    {
-      "id": 19,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "¿Qué hora es?",
-      "ja": "何時？",
-      "lectura": "なんじ？",
-      "bloques": [
-        "何時？"
-      ]
-    },
-    {
-      "id": 20,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "¿Estás libre hoy?",
-      "ja": "今日暇？",
-      "lectura": "きょう ひま？",
-      "bloques": [
-        "今日",
-        "暇？"
-      ]
-    },
-    {
-      "id": 21,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "¿Estás libre mañana?",
-      "ja": "明日暇？",
-      "lectura": "あした ひま？",
-      "bloques": [
-        "明日",
-        "暇？"
-      ]
-    },
-    {
-      "id": 22,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "¿Puedes quedar hoy?",
-      "ja": "今日会える？",
-      "lectura": "きょう あえる？",
-      "bloques": [
-        "今日",
-        "会える？"
-      ]
-    },
-    {
-      "id": 23,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "Hoy no puedo, lo siento.",
-      "ja": "今日はちょっと無理。",
-      "lectura": "きょうは ちょっと むり。",
-      "bloques": [
-        "今日は",
-        "ちょっと",
-        "無理。"
-      ]
-    },
-    {
-      "id": 24,
-      "nivel": "basico",
-      "categoria": "respuestas",
-      "es": "¡Vale!",
-      "ja": "いいよ！",
-      "lectura": "いいよ！",
-      "bloques": [
-        "いいよ！"
-      ]
-    },
-    {
-      "id": 25,
-      "nivel": "basico",
-      "categoria": "respuestas",
-      "es": "¡Qué bien! / ¡Buena idea!",
-      "ja": "いいね！",
-      "lectura": "いいね！",
-      "bloques": [
-        "いいね！"
-      ]
-    },
-    {
-      "id": 26,
-      "nivel": "basico",
-      "categoria": "respuestas",
-      "es": "¡Eso está bien!",
-      "ja": "それいいね！",
-      "lectura": "それ いいね！",
-      "bloques": [
-        "それ",
-        "いいね！"
-      ]
-    },
-    {
-      "id": 27,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "¿Qué hacemos?",
-      "ja": "どうする？",
-      "lectura": "どうする？",
-      "bloques": [
-        "どうする？"
-      ]
-    },
-    {
-      "id": 28,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "¿Adónde vamos?",
-      "ja": "どこ行く？",
-      "lectura": "どこ いく？",
-      "bloques": [
-        "どこ",
-        "行く？"
-      ]
-    },
-    {
-      "id": 29,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "¿Vienes conmigo?",
-      "ja": "一緒に行く？",
-      "lectura": "いっしょに いく？",
-      "bloques": [
-        "一緒に",
-        "行く？"
-      ]
-    },
-    {
-      "id": 30,
-      "nivel": "basico",
-      "categoria": "planes",
-      "es": "¡Vamos!",
-      "ja": "行こう！",
-      "lectura": "いこう！",
-      "bloques": [
-        "行こう！"
-      ]
-    },
-    {
-      "id": 31,
-      "nivel": "basico",
-      "categoria": "comida",
-      "es": "¿Qué te apetece comer?",
-      "ja": "何食べたい？",
-      "lectura": "なに たべたい？",
-      "bloques": [
-        "何",
-        "食べたい？"
-      ]
-    },
-    {
-      "id": 32,
-      "nivel": "basico",
-      "categoria": "comida",
-      "es": "Tengo hambre.",
-      "ja": "お腹すいた。",
-      "lectura": "おなか すいた。",
-      "bloques": [
-        "お腹",
-        "すいた。"
-      ]
-    },
-    {
-      "id": 33,
-      "nivel": "basico",
-      "categoria": "comida",
-      "es": "Tengo sed.",
-      "ja": "のど渇いた。",
-      "lectura": "のど かわいた。",
-      "bloques": [
-        "のど",
-        "渇いた。"
-      ]
-    },
-    {
-      "id": 34,
-      "nivel": "basico",
-      "categoria": "comida",
-      "es": "Prueba esto.",
-      "ja": "これ食べてみて。",
-      "lectura": "これ たべてみて。",
-      "bloques": [
-        "これ",
-        "食べてみて。"
-      ]
-    },
-    {
-      "id": 35,
-      "nivel": "basico",
-      "categoria": "comida",
-      "es": "¡Está buenísimo!",
-      "ja": "めっちゃおいしい！",
-      "lectura": "めっちゃ おいしい！",
-      "bloques": [
-        "めっちゃ",
-        "おいしい！"
-      ]
-    },
-    {
-      "id": 36,
-      "nivel": "basico",
-      "categoria": "comida",
-      "es": "Ya estoy lleno.",
-      "ja": "もうお腹いっぱい。",
-      "lectura": "もう おなか いっぱい。",
-      "bloques": [
-        "もう",
-        "お腹",
-        "いっぱい。"
-      ]
-    },
-    {
-      "id": 37,
-      "nivel": "basico",
-      "categoria": "comida",
-      "es": "Pásame agua.",
-      "ja": "水ちょうだい。",
-      "lectura": "みず ちょうだい。",
-      "bloques": [
-        "水",
-        "ちょうだい。"
-      ]
-    },
-    {
-      "id": 38,
-      "nivel": "basico",
-      "categoria": "compras",
-      "es": "¿Cuánto cuesta esto?",
-      "ja": "これいくら？",
-      "lectura": "これ いくら？",
-      "bloques": [
-        "これ",
-        "いくら？"
-      ]
-    },
-    {
-      "id": 39,
-      "nivel": "basico",
-      "categoria": "compras",
-      "es": "Esto, por favor.",
-      "ja": "これください。",
-      "lectura": "これ ください。",
-      "bloques": [
-        "これ",
-        "ください。"
-      ]
-    },
-    {
-      "id": 40,
-      "nivel": "basico",
-      "categoria": "compras",
-      "es": "Es un poco caro, ¿eh?",
-      "ja": "ちょっと高いね。",
-      "lectura": "ちょっと たかいね。",
-      "bloques": [
-        "ちょっと",
-        "高いね。"
-      ]
-    },
-    {
-      "id": 41,
-      "nivel": "basico",
-      "categoria": "gustos",
-      "es": "Me gusta esto.",
-      "ja": "これ好き。",
-      "lectura": "これ すき。",
-      "bloques": [
-        "これ",
-        "好き。"
-      ]
-    },
-    {
-      "id": 42,
-      "nivel": "basico",
-      "categoria": "conversacion",
-      "es": "Eso me suena. / Eso lo conozco.",
-      "ja": "それ知ってる。",
-      "lectura": "それ しってる。",
-      "bloques": [
-        "それ",
-        "知ってる。"
-      ]
-    },
-    {
-      "id": 43,
-      "nivel": "basico",
-      "categoria": "conversacion",
-      "es": "No lo sabía.",
-      "ja": "知らなかった。",
-      "lectura": "しらなかった。",
-      "bloques": [
-        "知らなかった。"
-      ]
-    },
-    {
-      "id": 44,
-      "nivel": "basico",
-      "categoria": "reacciones",
-      "es": "¿De verdad?",
-      "ja": "本当？",
-      "lectura": "ほんとう？",
-      "bloques": [
-        "本当？"
-      ]
-    },
-    {
-      "id": 45,
-      "nivel": "basico",
-      "categoria": "reacciones",
-      "es": "¡No me digas!",
-      "ja": "うそでしょ？",
-      "lectura": "うそでしょ？",
-      "bloques": [
-        "うそでしょ？"
-      ]
-    },
-    {
-      "id": 46,
-      "nivel": "basico",
-      "categoria": "reacciones",
-      "es": "¿En serio?",
-      "ja": "マジで？",
-      "lectura": "マジで？",
-      "bloques": [
-        "マジで？"
-      ]
-    },
-    {
-      "id": 47,
-      "nivel": "basico",
-      "categoria": "reacciones",
-      "es": "¡Qué fuerte! / ¡Increíble!",
-      "ja": "すごい！",
-      "lectura": "すごい！",
-      "bloques": [
-        "すごい！"
-      ]
-    },
-    {
-      "id": 48,
-      "nivel": "basico",
-      "categoria": "reacciones",
-      "es": "¡Buah! / ¡Qué fuerte!",
-      "ja": "やばい！",
-      "lectura": "やばい！",
-      "bloques": [
-        "やばい！"
-      ]
-    },
-    {
-      "id": 49,
-      "nivel": "basico",
-      "categoria": "rutina",
-      "es": "Tengo un poco de sueño.",
-      "ja": "ちょっと眠い。",
-      "lectura": "ちょっと ねむい。",
-      "bloques": [
-        "ちょっと",
-        "眠い。"
-      ]
-    },
-    {
-      "id": 50,
-      "nivel": "basico",
-      "categoria": "rutina",
-      "es": "Me voy a dormir ya.",
-      "ja": "もう寝るね。",
-      "lectura": "もう ねるね。",
-      "bloques": [
-        "もう",
-        "寝るね。"
-      ]
-    },
-    {
-      "id": 51,
-      "nivel": "basico",
-      "categoria": "rutina",
-      "es": "Estoy cansado hoy.",
-      "ja": "今日疲れた。",
-      "lectura": "きょう つかれた。",
-      "bloques": [
-        "今日",
-        "疲れた。"
-      ]
-    },
-    {
-      "id": 52,
-      "nivel": "basico",
-      "categoria": "tiempo",
-      "es": "Hace calor, ¿eh?",
-      "ja": "暑いね。",
-      "lectura": "あついね。",
-      "bloques": [
-        "暑いね。"
-      ]
-    },
-    {
-      "id": 53,
-      "nivel": "basico",
-      "categoria": "tiempo",
-      "es": "Hace frío, ¿eh?",
-      "ja": "寒いね。",
-      "lectura": "さむいね。",
-      "bloques": [
-        "寒いね。"
-      ]
-    },
-    {
-      "id": 54,
-      "nivel": "basico",
-      "categoria": "tiempo",
-      "es": "Está lloviendo.",
-      "ja": "雨降ってる。",
-      "lectura": "あめ ふってる。",
-      "bloques": [
-        "雨",
-        "降ってる。"
-      ]
-    },
-    {
-      "id": 55,
-      "nivel": "basico",
-      "categoria": "salud",
-      "es": "Me duele la tripa.",
-      "ja": "お腹痛い。",
-      "lectura": "おなか いたい。",
-      "bloques": [
-        "お腹",
-        "痛い。"
-      ]
-    },
-    {
-      "id": 56,
-      "nivel": "basico",
-      "categoria": "amigos",
-      "es": "¿Ha pasado algo?",
-      "ja": "何かあった？",
-      "lectura": "なにか あった？",
-      "bloques": [
-        "何か",
-        "あった？"
-      ]
-    },
-    {
-      "id": 57,
-      "nivel": "basico",
-      "categoria": "amigos",
-      "es": "¿Qué te pasa?",
-      "ja": "どうしたの？",
-      "lectura": "どうしたの？",
-      "bloques": [
-        "どうしたの？"
-      ]
-    },
-    {
-      "id": 58,
-      "nivel": "basico",
-      "categoria": "saludos",
-      "es": "Nos vemos luego.",
-      "ja": "またあとでね。",
-      "lectura": "また あとでね。",
-      "bloques": [
-        "また",
-        "あとでね。"
-      ]
-    },
-    {
-      "id": 59,
-      "nivel": "basico",
-      "categoria": "amigos",
-      "es": "¿Tienes un momento?",
-      "ja": "ちょっといい？",
-      "lectura": "ちょっと いい？",
-      "bloques": [
-        "ちょっと",
-        "いい？"
-      ]
-    },
-    {
-      "id": 60,
-      "nivel": "basico",
-      "categoria": "respuestas",
-      "es": "¡Entendido! / ¡Vale!",
-      "ja": "わかった！",
-      "lectura": "わかった！",
-      "bloques": [
-        "わかった！"
-      ]
-    },
-    {
-      "id": 61,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "¿Qué has dicho?",
-      "ja": "さっき何て言った？",
-      "lectura": "さっき なんて いった？",
-      "bloques": [
-        "さっき",
-        "何て",
-        "言った？"
-      ]
-    },
-    {
-      "id": 62,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "Dilo otra vez.",
-      "ja": "もう一回言って。",
-      "lectura": "もう いっかい いって。",
-      "bloques": [
-        "もう一回",
-        "言って。"
-      ]
-    },
-    {
-      "id": 63,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "No lo entiendo muy bien.",
-      "ja": "ちょっとよく分からない。",
-      "lectura": "ちょっと よく わからない。",
-      "bloques": [
-        "ちょっと",
-        "よく",
-        "分からない。"
-      ]
-    },
-    {
-      "id": 64,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "Ah, ya entiendo.",
-      "ja": "そういうことか。",
-      "lectura": "そういう ことか。",
-      "bloques": [
-        "そういう",
-        "ことか。"
-      ]
-    },
-    {
-      "id": 65,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "Ya veo.",
-      "ja": "なるほどね。",
-      "lectura": "なるほどね。",
-      "bloques": [
-        "なるほどね。"
-      ]
-    },
-    {
-      "id": 66,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "Ah, ¿sí?",
-      "ja": "そうなんだ。",
-      "lectura": "そうなんだ。",
-      "bloques": [
-        "そうなんだ。"
-      ]
-    },
-    {
-      "id": 67,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "Eso no lo sabía.",
-      "ja": "それは知らなかった。",
-      "lectura": "それは しらなかった。",
-      "bloques": [
-        "それは",
-        "知らなかった。"
-      ]
-    },
-    {
-      "id": 68,
-      "nivel": "intermedio",
-      "categoria": "opiniones",
-      "es": "Me da esa sensación.",
-      "ja": "そんな気がする。",
-      "lectura": "そんな きがする。",
-      "bloques": [
-        "そんな",
-        "気がする。"
-      ]
-    },
-    {
-      "id": 69,
-      "nivel": "intermedio",
-      "categoria": "opiniones",
-      "es": "Creo que seguramente estará bien.",
-      "ja": "たぶん大丈夫だと思う。",
-      "lectura": "たぶん だいじょうぶだと おもう。",
-      "bloques": [
-        "たぶん",
-        "大丈夫だと",
-        "思う。"
-      ]
-    },
-    {
-      "id": 70,
-      "nivel": "intermedio",
-      "categoria": "planes",
-      "es": "Estoy a punto de llegar.",
-      "ja": "もう少しで着く。",
-      "lectura": "もう すこしで つく。",
-      "bloques": [
-        "もう少しで",
-        "着く。"
-      ]
-    },
-    {
-      "id": 71,
-      "nivel": "intermedio",
-      "categoria": "opiniones",
-      "es": "Ha sido más rápido de lo que pensaba.",
-      "ja": "思ったより早かった。",
-      "lectura": "おもったより はやかった。",
-      "bloques": [
-        "思ったより",
-        "早かった。"
-      ]
-    },
-    {
-      "id": 72,
-      "nivel": "intermedio",
-      "categoria": "rutina",
-      "es": "He tardado más de lo que pensaba.",
-      "ja": "思ったより時間かかった。",
-      "lectura": "おもったより じかん かかった。",
-      "bloques": [
-        "思ったより",
-        "時間",
-        "かかった。"
-      ]
-    },
-    {
-      "id": 73,
-      "nivel": "intermedio",
-      "categoria": "transporte",
-      "es": "El tren va con retraso.",
-      "ja": "電車が遅れてる。",
-      "lectura": "でんしゃが おくれてる。",
-      "bloques": [
-        "電車が",
-        "遅れてる。"
-      ]
-    },
-    {
-      "id": 74,
-      "nivel": "intermedio",
-      "categoria": "rutina",
-      "es": "Me he quedado dormido.",
-      "ja": "寝坊しちゃった。",
-      "lectura": "ねぼうしちゃった。",
-      "bloques": [
-        "寝坊",
-        "しちゃった。"
-      ]
-    },
-    {
-      "id": 75,
-      "nivel": "intermedio",
-      "categoria": "rutina",
-      "es": "Me he dejado la cartera.",
-      "ja": "財布忘れちゃった。",
-      "lectura": "さいふ わすれちゃった。",
-      "bloques": [
-        "財布",
-        "忘れちゃった。"
-      ]
-    },
-    {
-      "id": 76,
-      "nivel": "intermedio",
-      "categoria": "tecnologia",
-      "es": "Me queda poca batería.",
-      "ja": "充電切れそう。",
-      "lectura": "じゅうでん きれそう。",
-      "bloques": [
-        "充電",
-        "切れそう。"
-      ]
-    },
-    {
-      "id": 77,
-      "nivel": "intermedio",
-      "categoria": "rutina",
-      "es": "Voy a buscarlo un momento.",
-      "ja": "ちょっと調べてみる。",
-      "lectura": "ちょっと しらべてみる。",
-      "bloques": [
-        "ちょっと",
-        "調べてみる。"
-      ]
-    },
-    {
-      "id": 78,
-      "nivel": "intermedio",
-      "categoria": "amigos",
-      "es": "Te lo mando luego.",
-      "ja": "あとで送るね。",
-      "lectura": "あとで おくるね。",
-      "bloques": [
-        "あとで",
-        "送るね。"
-      ]
-    },
-    {
-      "id": 79,
-      "nivel": "intermedio",
-      "categoria": "tecnologia",
-      "es": "¿Ya lo has comprobado?",
-      "ja": "もう確認した？",
-      "lectura": "もう かくにんした？",
-      "bloques": [
-        "もう",
-        "確認した？"
-      ]
-    },
-    {
-      "id": 80,
-      "nivel": "intermedio",
-      "categoria": "compras",
-      "es": "¿Dónde compraste eso?",
-      "ja": "それ、どこで買ったの？",
-      "lectura": "それ、どこで かったの？",
-      "bloques": [
-        "それ、",
-        "どこで",
-        "買ったの？"
-      ]
-    },
-    {
-      "id": 81,
-      "nivel": "intermedio",
-      "categoria": "rutina",
-      "es": "¿Cómo se usa esto?",
-      "ja": "これってどうやって使うの？",
-      "lectura": "これって どうやって つかうの？",
-      "bloques": [
-        "これって",
-        "どうやって",
-        "使うの？"
-      ]
-    },
-    {
-      "id": 82,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "¿Por qué piensas eso?",
-      "ja": "なんでそう思うの？",
-      "lectura": "なんで そう おもうの？",
-      "bloques": [
-        "なんで",
-        "そう",
-        "思うの？"
-      ]
-    },
-    {
-      "id": 83,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "¿Tienes alguna recomendación?",
-      "ja": "何かおすすめある？",
-      "lectura": "なにか おすすめ ある？",
-      "bloques": [
-        "何か",
-        "おすすめ",
-        "ある？"
-      ]
-    },
-    {
-      "id": 84,
-      "nivel": "intermedio",
-      "categoria": "respuestas",
-      "es": "Me da igual, cualquiera de los dos.",
-      "ja": "どっちでもいいよ。",
-      "lectura": "どっちでも いいよ。",
-      "bloques": [
-        "どっちでも",
-        "いいよ。"
-      ]
-    },
-    {
-      "id": 85,
-      "nivel": "intermedio",
-      "categoria": "opiniones",
-      "es": "¿Cuál crees que es mejor?",
-      "ja": "どっちがいいと思う？",
-      "lectura": "どっちが いいと おもう？",
-      "bloques": [
-        "どっちが",
-        "いいと",
-        "思う？"
-      ]
-    },
-    {
-      "id": 86,
-      "nivel": "intermedio",
-      "categoria": "comida",
-      "es": "Empieza a comer tú.",
-      "ja": "先に食べてて。",
-      "lectura": "さきに たべてて。",
-      "bloques": [
-        "先に",
-        "食べてて。"
-      ]
-    },
-    {
-      "id": 87,
-      "nivel": "intermedio",
-      "categoria": "comida",
-      "es": "¿Ya has decidido qué vas a comer?",
-      "ja": "何食べるか決めた？",
-      "lectura": "なに たべるか きめた？",
-      "bloques": [
-        "何食べるか",
-        "決めた？"
-      ]
-    },
-    {
-      "id": 88,
-      "nivel": "intermedio",
-      "categoria": "planes",
-      "es": "¿Comemos fuera hoy?",
-      "ja": "今日、外で食べない？",
-      "lectura": "きょう、そとで たべない？",
-      "bloques": [
-        "今日、",
-        "外で",
-        "食べない？"
-      ]
-    },
-    {
-      "id": 89,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "Habla un poco más despacio.",
-      "ja": "もう少しゆっくり話して。",
-      "lectura": "もうすこし ゆっくり はなして。",
-      "bloques": [
-        "もう少し",
-        "ゆっくり",
-        "話して。"
-      ]
-    },
-    {
-      "id": 90,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "¿Qué significa esto?",
-      "ja": "これってどういう意味？",
-      "lectura": "これって どういう いみ？",
-      "bloques": [
-        "これって",
-        "どういう",
-        "意味？"
-      ]
-    },
-    {
-      "id": 91,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "Eso me suena.",
-      "ja": "それ聞いたことある。",
-      "lectura": "それ きいたことある。",
-      "bloques": [
-        "それ",
-        "聞いたことある。"
-      ]
-    },
-    {
-      "id": 92,
-      "nivel": "intermedio",
-      "categoria": "planes",
-      "es": "Si puedo, voy.",
-      "ja": "行けたら行くね。",
-      "lectura": "いけたら いくね。",
-      "bloques": [
-        "行けたら",
-        "行くね。"
-      ]
-    },
-    {
-      "id": 93,
-      "nivel": "intermedio",
-      "categoria": "opiniones",
-      "es": "Déjame pensarlo un poco.",
-      "ja": "ちょっと考えさせて。",
-      "lectura": "ちょっと かんがえさせて。",
-      "bloques": [
-        "ちょっと",
-        "考えさせて。"
-      ]
-    },
-    {
-      "id": 94,
-      "nivel": "intermedio",
-      "categoria": "planes",
-      "es": "Mejor lo dejamos.",
-      "ja": "やっぱりやめとく。",
-      "lectura": "やっぱり やめとく。",
-      "bloques": [
-        "やっぱり",
-        "やめとく。"
-      ]
-    },
-    {
-      "id": 95,
-      "nivel": "intermedio",
-      "categoria": "rutina",
-      "es": "Hoy quiero quedarme tranquilo en casa.",
-      "ja": "今日は家でゆっくりしたい。",
-      "lectura": "きょうは いえで ゆっくりしたい。",
-      "bloques": [
-        "今日は",
-        "家で",
-        "ゆっくりしたい。"
-      ]
-    },
-    {
-      "id": 96,
-      "nivel": "intermedio",
-      "categoria": "amigos",
-      "es": "Es que últimamente ando bastante liado.",
-      "ja": "最近ちょっと忙しくてさ。",
-      "lectura": "さいきん ちょっと いそがしくてさ。",
-      "bloques": [
-        "最近",
-        "ちょっと",
-        "忙しくてさ。"
-      ]
-    },
-    {
-      "id": 97,
-      "nivel": "intermedio",
-      "categoria": "amigos",
-      "es": "¿Qué tal últimamente?",
-      "ja": "最近どう？",
-      "lectura": "さいきん どう？",
-      "bloques": [
-        "最近",
-        "どう？"
-      ]
-    },
-    {
-      "id": 98,
-      "nivel": "intermedio",
-      "categoria": "saludos",
-      "es": "¡Cuánto tiempo!",
-      "ja": "久しぶり！",
-      "lectura": "ひさしぶり！",
-      "bloques": [
-        "久しぶり！"
-      ]
-    },
-    {
-      "id": 99,
-      "nivel": "intermedio",
-      "categoria": "amigos",
-      "es": "Me alegro de verte.",
-      "ja": "会えてうれしい。",
-      "lectura": "あえて うれしい。",
-      "bloques": [
-        "会えて",
-        "うれしい。"
-      ]
-    },
-    {
-      "id": 100,
-      "nivel": "intermedio",
-      "categoria": "amigos",
-      "es": "Se me olvidó escribirte.",
-      "ja": "連絡するの忘れてた。",
-      "lectura": "れんらくするの わすれてた。",
-      "bloques": [
-        "連絡するの",
-        "忘れてた。"
-      ]
-    },
-    {
-      "id": 101,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "Quería decirte una cosa...",
-      "ja": "言おうと思ってたんだけど。",
-      "lectura": "いおうと おもってたんだけど。",
-      "bloques": [
-        "言おうと",
-        "思ってたんだけど。"
-      ]
-    },
-    {
-      "id": 102,
-      "nivel": "intermedio",
-      "categoria": "opiniones",
-      "es": "Eso me viene un poco mal.",
-      "ja": "それはちょっと困る。",
-      "lectura": "それは ちょっと こまる。",
-      "bloques": [
-        "それは",
-        "ちょっと",
-        "困る。"
-      ]
-    },
-    {
-      "id": 103,
-      "nivel": "intermedio",
-      "categoria": "amigos",
-      "es": "No hace falta que te fuerces.",
-      "ja": "無理しなくていいよ。",
-      "lectura": "むりしなくて いいよ。",
-      "bloques": [
-        "無理しなくて",
-        "いいよ。"
-      ]
-    },
-    {
-      "id": 104,
-      "nivel": "intermedio",
-      "categoria": "amigos",
-      "es": "No te preocupes por eso.",
-      "ja": "気にしないで。",
-      "lectura": "きにしないで。",
-      "bloques": [
-        "気にしないで。"
-      ]
-    },
-    {
-      "id": 105,
-      "nivel": "intermedio",
-      "categoria": "planes",
-      "es": "¿Puedes esperar un poquito más?",
-      "ja": "もうちょっと待ってもらえる？",
-      "lectura": "もうちょっと まってもらえる？",
-      "bloques": [
-        "もうちょっと",
-        "待ってもらえる？"
-      ]
-    },
-    {
-      "id": 106,
-      "nivel": "especializado",
-      "categoria": "tecnologia",
-      "es": "El wifi no conecta para nada.",
-      "ja": "Wi-Fiが全然つながらない。",
-      "lectura": "ワイファイが ぜんぜん つながらない。",
-      "bloques": [
-        "Wi-Fiが",
-        "全然",
-        "つながらない。"
-      ]
-    },
-    {
-      "id": 107,
-      "nivel": "especializado",
-      "categoria": "tecnologia",
-      "es": "El ordenador ha dejado de funcionar de repente.",
-      "ja": "パソコンが急に動かなくなった。",
-      "lectura": "パソコンが きゅうに うごかなくなった。",
-      "bloques": [
-        "パソコンが",
-        "急に",
-        "動かなくなった。"
-      ]
-    },
-    {
-      "id": 108,
-      "nivel": "especializado",
-      "categoria": "tecnologia",
-      "es": "¿Dónde guardé el archivo?",
-      "ja": "ファイルどこに保存したっけ？",
-      "lectura": "ファイル どこに ほぞんしたっけ？",
-      "bloques": [
-        "ファイル",
-        "どこに",
-        "保存したっけ？"
-      ]
-    },
-    {
-      "id": 109,
-      "nivel": "especializado",
-      "categoria": "tecnologia",
-      "es": "Haz una copia de seguridad luego, por si acaso.",
-      "ja": "あとでバックアップ取っといて。",
-      "lectura": "あとで バックアップ とっといて。",
-      "bloques": [
-        "あとで",
-        "バックアップ",
-        "取っといて。"
-      ]
-    },
-    {
-      "id": 110,
-      "nivel": "especializado",
-      "categoria": "tecnologia",
-      "es": "¿Puedes compartir pantalla?",
-      "ja": "画面共有してもらえる？",
-      "lectura": "がめんきょうゆうして もらえる？",
-      "bloques": [
-        "画面共有して",
-        "もらえる？"
-      ]
-    },
-    {
-      "id": 111,
-      "nivel": "especializado",
-      "categoria": "tecnologia",
-      "es": "La aplicación se cierra sola.",
-      "ja": "アプリが勝手に閉じちゃう。",
-      "lectura": "アプリが かってに とじちゃう。",
-      "bloques": [
-        "アプリが",
-        "勝手に",
-        "閉じちゃう。"
-      ]
-    },
-    {
-      "id": 112,
-      "nivel": "especializado",
-      "categoria": "tecnologia",
-      "es": "He olvidado la contraseña.",
-      "ja": "パスワード忘れた。",
-      "lectura": "パスワード わすれた。",
-      "bloques": [
-        "パスワード",
-        "忘れた。"
-      ]
-    },
-    {
-      "id": 113,
-      "nivel": "especializado",
-      "categoria": "tecnologia",
-      "es": "Voy a silenciar las notificaciones.",
-      "ja": "通知オフにしとく。",
-      "lectura": "つうち オフに しとく。",
-      "bloques": [
-        "通知",
-        "オフに",
-        "しとく。"
-      ]
-    },
-    {
-      "id": 114,
-      "nivel": "especializado",
-      "categoria": "tecnologia",
-      "es": "¿Será mejor cambiar este ajuste?",
-      "ja": "この設定、変えたほうがいいかな。",
-      "lectura": "この せってい、かえたほうが いいかな。",
-      "bloques": [
-        "この設定、",
-        "変えたほうが",
-        "いいかな。"
-      ]
-    },
-    {
-      "id": 115,
-      "nivel": "especializado",
-      "categoria": "videojuegos",
-      "es": "¿No va un poco lageado?",
-      "ja": "ちょっとラグくない？",
-      "lectura": "ちょっと ラグくない？",
-      "bloques": [
-        "ちょっと",
-        "ラグくない？"
-      ]
-    },
-    {
-      "id": 116,
-      "nivel": "especializado",
-      "categoria": "videojuegos",
-      "es": "Eso ha sido por el lag, ¡te lo digo!",
-      "ja": "今のはラグのせいだって。",
-      "lectura": "いまのは ラグの せいだって。",
-      "bloques": [
-        "今のは",
-        "ラグのせい",
-        "だって。"
-      ]
-    },
-    {
-      "id": 117,
-      "nivel": "especializado",
-      "categoria": "videojuegos",
-      "es": "¿Tienes algún objeto de curación?",
-      "ja": "回復アイテム持ってる？",
-      "lectura": "かいふくアイテム もってる？",
-      "bloques": [
-        "回復アイテム",
-        "持ってる？"
-      ]
-    },
-    {
-      "id": 118,
-      "nivel": "especializado",
-      "categoria": "videojuegos",
-      "es": "Vamos a derrotar primero al enemigo.",
-      "ja": "先に敵を倒しとこう。",
-      "lectura": "さきに てきを たおしとこう。",
-      "bloques": [
-        "先に",
-        "敵を",
-        "倒しとこう。"
-      ]
-    },
-    {
-      "id": 119,
-      "nivel": "especializado",
-      "categoria": "videojuegos",
-      "es": "Vamos a rodearlos por este lado.",
-      "ja": "こっちから回り込もう。",
-      "lectura": "こっちから まわりこもう。",
-      "bloques": [
-        "こっちから",
-        "回り込もう。"
-      ]
-    },
-    {
-      "id": 120,
-      "nivel": "especializado",
-      "categoria": "videojuegos",
-      "es": "¡Cúbreme un momento!",
-      "ja": "ちょっとカバーして！",
-      "lectura": "ちょっと カバーして！",
-      "bloques": [
-        "ちょっと",
-        "カバーして！"
-      ]
-    },
-    {
-      "id": 121,
-      "nivel": "basico",
-      "categoria": "saludos",
-      "es": "¿Qué tal últimamente? / ¿Cómo te va?",
-      "ja": "どうしてる？",
-      "lectura": "どうしてる？",
-      "bloques": [
-        "どうしてる？"
-      ]
-    },
-    {
-      "id": 122,
-      "nivel": "basico",
-      "categoria": "amigos",
-      "es": "¿Qué tal todo?",
-      "ja": "調子どう？",
-      "lectura": "ちょうし どう？",
-      "bloques": [
-        "調子",
-        "どう？"
-      ]
-    },
-    {
-      "id": 123,
-      "nivel": "basico",
-      "categoria": "amigos",
-      "es": "¿Qué pasa? / ¿Qué te ocurre?",
-      "ja": "どうした？",
-      "lectura": "どうした？",
-      "bloques": [
-        "どうした？"
-      ]
-    },
-    {
-      "id": 124,
-      "nivel": "basico",
-      "categoria": "conversacion",
-      "es": "¿Y eso? / ¿Cómo es eso?",
-      "ja": "なんで？",
-      "lectura": "なんで？",
-      "bloques": [
-        "なんで？"
-      ]
-    },
-    {
-      "id": 125,
-      "nivel": "basico",
-      "categoria": "respuestas",
-      "es": "Ah, ya veo. / Ah, vale.",
-      "ja": "そっか。",
-      "lectura": "そっか。",
-      "bloques": [
-        "そっか。"
-      ]
-    },
-    {
-      "id": 126,
-      "nivel": "basico",
-      "categoria": "respuestas",
-      "es": "¡Pues claro! / ¡Por supuesto!",
-      "ja": "もちろん！",
-      "lectura": "もちろん！",
-      "bloques": [
-        "もちろん！"
-      ]
-    },
-    {
-      "id": 127,
-      "nivel": "basico",
-      "categoria": "reacciones",
-      "es": "¡Qué guay! / ¡Eso mola!",
-      "ja": "いいじゃん！",
-      "lectura": "いいじゃん！",
-      "bloques": [
-        "いいじゃん！"
-      ]
-    },
-    {
-      "id": 128,
-      "nivel": "basico",
-      "categoria": "reacciones",
-      "es": "¿En serio? (muy informal)",
-      "ja": "マジ？",
-      "lectura": "マジ？",
-      "bloques": [
-        "マジ？"
-      ]
-    },
-    {
-      "id": 129,
-      "nivel": "basico",
-      "categoria": "amigos",
-      "es": "¿Qué estás haciendo? (muy informal)",
-      "ja": "何してんの？",
-      "lectura": "なに してんの？",
-      "bloques": [
-        "何",
-        "してんの？"
-      ]
-    },
-    {
-      "id": 130,
-      "nivel": "basico",
-      "categoria": "respuestas",
-      "es": "No pasa nada. / No te preocupes.",
-      "ja": "大丈夫だよ。",
-      "lectura": "だいじょうぶだよ。",
-      "bloques": [
-        "大丈夫",
-        "だよ。"
-      ]
-    },
-    {
-      "id": 131,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "¿Qué quieres decir?",
-      "ja": "どういうこと？",
-      "lectura": "どういうこと？",
-      "bloques": [
-        "どういう",
-        "こと？"
-      ]
-    },
-    {
-      "id": 132,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "No es eso lo que quería decir.",
-      "ja": "そういうことじゃない。",
-      "lectura": "そういう ことじゃない。",
-      "bloques": [
-        "そういう",
-        "ことじゃない。"
-      ]
-    },
-    {
-      "id": 133,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "Espera, ahora lo entiendo.",
-      "ja": "あ、分かった。",
-      "lectura": "あ、わかった。",
-      "bloques": [
-        "あ、",
-        "分かった。"
-      ]
-    },
-    {
-      "id": 134,
-      "nivel": "intermedio",
-      "categoria": "opiniones",
-      "es": "Hay algo que no encaja.",
-      "ja": "なんか違う。",
-      "lectura": "なんか ちがう。",
-      "bloques": [
-        "なんか",
-        "違う。"
-      ]
-    },
-    {
-      "id": 135,
-      "nivel": "intermedio",
-      "categoria": "opiniones",
-      "es": "A mí también me parece.",
-      "ja": "私もそう思う。",
-      "lectura": "わたしも そうおもう。",
-      "bloques": [
-        "私も",
-        "そう思う。"
-      ]
-    },
-    {
-      "id": 136,
-      "nivel": "intermedio",
-      "categoria": "respuestas",
-      "es": "¡Eso mismo!",
-      "ja": "それそれ！",
-      "lectura": "それそれ！",
-      "bloques": [
-        "それそれ！"
-      ]
-    },
-    {
-      "id": 137,
-      "nivel": "intermedio",
-      "categoria": "respuestas",
-      "es": "Bueno, supongo que sí.",
-      "ja": "まあ、そうかもね。",
-      "lectura": "まあ、そうかもね。",
-      "bloques": [
-        "まあ、",
-        "そうかもね。"
-      ]
-    },
-    {
-      "id": 138,
-      "nivel": "intermedio",
-      "categoria": "amigos",
-      "es": "¿Te apetece venir?",
-      "ja": "よかったら来ない？",
-      "lectura": "よかったら こない？",
-      "bloques": [
-        "よかったら",
-        "来ない？"
-      ]
-    },
-    {
-      "id": 139,
-      "nivel": "intermedio",
-      "categoria": "planes",
-      "es": "¿Quedamos otro día?",
-      "ja": "また今度にしない？",
-      "lectura": "また こんどに しない？",
-      "bloques": [
-        "また今度に",
-        "しない？"
-      ]
-    },
-    {
-      "id": 140,
-      "nivel": "intermedio",
-      "categoria": "planes",
-      "es": "Creo que llegaré un poco tarde.",
-      "ja": "ちょっと遅れると思う。",
-      "lectura": "ちょっと おくれると おもう。",
-      "bloques": [
-        "ちょっと",
-        "遅れると",
-        "思う。"
-      ]
-    },
-    {
-      "id": 141,
-      "nivel": "intermedio",
-      "categoria": "amigos",
-      "es": "Perdona por hacerte esperar.",
-      "ja": "待たせてごめん。",
-      "lectura": "またせて ごめん。",
-      "bloques": [
-        "待たせて",
-        "ごめん。"
-      ]
-    },
-    {
-      "id": 142,
-      "nivel": "intermedio",
-      "categoria": "conversacion",
-      "es": "No tengo ni idea.",
-      "ja": "全然分かんない。",
-      "lectura": "ぜんぜん わかんない。",
-      "bloques": [
-        "全然",
-        "分かんない。"
-      ]
-    },
-    {
-      "id": 143,
-      "nivel": "intermedio",
-      "categoria": "reacciones",
-      "es": "¡Qué alivio!",
-      "ja": "よかったー！",
-      "lectura": "よかったー！",
-      "bloques": [
-        "よかったー！"
-      ]
-    },
-    {
-      "id": 144,
-      "nivel": "intermedio",
-      "categoria": "opiniones",
-      "es": "Eso sí que es verdad.",
-      "ja": "それはそうだね。",
-      "lectura": "それは そうだね。",
-      "bloques": [
-        "それは",
-        "そうだね。"
-      ]
-    },
-    {
-      "id": 145,
-      "nivel": "intermedio",
-      "categoria": "rutina",
-      "es": "Al final me he quedado en casa.",
-      "ja": "結局、家にいた。",
-      "lectura": "けっきょく、いえに いた。",
-      "bloques": [
-        "結局、",
-        "家に",
-        "いた。"
-      ]
-    }
+  {
+   "id": 3,
+   "nivel": "basico",
+   "categoria": "saludos",
+   "es": "¡Buen trabajo! / ¡Qué tal!",
+   "ja": "おつかれ！",
+   "lectura": "おつかれ！",
+   "bloques": [
+    "おつかれ！"
+   ],
+   "romaji": "Otsukare!"
+  },
+  {
+   "id": 4,
+   "nivel": "basico",
+   "categoria": "saludos",
+   "es": "¡Hasta luego!",
+   "ja": "またね！",
+   "lectura": "またね！",
+   "bloques": [
+    "またね！"
+   ],
+   "romaji": "Mata ne!"
+  },
+  {
+   "id": 5,
+   "nivel": "basico",
+   "categoria": "cortesia",
+   "es": "¡Gracias!",
+   "ja": "ありがとう！",
+   "lectura": "ありがとう！",
+   "bloques": [
+    "ありがとう！"
+   ],
+   "romaji": "Arigatou!"
+  },
+  {
+   "id": 6,
+   "nivel": "basico",
+   "categoria": "cortesia",
+   "es": "¡Perdón!",
+   "ja": "ごめん！",
+   "lectura": "ごめん！",
+   "bloques": [
+    "ごめん！"
+   ],
+   "romaji": "Gomen!"
+  },
+  {
+   "id": 7,
+   "nivel": "basico",
+   "categoria": "amigos",
+   "es": "¿Qué tal?",
+   "ja": "元気？",
+   "lectura": "げんき？",
+   "bloques": [
+    "元気？"
+   ],
+   "romaji": "Genki?"
+  },
+  {
+   "id": 8,
+   "nivel": "basico",
+   "categoria": "amigos",
+   "es": "Estoy bien.",
+   "ja": "元気だよ。",
+   "lectura": "げんきだよ。",
+   "bloques": [
+    "元気だよ。"
+   ],
+   "romaji": "Genki da yo."
+  },
+  {
+   "id": 9,
+   "nivel": "basico",
+   "categoria": "amigos",
+   "es": "¿Estás bien?",
+   "ja": "大丈夫？",
+   "lectura": "だいじょうぶ？",
+   "bloques": [
+    "大丈夫？"
+   ],
+   "romaji": "Daijoubu?"
+  },
+  {
+   "id": 10,
+   "nivel": "basico",
+   "categoria": "amigos",
+   "es": "Sí, estoy bien.",
+   "ja": "うん、大丈夫。",
+   "lectura": "うん、だいじょうぶ。",
+   "bloques": [
+    "うん、",
+    "大丈夫。"
+   ],
+   "romaji": "Un, daijoubu."
+  },
+  {
+   "id": 11,
+   "nivel": "basico",
+   "categoria": "rutina",
+   "es": "¿Qué haces ahora?",
+   "ja": "今何してる？",
+   "lectura": "いま なにしてる？",
+   "bloques": [
+    "今",
+    "何してる？"
+   ],
+   "romaji": "Ima nani shiteru?"
+  },
+  {
+   "id": 12,
+   "nivel": "basico",
+   "categoria": "rutina",
+   "es": "Estoy en casa ahora.",
+   "ja": "今、家にいるよ。",
+   "lectura": "いま、いえに いるよ。",
+   "bloques": [
+    "今、",
+    "家に",
+    "いるよ。"
+   ],
+   "romaji": "Ima, ie ni iru yo."
+  },
+  {
+   "id": 13,
+   "nivel": "basico",
+   "categoria": "amigos",
+   "es": "¿Dónde estás?",
+   "ja": "今どこ？",
+   "lectura": "いま どこ？",
+   "bloques": [
+    "今",
+    "どこ？"
+   ],
+   "romaji": "Ima doko?"
+  },
+  {
+   "id": 14,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "¿Ya has llegado?",
+   "ja": "もう着いた？",
+   "lectura": "もう ついた？",
+   "bloques": [
+    "もう",
+    "着いた？"
+   ],
+   "romaji": "Mou tsuita?"
+  },
+  {
+   "id": 15,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "Estoy yendo para allá.",
+   "ja": "今向かってる。",
+   "lectura": "いま むかってる。",
+   "bloques": [
+    "今",
+    "向かってる。"
+   ],
+   "romaji": "Ima mukatteru."
+  },
+  {
+   "id": 16,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "Espera un momento.",
+   "ja": "ちょっと待って。",
+   "lectura": "ちょっと まって。",
+   "bloques": [
+    "ちょっと",
+    "待って。"
+   ],
+   "romaji": "Chotto matte."
+  },
+  {
+   "id": 17,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "Voy enseguida.",
+   "ja": "すぐ行くよ。",
+   "lectura": "すぐ いくよ。",
+   "bloques": [
+    "すぐ",
+    "行くよ。"
+   ],
+   "romaji": "Sugu iku yo."
+  },
+  {
+   "id": 18,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "Ve tú primero.",
+   "ja": "先に行ってて。",
+   "lectura": "さきに いってて。",
+   "bloques": [
+    "先に",
+    "行ってて。"
+   ],
+   "romaji": "Saki ni ittete."
+  },
+  {
+   "id": 19,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "¿Qué hora es?",
+   "ja": "何時？",
+   "lectura": "なんじ？",
+   "bloques": [
+    "何時？"
+   ],
+   "romaji": "Nanji?"
+  },
+  {
+   "id": 20,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "¿Estás libre hoy?",
+   "ja": "今日暇？",
+   "lectura": "きょう ひま？",
+   "bloques": [
+    "今日",
+    "暇？"
+   ],
+   "romaji": "Kyou hima?"
+  },
+  {
+   "id": 21,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "¿Estás libre mañana?",
+   "ja": "明日暇？",
+   "lectura": "あした ひま？",
+   "bloques": [
+    "明日",
+    "暇？"
+   ],
+   "romaji": "Ashita hima?"
+  },
+  {
+   "id": 22,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "¿Puedes quedar hoy?",
+   "ja": "今日会える？",
+   "lectura": "きょう あえる？",
+   "bloques": [
+    "今日",
+    "会える？"
+   ],
+   "romaji": "Kyou aeru?"
+  },
+  {
+   "id": 23,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "Hoy no puedo, lo siento.",
+   "ja": "今日はちょっと無理。",
+   "lectura": "きょうは ちょっと むり。",
+   "bloques": [
+    "今日は",
+    "ちょっと",
+    "無理。"
+   ],
+   "romaji": "Kyou wa chotto muri."
+  },
+  {
+   "id": 24,
+   "nivel": "basico",
+   "categoria": "respuestas",
+   "es": "¡Vale!",
+   "ja": "いいよ！",
+   "lectura": "いいよ！",
+   "bloques": [
+    "いいよ！"
+   ],
+   "romaji": "Ii yo!"
+  },
+  {
+   "id": 25,
+   "nivel": "basico",
+   "categoria": "respuestas",
+   "es": "¡Qué bien! / ¡Buena idea!",
+   "ja": "いいね！",
+   "lectura": "いいね！",
+   "bloques": [
+    "いいね！"
+   ],
+   "romaji": "Ii ne!"
+  },
+  {
+   "id": 26,
+   "nivel": "basico",
+   "categoria": "respuestas",
+   "es": "¡Eso está bien!",
+   "ja": "それいいね！",
+   "lectura": "それ いいね！",
+   "bloques": [
+    "それ",
+    "いいね！"
+   ],
+   "romaji": "Sore ii ne!"
+  },
+  {
+   "id": 27,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "¿Qué hacemos?",
+   "ja": "どうする？",
+   "lectura": "どうする？",
+   "bloques": [
+    "どうする？"
+   ],
+   "romaji": "Dou suru?"
+  },
+  {
+   "id": 28,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "¿Adónde vamos?",
+   "ja": "どこ行く？",
+   "lectura": "どこ いく？",
+   "bloques": [
+    "どこ",
+    "行く？"
+   ],
+   "romaji": "Doko iku?"
+  },
+  {
+   "id": 29,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "¿Vienes conmigo?",
+   "ja": "一緒に行く？",
+   "lectura": "いっしょに いく？",
+   "bloques": [
+    "一緒に",
+    "行く？"
+   ],
+   "romaji": "Issho ni iku?"
+  },
+  {
+   "id": 30,
+   "nivel": "basico",
+   "categoria": "planes",
+   "es": "¡Vamos!",
+   "ja": "行こう！",
+   "lectura": "いこう！",
+   "bloques": [
+    "行こう！"
+   ],
+   "romaji": "Ikou!"
+  },
+  {
+   "id": 31,
+   "nivel": "basico",
+   "categoria": "comida",
+   "es": "¿Qué te apetece comer?",
+   "ja": "何食べたい？",
+   "lectura": "なに たべたい？",
+   "bloques": [
+    "何",
+    "食べたい？"
+   ],
+   "romaji": "Nani tabetai?"
+  },
+  {
+   "id": 32,
+   "nivel": "basico",
+   "categoria": "comida",
+   "es": "Tengo hambre.",
+   "ja": "お腹すいた。",
+   "lectura": "おなか すいた。",
+   "bloques": [
+    "お腹",
+    "すいた。"
+   ],
+   "romaji": "Onaka suita."
+  },
+  {
+   "id": 33,
+   "nivel": "basico",
+   "categoria": "comida",
+   "es": "Tengo sed.",
+   "ja": "のど渇いた。",
+   "lectura": "のど かわいた。",
+   "bloques": [
+    "のど",
+    "渇いた。"
+   ],
+   "romaji": "Nodo kawaita."
+  },
+  {
+   "id": 34,
+   "nivel": "basico",
+   "categoria": "comida",
+   "es": "Prueba esto.",
+   "ja": "これ食べてみて。",
+   "lectura": "これ たべてみて。",
+   "bloques": [
+    "これ",
+    "食べてみて。"
+   ],
+   "romaji": "Kore tabete mite."
+  },
+  {
+   "id": 35,
+   "nivel": "basico",
+   "categoria": "comida",
+   "es": "¡Está buenísimo!",
+   "ja": "めっちゃおいしい！",
+   "lectura": "めっちゃ おいしい！",
+   "bloques": [
+    "めっちゃ",
+    "おいしい！"
+   ],
+   "romaji": "Metcha oishii!"
+  },
+  {
+   "id": 36,
+   "nivel": "basico",
+   "categoria": "comida",
+   "es": "Ya estoy lleno.",
+   "ja": "もうお腹いっぱい。",
+   "lectura": "もう おなか いっぱい。",
+   "bloques": [
+    "もう",
+    "お腹",
+    "いっぱい。"
+   ],
+   "romaji": "Mou onaka ippai."
+  },
+  {
+   "id": 37,
+   "nivel": "basico",
+   "categoria": "comida",
+   "es": "Pásame agua.",
+   "ja": "水ちょうだい。",
+   "lectura": "みず ちょうだい。",
+   "bloques": [
+    "水",
+    "ちょうだい。"
+   ],
+   "romaji": "Mizu choudai."
+  },
+  {
+   "id": 38,
+   "nivel": "basico",
+   "categoria": "compras",
+   "es": "¿Cuánto cuesta esto?",
+   "ja": "これいくら？",
+   "lectura": "これ いくら？",
+   "bloques": [
+    "これ",
+    "いくら？"
+   ],
+   "romaji": "Kore ikura?"
+  },
+  {
+   "id": 39,
+   "nivel": "basico",
+   "categoria": "compras",
+   "es": "Esto, por favor.",
+   "ja": "これください。",
+   "lectura": "これ ください。",
+   "bloques": [
+    "これ",
+    "ください。"
+   ],
+   "romaji": "Kore kudasai."
+  },
+  {
+   "id": 40,
+   "nivel": "basico",
+   "categoria": "compras",
+   "es": "Es un poco caro, ¿eh?",
+   "ja": "ちょっと高いね。",
+   "lectura": "ちょっと たかいね。",
+   "bloques": [
+    "ちょっと",
+    "高いね。"
+   ],
+   "romaji": "Chotto takai ne."
+  },
+  {
+   "id": 41,
+   "nivel": "basico",
+   "categoria": "gustos",
+   "es": "Me gusta esto.",
+   "ja": "これ好き。",
+   "lectura": "これ すき。",
+   "bloques": [
+    "これ",
+    "好き。"
+   ],
+   "romaji": "Kore suki."
+  },
+  {
+   "id": 42,
+   "nivel": "basico",
+   "categoria": "conversacion",
+   "es": "Eso me suena. / Eso lo conozco.",
+   "ja": "それ知ってる。",
+   "lectura": "それ しってる。",
+   "bloques": [
+    "それ",
+    "知ってる。"
+   ],
+   "romaji": "Sore shitteru."
+  },
+  {
+   "id": 43,
+   "nivel": "basico",
+   "categoria": "conversacion",
+   "es": "No lo sabía.",
+   "ja": "知らなかった。",
+   "lectura": "しらなかった。",
+   "bloques": [
+    "知らなかった。"
+   ],
+   "romaji": "Shiranakatta."
+  },
+  {
+   "id": 44,
+   "nivel": "basico",
+   "categoria": "reacciones",
+   "es": "¿De verdad?",
+   "ja": "本当？",
+   "lectura": "ほんとう？",
+   "bloques": [
+    "本当？"
+   ],
+   "romaji": "Hontou?"
+  },
+  {
+   "id": 45,
+   "nivel": "basico",
+   "categoria": "reacciones",
+   "es": "¡No me digas!",
+   "ja": "うそでしょ？",
+   "lectura": "うそでしょ？",
+   "bloques": [
+    "うそでしょ？"
+   ],
+   "romaji": "Uso desho?"
+  },
+  {
+   "id": 46,
+   "nivel": "basico",
+   "categoria": "reacciones",
+   "es": "¿En serio?",
+   "ja": "マジで？",
+   "lectura": "マジで？",
+   "bloques": [
+    "マジで？"
+   ],
+   "romaji": "Majide?"
+  },
+  {
+   "id": 47,
+   "nivel": "basico",
+   "categoria": "reacciones",
+   "es": "¡Qué fuerte! / ¡Increíble!",
+   "ja": "すごい！",
+   "lectura": "すごい！",
+   "bloques": [
+    "すごい！"
+   ],
+   "romaji": "Sugoi!"
+  },
+  {
+   "id": 48,
+   "nivel": "basico",
+   "categoria": "reacciones",
+   "es": "¡Buah! / ¡Qué fuerte!",
+   "ja": "やばい！",
+   "lectura": "やばい！",
+   "bloques": [
+    "やばい！"
+   ],
+   "romaji": "Yabai!"
+  },
+  {
+   "id": 49,
+   "nivel": "basico",
+   "categoria": "rutina",
+   "es": "Tengo un poco de sueño.",
+   "ja": "ちょっと眠い。",
+   "lectura": "ちょっと ねむい。",
+   "bloques": [
+    "ちょっと",
+    "眠い。"
+   ],
+   "romaji": "Chotto nemui."
+  },
+  {
+   "id": 50,
+   "nivel": "basico",
+   "categoria": "rutina",
+   "es": "Me voy a dormir ya.",
+   "ja": "もう寝るね。",
+   "lectura": "もう ねるね。",
+   "bloques": [
+    "もう",
+    "寝るね。"
+   ],
+   "romaji": "Mou neru ne."
+  },
+  {
+   "id": 51,
+   "nivel": "basico",
+   "categoria": "rutina",
+   "es": "Estoy cansado hoy.",
+   "ja": "今日疲れた。",
+   "lectura": "きょう つかれた。",
+   "bloques": [
+    "今日",
+    "疲れた。"
+   ],
+   "romaji": "Kyou tsukareta."
+  },
+  {
+   "id": 52,
+   "nivel": "basico",
+   "categoria": "tiempo",
+   "es": "Hace calor, ¿eh?",
+   "ja": "暑いね。",
+   "lectura": "あついね。",
+   "bloques": [
+    "暑いね。"
+   ],
+   "romaji": "Atsui ne."
+  },
+  {
+   "id": 53,
+   "nivel": "basico",
+   "categoria": "tiempo",
+   "es": "Hace frío, ¿eh?",
+   "ja": "寒いね。",
+   "lectura": "さむいね。",
+   "bloques": [
+    "寒いね。"
+   ],
+   "romaji": "Samui ne."
+  },
+  {
+   "id": 54,
+   "nivel": "basico",
+   "categoria": "tiempo",
+   "es": "Está lloviendo.",
+   "ja": "雨降ってる。",
+   "lectura": "あめ ふってる。",
+   "bloques": [
+    "雨",
+    "降ってる。"
+   ],
+   "romaji": "Ame futteru."
+  },
+  {
+   "id": 55,
+   "nivel": "basico",
+   "categoria": "salud",
+   "es": "Me duele la tripa.",
+   "ja": "お腹痛い。",
+   "lectura": "おなか いたい。",
+   "bloques": [
+    "お腹",
+    "痛い。"
+   ],
+   "romaji": "Onaka itai."
+  },
+  {
+   "id": 56,
+   "nivel": "basico",
+   "categoria": "amigos",
+   "es": "¿Ha pasado algo?",
+   "ja": "何かあった？",
+   "lectura": "なにか あった？",
+   "bloques": [
+    "何か",
+    "あった？"
+   ],
+   "romaji": "Nani ka atta?"
+  },
+  {
+   "id": 57,
+   "nivel": "basico",
+   "categoria": "amigos",
+   "es": "¿Qué te pasa?",
+   "ja": "どうしたの？",
+   "lectura": "どうしたの？",
+   "bloques": [
+    "どうしたの？"
+   ],
+   "romaji": "Dou shita no?"
+  },
+  {
+   "id": 58,
+   "nivel": "basico",
+   "categoria": "saludos",
+   "es": "Nos vemos luego.",
+   "ja": "またあとでね。",
+   "lectura": "また あとでね。",
+   "bloques": [
+    "また",
+    "あとでね。"
+   ],
+   "romaji": "Mata atode ne."
+  },
+  {
+   "id": 59,
+   "nivel": "basico",
+   "categoria": "amigos",
+   "es": "¿Tienes un momento?",
+   "ja": "ちょっといい？",
+   "lectura": "ちょっと いい？",
+   "bloques": [
+    "ちょっと",
+    "いい？"
+   ],
+   "romaji": "Chotto ii?"
+  },
+  {
+   "id": 60,
+   "nivel": "basico",
+   "categoria": "respuestas",
+   "es": "¡Entendido! / ¡Vale!",
+   "ja": "わかった！",
+   "lectura": "わかった！",
+   "bloques": [
+    "わかった！"
+   ],
+   "romaji": "Wakatta!"
+  },
+  {
+   "id": 61,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "¿Qué has dicho?",
+   "ja": "さっき何て言った？",
+   "lectura": "さっき なんて いった？",
+   "bloques": [
+    "さっき",
+    "何て",
+    "言った？"
+   ],
+   "romaji": "Sakki nan te itta?"
+  },
+  {
+   "id": 62,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "Dilo otra vez.",
+   "ja": "もう一回言って。",
+   "lectura": "もう いっかい いって。",
+   "bloques": [
+    "もう一回",
+    "言って。"
+   ],
+   "romaji": "Mou ikkai itte."
+  },
+  {
+   "id": 63,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "No lo entiendo muy bien.",
+   "ja": "ちょっとよく分からない。",
+   "lectura": "ちょっと よく わからない。",
+   "bloques": [
+    "ちょっと",
+    "よく",
+    "分からない。"
+   ],
+   "romaji": "Chotto yoku wakaranai."
+  },
+  {
+   "id": 64,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "Ah, ya entiendo.",
+   "ja": "そういうことか。",
+   "lectura": "そういう ことか。",
+   "bloques": [
+    "そういう",
+    "ことか。"
+   ],
+   "romaji": "Sou iu koto ka."
+  },
+  {
+   "id": 65,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "Ya veo.",
+   "ja": "なるほどね。",
+   "lectura": "なるほどね。",
+   "bloques": [
+    "なるほどね。"
+   ],
+   "romaji": "Naruhodo ne."
+  },
+  {
+   "id": 66,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "Ah, ¿sí?",
+   "ja": "そうなんだ。",
+   "lectura": "そうなんだ。",
+   "bloques": [
+    "そうなんだ。"
+   ],
+   "romaji": "Souna n da."
+  },
+  {
+   "id": 67,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "Eso no lo sabía.",
+   "ja": "それは知らなかった。",
+   "lectura": "それは しらなかった。",
+   "bloques": [
+    "それは",
+    "知らなかった。"
+   ],
+   "romaji": "Sore wa shiranakatta."
+  },
+  {
+   "id": 68,
+   "nivel": "intermedio",
+   "categoria": "opiniones",
+   "es": "Me da esa sensación.",
+   "ja": "そんな気がする。",
+   "lectura": "そんな きがする。",
+   "bloques": [
+    "そんな",
+    "気がする。"
+   ],
+   "romaji": "Sonna ki ga suru."
+  },
+  {
+   "id": 69,
+   "nivel": "intermedio",
+   "categoria": "opiniones",
+   "es": "Creo que seguramente estará bien.",
+   "ja": "たぶん大丈夫だと思う。",
+   "lectura": "たぶん だいじょうぶだと おもう。",
+   "bloques": [
+    "たぶん",
+    "大丈夫だと",
+    "思う。"
+   ],
+   "romaji": "Tabun daijoubu da to omou."
+  },
+  {
+   "id": 70,
+   "nivel": "intermedio",
+   "categoria": "planes",
+   "es": "Estoy a punto de llegar.",
+   "ja": "もう少しで着く。",
+   "lectura": "もう すこしで つく。",
+   "bloques": [
+    "もう少しで",
+    "着く。"
+   ],
+   "romaji": "Mou sukoshi de tsuku."
+  },
+  {
+   "id": 71,
+   "nivel": "intermedio",
+   "categoria": "opiniones",
+   "es": "Ha sido más rápido de lo que pensaba.",
+   "ja": "思ったより早かった。",
+   "lectura": "おもったより はやかった。",
+   "bloques": [
+    "思ったより",
+    "早かった。"
+   ],
+   "romaji": "Omotta yori hayakatta."
+  },
+  {
+   "id": 72,
+   "nivel": "intermedio",
+   "categoria": "rutina",
+   "es": "He tardado más de lo que pensaba.",
+   "ja": "思ったより時間かかった。",
+   "lectura": "おもったより じかん かかった。",
+   "bloques": [
+    "思ったより",
+    "時間",
+    "かかった。"
+   ],
+   "romaji": "Omotta yori jikan kakatta."
+  },
+  {
+   "id": 73,
+   "nivel": "intermedio",
+   "categoria": "transporte",
+   "es": "El tren va con retraso.",
+   "ja": "電車が遅れてる。",
+   "lectura": "でんしゃが おくれてる。",
+   "bloques": [
+    "電車が",
+    "遅れてる。"
+   ],
+   "romaji": "Densha ga okureteru."
+  },
+  {
+   "id": 74,
+   "nivel": "intermedio",
+   "categoria": "rutina",
+   "es": "Me he quedado dormido.",
+   "ja": "寝坊しちゃった。",
+   "lectura": "ねぼうしちゃった。",
+   "bloques": [
+    "寝坊",
+    "しちゃった。"
+   ],
+   "romaji": "Nebou shichatta."
+  },
+  {
+   "id": 75,
+   "nivel": "intermedio",
+   "categoria": "rutina",
+   "es": "Me he dejado la cartera.",
+   "ja": "財布忘れちゃった。",
+   "lectura": "さいふ わすれちゃった。",
+   "bloques": [
+    "財布",
+    "忘れちゃった。"
+   ],
+   "romaji": "Saifu wasurechatta."
+  },
+  {
+   "id": 76,
+   "nivel": "intermedio",
+   "categoria": "tecnologia",
+   "es": "Me queda poca batería.",
+   "ja": "充電切れそう。",
+   "lectura": "じゅうでん きれそう。",
+   "bloques": [
+    "充電",
+    "切れそう。"
+   ],
+   "romaji": "Juuden kire sou."
+  },
+  {
+   "id": 77,
+   "nivel": "intermedio",
+   "categoria": "rutina",
+   "es": "Voy a buscarlo un momento.",
+   "ja": "ちょっと調べてみる。",
+   "lectura": "ちょっと しらべてみる。",
+   "bloques": [
+    "ちょっと",
+    "調べてみる。"
+   ],
+   "romaji": "Chotto shirabete miru."
+  },
+  {
+   "id": 78,
+   "nivel": "intermedio",
+   "categoria": "amigos",
+   "es": "Te lo mando luego.",
+   "ja": "あとで送るね。",
+   "lectura": "あとで おくるね。",
+   "bloques": [
+    "あとで",
+    "送るね。"
+   ],
+   "romaji": "Atode okuru ne."
+  },
+  {
+   "id": 79,
+   "nivel": "intermedio",
+   "categoria": "tecnologia",
+   "es": "¿Ya lo has comprobado?",
+   "ja": "もう確認した？",
+   "lectura": "もう かくにんした？",
+   "bloques": [
+    "もう",
+    "確認した？"
+   ],
+   "romaji": "Mou kakunin shita?"
+  },
+  {
+   "id": 80,
+   "nivel": "intermedio",
+   "categoria": "compras",
+   "es": "¿Dónde compraste eso?",
+   "ja": "それ、どこで買ったの？",
+   "lectura": "それ、どこで かったの？",
+   "bloques": [
+    "それ、",
+    "どこで",
+    "買ったの？"
+   ],
+   "romaji": "Sore, doko de katta no?"
+  },
+  {
+   "id": 81,
+   "nivel": "intermedio",
+   "categoria": "rutina",
+   "es": "¿Cómo se usa esto?",
+   "ja": "これってどうやって使うの？",
+   "lectura": "これって どうやって つかうの？",
+   "bloques": [
+    "これって",
+    "どうやって",
+    "使うの？"
+   ],
+   "romaji": "Korette dou yatte tsukau no?"
+  },
+  {
+   "id": 82,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "¿Por qué piensas eso?",
+   "ja": "なんでそう思うの？",
+   "lectura": "なんで そう おもうの？",
+   "bloques": [
+    "なんで",
+    "そう",
+    "思うの？"
+   ],
+   "romaji": "Nan de sou omou no?"
+  },
+  {
+   "id": 83,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "¿Tienes alguna recomendación?",
+   "ja": "何かおすすめある？",
+   "lectura": "なにか おすすめ ある？",
+   "bloques": [
+    "何か",
+    "おすすめ",
+    "ある？"
+   ],
+   "romaji": "Nani ka o susume aru?"
+  },
+  {
+   "id": 84,
+   "nivel": "intermedio",
+   "categoria": "respuestas",
+   "es": "Me da igual, cualquiera de los dos.",
+   "ja": "どっちでもいいよ。",
+   "lectura": "どっちでも いいよ。",
+   "bloques": [
+    "どっちでも",
+    "いいよ。"
+   ],
+   "romaji": "Dotchi demo ii yo."
+  },
+  {
+   "id": 85,
+   "nivel": "intermedio",
+   "categoria": "opiniones",
+   "es": "¿Cuál crees que es mejor?",
+   "ja": "どっちがいいと思う？",
+   "lectura": "どっちが いいと おもう？",
+   "bloques": [
+    "どっちが",
+    "いいと",
+    "思う？"
+   ],
+   "romaji": "Dotchi ga ii to omou?"
+  },
+  {
+   "id": 86,
+   "nivel": "intermedio",
+   "categoria": "comida",
+   "es": "Empieza a comer tú.",
+   "ja": "先に食べてて。",
+   "lectura": "さきに たべてて。",
+   "bloques": [
+    "先に",
+    "食べてて。"
+   ],
+   "romaji": "Saki ni tabetete."
+  },
+  {
+   "id": 87,
+   "nivel": "intermedio",
+   "categoria": "comida",
+   "es": "¿Ya has decidido qué vas a comer?",
+   "ja": "何食べるか決めた？",
+   "lectura": "なに たべるか きめた？",
+   "bloques": [
+    "何食べるか",
+    "決めた？"
+   ],
+   "romaji": "Nani taberu ka kimeta?"
+  },
+  {
+   "id": 88,
+   "nivel": "intermedio",
+   "categoria": "planes",
+   "es": "¿Comemos fuera hoy?",
+   "ja": "今日、外で食べない？",
+   "lectura": "きょう、そとで たべない？",
+   "bloques": [
+    "今日、",
+    "外で",
+    "食べない？"
+   ],
+   "romaji": "Kyou, soto de tabenai?"
+  },
+  {
+   "id": 89,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "Habla un poco más despacio.",
+   "ja": "もう少しゆっくり話して。",
+   "lectura": "もうすこし ゆっくり はなして。",
+   "bloques": [
+    "もう少し",
+    "ゆっくり",
+    "話して。"
+   ],
+   "romaji": "Mou sukoshi yukkuri hanashite."
+  },
+  {
+   "id": 90,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "¿Qué significa esto?",
+   "ja": "これってどういう意味？",
+   "lectura": "これって どういう いみ？",
+   "bloques": [
+    "これって",
+    "どういう",
+    "意味？"
+   ],
+   "romaji": "Korette dou iu imi?"
+  },
+  {
+   "id": 91,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "Eso me suena.",
+   "ja": "それ聞いたことある。",
+   "lectura": "それ きいたことある。",
+   "bloques": [
+    "それ",
+    "聞いたことある。"
+   ],
+   "romaji": "Sore kiita koto aru."
+  },
+  {
+   "id": 92,
+   "nivel": "intermedio",
+   "categoria": "planes",
+   "es": "Si puedo, voy.",
+   "ja": "行けたら行くね。",
+   "lectura": "いけたら いくね。",
+   "bloques": [
+    "行けたら",
+    "行くね。"
+   ],
+   "romaji": "Iketara iku ne."
+  },
+  {
+   "id": 93,
+   "nivel": "intermedio",
+   "categoria": "opiniones",
+   "es": "Déjame pensarlo un poco.",
+   "ja": "ちょっと考えさせて。",
+   "lectura": "ちょっと かんがえさせて。",
+   "bloques": [
+    "ちょっと",
+    "考えさせて。"
+   ],
+   "romaji": "Chotto kangaesasete."
+  },
+  {
+   "id": 94,
+   "nivel": "intermedio",
+   "categoria": "planes",
+   "es": "Mejor lo dejamos.",
+   "ja": "やっぱりやめとく。",
+   "lectura": "やっぱり やめとく。",
+   "bloques": [
+    "やっぱり",
+    "やめとく。"
+   ],
+   "romaji": "Yappari yametoku."
+  },
+  {
+   "id": 95,
+   "nivel": "intermedio",
+   "categoria": "rutina",
+   "es": "Hoy quiero quedarme tranquilo en casa.",
+   "ja": "今日は家でゆっくりしたい。",
+   "lectura": "きょうは いえで ゆっくりしたい。",
+   "bloques": [
+    "今日は",
+    "家で",
+    "ゆっくりしたい。"
+   ],
+   "romaji": "Kyou wa ie de yukkuri shitai."
+  },
+  {
+   "id": 96,
+   "nivel": "intermedio",
+   "categoria": "amigos",
+   "es": "Es que últimamente ando bastante liado.",
+   "ja": "最近ちょっと忙しくてさ。",
+   "lectura": "さいきん ちょっと いそがしくてさ。",
+   "bloques": [
+    "最近",
+    "ちょっと",
+    "忙しくてさ。"
+   ],
+   "romaji": "Saikin chotto isogashikute sa."
+  },
+  {
+   "id": 97,
+   "nivel": "intermedio",
+   "categoria": "amigos",
+   "es": "¿Qué tal últimamente?",
+   "ja": "最近どう？",
+   "lectura": "さいきん どう？",
+   "bloques": [
+    "最近",
+    "どう？"
+   ],
+   "romaji": "Saikin dou?"
+  },
+  {
+   "id": 98,
+   "nivel": "intermedio",
+   "categoria": "saludos",
+   "es": "¡Cuánto tiempo!",
+   "ja": "久しぶり！",
+   "lectura": "ひさしぶり！",
+   "bloques": [
+    "久しぶり！"
+   ],
+   "romaji": "Hisashiburi!"
+  },
+  {
+   "id": 99,
+   "nivel": "intermedio",
+   "categoria": "amigos",
+   "es": "Me alegro de verte.",
+   "ja": "会えてうれしい。",
+   "lectura": "あえて うれしい。",
+   "bloques": [
+    "会えて",
+    "うれしい。"
+   ],
+   "romaji": "Aete ureshii."
+  },
+  {
+   "id": 100,
+   "nivel": "intermedio",
+   "categoria": "amigos",
+   "es": "Se me olvidó escribirte.",
+   "ja": "連絡するの忘れてた。",
+   "lectura": "れんらくするの わすれてた。",
+   "bloques": [
+    "連絡するの",
+    "忘れてた。"
+   ],
+   "romaji": "Renraku suru no wasureteta."
+  },
+  {
+   "id": 101,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "Quería decirte una cosa...",
+   "ja": "言おうと思ってたんだけど。",
+   "lectura": "いおうと おもってたんだけど。",
+   "bloques": [
+    "言おうと",
+    "思ってたんだけど。"
+   ],
+   "romaji": "Iou to omotteta n dakedo."
+  },
+  {
+   "id": 102,
+   "nivel": "intermedio",
+   "categoria": "opiniones",
+   "es": "Eso me viene un poco mal.",
+   "ja": "それはちょっと困る。",
+   "lectura": "それは ちょっと こまる。",
+   "bloques": [
+    "それは",
+    "ちょっと",
+    "困る。"
+   ],
+   "romaji": "Sore wa chotto komaru."
+  },
+  {
+   "id": 103,
+   "nivel": "intermedio",
+   "categoria": "amigos",
+   "es": "No hace falta que te fuerces.",
+   "ja": "無理しなくていいよ。",
+   "lectura": "むりしなくて いいよ。",
+   "bloques": [
+    "無理しなくて",
+    "いいよ。"
+   ],
+   "romaji": "Muri shinakute ii yo."
+  },
+  {
+   "id": 104,
+   "nivel": "intermedio",
+   "categoria": "amigos",
+   "es": "No te preocupes por eso.",
+   "ja": "気にしないで。",
+   "lectura": "きにしないで。",
+   "bloques": [
+    "気にしないで。"
+   ],
+   "romaji": "Ki ni shinaide."
+  },
+  {
+   "id": 105,
+   "nivel": "intermedio",
+   "categoria": "planes",
+   "es": "¿Puedes esperar un poquito más?",
+   "ja": "もうちょっと待ってもらえる？",
+   "lectura": "もうちょっと まってもらえる？",
+   "bloques": [
+    "もうちょっと",
+    "待ってもらえる？"
+   ],
+   "romaji": "Mou chotto matte moraeru?"
+  },
+  {
+   "id": 106,
+   "nivel": "especializado",
+   "categoria": "tecnologia",
+   "es": "El wifi no conecta para nada.",
+   "ja": "Wi-Fiが全然つながらない。",
+   "lectura": "ワイファイが ぜんぜん つながらない。",
+   "bloques": [
+    "Wi-Fiが",
+    "全然",
+    "つながらない。"
+   ],
+   "romaji": "Wi-Fi ga zenzen tsunagaranai."
+  },
+  {
+   "id": 107,
+   "nivel": "especializado",
+   "categoria": "tecnologia",
+   "es": "El ordenador ha dejado de funcionar de repente.",
+   "ja": "パソコンが急に動かなくなった。",
+   "lectura": "パソコンが きゅうに うごかなくなった。",
+   "bloques": [
+    "パソコンが",
+    "急に",
+    "動かなくなった。"
+   ],
+   "romaji": "Pasokon ga kyuu ni ugokanaku natta."
+  },
+  {
+   "id": 108,
+   "nivel": "especializado",
+   "categoria": "tecnologia",
+   "es": "¿Dónde guardé el archivo?",
+   "ja": "ファイルどこに保存したっけ？",
+   "lectura": "ファイル どこに ほぞんしたっけ？",
+   "bloques": [
+    "ファイル",
+    "どこに",
+    "保存したっけ？"
+   ],
+   "romaji": "Fairu doko ni hozon shitakke?"
+  },
+  {
+   "id": 109,
+   "nivel": "especializado",
+   "categoria": "tecnologia",
+   "es": "Haz una copia de seguridad luego, por si acaso.",
+   "ja": "あとでバックアップ取っといて。",
+   "lectura": "あとで バックアップ とっといて。",
+   "bloques": [
+    "あとで",
+    "バックアップ",
+    "取っといて。"
+   ],
+   "romaji": "Atode bakkuappu tottoite."
+  },
+  {
+   "id": 110,
+   "nivel": "especializado",
+   "categoria": "tecnologia",
+   "es": "¿Puedes compartir pantalla?",
+   "ja": "画面共有してもらえる？",
+   "lectura": "がめんきょうゆうして もらえる？",
+   "bloques": [
+    "画面共有して",
+    "もらえる？"
+   ],
+   "romaji": "Gamenkyouyuu shite moraeru?"
+  },
+  {
+   "id": 111,
+   "nivel": "especializado",
+   "categoria": "tecnologia",
+   "es": "La aplicación se cierra sola.",
+   "ja": "アプリが勝手に閉じちゃう。",
+   "lectura": "アプリが かってに とじちゃう。",
+   "bloques": [
+    "アプリが",
+    "勝手に",
+    "閉じちゃう。"
+   ],
+   "romaji": "Apuri ga katteni tojichau."
+  },
+  {
+   "id": 112,
+   "nivel": "especializado",
+   "categoria": "tecnologia",
+   "es": "He olvidado la contraseña.",
+   "ja": "パスワード忘れた。",
+   "lectura": "パスワード わすれた。",
+   "bloques": [
+    "パスワード",
+    "忘れた。"
+   ],
+   "romaji": "Pasuwaado wasureta."
+  },
+  {
+   "id": 113,
+   "nivel": "especializado",
+   "categoria": "tecnologia",
+   "es": "Voy a silenciar las notificaciones.",
+   "ja": "通知オフにしとく。",
+   "lectura": "つうち オフに しとく。",
+   "bloques": [
+    "通知",
+    "オフに",
+    "しとく。"
+   ],
+   "romaji": "Tsuuchi ofu ni shitoku."
+  },
+  {
+   "id": 114,
+   "nivel": "especializado",
+   "categoria": "tecnologia",
+   "es": "¿Será mejor cambiar este ajuste?",
+   "ja": "この設定、変えたほうがいいかな。",
+   "lectura": "この せってい、かえたほうが いいかな。",
+   "bloques": [
+    "この設定、",
+    "変えたほうが",
+    "いいかな。"
+   ],
+   "romaji": "Kono settei, kaeta hou ga ii ka na."
+  },
+  {
+   "id": 115,
+   "nivel": "especializado",
+   "categoria": "videojuegos",
+   "es": "¿No va un poco lageado?",
+   "ja": "ちょっとラグくない？",
+   "lectura": "ちょっと ラグくない？",
+   "bloques": [
+    "ちょっと",
+    "ラグくない？"
+   ],
+   "romaji": "Chotto ragu kunai?"
+  },
+  {
+   "id": 116,
+   "nivel": "especializado",
+   "categoria": "videojuegos",
+   "es": "Eso ha sido por el lag, ¡te lo digo!",
+   "ja": "今のはラグのせいだって。",
+   "lectura": "いまのは ラグの せいだって。",
+   "bloques": [
+    "今のは",
+    "ラグのせい",
+    "だって。"
+   ],
+   "romaji": "Ima no wa ragu no sei datte."
+  },
+  {
+   "id": 117,
+   "nivel": "especializado",
+   "categoria": "videojuegos",
+   "es": "¿Tienes algún objeto de curación?",
+   "ja": "回復アイテム持ってる？",
+   "lectura": "かいふくアイテム もってる？",
+   "bloques": [
+    "回復アイテム",
+    "持ってる？"
+   ],
+   "romaji": "Kaifuku aitemu motteru?"
+  },
+  {
+   "id": 118,
+   "nivel": "especializado",
+   "categoria": "videojuegos",
+   "es": "Vamos a derrotar primero al enemigo.",
+   "ja": "先に敵を倒しとこう。",
+   "lectura": "さきに てきを たおしとこう。",
+   "bloques": [
+    "先に",
+    "敵を",
+    "倒しとこう。"
+   ],
+   "romaji": "Saki ni teki o taoshitokou."
+  },
+  {
+   "id": 119,
+   "nivel": "especializado",
+   "categoria": "videojuegos",
+   "es": "Vamos a rodearlos por este lado.",
+   "ja": "こっちから回り込もう。",
+   "lectura": "こっちから まわりこもう。",
+   "bloques": [
+    "こっちから",
+    "回り込もう。"
+   ],
+   "romaji": "Kotchi kara mawarikomou."
+  },
+  {
+   "id": 120,
+   "nivel": "especializado",
+   "categoria": "videojuegos",
+   "es": "¡Cúbreme un momento!",
+   "ja": "ちょっとカバーして！",
+   "lectura": "ちょっと カバーして！",
+   "bloques": [
+    "ちょっと",
+    "カバーして！"
+   ],
+   "romaji": "Chotto kabaa shite!"
+  },
+  {
+   "id": 121,
+   "nivel": "basico",
+   "categoria": "saludos",
+   "es": "¿Qué tal últimamente? / ¿Cómo te va?",
+   "ja": "どうしてる？",
+   "lectura": "どうしてる？",
+   "bloques": [
+    "どうしてる？"
+   ],
+   "romaji": "Dou shiteru?"
+  },
+  {
+   "id": 122,
+   "nivel": "basico",
+   "categoria": "amigos",
+   "es": "¿Qué tal todo?",
+   "ja": "調子どう？",
+   "lectura": "ちょうし どう？",
+   "bloques": [
+    "調子",
+    "どう？"
+   ],
+   "romaji": "Choushi dou?"
+  },
+  {
+   "id": 123,
+   "nivel": "basico",
+   "categoria": "amigos",
+   "es": "¿Qué pasa? / ¿Qué te ocurre?",
+   "ja": "どうした？",
+   "lectura": "どうした？",
+   "bloques": [
+    "どうした？"
+   ],
+   "romaji": "Dou shita?"
+  },
+  {
+   "id": 124,
+   "nivel": "basico",
+   "categoria": "conversacion",
+   "es": "¿Y eso? / ¿Cómo es eso?",
+   "ja": "なんで？",
+   "lectura": "なんで？",
+   "bloques": [
+    "なんで？"
+   ],
+   "romaji": "Nan de?"
+  },
+  {
+   "id": 125,
+   "nivel": "basico",
+   "categoria": "respuestas",
+   "es": "Ah, ya veo. / Ah, vale.",
+   "ja": "そっか。",
+   "lectura": "そっか。",
+   "bloques": [
+    "そっか。"
+   ],
+   "romaji": "So kka."
+  },
+  {
+   "id": 126,
+   "nivel": "basico",
+   "categoria": "respuestas",
+   "es": "¡Pues claro! / ¡Por supuesto!",
+   "ja": "もちろん！",
+   "lectura": "もちろん！",
+   "bloques": [
+    "もちろん！"
+   ],
+   "romaji": "Mochiron!"
+  },
+  {
+   "id": 127,
+   "nivel": "basico",
+   "categoria": "reacciones",
+   "es": "¡Qué guay! / ¡Eso mola!",
+   "ja": "いいじゃん！",
+   "lectura": "いいじゃん！",
+   "bloques": [
+    "いいじゃん！"
+   ],
+   "romaji": "Ii jan!"
+  },
+  {
+   "id": 128,
+   "nivel": "basico",
+   "categoria": "reacciones",
+   "es": "¿En serio? (muy informal)",
+   "ja": "マジ？",
+   "lectura": "マジ？",
+   "bloques": [
+    "マジ？"
+   ],
+   "romaji": "Maji?"
+  },
+  {
+   "id": 129,
+   "nivel": "basico",
+   "categoria": "amigos",
+   "es": "¿Qué estás haciendo? (muy informal)",
+   "ja": "何してんの？",
+   "lectura": "なに してんの？",
+   "bloques": [
+    "何",
+    "してんの？"
+   ],
+   "romaji": "Nani shiten no?"
+  },
+  {
+   "id": 130,
+   "nivel": "basico",
+   "categoria": "respuestas",
+   "es": "No pasa nada. / No te preocupes.",
+   "ja": "大丈夫だよ。",
+   "lectura": "だいじょうぶだよ。",
+   "bloques": [
+    "大丈夫",
+    "だよ。"
+   ],
+   "romaji": "Daijoubu da yo."
+  },
+  {
+   "id": 131,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "¿Qué quieres decir?",
+   "ja": "どういうこと？",
+   "lectura": "どういうこと？",
+   "bloques": [
+    "どういう",
+    "こと？"
+   ],
+   "romaji": "Dou iu koto?"
+  },
+  {
+   "id": 132,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "No es eso lo que quería decir.",
+   "ja": "そういうことじゃない。",
+   "lectura": "そういう ことじゃない。",
+   "bloques": [
+    "そういう",
+    "ことじゃない。"
+   ],
+   "romaji": "Sou iu kotoja nai."
+  },
+  {
+   "id": 133,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "Espera, ahora lo entiendo.",
+   "ja": "あ、分かった。",
+   "lectura": "あ、わかった。",
+   "bloques": [
+    "あ、",
+    "分かった。"
+   ],
+   "romaji": "A, wakatta."
+  },
+  {
+   "id": 134,
+   "nivel": "intermedio",
+   "categoria": "opiniones",
+   "es": "Hay algo que no encaja.",
+   "ja": "なんか違う。",
+   "lectura": "なんか ちがう。",
+   "bloques": [
+    "なんか",
+    "違う。"
+   ],
+   "romaji": "Nan ka chigau."
+  },
+  {
+   "id": 135,
+   "nivel": "intermedio",
+   "categoria": "opiniones",
+   "es": "A mí también me parece.",
+   "ja": "私もそう思う。",
+   "lectura": "わたしも そうおもう。",
+   "bloques": [
+    "私も",
+    "そう思う。"
+   ],
+   "romaji": "Watashi mo sou omou."
+  },
+  {
+   "id": 136,
+   "nivel": "intermedio",
+   "categoria": "respuestas",
+   "es": "¡Eso mismo!",
+   "ja": "それそれ！",
+   "lectura": "それそれ！",
+   "bloques": [
+    "それそれ！"
+   ],
+   "romaji": "Sore sore!"
+  },
+  {
+   "id": 137,
+   "nivel": "intermedio",
+   "categoria": "respuestas",
+   "es": "Bueno, supongo que sí.",
+   "ja": "まあ、そうかもね。",
+   "lectura": "まあ、そうかもね。",
+   "bloques": [
+    "まあ、",
+    "そうかもね。"
+   ],
+   "romaji": "Maa, sou ka mo ne."
+  },
+  {
+   "id": 138,
+   "nivel": "intermedio",
+   "categoria": "amigos",
+   "es": "¿Te apetece venir?",
+   "ja": "よかったら来ない？",
+   "lectura": "よかったら こない？",
+   "bloques": [
+    "よかったら",
+    "来ない？"
+   ],
+   "romaji": "Yokattara konai?"
+  },
+  {
+   "id": 139,
+   "nivel": "intermedio",
+   "categoria": "planes",
+   "es": "¿Quedamos otro día?",
+   "ja": "また今度にしない？",
+   "lectura": "また こんどに しない？",
+   "bloques": [
+    "また今度に",
+    "しない？"
+   ],
+   "romaji": "Mata kondo ni shinai?"
+  },
+  {
+   "id": 140,
+   "nivel": "intermedio",
+   "categoria": "planes",
+   "es": "Creo que llegaré un poco tarde.",
+   "ja": "ちょっと遅れると思う。",
+   "lectura": "ちょっと おくれると おもう。",
+   "bloques": [
+    "ちょっと",
+    "遅れると",
+    "思う。"
+   ],
+   "romaji": "Chotto okureru to omou."
+  },
+  {
+   "id": 141,
+   "nivel": "intermedio",
+   "categoria": "amigos",
+   "es": "Perdona por hacerte esperar.",
+   "ja": "待たせてごめん。",
+   "lectura": "またせて ごめん。",
+   "bloques": [
+    "待たせて",
+    "ごめん。"
+   ],
+   "romaji": "Matasete gomen."
+  },
+  {
+   "id": 142,
+   "nivel": "intermedio",
+   "categoria": "conversacion",
+   "es": "No tengo ni idea.",
+   "ja": "全然分かんない。",
+   "lectura": "ぜんぜん わかんない。",
+   "bloques": [
+    "全然",
+    "分かんない。"
+   ],
+   "romaji": "Zenzen wakannai."
+  },
+  {
+   "id": 143,
+   "nivel": "intermedio",
+   "categoria": "reacciones",
+   "es": "¡Qué alivio!",
+   "ja": "よかったー！",
+   "lectura": "よかったー！",
+   "bloques": [
+    "よかったー！"
+   ],
+   "romaji": "Yokattaa!"
+  },
+  {
+   "id": 144,
+   "nivel": "intermedio",
+   "categoria": "opiniones",
+   "es": "Eso sí que es verdad.",
+   "ja": "それはそうだね。",
+   "lectura": "それは そうだね。",
+   "bloques": [
+    "それは",
+    "そうだね。"
+   ],
+   "romaji": "Sore wa sou da ne."
+  },
+  {
+   "id": 145,
+   "nivel": "intermedio",
+   "categoria": "rutina",
+   "es": "Al final me he quedado en casa.",
+   "ja": "結局、家にいた。",
+   "lectura": "けっきょく、いえに いた。",
+   "bloques": [
+    "結局、",
+    "家に",
+    "いた。"
+   ],
+   "romaji": "Kekkyoku, ie ni ita."
+  }
+ ],
+ "furi": {
+  "おはよう！": [
+   [
+    "おはよう！",
+    ""
+   ]
+  ],
+  "こんにちは！": [
+   [
+    "こんにちは！",
+    ""
+   ]
+  ],
+  "おつかれ！": [
+   [
+    "おつかれ！",
+    ""
+   ]
+  ],
+  "またね！": [
+   [
+    "またね！",
+    ""
+   ]
+  ],
+  "ありがとう！": [
+   [
+    "ありがとう！",
+    ""
+   ]
+  ],
+  "ごめん！": [
+   [
+    "ごめん！",
+    ""
+   ]
+  ],
+  "元気？": [
+   [
+    "元気",
+    "げんき"
+   ],
+   [
+    "？",
+    ""
+   ]
+  ],
+  "元気だよ。": [
+   [
+    "元気",
+    "げんき"
+   ],
+   [
+    "だよ。",
+    ""
+   ]
+  ],
+  "大丈夫？": [
+   [
+    "大丈夫",
+    "だいじょうぶ"
+   ],
+   [
+    "？",
+    ""
+   ]
+  ],
+  "うん、大丈夫。": [
+   [
+    "うん、",
+    ""
+   ],
+   [
+    "大丈夫",
+    "だいじょうぶ"
+   ],
+   [
+    "。",
+    ""
+   ]
+  ],
+  "うん、": [
+   [
+    "うん、",
+    ""
+   ]
+  ],
+  "大丈夫。": [
+   [
+    "大丈夫",
+    "だいじょうぶ"
+   ],
+   [
+    "。",
+    ""
+   ]
+  ],
+  "今何してる？": [
+   [
+    "今何",
+    "いまなに"
+   ],
+   [
+    "してる？",
+    ""
+   ]
+  ],
+  "今": [
+   [
+    "今",
+    "いま"
+   ]
+  ],
+  "何してる？": [
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "してる？",
+    ""
+   ]
+  ],
+  "今、家にいるよ。": [
+   [
+    "今",
+    "いま"
+   ],
+   [
+    "、",
+    ""
+   ],
+   [
+    "家",
+    "いえ"
+   ],
+   [
+    "にいるよ。",
+    ""
+   ]
+  ],
+  "今、": [
+   [
+    "今",
+    "いま"
+   ],
+   [
+    "、",
+    ""
+   ]
+  ],
+  "家に": [
+   [
+    "家",
+    "いえ"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "いるよ。": [
+   [
+    "いるよ。",
+    ""
+   ]
+  ],
+  "今どこ？": [
+   [
+    "今",
+    "いま"
+   ],
+   [
+    "どこ？",
+    ""
+   ]
+  ],
+  "どこ？": [
+   [
+    "どこ？",
+    ""
+   ]
+  ],
+  "もう着いた？": [
+   [
+    "もう",
+    ""
+   ],
+   [
+    "着",
+    "つ"
+   ],
+   [
+    "いた？",
+    ""
+   ]
+  ],
+  "もう": [
+   [
+    "もう",
+    ""
+   ]
+  ],
+  "着いた？": [
+   [
+    "着",
+    "つ"
+   ],
+   [
+    "いた？",
+    ""
+   ]
+  ],
+  "今向かってる。": [
+   [
+    "今向",
+    "いまむ"
+   ],
+   [
+    "かってる。",
+    ""
+   ]
+  ],
+  "向かってる。": [
+   [
+    "向",
+    "む"
+   ],
+   [
+    "かってる。",
+    ""
+   ]
+  ],
+  "ちょっと待って。": [
+   [
+    "ちょっと",
+    ""
+   ],
+   [
+    "待",
+    "ま"
+   ],
+   [
+    "って。",
+    ""
+   ]
+  ],
+  "ちょっと": [
+   [
+    "ちょっと",
+    ""
+   ]
+  ],
+  "待って。": [
+   [
+    "待",
+    "ま"
+   ],
+   [
+    "って。",
+    ""
+   ]
+  ],
+  "すぐ行くよ。": [
+   [
+    "すぐ",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くよ。",
+    ""
+   ]
+  ],
+  "すぐ": [
+   [
+    "すぐ",
+    ""
+   ]
+  ],
+  "行くよ。": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くよ。",
+    ""
+   ]
+  ],
+  "先に行ってて。": [
+   [
+    "先",
+    "さき"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "ってて。",
+    ""
+   ]
+  ],
+  "先に": [
+   [
+    "先",
+    "さき"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "行ってて。": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "ってて。",
+    ""
+   ]
+  ],
+  "何時？": [
+   [
+    "何時",
+    "なんじ"
+   ],
+   [
+    "？",
+    ""
+   ]
+  ],
+  "今日暇？": [
+   [
+    "今日暇",
+    "きょうひま"
+   ],
+   [
+    "？",
+    ""
+   ]
+  ],
+  "今日": [
+   [
+    "今日",
+    "きょう"
+   ]
+  ],
+  "暇？": [
+   [
+    "暇",
+    "ひま"
+   ],
+   [
+    "？",
+    ""
+   ]
+  ],
+  "明日暇？": [
+   [
+    "明日暇",
+    "あしたひま"
+   ],
+   [
+    "？",
+    ""
+   ]
+  ],
+  "明日": [
+   [
+    "明日",
+    "あした"
+   ]
+  ],
+  "今日会える？": [
+   [
+    "今日会",
+    "きょうあ"
+   ],
+   [
+    "える？",
+    ""
+   ]
+  ],
+  "会える？": [
+   [
+    "会",
+    "あ"
+   ],
+   [
+    "える？",
+    ""
+   ]
+  ],
+  "今日はちょっと無理。": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "はちょっと",
+    ""
+   ],
+   [
+    "無理",
+    "むり"
+   ],
+   [
+    "。",
+    ""
+   ]
+  ],
+  "今日は": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ]
+  ],
+  "無理。": [
+   [
+    "無理",
+    "むり"
+   ],
+   [
+    "。",
+    ""
+   ]
+  ],
+  "いいよ！": [
+   [
+    "いいよ！",
+    ""
+   ]
+  ],
+  "いいね！": [
+   [
+    "いいね！",
+    ""
+   ]
+  ],
+  "それいいね！": [
+   [
+    "それいいね！",
+    ""
+   ]
+  ],
+  "それ": [
+   [
+    "それ",
+    ""
+   ]
+  ],
+  "どうする？": [
+   [
+    "どうする？",
+    ""
+   ]
+  ],
+  "どこ行く？": [
+   [
+    "どこ",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く？",
+    ""
+   ]
+  ],
+  "どこ": [
+   [
+    "どこ",
+    ""
+   ]
+  ],
+  "行く？": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く？",
+    ""
+   ]
+  ],
+  "一緒に行く？": [
+   [
+    "一緒",
+    "いっしょ"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く？",
+    ""
+   ]
+  ],
+  "一緒に": [
+   [
+    "一緒",
+    "いっしょ"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "行こう！": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "こう！",
+    ""
+   ]
+  ],
+  "何食べたい？": [
+   [
+    "何食",
+    "なにた"
+   ],
+   [
+    "べたい？",
+    ""
+   ]
+  ],
+  "何": [
+   [
+    "何",
+    "なに"
+   ]
+  ],
+  "食べたい？": [
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べたい？",
+    ""
+   ]
+  ],
+  "お腹すいた。": [
+   [
+    "お",
+    ""
+   ],
+   [
+    "腹",
+    "なか"
+   ],
+   [
+    "すいた。",
+    ""
+   ]
+  ],
+  "お腹": [
+   [
+    "お",
+    ""
+   ],
+   [
+    "腹",
+    "なか"
+   ]
+  ],
+  "すいた。": [
+   [
+    "すいた。",
+    ""
+   ]
+  ],
+  "のど渇いた。": [
+   [
+    "のど",
+    ""
+   ],
+   [
+    "渇",
+    "かわ"
+   ],
+   [
+    "いた。",
+    ""
+   ]
+  ],
+  "のど": [
+   [
+    "のど",
+    ""
+   ]
+  ],
+  "渇いた。": [
+   [
+    "渇",
+    "かわ"
+   ],
+   [
+    "いた。",
+    ""
+   ]
+  ],
+  "これ食べてみて。": [
+   [
+    "これ",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べてみて。",
+    ""
+   ]
+  ],
+  "これ": [
+   [
+    "これ",
+    ""
+   ]
+  ],
+  "食べてみて。": [
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べてみて。",
+    ""
+   ]
+  ],
+  "めっちゃおいしい！": [
+   [
+    "めっちゃおいしい！",
+    ""
+   ]
+  ],
+  "めっちゃ": [
+   [
+    "めっちゃ",
+    ""
+   ]
+  ],
+  "おいしい！": [
+   [
+    "おいしい！",
+    ""
+   ]
+  ],
+  "もうお腹いっぱい。": [
+   [
+    "もうお",
+    ""
+   ],
+   [
+    "腹",
+    "なか"
+   ],
+   [
+    "いっぱい。",
+    ""
+   ]
+  ],
+  "いっぱい。": [
+   [
+    "いっぱい。",
+    ""
+   ]
+  ],
+  "水ちょうだい。": [
+   [
+    "水",
+    "みず"
+   ],
+   [
+    "ちょうだい。",
+    ""
+   ]
+  ],
+  "水": [
+   [
+    "水",
+    "みず"
+   ]
+  ],
+  "ちょうだい。": [
+   [
+    "ちょうだい。",
+    ""
+   ]
+  ],
+  "これいくら？": [
+   [
+    "これいくら？",
+    ""
+   ]
+  ],
+  "いくら？": [
+   [
+    "いくら？",
+    ""
+   ]
+  ],
+  "これください。": [
+   [
+    "これください。",
+    ""
+   ]
+  ],
+  "ください。": [
+   [
+    "ください。",
+    ""
+   ]
+  ],
+  "ちょっと高いね。": [
+   [
+    "ちょっと",
+    ""
+   ],
+   [
+    "高",
+    "たか"
+   ],
+   [
+    "いね。",
+    ""
+   ]
+  ],
+  "高いね。": [
+   [
+    "高",
+    "たか"
+   ],
+   [
+    "いね。",
+    ""
+   ]
+  ],
+  "これ好き。": [
+   [
+    "これ",
+    ""
+   ],
+   [
+    "好",
+    "す"
+   ],
+   [
+    "き。",
+    ""
+   ]
+  ],
+  "好き。": [
+   [
+    "好",
+    "す"
+   ],
+   [
+    "き。",
+    ""
+   ]
+  ],
+  "それ知ってる。": [
+   [
+    "それ",
+    ""
+   ],
+   [
+    "知",
+    "し"
+   ],
+   [
+    "ってる。",
+    ""
+   ]
+  ],
+  "知ってる。": [
+   [
+    "知",
+    "し"
+   ],
+   [
+    "ってる。",
+    ""
+   ]
+  ],
+  "知らなかった。": [
+   [
+    "知",
+    "し"
+   ],
+   [
+    "らなかった。",
+    ""
+   ]
+  ],
+  "本当？": [
+   [
+    "本当",
+    "ほんとう"
+   ],
+   [
+    "？",
+    ""
+   ]
+  ],
+  "うそでしょ？": [
+   [
+    "うそでしょ？",
+    ""
+   ]
+  ],
+  "マジで？": [
+   [
+    "マジで？",
+    ""
+   ]
+  ],
+  "すごい！": [
+   [
+    "すごい！",
+    ""
+   ]
+  ],
+  "やばい！": [
+   [
+    "やばい！",
+    ""
+   ]
+  ],
+  "ちょっと眠い。": [
+   [
+    "ちょっと",
+    ""
+   ],
+   [
+    "眠",
+    "ねむ"
+   ],
+   [
+    "い。",
+    ""
+   ]
+  ],
+  "眠い。": [
+   [
+    "眠",
+    "ねむ"
+   ],
+   [
+    "い。",
+    ""
+   ]
+  ],
+  "もう寝るね。": [
+   [
+    "もう",
+    ""
+   ],
+   [
+    "寝",
+    "ね"
+   ],
+   [
+    "るね。",
+    ""
+   ]
+  ],
+  "寝るね。": [
+   [
+    "寝",
+    "ね"
+   ],
+   [
+    "るね。",
+    ""
+   ]
+  ],
+  "今日疲れた。": [
+   [
+    "今日疲",
+    "きょうつか"
+   ],
+   [
+    "れた。",
+    ""
+   ]
+  ],
+  "疲れた。": [
+   [
+    "疲",
+    "つか"
+   ],
+   [
+    "れた。",
+    ""
+   ]
+  ],
+  "暑いね。": [
+   [
+    "暑",
+    "あつ"
+   ],
+   [
+    "いね。",
+    ""
+   ]
+  ],
+  "寒いね。": [
+   [
+    "寒",
+    "さむ"
+   ],
+   [
+    "いね。",
+    ""
+   ]
+  ],
+  "雨降ってる。": [
+   [
+    "雨降",
+    "あめふ"
+   ],
+   [
+    "ってる。",
+    ""
+   ]
+  ],
+  "雨": [
+   [
+    "雨",
+    "あめ"
+   ]
+  ],
+  "降ってる。": [
+   [
+    "降",
+    "ふ"
+   ],
+   [
+    "ってる。",
+    ""
+   ]
+  ],
+  "お腹痛い。": [
+   [
+    "お",
+    ""
+   ],
+   [
+    "腹痛",
+    "なかいた"
+   ],
+   [
+    "い。",
+    ""
+   ]
+  ],
+  "痛い。": [
+   [
+    "痛",
+    "いた"
+   ],
+   [
+    "い。",
+    ""
+   ]
+  ],
+  "何かあった？": [
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "かあった？",
+    ""
+   ]
+  ],
+  "何か": [
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "か",
+    ""
+   ]
+  ],
+  "あった？": [
+   [
+    "あった？",
+    ""
+   ]
+  ],
+  "どうしたの？": [
+   [
+    "どうしたの？",
+    ""
+   ]
+  ],
+  "またあとでね。": [
+   [
+    "またあとでね。",
+    ""
+   ]
+  ],
+  "また": [
+   [
+    "また",
+    ""
+   ]
+  ],
+  "あとでね。": [
+   [
+    "あとでね。",
+    ""
+   ]
+  ],
+  "ちょっといい？": [
+   [
+    "ちょっといい？",
+    ""
+   ]
+  ],
+  "いい？": [
+   [
+    "いい？",
+    ""
+   ]
+  ],
+  "わかった！": [
+   [
+    "わかった！",
+    ""
+   ]
+  ],
+  "さっき何て言った？": [
+   [
+    "さっき",
+    ""
+   ],
+   [
+    "何",
+    "なん"
+   ],
+   [
+    "て",
+    ""
+   ],
+   [
+    "言",
+    "い"
+   ],
+   [
+    "った？",
+    ""
+   ]
+  ],
+  "さっき": [
+   [
+    "さっき",
+    ""
+   ]
+  ],
+  "何て": [
+   [
+    "何",
+    "なん"
+   ],
+   [
+    "て",
+    ""
+   ]
+  ],
+  "言った？": [
+   [
+    "言",
+    "い"
+   ],
+   [
+    "った？",
+    ""
+   ]
+  ],
+  "もう一回言って。": [
+   [
+    "もう",
+    ""
+   ],
+   [
+    "一回言",
+    "いっかいい"
+   ],
+   [
+    "って。",
+    ""
+   ]
+  ],
+  "もう一回": [
+   [
+    "もう",
+    ""
+   ],
+   [
+    "一回",
+    "いっかい"
+   ]
+  ],
+  "言って。": [
+   [
+    "言",
+    "い"
+   ],
+   [
+    "って。",
+    ""
+   ]
+  ],
+  "ちょっとよく分からない。": [
+   [
+    "ちょっとよく",
+    ""
+   ],
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "からない。",
+    ""
+   ]
+  ],
+  "よく": [
+   [
+    "よく",
+    ""
+   ]
+  ],
+  "分からない。": [
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "からない。",
+    ""
+   ]
+  ],
+  "そういうことか。": [
+   [
+    "そういうことか。",
+    ""
+   ]
+  ],
+  "そういう": [
+   [
+    "そういう",
+    ""
+   ]
+  ],
+  "ことか。": [
+   [
+    "ことか。",
+    ""
+   ]
+  ],
+  "なるほどね。": [
+   [
+    "なるほどね。",
+    ""
+   ]
+  ],
+  "そうなんだ。": [
+   [
+    "そうなんだ。",
+    ""
+   ]
+  ],
+  "それは知らなかった。": [
+   [
+    "それは",
+    ""
+   ],
+   [
+    "知",
+    "し"
+   ],
+   [
+    "らなかった。",
+    ""
+   ]
+  ],
+  "それは": [
+   [
+    "それは",
+    ""
+   ]
+  ],
+  "そんな気がする。": [
+   [
+    "そんな",
+    ""
+   ],
+   [
+    "気",
+    "き"
+   ],
+   [
+    "がする。",
+    ""
+   ]
+  ],
+  "そんな": [
+   [
+    "そんな",
+    ""
+   ]
+  ],
+  "気がする。": [
+   [
+    "気",
+    "き"
+   ],
+   [
+    "がする。",
+    ""
+   ]
+  ],
+  "たぶん大丈夫だと思う。": [
+   [
+    "たぶん",
+    ""
+   ],
+   [
+    "大丈夫",
+    "だいじょうぶ"
+   ],
+   [
+    "だと",
+    ""
+   ],
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "う。",
+    ""
+   ]
+  ],
+  "たぶん": [
+   [
+    "たぶん",
+    ""
+   ]
+  ],
+  "大丈夫だと": [
+   [
+    "大丈夫",
+    "だいじょうぶ"
+   ],
+   [
+    "だと",
+    ""
+   ]
+  ],
+  "思う。": [
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "う。",
+    ""
+   ]
+  ],
+  "もう少しで着く。": [
+   [
+    "もう",
+    ""
+   ],
+   [
+    "少",
+    "すこ"
+   ],
+   [
+    "しで",
+    ""
+   ],
+   [
+    "着",
+    "つ"
+   ],
+   [
+    "く。",
+    ""
+   ]
+  ],
+  "もう少しで": [
+   [
+    "もう",
+    ""
+   ],
+   [
+    "少",
+    "すこ"
+   ],
+   [
+    "しで",
+    ""
+   ]
+  ],
+  "着く。": [
+   [
+    "着",
+    "つ"
+   ],
+   [
+    "く。",
+    ""
+   ]
+  ],
+  "思ったより早かった。": [
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "ったより",
+    ""
+   ],
+   [
+    "早",
+    "はや"
+   ],
+   [
+    "かった。",
+    ""
+   ]
+  ],
+  "思ったより": [
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "ったより",
+    ""
+   ]
+  ],
+  "早かった。": [
+   [
+    "早",
+    "はや"
+   ],
+   [
+    "かった。",
+    ""
+   ]
+  ],
+  "思ったより時間かかった。": [
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "ったより",
+    ""
+   ],
+   [
+    "時間",
+    "じかん"
+   ],
+   [
+    "かかった。",
+    ""
+   ]
+  ],
+  "時間": [
+   [
+    "時間",
+    "じかん"
+   ]
+  ],
+  "かかった。": [
+   [
+    "かかった。",
+    ""
+   ]
+  ],
+  "電車が遅れてる。": [
+   [
+    "電車",
+    "でんしゃ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れてる。",
+    ""
+   ]
+  ],
+  "電車が": [
+   [
+    "電車",
+    "でんしゃ"
+   ],
+   [
+    "が",
+    ""
+   ]
+  ],
+  "遅れてる。": [
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れてる。",
+    ""
+   ]
+  ],
+  "寝坊しちゃった。": [
+   [
+    "寝坊",
+    "ねぼう"
+   ],
+   [
+    "しちゃった。",
+    ""
+   ]
+  ],
+  "寝坊": [
+   [
+    "寝坊",
+    "ねぼう"
+   ]
+  ],
+  "しちゃった。": [
+   [
+    "しちゃった。",
+    ""
+   ]
+  ],
+  "財布忘れちゃった。": [
+   [
+    "財布忘",
+    "さいふわす"
+   ],
+   [
+    "れちゃった。",
+    ""
+   ]
+  ],
+  "財布": [
+   [
+    "財布",
+    "さいふ"
+   ]
+  ],
+  "忘れちゃった。": [
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れちゃった。",
+    ""
+   ]
+  ],
+  "充電切れそう。": [
+   [
+    "充電切",
+    "じゅうでんき"
+   ],
+   [
+    "れそう。",
+    ""
+   ]
+  ],
+  "充電": [
+   [
+    "充電",
+    "じゅうでん"
+   ]
+  ],
+  "切れそう。": [
+   [
+    "切",
+    "き"
+   ],
+   [
+    "れそう。",
+    ""
+   ]
+  ],
+  "ちょっと調べてみる。": [
+   [
+    "ちょっと",
+    ""
+   ],
+   [
+    "調",
+    "しら"
+   ],
+   [
+    "べてみる。",
+    ""
+   ]
+  ],
+  "調べてみる。": [
+   [
+    "調",
+    "しら"
+   ],
+   [
+    "べてみる。",
+    ""
+   ]
+  ],
+  "あとで送るね。": [
+   [
+    "あとで",
+    ""
+   ],
+   [
+    "送",
+    "おく"
+   ],
+   [
+    "るね。",
+    ""
+   ]
+  ],
+  "あとで": [
+   [
+    "あとで",
+    ""
+   ]
+  ],
+  "送るね。": [
+   [
+    "送",
+    "おく"
+   ],
+   [
+    "るね。",
+    ""
+   ]
+  ],
+  "もう確認した？": [
+   [
+    "もう",
+    ""
+   ],
+   [
+    "確認",
+    "かくにん"
+   ],
+   [
+    "した？",
+    ""
+   ]
+  ],
+  "確認した？": [
+   [
+    "確認",
+    "かくにん"
+   ],
+   [
+    "した？",
+    ""
+   ]
+  ],
+  "それ、どこで買ったの？": [
+   [
+    "それ、どこで",
+    ""
+   ],
+   [
+    "買",
+    "か"
+   ],
+   [
+    "ったの？",
+    ""
+   ]
+  ],
+  "それ、": [
+   [
+    "それ、",
+    ""
+   ]
+  ],
+  "どこで": [
+   [
+    "どこで",
+    ""
+   ]
+  ],
+  "買ったの？": [
+   [
+    "買",
+    "か"
+   ],
+   [
+    "ったの？",
+    ""
+   ]
+  ],
+  "これってどうやって使うの？": [
+   [
+    "これってどうやって",
+    ""
+   ],
+   [
+    "使",
+    "つか"
+   ],
+   [
+    "うの？",
+    ""
+   ]
+  ],
+  "これって": [
+   [
+    "これって",
+    ""
+   ]
+  ],
+  "どうやって": [
+   [
+    "どうやって",
+    ""
+   ]
+  ],
+  "使うの？": [
+   [
+    "使",
+    "つか"
+   ],
+   [
+    "うの？",
+    ""
+   ]
+  ],
+  "なんでそう思うの？": [
+   [
+    "なんでそう",
+    ""
+   ],
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "うの？",
+    ""
+   ]
+  ],
+  "なんで": [
+   [
+    "なんで",
+    ""
+   ]
+  ],
+  "そう": [
+   [
+    "そう",
+    ""
+   ]
+  ],
+  "思うの？": [
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "うの？",
+    ""
+   ]
+  ],
+  "何かおすすめある？": [
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "かおすすめある？",
+    ""
+   ]
+  ],
+  "おすすめ": [
+   [
+    "おすすめ",
+    ""
+   ]
+  ],
+  "ある？": [
+   [
+    "ある？",
+    ""
+   ]
+  ],
+  "どっちでもいいよ。": [
+   [
+    "どっちでもいいよ。",
+    ""
+   ]
+  ],
+  "どっちでも": [
+   [
+    "どっちでも",
+    ""
+   ]
+  ],
+  "いいよ。": [
+   [
+    "いいよ。",
+    ""
+   ]
+  ],
+  "どっちがいいと思う？": [
+   [
+    "どっちがいいと",
+    ""
+   ],
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "う？",
+    ""
+   ]
+  ],
+  "どっちが": [
+   [
+    "どっちが",
+    ""
+   ]
+  ],
+  "いいと": [
+   [
+    "いいと",
+    ""
+   ]
+  ],
+  "思う？": [
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "う？",
+    ""
+   ]
+  ],
+  "先に食べてて。": [
+   [
+    "先",
+    "さき"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べてて。",
+    ""
+   ]
+  ],
+  "食べてて。": [
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べてて。",
+    ""
+   ]
+  ],
+  "何食べるか決めた？": [
+   [
+    "何食",
+    "なにた"
+   ],
+   [
+    "べるか",
+    ""
+   ],
+   [
+    "決",
+    "き"
+   ],
+   [
+    "めた？",
+    ""
+   ]
+  ],
+  "何食べるか": [
+   [
+    "何食",
+    "なにた"
+   ],
+   [
+    "べるか",
+    ""
+   ]
+  ],
+  "決めた？": [
+   [
+    "決",
+    "き"
+   ],
+   [
+    "めた？",
+    ""
+   ]
+  ],
+  "今日、外で食べない？": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "、",
+    ""
+   ],
+   [
+    "外",
+    "そと"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べない？",
+    ""
+   ]
+  ],
+  "今日、": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "、",
+    ""
+   ]
+  ],
+  "外で": [
+   [
+    "外",
+    "そと"
+   ],
+   [
+    "で",
+    ""
+   ]
+  ],
+  "食べない？": [
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べない？",
+    ""
+   ]
+  ],
+  "もう少しゆっくり話して。": [
+   [
+    "もう",
+    ""
+   ],
+   [
+    "少",
+    "すこ"
+   ],
+   [
+    "しゆっくり",
+    ""
+   ],
+   [
+    "話",
+    "はな"
+   ],
+   [
+    "して。",
+    ""
+   ]
+  ],
+  "もう少し": [
+   [
+    "もう",
+    ""
+   ],
+   [
+    "少",
+    "すこ"
+   ],
+   [
+    "し",
+    ""
+   ]
+  ],
+  "ゆっくり": [
+   [
+    "ゆっくり",
+    ""
+   ]
+  ],
+  "話して。": [
+   [
+    "話",
+    "はな"
+   ],
+   [
+    "して。",
+    ""
+   ]
+  ],
+  "これってどういう意味？": [
+   [
+    "これってどういう",
+    ""
+   ],
+   [
+    "意味",
+    "いみ"
+   ],
+   [
+    "？",
+    ""
+   ]
+  ],
+  "どういう": [
+   [
+    "どういう",
+    ""
+   ]
+  ],
+  "意味？": [
+   [
+    "意味",
+    "いみ"
+   ],
+   [
+    "？",
+    ""
+   ]
+  ],
+  "それ聞いたことある。": [
+   [
+    "それ",
+    ""
+   ],
+   [
+    "聞",
+    "き"
+   ],
+   [
+    "いたことある。",
+    ""
+   ]
+  ],
+  "聞いたことある。": [
+   [
+    "聞",
+    "き"
+   ],
+   [
+    "いたことある。",
+    ""
+   ]
+  ],
+  "行けたら行くね。": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けたら",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くね。",
+    ""
+   ]
+  ],
+  "行けたら": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けたら",
+    ""
+   ]
+  ],
+  "行くね。": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くね。",
+    ""
+   ]
+  ],
+  "ちょっと考えさせて。": [
+   [
+    "ちょっと",
+    ""
+   ],
+   [
+    "考",
+    "かんが"
+   ],
+   [
+    "えさせて。",
+    ""
+   ]
+  ],
+  "考えさせて。": [
+   [
+    "考",
+    "かんが"
+   ],
+   [
+    "えさせて。",
+    ""
+   ]
+  ],
+  "やっぱりやめとく。": [
+   [
+    "やっぱりやめとく。",
+    ""
+   ]
+  ],
+  "やっぱり": [
+   [
+    "やっぱり",
+    ""
+   ]
+  ],
+  "やめとく。": [
+   [
+    "やめとく。",
+    ""
+   ]
+  ],
+  "今日は家でゆっくりしたい。": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "家",
+    "いえ"
+   ],
+   [
+    "でゆっくりしたい。",
+    ""
+   ]
+  ],
+  "家で": [
+   [
+    "家",
+    "いえ"
+   ],
+   [
+    "で",
+    ""
+   ]
+  ],
+  "ゆっくりしたい。": [
+   [
+    "ゆっくりしたい。",
+    ""
+   ]
+  ],
+  "最近ちょっと忙しくてさ。": [
+   [
+    "最近",
+    "さいきん"
+   ],
+   [
+    "ちょっと",
+    ""
+   ],
+   [
+    "忙",
+    "いそが"
+   ],
+   [
+    "しくてさ。",
+    ""
+   ]
+  ],
+  "最近": [
+   [
+    "最近",
+    "さいきん"
+   ]
+  ],
+  "忙しくてさ。": [
+   [
+    "忙",
+    "いそが"
+   ],
+   [
+    "しくてさ。",
+    ""
+   ]
+  ],
+  "最近どう？": [
+   [
+    "最近",
+    "さいきん"
+   ],
+   [
+    "どう？",
+    ""
+   ]
+  ],
+  "どう？": [
+   [
+    "どう？",
+    ""
+   ]
+  ],
+  "久しぶり！": [
+   [
+    "久",
+    "ひさ"
+   ],
+   [
+    "しぶり！",
+    ""
+   ]
+  ],
+  "会えてうれしい。": [
+   [
+    "会",
+    "あ"
+   ],
+   [
+    "えてうれしい。",
+    ""
+   ]
+  ],
+  "会えて": [
+   [
+    "会",
+    "あ"
+   ],
+   [
+    "えて",
+    ""
+   ]
+  ],
+  "うれしい。": [
+   [
+    "うれしい。",
+    ""
+   ]
+  ],
+  "連絡するの忘れてた。": [
+   [
+    "連絡",
+    "れんらく"
+   ],
+   [
+    "するの",
+    ""
+   ],
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れてた。",
+    ""
+   ]
+  ],
+  "連絡するの": [
+   [
+    "連絡",
+    "れんらく"
+   ],
+   [
+    "するの",
+    ""
+   ]
+  ],
+  "忘れてた。": [
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れてた。",
+    ""
+   ]
+  ],
+  "言おうと思ってたんだけど。": [
+   [
+    "言",
+    "い"
+   ],
+   [
+    "おうと",
+    ""
+   ],
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "ってたんだけど。",
+    ""
+   ]
+  ],
+  "言おうと": [
+   [
+    "言",
+    "い"
+   ],
+   [
+    "おうと",
+    ""
+   ]
+  ],
+  "思ってたんだけど。": [
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "ってたんだけど。",
+    ""
+   ]
+  ],
+  "それはちょっと困る。": [
+   [
+    "それはちょっと",
+    ""
+   ],
+   [
+    "困",
+    "こま"
+   ],
+   [
+    "る。",
+    ""
+   ]
+  ],
+  "困る。": [
+   [
+    "困",
+    "こま"
+   ],
+   [
+    "る。",
+    ""
+   ]
+  ],
+  "無理しなくていいよ。": [
+   [
+    "無理",
+    "むり"
+   ],
+   [
+    "しなくていいよ。",
+    ""
+   ]
+  ],
+  "無理しなくて": [
+   [
+    "無理",
+    "むり"
+   ],
+   [
+    "しなくて",
+    ""
+   ]
+  ],
+  "気にしないで。": [
+   [
+    "気",
+    "き"
+   ],
+   [
+    "にしないで。",
+    ""
+   ]
+  ],
+  "もうちょっと待ってもらえる？": [
+   [
+    "もうちょっと",
+    ""
+   ],
+   [
+    "待",
+    "ま"
+   ],
+   [
+    "ってもらえる？",
+    ""
+   ]
+  ],
+  "もうちょっと": [
+   [
+    "もうちょっと",
+    ""
+   ]
+  ],
+  "待ってもらえる？": [
+   [
+    "待",
+    "ま"
+   ],
+   [
+    "ってもらえる？",
+    ""
+   ]
+  ],
+  "Wi-Fiが全然つながらない。": [
+   [
+    "Wi-Fiが",
+    ""
+   ],
+   [
+    "全然",
+    "ぜんぜん"
+   ],
+   [
+    "つながらない。",
+    ""
+   ]
+  ],
+  "Wi-Fiが": [
+   [
+    "Wi-Fiが",
+    ""
+   ]
+  ],
+  "全然": [
+   [
+    "全然",
+    "ぜんぜん"
+   ]
+  ],
+  "つながらない。": [
+   [
+    "つながらない。",
+    ""
+   ]
+  ],
+  "パソコンが急に動かなくなった。": [
+   [
+    "パソコンが",
+    ""
+   ],
+   [
+    "急",
+    "きゅう"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "動",
+    "うご"
+   ],
+   [
+    "かなくなった。",
+    ""
+   ]
+  ],
+  "パソコンが": [
+   [
+    "パソコンが",
+    ""
+   ]
+  ],
+  "急に": [
+   [
+    "急",
+    "きゅう"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "動かなくなった。": [
+   [
+    "動",
+    "うご"
+   ],
+   [
+    "かなくなった。",
+    ""
+   ]
+  ],
+  "ファイルどこに保存したっけ？": [
+   [
+    "ファイルどこに",
+    ""
+   ],
+   [
+    "保存",
+    "ほぞん"
+   ],
+   [
+    "したっけ？",
+    ""
+   ]
+  ],
+  "ファイル": [
+   [
+    "ファイル",
+    ""
+   ]
+  ],
+  "どこに": [
+   [
+    "どこに",
+    ""
+   ]
+  ],
+  "保存したっけ？": [
+   [
+    "保存",
+    "ほぞん"
+   ],
+   [
+    "したっけ？",
+    ""
+   ]
+  ],
+  "あとでバックアップ取っといて。": [
+   [
+    "あとでバックアップ",
+    ""
+   ],
+   [
+    "取",
+    "と"
+   ],
+   [
+    "っといて。",
+    ""
+   ]
+  ],
+  "バックアップ": [
+   [
+    "バックアップ",
+    ""
+   ]
+  ],
+  "取っといて。": [
+   [
+    "取",
+    "と"
+   ],
+   [
+    "っといて。",
+    ""
+   ]
+  ],
+  "画面共有してもらえる？": [
+   [
+    "画面共有",
+    "がめんきょうゆう"
+   ],
+   [
+    "してもらえる？",
+    ""
+   ]
+  ],
+  "画面共有して": [
+   [
+    "画面共有",
+    "がめんきょうゆう"
+   ],
+   [
+    "して",
+    ""
+   ]
+  ],
+  "もらえる？": [
+   [
+    "もらえる？",
+    ""
+   ]
+  ],
+  "アプリが勝手に閉じちゃう。": [
+   [
+    "アプリが",
+    ""
+   ],
+   [
+    "勝手",
+    "かって"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "閉",
+    "と"
+   ],
+   [
+    "じちゃう。",
+    ""
+   ]
+  ],
+  "アプリが": [
+   [
+    "アプリが",
+    ""
+   ]
+  ],
+  "勝手に": [
+   [
+    "勝手",
+    "かって"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "閉じちゃう。": [
+   [
+    "閉",
+    "と"
+   ],
+   [
+    "じちゃう。",
+    ""
+   ]
+  ],
+  "パスワード忘れた。": [
+   [
+    "パスワード",
+    ""
+   ],
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れた。",
+    ""
+   ]
+  ],
+  "パスワード": [
+   [
+    "パスワード",
+    ""
+   ]
+  ],
+  "忘れた。": [
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れた。",
+    ""
+   ]
+  ],
+  "通知オフにしとく。": [
+   [
+    "通知",
+    "つうち"
+   ],
+   [
+    "オフにしとく。",
+    ""
+   ]
+  ],
+  "通知": [
+   [
+    "通知",
+    "つうち"
+   ]
+  ],
+  "オフに": [
+   [
+    "オフに",
+    ""
+   ]
+  ],
+  "しとく。": [
+   [
+    "しとく。",
+    ""
+   ]
+  ],
+  "この設定、変えたほうがいいかな。": [
+   [
+    "この",
+    ""
+   ],
+   [
+    "設定",
+    "せってい"
+   ],
+   [
+    "、",
+    ""
+   ],
+   [
+    "変",
+    "か"
+   ],
+   [
+    "えたほうがいいかな。",
+    ""
+   ]
+  ],
+  "この設定、": [
+   [
+    "この",
+    ""
+   ],
+   [
+    "設定",
+    "せってい"
+   ],
+   [
+    "、",
+    ""
+   ]
+  ],
+  "変えたほうが": [
+   [
+    "変",
+    "か"
+   ],
+   [
+    "えたほうが",
+    ""
+   ]
+  ],
+  "いいかな。": [
+   [
+    "いいかな。",
+    ""
+   ]
+  ],
+  "ちょっとラグくない？": [
+   [
+    "ちょっとラグくない？",
+    ""
+   ]
+  ],
+  "ラグくない？": [
+   [
+    "ラグくない？",
+    ""
+   ]
+  ],
+  "今のはラグのせいだって。": [
+   [
+    "今",
+    "いま"
+   ],
+   [
+    "のはラグのせいだって。",
+    ""
+   ]
+  ],
+  "今のは": [
+   [
+    "今",
+    "いま"
+   ],
+   [
+    "のは",
+    ""
+   ]
+  ],
+  "ラグのせい": [
+   [
+    "ラグのせい",
+    ""
+   ]
+  ],
+  "だって。": [
+   [
+    "だって。",
+    ""
+   ]
+  ],
+  "回復アイテム持ってる？": [
+   [
+    "回復",
+    "かいふく"
+   ],
+   [
+    "アイテム",
+    ""
+   ],
+   [
+    "持",
+    "も"
+   ],
+   [
+    "ってる？",
+    ""
+   ]
+  ],
+  "回復アイテム": [
+   [
+    "回復",
+    "かいふく"
+   ],
+   [
+    "アイテム",
+    ""
+   ]
+  ],
+  "持ってる？": [
+   [
+    "持",
+    "も"
+   ],
+   [
+    "ってる？",
+    ""
+   ]
+  ],
+  "先に敵を倒しとこう。": [
+   [
+    "先",
+    "さき"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "敵",
+    "てき"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "倒",
+    "たお"
+   ],
+   [
+    "しとこう。",
+    ""
+   ]
+  ],
+  "敵を": [
+   [
+    "敵",
+    "てき"
+   ],
+   [
+    "を",
+    ""
+   ]
+  ],
+  "倒しとこう。": [
+   [
+    "倒",
+    "たお"
+   ],
+   [
+    "しとこう。",
+    ""
+   ]
+  ],
+  "こっちから回り込もう。": [
+   [
+    "こっちから",
+    ""
+   ],
+   [
+    "回",
+    "まわ"
+   ],
+   [
+    "り",
+    ""
+   ],
+   [
+    "込",
+    "こ"
+   ],
+   [
+    "もう。",
+    ""
+   ]
+  ],
+  "こっちから": [
+   [
+    "こっちから",
+    ""
+   ]
+  ],
+  "回り込もう。": [
+   [
+    "回",
+    "まわ"
+   ],
+   [
+    "り",
+    ""
+   ],
+   [
+    "込",
+    "こ"
+   ],
+   [
+    "もう。",
+    ""
+   ]
+  ],
+  "ちょっとカバーして！": [
+   [
+    "ちょっとカバーして！",
+    ""
+   ]
+  ],
+  "カバーして！": [
+   [
+    "カバーして！",
+    ""
+   ]
+  ],
+  "どうしてる？": [
+   [
+    "どうしてる？",
+    ""
+   ]
+  ],
+  "調子どう？": [
+   [
+    "調子",
+    "ちょうし"
+   ],
+   [
+    "どう？",
+    ""
+   ]
+  ],
+  "調子": [
+   [
+    "調子",
+    "ちょうし"
+   ]
+  ],
+  "どうした？": [
+   [
+    "どうした？",
+    ""
+   ]
+  ],
+  "なんで？": [
+   [
+    "なんで？",
+    ""
+   ]
+  ],
+  "そっか。": [
+   [
+    "そっか。",
+    ""
+   ]
+  ],
+  "もちろん！": [
+   [
+    "もちろん！",
+    ""
+   ]
+  ],
+  "いいじゃん！": [
+   [
+    "いいじゃん！",
+    ""
+   ]
+  ],
+  "マジ？": [
+   [
+    "マジ？",
+    ""
+   ]
+  ],
+  "何してんの？": [
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "してんの？",
+    ""
+   ]
+  ],
+  "してんの？": [
+   [
+    "してんの？",
+    ""
+   ]
+  ],
+  "大丈夫だよ。": [
+   [
+    "大丈夫",
+    "だいじょうぶ"
+   ],
+   [
+    "だよ。",
+    ""
+   ]
+  ],
+  "大丈夫": [
+   [
+    "大丈夫",
+    "だいじょうぶ"
+   ]
+  ],
+  "だよ。": [
+   [
+    "だよ。",
+    ""
+   ]
+  ],
+  "どういうこと？": [
+   [
+    "どういうこと？",
+    ""
+   ]
+  ],
+  "こと？": [
+   [
+    "こと？",
+    ""
+   ]
+  ],
+  "そういうことじゃない。": [
+   [
+    "そういうことじゃない。",
+    ""
+   ]
+  ],
+  "ことじゃない。": [
+   [
+    "ことじゃない。",
+    ""
+   ]
+  ],
+  "あ、分かった。": [
+   [
+    "あ、",
+    ""
+   ],
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "かった。",
+    ""
+   ]
+  ],
+  "あ、": [
+   [
+    "あ、",
+    ""
+   ]
+  ],
+  "分かった。": [
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "かった。",
+    ""
+   ]
+  ],
+  "なんか違う。": [
+   [
+    "なんか",
+    ""
+   ],
+   [
+    "違",
+    "ちが"
+   ],
+   [
+    "う。",
+    ""
+   ]
+  ],
+  "なんか": [
+   [
+    "なんか",
+    ""
+   ]
+  ],
+  "違う。": [
+   [
+    "違",
+    "ちが"
+   ],
+   [
+    "う。",
+    ""
+   ]
+  ],
+  "私もそう思う。": [
+   [
+    "私",
+    "わたし"
+   ],
+   [
+    "もそう",
+    ""
+   ],
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "う。",
+    ""
+   ]
+  ],
+  "私も": [
+   [
+    "私",
+    "わたし"
+   ],
+   [
+    "も",
+    ""
+   ]
+  ],
+  "そう思う。": [
+   [
+    "そう",
+    ""
+   ],
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "う。",
+    ""
+   ]
+  ],
+  "それそれ！": [
+   [
+    "それそれ！",
+    ""
+   ]
+  ],
+  "まあ、そうかもね。": [
+   [
+    "まあ、そうかもね。",
+    ""
+   ]
+  ],
+  "まあ、": [
+   [
+    "まあ、",
+    ""
+   ]
+  ],
+  "そうかもね。": [
+   [
+    "そうかもね。",
+    ""
+   ]
+  ],
+  "よかったら来ない？": [
+   [
+    "よかったら",
+    ""
+   ],
+   [
+    "来",
+    "こ"
+   ],
+   [
+    "ない？",
+    ""
+   ]
+  ],
+  "よかったら": [
+   [
+    "よかったら",
+    ""
+   ]
+  ],
+  "来ない？": [
+   [
+    "来",
+    "こ"
+   ],
+   [
+    "ない？",
+    ""
+   ]
+  ],
+  "また今度にしない？": [
+   [
+    "また",
+    ""
+   ],
+   [
+    "今度",
+    "こんど"
+   ],
+   [
+    "にしない？",
+    ""
+   ]
+  ],
+  "また今度に": [
+   [
+    "また",
+    ""
+   ],
+   [
+    "今度",
+    "こんど"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "しない？": [
+   [
+    "しない？",
+    ""
+   ]
+  ],
+  "ちょっと遅れると思う。": [
+   [
+    "ちょっと",
+    ""
+   ],
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れると",
+    ""
+   ],
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "う。",
+    ""
+   ]
+  ],
+  "遅れると": [
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れると",
+    ""
+   ]
+  ],
+  "待たせてごめん。": [
+   [
+    "待",
+    "ま"
+   ],
+   [
+    "たせてごめん。",
+    ""
+   ]
+  ],
+  "待たせて": [
+   [
+    "待",
+    "ま"
+   ],
+   [
+    "たせて",
+    ""
+   ]
+  ],
+  "ごめん。": [
+   [
+    "ごめん。",
+    ""
+   ]
+  ],
+  "全然分かんない。": [
+   [
+    "全然分",
+    "ぜんぜんわ"
+   ],
+   [
+    "かんない。",
+    ""
+   ]
+  ],
+  "分かんない。": [
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "かんない。",
+    ""
+   ]
+  ],
+  "よかったー！": [
+   [
+    "よかったー！",
+    ""
+   ]
+  ],
+  "それはそうだね。": [
+   [
+    "それはそうだね。",
+    ""
+   ]
+  ],
+  "そうだね。": [
+   [
+    "そうだね。",
+    ""
+   ]
+  ],
+  "結局、家にいた。": [
+   [
+    "結局",
+    "けっきょく"
+   ],
+   [
+    "、",
+    ""
+   ],
+   [
+    "家",
+    "いえ"
+   ],
+   [
+    "にいた。",
+    ""
+   ]
+  ],
+  "結局、": [
+   [
+    "結局",
+    "けっきょく"
+   ],
+   [
+    "、",
+    ""
+   ]
+  ],
+  "いた。": [
+   [
+    "いた。",
+    ""
+   ]
+  ],
+  "水を": [
+   [
+    "水",
+    "みず"
+   ],
+   [
+    "を",
+    ""
+   ]
+  ],
+  "飲む": [
+   [
+    "飲",
+    "の"
+   ],
+   [
+    "む",
+    ""
+   ]
+  ],
+  "家にいる": [
+   [
+    "家",
+    "いえ"
+   ],
+   [
+    "にいる",
+    ""
+   ]
+  ],
+  "今日いる": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "いる",
+    ""
+   ]
+  ],
+  "会える": [
+   [
+    "会",
+    "あ"
+   ],
+   [
+    "える",
+    ""
+   ]
+  ],
+  "家にいるよ": [
+   [
+    "家",
+    "いえ"
+   ],
+   [
+    "にいるよ",
+    ""
+   ]
+  ],
+  "電車が遅れてる": [
+   [
+    "電車",
+    "でんしゃ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れてる",
+    ""
+   ]
+  ],
+  "財布忘れちゃった": [
+   [
+    "財布忘",
+    "さいふわす"
+   ],
+   [
+    "れちゃった",
+    ""
+   ]
+  ],
+  "行く": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く",
+    ""
+   ]
+  ],
+  "好き": [
+   [
+    "好",
+    "す"
+   ],
+   [
+    "き",
+    ""
+   ]
+  ],
+  "何時": [
+   [
+    "何時",
+    "なんじ"
+   ]
+  ],
+  "今どこ": [
+   [
+    "今",
+    "いま"
+   ],
+   [
+    "どこ",
+    ""
+   ]
+  ],
+  "今日は無理": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "無理",
+    "むり"
+   ]
+  ],
+  "水をちょうだい": [
+   [
+    "水",
+    "みず"
+   ],
+   [
+    "をちょうだい",
+    ""
+   ]
+  ],
+  "外で食べる": [
+   [
+    "外",
+    "そと"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べる",
+    ""
+   ]
+  ],
+  "水ちょうだい": [
+   [
+    "水",
+    "みず"
+   ],
+   [
+    "ちょうだい",
+    ""
+   ]
+  ],
+  "今日はちょっと無理": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "はちょっと",
+    ""
+   ],
+   [
+    "無理",
+    "むり"
+   ]
+  ],
+  "外で食べない": [
+   [
+    "外",
+    "そと"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べない",
+    ""
+   ]
+  ],
+  "家": [
+   [
+    "家",
+    "いえ"
+   ]
+  ],
+  "電車": [
+   [
+    "電車",
+    "でんしゃ"
+   ]
+  ],
+  "遅れてる": [
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れてる",
+    ""
+   ]
+  ],
+  "無理": [
+   [
+    "無理",
+    "むり"
+   ]
+  ],
+  "外": [
+   [
+    "外",
+    "そと"
+   ]
+  ],
+  "食べない": [
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べない",
+    ""
+   ]
+  ],
+  "水をください": [
+   [
+    "水",
+    "みず"
+   ],
+   [
+    "をください",
+    ""
+   ]
+  ],
+  "行くよ": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くよ",
+    ""
+   ]
+  ],
+  "暑いね": [
+   [
+    "暑",
+    "あつ"
+   ],
+   [
+    "いね",
+    ""
+   ]
+  ],
+  "忙しくてさ": [
+   [
+    "忙",
+    "いそが"
+   ],
+   [
+    "しくてさ",
+    ""
+   ]
+  ],
+  "これって何": [
+   [
+    "これって",
+    ""
+   ],
+   [
+    "何",
+    "なん"
+   ]
+  ],
+  "寒いね": [
+   [
+    "寒",
+    "さむ"
+   ],
+   [
+    "いね",
+    ""
+   ]
+  ],
+  "最近ちょっと忙しくてさ": [
+   [
+    "最近",
+    "さいきん"
+   ],
+   [
+    "ちょっと",
+    ""
+   ],
+   [
+    "忙",
+    "いそが"
+   ],
+   [
+    "しくてさ",
+    ""
+   ]
+  ],
+  "暑い": [
+   [
+    "暑",
+    "あつ"
+   ],
+   [
+    "い",
+    ""
+   ]
+  ],
+  "何してる": [
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "してる",
+    ""
+   ]
+  ],
+  "忘れちゃった": [
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れちゃった",
+    ""
+   ]
+  ],
+  "分からない": [
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "からない",
+    ""
+   ]
+  ],
+  "分かんない": [
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "かんない",
+    ""
+   ]
+  ],
+  "寝坊しちゃった": [
+   [
+    "寝坊",
+    "ねぼう"
+   ],
+   [
+    "しちゃった",
+    ""
+   ]
+  ],
+  "先に敵を倒しとこう": [
+   [
+    "先",
+    "さき"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "敵",
+    "てき"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "倒",
+    "たお"
+   ],
+   [
+    "しとこう",
+    ""
+   ]
+  ],
+  "全然分かんない": [
+   [
+    "全然分",
+    "ぜんぜんわ"
+   ],
+   [
+    "かんない",
+    ""
+   ]
+  ],
+  "何している": [
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "している",
+    ""
+   ]
+  ],
+  "何した": [
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "した",
+    ""
+   ]
+  ],
+  "何する": [
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "する",
+    ""
+   ]
+  ],
+  "忘れてしまった": [
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れてしまった",
+    ""
+   ]
+  ],
+  "忘れとった": [
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れとった",
+    ""
+   ]
+  ],
+  "忘れてる": [
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れてる",
+    ""
+   ]
+  ],
+  "食べておく": [
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べておく",
+    ""
+   ]
+  ],
+  "食べとく": [
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べとく",
+    ""
+   ]
+  ],
+  "食べちゃう": [
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べちゃう",
+    ""
+   ]
+  ],
+  "食べてる": [
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べてる",
+    ""
+   ]
+  ],
+  "閉じてしまう": [
+   [
+    "閉",
+    "と"
+   ],
+   [
+    "じてしまう",
+    ""
+   ]
+  ],
+  "閉じちゃう": [
+   [
+    "閉",
+    "と"
+   ],
+   [
+    "じちゃう",
+    ""
+   ]
+  ],
+  "閉じとく": [
+   [
+    "閉",
+    "へい"
+   ],
+   [
+    "じとく",
+    ""
+   ]
+  ],
+  "閉じてる": [
+   [
+    "閉",
+    "と"
+   ],
+   [
+    "じてる",
+    ""
+   ]
+  ],
+  "分かった": [
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "かった",
+    ""
+   ]
+  ],
+  "分かる": [
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "かる",
+    ""
+   ]
   ]
+ }
 }

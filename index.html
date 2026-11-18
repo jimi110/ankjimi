@@ -1198,9 +1198,20 @@
         /* --- RECORRIDO POR VERSIONES --- */
         .rec-overlay { position: fixed; inset: 0; z-index: 5000; display: none; flex-direction: column; background: var(--bg-color); }
         .rec-overlay.open { display: flex; }
-        .rec-bar { display:flex; align-items:center; gap:10px; padding: 10px 14px; border-bottom: 2px solid var(--border); background: var(--bg-color); }
+        .rec-bar { display:flex; align-items:center; justify-content:space-between; gap:10px; padding: 10px 14px; border-bottom: 2px solid var(--border); background: var(--bg-color); }
         .rec-title { font-weight: 800; font-size: 15px; color: var(--text-main); }
         /* --- FORMAR FRASES --- */
+        .fr-tem-choices { display:flex; flex-direction:column; gap:14px; max-width:460px; margin:0 auto; }
+        .fr-tem-card { display:flex; align-items:center; gap:14px; text-align:left; padding:18px; cursor:pointer; width:100%; font-family:inherit; color:var(--text-main); }
+        .fr-tem-card .kana-choice-glyph { font-size:34px; margin:0; }
+        .fr-tem-card b { display:block; font-size:19px; margin-bottom:3px; }
+        .fr-tem-card small { display:block; font-size:13px; color:var(--text-muted); font-weight:500; line-height:1.35; }
+        .fr-resumen { font-weight:600; margin:2px 0 8px; }
+        .fr-uso { background:var(--bg-secondary); border-left:4px solid var(--primary); border-radius:var(--radius-md); padding:8px 12px; margin:8px 0; font-size:14px; line-height:1.4; }
+        .fr-mark { background:var(--correct-bg); color:inherit; border-radius:6px; padding:0 4px; }
+        .fr-inline { align-items:center; font-size:22px; font-weight:700; gap:6px; }
+        .fr-fixed { font-size:22px; font-weight:700; }
+        .fr-opt-ja { font-size:19px; line-height:1.9; }
         .fr-card-wide { grid-column: 1 / -1; display:flex; align-items:center; gap:14px; text-align:left; }
         .fr-card-wide .kana-choice-glyph { font-size: 30px; margin:0; }
         .fr-card-soon { opacity: .6; cursor: default; }
@@ -1864,7 +1875,7 @@
     <!-- PANTALLA: TEMARIO (teoría + lista) -->
     <div id="screen-frases-temario" class="screen pad-bottom">
         <div class="header-controls">
-            <button class="btn-back" onclick="frBackToHub()">← Volver</button>
+            <button class="btn-back" onclick="frTemBack()">← Volver</button>
         </div>
         <div style="text-align:center; margin-bottom:6px;"><h2 id="fr-tem-title" style="font-size:20px;">📖 Temario</h2></div>
         <div id="fr-tem-body"></div>
@@ -2077,6 +2088,7 @@
         if (currentTopicId && document.getElementById('screen-theory').classList.contains('active')) {
             renderTheory(); // Refrescar furigana instantáneamente en teoría
         }
+        if (key === 'hiragana' && typeof frRefreshFurigana === 'function') frRefreshFurigana();
     }
 
     function applyPrefs() {
@@ -5366,12 +5378,15 @@
 
         const frCards = ['frases', 'conectores'].map(m => {
             const st = frGetStats(m), md = FR_MODES[m];
-            const doneF = Object.keys(st.done).length, doneE = Object.keys(st.ex).length;
+            const doneE = Object.keys(st.ex).length;
             const pct = st.attempts > 0 ? Math.round((st.correct / st.attempts) * 100) : 0;
+            const row = (lbl, t, tot) => `<div class="kana-stats-row"><span>${lbl}</span><strong style="color:var(--correct);">${Object.keys(st.t[t]).length} / ${tot}</strong></div>`;
             return `
                 <div class="stats-kana-card">
                     <div class="stats-kana-card-title">${md.icono} ${md.titulo}</div>
-                    <div class="kana-stats-row"><span>${md.items[0].toUpperCase() + md.items.slice(1)} completadas</span><strong style="color:var(--correct);">${doneF} / ${st.totalF || md.fbF}</strong></div>
+                    ${row('🧩 Ordenar', 'ordenar', st.totalF || md.fbF)}
+                    ${row('✏️ Completar', 'completar', st.totalC || md.fbC)}
+                    ${row('🔘 Elegir', 'elegir', st.totalC || md.fbC)}
                     <div class="kana-stats-row"><span>Ejercicios de teoría</span><strong>${doneE} / ${st.totalEx || md.fbE}</strong></div>
                     <div class="kana-stats-row"><span>Intentos</span><strong>${st.attempts}</strong></div>
                     <div class="kana-stats-row"><span>% de acierto</span><strong>${pct}%</strong></div>
@@ -5463,16 +5478,23 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('recorrido-overlay').classList.contains('open')) closeRecorrido(); });
 
     // ===================== FORMAR FRASES / JUNTAR ORACIONES ===================== //
-    // Un único módulo con dos "modos" (mismo diseño, distintos datos).
+    // Un único módulo con dos "modos" (mismo diseño, distintos datos) y tres tipos de ejercicio.
     const FR_LEVELS = [
         { id: 'basico', label: '🟢 Básico' },
         { id: 'intermedio', label: '🟡 Intermedio' },
         { id: 'especializado', label: '🔴 Especializado' },
         { id: 'mezcla', label: '🎲 Mezcla' }
     ];
+    const FR_TYPES = [
+        { id: 'ordenar', label: '🧩 Ordenar' },
+        { id: 'completar', label: '✏️ Completar' },
+        { id: 'elegir', label: '🔘 Elegir' },
+        { id: 'mezcla', label: '🎲 Mezcla' }
+    ];
+    const FR_TYPE_IDS = ['ordenar', 'completar', 'elegir'];
     const FR_MODES = {
-        frases: { icono: '🧩', titulo: 'Formar frases', sub: 'Ordena frases coloquiales, como se habla en la calle', items: 'frases', lista: 'Mis frases', key: 'nihongoFrasesStats', fbF: 145, fbE: 31, files: ['frases-ja.json', 'frases-glosario.json', 'frases-teoria.json'], conn: false },
-        conectores: { icono: '🔗', titulo: 'Juntar oraciones', sub: 'Conecta oraciones de forma natural', items: 'oraciones', lista: 'Mis oraciones', key: 'nihongoConectoresStats', fbF: 66, fbE: 45, files: ['conectores-ja.json', 'conectores-glosario.json', 'conectores-teoria.json'], conn: true }
+        frases: { icono: '🧩', titulo: 'Formar frases', sub: 'Practica frases coloquiales, como se habla en la calle', items: 'frases', key: 'nihongoFrasesStats', fbF: 145, fbC: 108, fbE: 31, files: ['frases-ja.json', 'frases-glosario.json', 'frases-teoria.json'], conn: false },
+        conectores: { icono: '🔗', titulo: 'Juntar oraciones', sub: 'Conecta oraciones de forma natural', items: 'oraciones', key: 'nihongoConectoresStats', fbF: 66, fbC: 66, fbE: 45, files: ['conectores-ja.json', 'conectores-glosario.json', 'conectores-teoria.json'], conn: true }
     };
     // Familias de conectores: un distractor nunca es de la misma familia que la respuesta
     // (así no puede ser una alternativa igualmente válida).
@@ -5486,36 +5508,71 @@
         if (/^alternativa/.test(c)) return 'alt';
         return 'other';
     }
-    let frMode = 'frases', frData = null, frStats = null, frLevel = 'basico', frTab = 'teoria', frOpenAcc = null;
+    let frMode = 'frases', frData = null, frStats = null, frLevel = 'basico', frType = 'mezcla', frTemView = null, frTemLevel = 'basico', frOpenAcc = null, frOpenPh = null;
     const frDataBy = {}, frStatsBy = {};
-    function frNewStats() { return { done: {}, ex: {}, attempts: 0, correct: 0, level: 'basico' }; }
+    function frNewStats() { return { t: { ordenar: {}, completar: {}, elegir: {} }, ex: {}, attempts: 0, correct: 0, level: 'basico', type: 'ordenar' }; }
+    // Normaliza (y migra) los datos guardados: el antiguo "done" pasa a ser el tipo "ordenar".
+    function frFixStats(raw) {
+        const st = { ...frNewStats(), ...(raw || {}) };
+        const t = { ordenar: {}, completar: {}, elegir: {}, ...(st.t || {}) };
+        if (raw && raw.done && !(raw.t)) t.ordenar = { ...raw.done };
+        st.t = t; delete st.done;
+        return st;
+    }
+    function frReadStats(m) {
+        let raw = null;
+        try { const s = localStorage.getItem(FR_MODES[m].key); if (s) raw = JSON.parse(s); } catch (e) {}
+        return frFixStats(raw);
+    }
     function frSetMode(m) {
         frMode = m;
-        if (!frStatsBy[m]) {
-            frStatsBy[m] = frNewStats();
-            try { const s = localStorage.getItem(FR_MODES[m].key); if (s) frStatsBy[m] = { ...frNewStats(), ...JSON.parse(s) }; } catch (e) {}
-        }
-        frStats = frStatsBy[m]; frData = frDataBy[m] || null; frLevel = frStats.level || 'basico'; frOpenAcc = null;
+        if (!frStatsBy[m]) frStatsBy[m] = frReadStats(m);
+        frStats = frStatsBy[m]; frData = frDataBy[m] || null; frLevel = frStats.level || 'basico'; frType = 'mezcla';
+        frOpenAcc = null; frOpenPh = null; frTemView = null;
     }
     // Estadísticas de un modo sin necesidad de haber cargado sus datos (para la pantalla de Estadísticas).
-    function frGetStats(m) {
-        if (frStatsBy[m]) return frStatsBy[m];
-        let st = frNewStats();
-        try { const raw = localStorage.getItem(FR_MODES[m].key); if (raw) st = { ...st, ...JSON.parse(raw) }; } catch (e) {}
-        return (frStatsBy[m] = st);
-    }
+    function frGetStats(m) { return frStatsBy[m] || (frStatsBy[m] = frReadStats(m)); }
     function frResetAllStats() {
         Object.keys(FR_MODES).forEach(m => {
             const old = frGetStats(m);
-            frStatsBy[m] = { ...frNewStats(), totalF: old.totalF, totalEx: old.totalEx, level: old.level };
+            frStatsBy[m] = { ...frNewStats(), totalF: old.totalF, totalC: old.totalC, totalEx: old.totalEx, level: old.level, type: old.type };
             try { localStorage.setItem(FR_MODES[m].key, JSON.stringify(frStatsBy[m])); } catch (e) {}
         });
         if (frStats) frStats = frStatsBy[frMode];
+        frOpenAcc = null; frOpenPh = null;
     }
     function frSave() { try { localStorage.setItem(FR_MODES[frMode].key, JSON.stringify(frStats)); } catch (e) {} }
+    const frIsDone = (id, t) => t === 'mezcla' ? FR_TYPE_IDS.some(x => frStats.t[x][id]) : !!frStats.t[t][id];
+    const frCanType = (f, t) => t === 'ordenar' || f.bloques.length >= 2;
     function frEsc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
-    function frRich(t) { return frEsc(t).replace(/([぀-ヿ一-鿿～〜ー＿]+)/g, '<span class="fr-hl">$1</span>'); }
     function frShuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+    // ---- Furigana: usa el mapa "furi" de los JSON y respeta el ajuste de furigana de la app ----
+    const FR_JP_SRC = '[\u3040-\u30ff\u30fc\u3005\u4e00-\u9fff]+';
+    function frRuby(pairs) { return pairs.map(([a, r]) => r ? `<ruby>${frEsc(a)}<rt>${frEsc(r)}</rt></ruby>` : frEsc(a)).join(''); }
+    function frJa(t) {
+        if (t == null || t === '') return '';
+        t = String(t);
+        if (!prefs.hiragana || !frData || !frData.furi) return frEsc(t);
+        const fu = frData.furi, p = fu[t];
+        if (p) return frRuby(p);
+        let out = '', last = 0, m; const re = new RegExp(FR_JP_SRC, 'g');
+        while ((m = re.exec(t))) {
+            out += frEsc(t.slice(last, m.index)); last = m.index + m[0].length;
+            out += fu[m[0]] ? frRuby(fu[m[0]]) : frEsc(m[0]);
+        }
+        return out + frEsc(t.slice(last));
+    }
+    function frJaParts(parts) { return parts.map(frJa).join(''); }
+    // Texto explicativo en español con fragmentos en japonés resaltados (y con furigana).
+    function frRich(t) {
+        t = String(t == null ? '' : t); let out = '', last = 0, m; const re = new RegExp(FR_JP_SRC, 'g');
+        while ((m = re.exec(t))) {
+            out += frEsc(t.slice(last, m.index)); last = m.index + m[0].length;
+            out += `<span class="fr-hl">${frJa(m[0])}</span>`;
+        }
+        return out + frEsc(t.slice(last));
+    }
 
     async function frLoad() {
         if (frData) return frData;
@@ -5525,8 +5582,11 @@
         const [pj, gj, tj] = await Promise.all(rs.map(r => r.json()));
         const fam = {};   // bloque -> familias donde aparece
         (pj.frases || []).forEach(f => f.bloques.forEach(b => { (fam[b] = fam[b] || new Set()).add(frFamily(f.categoria)); }));
-        frStats.totalF = (pj.frases || []).length; frStats.totalEx = (tj.lecciones || []).reduce((n, l) => n + l.ejercicios.length, 0); frSave();
-        frData = frDataBy[frMode] = { frases: pj.frases || [], bloques: gj.bloques || {}, grupos: tj.grupos || [], lecciones: tj.lecciones || [], fam };
+        frStats.totalF = (pj.frases || []).length; frStats.totalC = (pj.frases || []).filter(f => f.bloques.length >= 2).length;
+        frStats.totalEx = (tj.lecciones || []).reduce((n, l) => n + l.ejercicios.length, 0); frSave();
+        frData = frDataBy[frMode] = { frases: pj.frases || [], bloques: gj.bloques || {}, lecciones: tj.lecciones || [], furi: pj.furi || {}, fam };
+        // Se añaden al mapa de furigana también las de las lecciones (están en el JSON de teoría si existe)
+        if (tj.furi) Object.assign(frData.furi, tj.furi);
         return frData;
     }
 
@@ -5536,13 +5596,14 @@
         renderFrasesHub();
     }
     function frBackToHub() { showScreen('frases'); renderFrasesHub(); }
-    function frBackToList() { frBackToHub(); }
-    function openTemario(tab) {
-        if (tab) frTab = tab;
+    function openTemario() {
+        frTemView = null;
         showScreen('frases-temario', true);
         renderTemario();
     }
     function frBackToTemario() { showScreen('frases-temario'); renderTemario(); }
+    function frTemBack() { if (frTemView) { frTemView = null; renderTemario(); window.scrollTo(0, 0); } else frBackToHub(); }
+    function frTemOpen(v) { frTemView = v; frOpenAcc = null; frOpenPh = null; renderTemario(); window.scrollTo(0, 0); playSound('click'); }
 
     function frNotice(el, html) { el.innerHTML = `<div class="fr-notice">${html}</div>`; }
     function frKoreanNotice() { return '🇰🇷<br><br>Las frases todavía no están disponibles para este idioma.'; }
@@ -5555,50 +5616,59 @@
             return false;
         }
     }
-    const frInLevel = lvl => frData.frases.filter(f => lvl === 'mezcla' || f.nivel === lvl);
+    const frInLevel = (lvl, t) => frData.frases.filter(f => (lvl === 'mezcla' || f.nivel === lvl) && (!t || t === 'mezcla' || frCanType(f, t)));
 
-    // ---- HUB: jugar + dificultad arriba, sin scroll ----
+    // ---- HUB: tipo de ejercicio + dificultad + jugar ----
     async function renderFrasesHub() {
         const m = FR_MODES[frMode], body = document.getElementById('fr-body');
         if (!(await frEnsureData(body))) return;
-        const all = frInLevel(frLevel), done = all.filter(f => frStats.done[f.id]).length;
+        const all = frInLevel(frLevel, frType), done = all.filter(f => frIsDone(f.id, frType)).length;
         const pct = all.length ? Math.round(done / all.length * 100) : 0;
-        let h = `<div class="fr-hub"><h2>${m.icono} ${m.titulo}</h2><p class="subtitle" style="margin-bottom:14px;">${m.sub}</p>
+        let h = `<div class="fr-hub"><h2>${m.icono} ${m.titulo}</h2><p class="subtitle" style="margin-bottom:12px;">${m.sub}</p>
             <div class="kana-section-title" style="text-align:center;">Dificultad</div><div class="fr-level-row">`;
         FR_LEVELS.forEach(l => {
-            const a = frInLevel(l.id), d = a.filter(f => frStats.done[f.id]).length;
+            const a = frInLevel(l.id, frType), d = a.filter(f => frIsDone(f.id, frType)).length;
             h += `<button type="button" class="kana-group-chip ${l.id === frLevel ? 'active' : ''}" onclick="frPickLevel('${l.id}')">${l.label} · ${d}/${a.length}</button>`;
         });
         h += `</div><button class="btn fr-play" onclick="startFrases()">▶️ Jugar</button>
             <div class="fr-bar"><div class="fr-bar-fill" style="width:${pct}%"></div></div><div class="fr-bar-txt">${done} de ${all.length} ${m.items} completadas · ${pct}%</div>
-            <button class="btn outline fr-tem-btn" onclick="openTemario('teoria')">📖 Temario</button></div>`;
+            <button class="btn outline fr-tem-btn" onclick="openTemario()">📖 Temario</button></div>`;
         body.innerHTML = h;
     }
     function frPickLevel(id) { frLevel = id; frStats.level = id; frSave(); renderFrasesHub(); }
+    function frPickType(id) { frType = id; frStats.type = id; frSave(); renderFrasesHub(); }
 
-    // ---- TEMARIO: teoría (desplegables) + lista de frases ----
+    // ---- TEMARIO: dos botones (Lecciones / Frases u Oraciones), solo teoría ----
     async function renderTemario() {
         const m = FR_MODES[frMode], body = document.getElementById('fr-tem-body');
-        document.getElementById('fr-tem-title').innerText = '📖 Temario · ' + m.titulo;
+        const ttl = document.getElementById('fr-tem-title');
+        ttl.innerText = '📖 Temario · ' + m.titulo;
         if (!(await frEnsureData(body))) return;
-        let h = `<div class="fr-tabs"><button type="button" class="kana-group-chip ${frTab === 'teoria' ? 'active' : ''}" onclick="frTab='teoria';renderTemario()">📖 Teoría</button><button type="button" class="kana-group-chip ${frTab === 'lista' ? 'active' : ''}" onclick="frTab='lista';renderTemario()">✅ ${m.lista}</button></div>`;
-        h += frTab === 'teoria' ? frRenderTheory() : frRenderPhrases();
-        body.innerHTML = h;
+        const items = m.items === 'frases' ? 'Frases' : 'Oraciones';
+        if (frTemView === 'lecciones') { ttl.innerText = '📚 Lecciones · ' + m.titulo; body.innerHTML = frRenderLessons(); return; }
+        if (frTemView === 'frases') { ttl.innerText = (m.items === 'frases' ? '💬 Frases' : '💬 Oraciones') + ' · ' + m.titulo; body.innerHTML = frRenderPhrases(); return; }
+        body.innerHTML = `<p class="subtitle" style="text-align:center;margin-bottom:16px;">¿Qué quieres estudiar? Aquí solo hay teoría; la práctica está en «Jugar».</p>
+            <div class="fr-tem-choices">
+                <button type="button" class="kana-choice-card fr-tem-card" onclick="frTemOpen('lecciones')"><span class="kana-choice-glyph">📚</span><span><b>Lecciones</b><small>${frData.lecciones.length} lecciones de la más fácil a la más difícil, con ejemplos y romaji</small></span></button>
+                <button type="button" class="kana-choice-card fr-tem-card" onclick="frTemOpen('frases')"><span class="kana-choice-glyph">💬</span><span><b>${items}</b><small>${frData.frases.length} ${m.items} de la app: japonés, romaji, español y ${m.conn ? 'cómo se usa cada conector' : 'qué significa cada bloque'}</small></span></button>
+            </div>`;
     }
 
-    function frRenderTheory() {
-        let h = '<p class="subtitle" style="text-align:center;">Toca una lección: explicación, ejemplos y ejercicios para practicarla.</p>';
+    const FR_NIVEL = { basico: '🟢 Básico', intermedio: '🟡 Intermedio', especializado: '🔴 Especializado' };
+    function frRenderLessons() {
+        let h = '<p class="subtitle" style="text-align:center;">Ordenadas de más fácil a más difícil. Solo se abre una a la vez.</p>';
         frData.lecciones.forEach((l, idx) => {
             const d = l.ejercicios.filter(e => frStats.ex[e.id]).length, all = l.ejercicios.length, open = frOpenAcc === l.id;
             h += `<div class="fr-acc ${open ? 'open' : ''}" data-id="${l.id}">
                 <button type="button" class="fr-acc-head" onclick="frToggleAcc('${l.id}')">
                     <span class="fr-acc-ico">${l.icono}</span>
-                    <span class="fr-acc-title">${frEsc(l.titulo)}<span class="fr-acc-meter"><span style="width:${all ? d / all * 100 : 0}%"></span></span><small>${d === all ? '✓ ' : ''}${d}/${all} ejercicios</small></span>
+                    <span class="fr-acc-title">${idx + 1}. ${frJa(l.titulo)}<span class="fr-acc-meter"><span style="width:${all ? d / all * 100 : 0}%"></span></span><small>${FR_NIVEL[l.nivel] || ''} · ${d === all ? '✓ ' : ''}${d}/${all} ejercicios</small></span>
                     <span class="fr-acc-chev">›</span></button>
                 <div class="fr-acc-panel"><div class="fr-acc-inner"><div class="fr-acc-content">
+                    ${l.resumen ? `<p class="fr-resumen">${frRich(l.resumen)}</p>` : ''}
                     <ul class="fr-points">${l.explicacion.map(t => `<li>${frRich(t)}</li>`).join('')}</ul>
                     <div class="kana-section-title" style="margin-top:14px;">Ejemplos</div>
-                    ${l.ejemplos.map(e => `<div class="fr-ex"><b onclick="speakJapanese('${e.ja.replace(/'/g, '')}')">${frEsc(e.ja)} 🔊</b><div class="fr-expr-read">${frEsc(e.lectura)}</div><div>${frEsc(e.es)}</div></div>`).join('')}
+                    ${l.ejemplos.map(e => `<div class="fr-ex"><b onclick="speakJapanese('${e.ja.replace(/'/g, '')}')">${frJa(e.ja)} 🔊</b><div class="fr-expr-read">${frEsc(e.romaji)}</div><div>${frEsc(e.es)}</div></div>`).join('')}
                     <button class="btn fr-acc-go" onclick="startQuiz('${l.id}')">▶️ Practicar esta lección</button>
                 </div></div></div></div>`;
         });
@@ -5612,56 +5682,59 @@
         if (willOpen) { el.classList.add('open'); playSound('click'); setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 340); }
     }
 
+    // ---- Frases / oraciones: solo teoría, un desplegable abierto a la vez ----
+    const FR_REG = { calle: '🗣️ De calle', neutro: '💬 Neutro', formal: '🎩 Formal' };
+    function frJaMarked(f) {
+        if (f.hueco) return frJa(f.hueco.pre) + `<mark class="fr-mark">${frJa(f.hueco.con)}</mark>` + frJa(f.hueco.post);
+        return frJa(f.ja);
+    }
     function frRenderPhrases() {
         const m = FR_MODES[frMode];
         let h = '<div class="fr-level-row">';
         FR_LEVELS.forEach(l => {
-            const a = frInLevel(l.id), d = a.filter(f => frStats.done[f.id]).length;
-            h += `<button type="button" class="kana-group-chip ${l.id === frLevel ? 'active' : ''}" onclick="frLevel='${l.id}';frStats.level=frLevel;frSave();renderTemario()">${l.label} · ${d}/${a.length}</button>`;
+            const n = frInLevel(l.id).length;
+            h += `<button type="button" class="kana-group-chip ${l.id === frTemLevel ? 'active' : ''}" onclick="frTemLevel='${l.id}';frOpenPh=null;renderTemario()">${l.id === 'mezcla' ? '📚 Todas' : l.label} · ${n}</button>`;
         });
         h += '</div>';
-        const cur = frInLevel(frLevel);
-        const pending = cur.filter(f => !frStats.done[f.id]), done = cur.filter(f => frStats.done[f.id]);
-        const item = f => `<div class="fr-item-wrap" data-id="${f.id}"><div class="fr-item ${frStats.done[f.id] ? 'done' : ''}" onclick="frToggleItem(${f.id})"><div class="fr-item-main">${frEsc(f.es)}${frStats.done[f.id] ? `<div class="fr-item-sub">${frEsc(f.ja)}</div>` : ''}</div>${frStats.done[f.id] ? '<span class="fr-check">✓</span>' : ''}<span class="fr-acc-chev" style="font-size:22px;">›</span></div><div class="fr-det"><div class="fr-det-clip"><div class="fr-det-in"></div></div></div></div>`;
-        h += `<div class="kana-section-title">Pendientes (${pending.length})</div>` + (pending.map(item).join('') || `<p class="subtitle">¡Todas completadas! 🎉</p>`);
-        h += `<div class="kana-section-title">Completadas (${done.length})</div>` + (done.map(item).join('') || '<p class="subtitle">Aún ninguna.</p>');
-        if (done.length) h += '<div class="center-btn-wrap" style="margin-top:14px;"><button class="btn outline" onclick="frResetLevel()">↺ Reiniciar este nivel</button></div>';
+        const list = frInLevel(frTemLevel);
+        h += `<p class="subtitle" style="text-align:center;">${list.length} ${m.items}. Toca una para ver su explicación.</p>`;
+        list.forEach(f => {
+            const open = frOpenPh === f.id;
+            h += `<div class="fr-item-wrap ${open ? 'open' : ''}" data-id="${f.id}"><div class="fr-item" onclick="frTogglePhrase(${f.id})"><div class="fr-item-main">${frEsc(f.es)}</div><span class="fr-acc-chev" style="font-size:22px;">›</span></div><div class="fr-det"><div class="fr-det-clip"><div class="fr-det-in">${open ? frPhraseCard(f) : ''}</div></div></div></div>`;
+        });
         return h;
     }
-
-    // Ficha de estudio de una frase: japonés, traducción, explicación palabra a palabra y audio.
-    function frSpeak(id) { const f = frData.frases.find(x => x.id === id); if (f) speakJapanese(f.ja); }
-    function frToggleItem(id) {
-        const wrap = document.querySelector(`.fr-item-wrap[data-id="${id}"]`); if (!wrap) return;
-        const inner = wrap.querySelector('.fr-det-in');
-        if (!inner.innerHTML) {
-            const f = frData.frases.find(x => x.id === id);
-            const tipo = String(f.categoria || '').replace(/_/g, ' ');
-            inner.innerHTML = `<div class="fr-det-ja">${frEsc(f.ja)}</div>
-                <div class="fr-expr-read">${frEsc(f.lectura)}</div>
-                <div class="fr-det-es">${frEsc(f.es)}</div>
-                <div class="fr-det-tags"><span class="fr-tag">${frEsc(f.nivel)}</span>${tipo ? `<span class="fr-tag">${frEsc(tipo)}</span>` : ''}</div>
-                <button type="button" class="btn outline" style="width:auto;padding:8px 18px;margin:10px 0 4px;font-size:15px;" onclick="frSpeak(${f.id})">🔊 Escuchar</button>
-                <div class="kana-section-title" style="margin-top:6px;">Palabra a palabra</div>
-                <div class="fr-gloss" style="max-height:none;border:0;padding:0;">${frGloss(f)}</div>
-                <button type="button" class="btn outline" style="width:100%;margin:12px 0 0;" onclick="startFrases(${f.id})">▶️ Practicar esta ${FR_MODES[frMode].items === 'frases' ? 'frase' : 'oración'}</button>`;
-        }
-        const willOpen = !wrap.classList.contains('open');
-        wrap.classList.toggle('open', willOpen);
-        if (willOpen) { playSound('click'); setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 340); }
+    function frPhraseCard(f) {
+        const tipo = String(f.categoria || '').replace(/_/g, ' ');
+        const m = FR_MODES[frMode];
+        return `<div class="fr-det-ja">${frJaMarked(f)}</div>
+            <div class="fr-expr-read">${frEsc(f.romaji)}</div>
+            <div class="fr-det-es">${frEsc(f.es)}</div>
+            <div class="fr-det-tags"><span class="fr-tag">${frEsc(FR_NIVEL[f.nivel] || f.nivel)}</span>${f.registro ? `<span class="fr-tag">${FR_REG[f.registro] || frEsc(f.registro)}</span>` : ''}${tipo ? `<span class="fr-tag">${frEsc(tipo)}</span>` : ''}</div>
+            ${f.uso ? `<div class="fr-uso"><b>${frJa(f.hueco.con)}</b> en esta frase: ${frEsc(f.uso)}</div>` : ''}
+            <button type="button" class="btn outline" style="width:auto;padding:8px 18px;margin:10px 0 4px;font-size:15px;" onclick="frSpeak(${f.id})">🔊 Escuchar</button>
+            <div class="kana-section-title" style="margin-top:6px;">${m.conn ? 'Parte a parte' : 'Bloque a bloque'}</div>
+            <div class="fr-gloss" style="max-height:none;border:0;padding:0;">${frGloss(f)}</div>`;
     }
-
-    async function frResetLevel() {
-        if (!(await appConfirm({ icon: '↺', title: '¿Reiniciar este nivel?', text: 'Las frases de este nivel volverán a estar pendientes.', confirmText: 'Reiniciar', danger: true }))) return;
-        frInLevel(frLevel).forEach(f => delete frStats.done[f.id]);
-        frSave(); renderTemario();
+    function frSpeak(id) { const f = frData.frases.find(x => x.id === id); if (f) speakJapanese(f.ja); }
+    function frTogglePhrase(id) {
+        const wrap = document.querySelector(`.fr-item-wrap[data-id="${id}"]`); if (!wrap) return;
+        const willOpen = !wrap.classList.contains('open');
+        document.querySelectorAll('.fr-item-wrap.open').forEach(x => x.classList.remove('open'));
+        frOpenPh = willOpen ? id : null;
+        if (willOpen) {
+            const inner = wrap.querySelector('.fr-det-in');
+            if (!inner.innerHTML) inner.innerHTML = frPhraseCard(frData.frases.find(x => x.id === id));
+            wrap.classList.add('open'); playSound('click'); setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 340);
+        }
     }
 
     function frResultBack() {
-        if (frSession && frSession.mode === 'quiz') { frTab = 'teoria'; frOpenAcc = frSession.lesson; frBackToTemario(); }
+        if (frSession && frSession.mode === 'quiz') { frTemView = 'lecciones'; frOpenAcc = frSession.lesson; frBackToTemario(); }
         else frBackToHub();
     }
 
+    // ---- Quiz de las lecciones ----
     function startQuiz(id) {
         const l = frData.lecciones.find(x => x.id === id);
         let ex = l.ejercicios.filter(e => !frStats.ex[e.id]);
@@ -5670,15 +5743,14 @@
         showScreen('frases-practice', true);
         frQuestion();
     }
-
     function frQuizQuestion() {
         const l = frData.lecciones.find(x => x.id === frSession.lesson);
         const ex = l.ejercicios.find(e => e.id === frSession.queue[0]);
-        frCur = null; frQuizEx = ex;
+        frCur = null; frState = null; frQuizEx = ex;
         const opts = frShuffle(ex.ops.map((t, i) => ({ t, ok: i === ex.ok })));
         frQuizOpts = opts;
-        document.getElementById('fr-stage').innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">${l.icono} ${frEsc(l.titulo)}</div><div class="fr-prompt-es" style="font-size:20px;">${frEsc(ex.p)}</div>${ex.ja ? `<div class="fr-expr-ja" style="font-size:34px;">${frEsc(ex.ja)}</div>` : ''}</div>
-            <div class="fr-opts">${opts.map((o, i) => `<button class="fr-opt" data-i="${i}" onclick="frAnswerQuiz(${i})">${frEsc(o.t)}</button>`).join('')}</div>`;
+        document.getElementById('fr-stage').innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">${l.icono} ${frJa(l.titulo)}</div><div class="fr-prompt-es" style="font-size:20px;">${frRich(ex.p)}</div>${ex.ja ? `<div class="fr-expr-ja" style="font-size:34px;">${frJa(ex.ja)}</div>` : ''}</div>
+            <div class="fr-opts">${opts.map((o, i) => `<button class="fr-opt" data-i="${i}" onclick="frAnswerQuiz(${i})">${frJa(o.t)}</button>`).join('')}</div>`;
     }
     let frQuizEx = null, frQuizOpts = null, frQuizLocked = false;
     function frAnswerQuiz(i) {
@@ -5692,63 +5764,94 @@
         const fb = document.getElementById('fr-feedback');
         fb.className = 'feedback-panel ' + (ok ? 'correct' : 'wrong'); fb.style.display = 'flex';
         document.getElementById('fr-fb-title').innerText = ok ? '✓ ¡Correcto!' : '✗ No era esa';
-        document.getElementById('fr-fb-answer').innerHTML = `<div style="font-size:18px;font-weight:700;">${frEsc(frQuizOpts.find(o => o.ok).t)}</div>`;
-        document.getElementById('fr-fb-gloss').innerHTML = `<div class="fr-gloss-item"><span>${frEsc(ex.exp)}</span></div>`;
+        document.getElementById('fr-fb-answer').innerHTML = `<div style="font-size:18px;font-weight:700;">${frJa(frQuizOpts.find(o => o.ok).t)}</div>`;
+        document.getElementById('fr-fb-gloss').innerHTML = `<div class="fr-gloss-item"><span>${frRich(ex.exp)}</span></div>`;
     }
 
-    // Distractores: en frases, bloques de otras frases; en oraciones, conectores de otra familia.
-    function frMakeChips(f) {
-        const correct = f.bloques.slice();
-        const extra = f.bloques.length <= 2 ? 2 : 1;
-        let pool = [];
+    // ---- Distractores ----
+    // En frases: bloques de otras frases (de la misma categoría si es posible). En oraciones: conectores de otra familia.
+    function frDistractors(f, n, exclude) {
+        exclude = exclude || f.bloques; let pool = [];
         if (FR_MODES[frMode].conn) {
             const mine = new Set(); f.bloques.forEach(b => (frData.fam[b] || []).forEach(x => mine.add(x)));
             mine.add(frFamily(f.categoria));
             Object.keys(frData.bloques).forEach(b => {
-                const g = frData.bloques[b]; if (!g[3] || correct.includes(b)) return;
+                const g = frData.bloques[b]; if (!g[3] || exclude.includes(b)) return;
                 const fams = [...(frData.fam[b] || [])];
                 if (fams.length && fams.every(x => !mine.has(x) || x === 'other')) pool.push(b);
             });
         } else {
             const all = [];
-            frData.frases.forEach(o => { if (o.id !== f.id) o.bloques.forEach(b => { if (o.bloques.length > 1 && !correct.includes(b) && !all.includes(b)) all.push(b); }); });
+            frData.frases.forEach(o => { if (o.id !== f.id) o.bloques.forEach(b => { if (o.bloques.length > 1 && !exclude.includes(b) && !all.includes(b) && /[぀-ヿ一-鿿]/.test(b)) all.push(b); }); });
             const same = all.filter(b => frData.frases.some(o => o.categoria === f.categoria && o.bloques.includes(b)));
-            pool = same.length >= extra ? same : all;
+            pool = same.length >= n ? same : all;
         }
-        const picks = frShuffle(pool).slice(0, extra);
-        return frShuffle(correct.concat(picks).map(t => ({ t })));
+        return frShuffle(pool).slice(0, n);
+    }
+    function frMakeChips(f) {
+        const extra = f.bloques.length <= 2 ? 2 : 1;
+        return frShuffle(f.bloques.concat(frDistractors(f, extra)).map(t => ({ t })));
+    }
+    // Completar: una parte de la frase queda en blanco y hay que colocar la pieza correcta.
+    function frMakeGap(f) {
+        if (f.hueco) {
+            const h = f.hueco;
+            return { parts: [{ t: h.pre }, { slot: 0 }, { t: h.post }], target: [h.con], chips: frShuffle([h.con].concat(frShuffle(f.distractores).slice(0, 3)).map(t => ({ t }))) };
+        }
+        const cand = f.bloques.map((b, i) => i).filter(i => /[぀-ヿ一-鿿]/.test(f.bloques[i]));
+        const gi = cand[Math.floor(Math.random() * cand.length)];
+        const parts = f.bloques.map((b, i) => i === gi ? { slot: 0 } : { t: b });
+        return { parts, target: [f.bloques[gi]], chips: frShuffle([f.bloques[gi]].concat(frDistractors(f, 2, f.bloques)).map(t => ({ t }))) };
+    }
+    // Elegir: tres frases completas, solo una está bien.
+    function frMakeOptions(f) {
+        let ok, wrong = [];
+        if (f.hueco) {
+            const h = f.hueco; ok = [h.pre, h.con, h.post];
+            wrong = frShuffle(f.distractores).slice(0, 2).map(d => [h.pre, d, h.post]);
+        } else {
+            ok = f.bloques.slice();
+            const idxs = ok.map((b, i) => i).filter(i => /[぀-ヿ一-鿿]/.test(ok[i]));
+            const seen = new Set([ok.join('')]);
+            let tries = 0;
+            while (wrong.length < 2 && tries++ < 40) {
+                const i = idxs[Math.floor(Math.random() * idxs.length)];
+                const d = frDistractors(f, 3, ok)[Math.floor(Math.random() * 3)]; if (!d) continue;
+                const w = ok.slice(); w[i] = d; const key = w.join('');
+                if (!seen.has(key)) { seen.add(key); wrong.push(w); }
+            }
+        }
+        return frShuffle([{ parts: ok, ok: true }].concat(wrong.map(p => ({ parts: p, ok: false }))));
     }
 
+    // ---- Sesión de práctica ----
     function startFrases(singleId) {
         let pool;
-        if (singleId) pool = frData.frases.filter(f => f.id === singleId);
-        else {
-            pool = frInLevel(frLevel);
-            pool = frShuffle(pool).sort((a, b) => (frStats.done[a.id] ? 1 : 0) - (frStats.done[b.id] ? 1 : 0)).slice(0, 10);
-            pool = frShuffle(pool);
-        }
-        frSession = { mode: 'frases', single: !!singleId, queue: pool.map(f => f.id), total: pool.length, firstTry: 0, seen: {}, retry: {}, expr: 0 };
+        pool = frInLevel(frLevel, frType);
+        pool = frShuffle(pool).sort((a, b) => (frIsDone(a.id, frType) ? 1 : 0) - (frIsDone(b.id, frType) ? 1 : 0)).slice(0, 10);
+        pool = frShuffle(pool);
+        const qt = {};
+        pool.forEach(f => { qt[f.id] = frType === 'mezcla' ? frShuffle(FR_TYPE_IDS.filter(t => frCanType(f, t)))[0] : frType; });
+        frSession = { mode: 'frases', queue: pool.map(f => f.id), qt, total: pool.length, firstTry: 0, seen: {}, retry: {}, expr: 0 };
         showScreen('frases-practice', true);
         frQuestion();
     }
-
     async function abortFrases() {
         if (!(await appConfirm({ icon: '🚪', title: '¿Salir de la práctica?', text: 'Tu progreso ya está guardado.', confirmText: 'Salir', cancelText: 'Seguir practicando', danger: true }))) return;
-        if (frSession && frSession.mode === 'quiz') { frTab = 'teoria'; frOpenAcc = frSession.lesson; frBackToTemario(); }
-        else if (frSession && frSession.single) { frTab = 'lista'; frBackToTemario(); }
+        if (frSession && frSession.mode === 'quiz') { frTemView = 'lecciones'; frOpenAcc = frSession.lesson; frBackToTemario(); }
         else frBackToHub();
     }
 
-    function frGloss(f, onlyNew) {
+    function frGloss(f) {
         return f.bloques.map(b => {
-            const g = frData.bloques[b] || ['', '', ''];
-            return `<div class="fr-gloss-item"><b>${frEsc(b)}</b><span>${frEsc(g[1])}<i>${frEsc(g[0])}${g[2] ? ' · ' + frEsc(g[2]) : ''}</i></span></div>`;
+            const g = frData.bloques[b] || ['', '', '', 0, ''];
+            return `<div class="fr-gloss-item"><b>${frJa(b)}</b><span>${frEsc(g[1])}<i>${frEsc(g[4] || '')}${g[2] ? ' · ' + frEsc(g[2]) : ''}</i></span></div>`;
         }).join('');
     }
 
     // ---- Traducción al tocar ----
     function frTapOn() { return prefs.frTapTranslate !== false; }
-    function frNorm(t) { return String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zñ0-9 ]/g, ' '); }
+    function frNorm(t) { return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zñ0-9 ]/g, ' '); }
     function frStem(w) { return w.length > 5 ? w.slice(0, -1) : w; }
     function frHidePop() { const p = document.getElementById('fr-pop'); if (p) p.remove(); }
     function frShowPop(el, html) {
@@ -5762,8 +5865,9 @@
     }
     document.addEventListener('pointerdown', e => { if (!e.target.closest || !e.target.closest('.fr-w, .fr-chip')) frHidePop(); }, true);
     function frBlockHtml(b) {
-        const g = frData.bloques[b] || ['', '', ''];
-        return `<div><b>${frEsc(b)}</b> <i>${frEsc(g[0])}</i><br>${frEsc(g[1])}${g[2] ? '<br><i>💡 ' + frEsc(g[2]) + '</i>' : ''}</div>`;
+        const g = frData.bloques[b];
+        if (!g) return `<div><b>${frJa(b)}</b></div>`;
+        return `<div><b>${frJa(b)}</b> <i>${frEsc(g[4] || '')}</i><br>${frEsc(g[1])}${g[2] ? '<br><i>💡 ' + frEsc(g[2]) + '</i>' : ''}</div>`;
     }
     function frShowBlock(el, b) { frShowPop(el, frBlockHtml(b)); }
     function frTapEs(el, word) {
@@ -5783,37 +5887,49 @@
         if (w.dataset.es !== undefined) frTapEs(w, w.dataset.es); else if (w.dataset.ja) frShowBlock(w, w.dataset.ja);
     });
 
-    let frCur = null, frState = null, frHints = false;
+    let frCur = null, frState = null, frHints = false, frQT = 'ordenar', frElegirOpts = null;
     function frQuestion() {
         const fb = document.getElementById('fr-feedback'); fb.className = 'feedback-panel'; fb.style.display = 'none';
         frQuizLocked = false;
         if (frSession.queue.length === 0) return frFinish();
-        if (frSession.mode === 'quiz') {
-            const dn = frSession.total - new Set(frSession.queue).size;
-            document.getElementById('fr-progress').style.width = (dn / frSession.total * 100) + '%';
-            document.getElementById('fr-count').innerText = dn + '/' + frSession.total;
-            return frQuizQuestion();
-        }
-        const id = frSession.queue[0];
-        frCur = frData.frases.find(f => f.id === id);
         const done = frSession.total - new Set(frSession.queue).size;
         document.getElementById('fr-progress').style.width = (done / frSession.total * 100) + '%';
         document.getElementById('fr-count').innerText = done + '/' + frSession.total;
-        const stage = document.getElementById('fr-stage');
-        const f = frCur;
-        if (f.bloques.length === 1) {
-            const g = frData.bloques[f.bloques[0]] || ['', '', ''];
+        if (frSession.mode === 'quiz') return frQuizQuestion();
+        const id = frSession.queue[0];
+        frCur = frData.frases.find(f => f.id === id);
+        frQT = frSession.qt[id];
+        const stage = document.getElementById('fr-stage'), f = frCur;
+        frHints = false;
+        if (frQT === 'ordenar' && f.bloques.length === 1) {
+            frState = null;
+            const g = frData.bloques[f.bloques[0]] || ['', '', '', 0, ''];
             stage.innerHTML = `<div class="fr-expr"><div class="fr-prompt-label">Expresión para aprender</div>
-                <div class="fr-expr-ja">${frEsc(f.ja)}</div><div class="fr-expr-read">${frEsc(f.lectura)} · ${frEsc(g[0])}</div>
+                <div class="fr-expr-ja">${frJa(f.ja)}</div><div class="fr-expr-read">${frEsc(f.romaji)}</div>
                 <div class="fr-expr-es">${frSpanishHtml(f.es)}</div>${g[2] ? '<div class="fr-expr-note">💡 ' + frEsc(g[2]) + '</div>' : ''}
                 <button class="kana-audio-btn" onclick="speakJapanese('${f.ja.replace(/'/g, '')}')">🔊</button></div>
                 <div class="center-btn-wrap"><button class="btn" onclick="frExprDone()">Entendido →</button></div>`;
             speakJapanese(f.ja);
             return;
         }
-        frState = { chips: frMakeChips(f), slots: new Array(f.bloques.length).fill(null), checked: false };
-        frHints = false;
-        stage.innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">Ordena la frase en japonés</div><div class="fr-prompt-es">${frSpanishHtml(f.es)}</div></div>
+        if (frQT === 'elegir') {
+            frState = null; frElegirOpts = frMakeOptions(f);
+            stage.innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">${f.hueco ? 'Elige la oración con el conector correcto' : 'Elige la frase correcta'}</div><div class="fr-prompt-es">${frSpanishHtml(f.es)}</div></div>
+                <div class="fr-opts">${frElegirOpts.map((o, i) => `<button class="fr-opt fr-opt-ja" data-i="${i}" onclick="frAnswerElegir(${i})">${frJaParts(o.parts)}</button>`).join('')}</div>`;
+            return;
+        }
+        if (frQT === 'completar') {
+            const g = frMakeGap(f);
+            frState = { chips: g.chips, slots: [null], target: g.target, parts: g.parts, checked: false };
+            stage.innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">${f.hueco ? 'Coloca el conector que falta' : 'Completa la frase'}</div><div class="fr-prompt-es">${frSpanishHtml(f.es)}</div></div>
+                <div class="fr-slots fr-inline" id="fr-slots"></div><div class="fr-tray" id="fr-tray"></div>
+                <div class="center-btn-wrap" style="margin-top:12px;"><button class="btn outline" id="fr-hint-btn" onclick="frToggleHints()" style="margin-bottom:8px;">👁️ Ver significados</button></div>
+                <div class="center-btn-wrap"><button class="btn" id="fr-check-btn" onclick="frCheck()" disabled style="opacity:.5">Comprobar</button></div>`;
+            frRender();
+            return;
+        }
+        frState = { chips: frMakeChips(f), slots: new Array(f.bloques.length).fill(null), target: f.bloques.slice(), parts: f.bloques.map((b, i) => ({ slot: i })), checked: false };
+        stage.innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">${f.hueco ? 'Ordena la oración en japonés' : 'Ordena la frase en japonés'}</div><div class="fr-prompt-es">${frSpanishHtml(f.es)}</div></div>
             <div class="fr-slots" id="fr-slots"></div><div class="fr-tray" id="fr-tray"></div>
             <div class="center-btn-wrap" style="margin-top:12px;"><button class="btn outline" id="fr-hint-btn" onclick="frToggleHints()" style="margin-bottom:8px;">👁️ Ver significados</button></div>
             <div class="center-btn-wrap"><button class="btn" id="fr-check-btn" onclick="frCheck()" disabled style="opacity:.5">Comprobar</button></div>`;
@@ -5831,7 +5947,7 @@
         const el = document.createElement('div');
         el.className = 'fr-chip' + (where === 'slot' ? ' in-slot' : '');
         const g = frData.bloques[c.t];
-        el.innerHTML = frEsc(c.t) + (frHints && g ? `<small>${frEsc(g[1])}</small>` : '');
+        el.innerHTML = frJa(c.t) + (frHints && g ? `<small>${frEsc(g[1])}</small>` : '');
         el.dataset.chip = i; el.dataset.where = where;
         el.addEventListener('pointerdown', frPointerDown);
         return el;
@@ -5839,13 +5955,18 @@
 
     function frRender() {
         const slotsEl = document.getElementById('fr-slots'), tray = document.getElementById('fr-tray');
-        if (!slotsEl) return;
+        if (!slotsEl || !frState) return;
         slotsEl.innerHTML = ''; tray.innerHTML = '';
-        frState.slots.forEach((ci, si) => {
+        frState.parts.forEach(p => {
+            if (p.t !== undefined) {
+                if (p.t === '') return;
+                const sp = document.createElement('span'); sp.className = 'fr-fixed'; sp.innerHTML = frJa(p.t); slotsEl.appendChild(sp); return;
+            }
+            const si = p.slot, ci = frState.slots[si];
             const s = document.createElement('div'); s.className = 'fr-slot'; s.dataset.slot = si;
             if (ci !== null) {
                 const el = frChipEl(ci, 'slot'); el.dataset.slotIndex = si;
-                if (frState.checked) el.classList.add(frState.chips[ci].t === frCur.bloques[si] ? 'good' : 'bad');
+                if (frState.checked) el.classList.add(frState.chips[ci].t === frState.target[si] ? 'good' : 'bad');
                 s.appendChild(el);
             }
             slotsEl.appendChild(s);
@@ -5864,6 +5985,7 @@
         const from = frState.slots.indexOf(ci);
         const prev = frState.slots[slotIdx];
         if (from >= 0) frState.slots[from] = prev;   // intercambio entre casillas
+        else if (prev !== null && frState.slots.length === 1) { /* sustituye la pieza anterior */ }
         frState.slots[slotIdx] = ci;
         playSound('click'); frRender();
     }
@@ -5906,7 +6028,7 @@
         if (d.long && !d.ghost) return;   // pulsación larga: solo mostró el significado
         document.querySelectorAll('.fr-slot.over').forEach(s => s.classList.remove('over'));
         if (!d.ghost) {                      // toque simple
-            if (d.where === 'tray') { const i = frState.slots.indexOf(null); if (i >= 0) frPlace(d.ci, i); }
+            if (d.where === 'tray') { let i = frState.slots.indexOf(null); if (i < 0 && frState.slots.length === 1) i = 0; if (i >= 0) frPlace(d.ci, i); }
             else frRemove(d.slotIndex);
             return;
         }
@@ -5918,46 +6040,62 @@
         else frRender();
     }
 
-    function frCheck() {
-        if (frState.checked) return;
-        frState.checked = true;
-        const f = frCur;
-        const ok = frState.slots.every((ci, i) => frState.chips[ci].t === f.bloques[i]);
+    // Resultado común (ordenar / completar / elegir)
+    function frResolve(ok) {
+        const f = frCur, first = !frSession.retry[f.id];
         frStats.attempts++;
-        const first = !frSession.retry[f.id];
         if (ok) {
-            frStats.correct++; frStats.done[f.id] = true;
+            frStats.correct++; frStats.t[frQT][f.id] = true;
             if (first) frSession.firstTry++;
-            frSession.queue.shift();
-            playSound('correct');
+            frSession.queue.shift(); playSound('correct');
         } else {
             frSession.retry[f.id] = true;
-            frSession.queue.push(frSession.queue.shift());
-            playSound('wrong');
+            frSession.queue.push(frSession.queue.shift()); playSound('wrong');
         }
-        frSave(); frRender();
+        frSave();
         const fb = document.getElementById('fr-feedback');
         fb.className = 'feedback-panel ' + (ok ? 'correct' : 'wrong'); fb.style.display = 'flex';
-        document.getElementById('fr-fb-title').innerText = ok ? '✓ ¡Correcto!' : '✗ Casi…';
-        document.getElementById('fr-fb-answer').innerHTML = `<div style="font-size:20px;font-weight:700;">${f.bloques.map(b => frTapOn() ? `<span class="fr-w" data-ja="${frEsc(b)}">${frEsc(b)}</span>` : frEsc(b)).join('')}</div><div style="font-size:13px;opacity:.8;">${frEsc(f.lectura)}</div>`;
+        document.getElementById('fr-fb-title').innerText = ok ? '✓ ¡Correcto!' : (frQT === 'ordenar' ? '✗ Casi…' : '✗ No era esa');
+        const sentence = f.bloques.map(b => frTapOn() ? `<span class="fr-w" data-ja="${frEsc(b)}">${frJa(b)}</span>` : frJa(b)).join('');
+        document.getElementById('fr-fb-answer').innerHTML = `<div style="font-size:20px;font-weight:700;">${sentence}</div><div style="font-size:13px;opacity:.85;">${frEsc(f.romaji)}</div>${f.uso ? `<div style="font-size:13px;margin-top:4px;"><b>${frJa(f.hueco.con)}</b>: ${frEsc(f.uso)}</div>` : ''}`;
         document.getElementById('fr-fb-gloss').innerHTML = frGloss(f);
         speakJapanese(f.ja);
     }
+    function frCheck() {
+        if (frState.checked) return;
+        frState.checked = true;
+        const ok = frState.slots.every((ci, i) => frState.chips[ci].t === frState.target[i]);
+        frRender(); frResolve(ok);
+    }
+    function frAnswerElegir(i) {
+        if (frQuizLocked) return; frQuizLocked = true;
+        document.querySelectorAll('.fr-opt').forEach((b, k) => { if (frElegirOpts[k].ok) b.classList.add('good'); else if (k === i) b.classList.add('bad'); b.disabled = true; });
+        frResolve(frElegirOpts[i].ok);
+    }
 
     function frExprDone() {
-        frStats.done[frCur.id] = true; frSession.expr++; frSave();
+        frStats.t.ordenar[frCur.id] = true; frSession.expr++; frSave();
         frSession.queue.shift(); playSound('primary'); frQuestion();
     }
     function frNext() { frQuestion(); }
 
     function frFinish() {
         playSound('complete');
-        if (frSession.mode === 'frases' && frSession.single) { frTab = 'lista'; frBackToTemario(); return; }
         const ordered = frSession.total - frSession.expr;
         const pct = ordered > 0 ? Math.round(frSession.firstTry / ordered * 100) : 100;
         document.getElementById('fr-result-score').innerText = pct + '%';
         document.getElementById('fr-result-sub').innerText = `${frSession.firstTry} de ${ordered} ${frSession.mode === 'quiz' ? 'ejercicios' : 'frases'} a la primera` + (frSession.expr ? ` · ${frSession.expr} expresiones aprendidas` : '') + ' · Progreso guardado';
         showScreen('frases-result');
+    }
+    // Al cambiar el ajuste de furigana, las pantallas visibles de esta sección se repintan.
+    function frRefreshFurigana() {
+        if (!frData) return;
+        if (currentScreenId === 'frases-temario') renderTemario();
+        else if (currentScreenId === 'frases-practice') {
+            if (frSession && frSession.mode === 'quiz' && frQuizEx) { const k = frQuizLocked; if (!k) frQuizQuestion(); }
+            else if (frState) frRender();
+            else if (frCur && frQT === 'elegir' && !frQuizLocked) frQuestion();
+        }
     }
 
     window.addEventListener('scroll', updateScrollTopButton, { passive: true });

@@ -1,1242 +1,1642 @@
 {
  "bloques": {
   "おはよう！": [
-   "ohayō",
+   "おはよう！",
    "¡Buenos días!",
-   "Forma informal de ohayō gozaimasu."
+   "Forma informal de ohayou gozaimasu.",
+   0,
+   "ohayou!"
   ],
   "こんにちは！": [
-   "konnichiwa",
+   "こんにちは！",
    "¡Hola! / Buenas tardes",
-   ""
+   "",
+   0,
+   "konnichiwa!"
   ],
   "おつかれ！": [
-   "otsukare",
+   "おつかれ！",
    "¡Buen trabajo! / ¡Qué cansancio!",
-   "Abreviatura de otsukaresama. Se usa para saludar o despedirse de compañeros."
+   "Abreviatura de otsukaresama. Se usa para saludar o despedirse de compañeros.",
+   0,
+   "otsukare!"
   ],
   "またね！": [
-   "mata ne",
+   "またね！",
    "¡Hasta luego!",
-   "また = otra vez; ね suaviza."
+   "また = otra vez; ね suaviza.",
+   0,
+   "mata ne!"
   ],
   "ありがとう！": [
-   "arigatō",
+   "ありがとう！",
    "¡Gracias!",
-   ""
+   "",
+   0,
+   "arigatou!"
   ],
   "ごめん！": [
-   "gomen",
+   "ごめん！",
    "¡Perdón!",
-   "Informal de ごめんなさい."
+   "Informal de ごめんなさい.",
+   0,
+   "gomen!"
   ],
   "元気？": [
-   "genki?",
+   "げんき？",
    "¿Qué tal? / ¿Estás bien?",
-   "Pregunta sin は: en la calle se omiten partículas."
+   "Pregunta sin は: en la calle se omiten partículas.",
+   0,
+   "genki?"
   ],
   "元気だよ。": [
-   "genki da yo",
+   "げんきだよ。",
    "Estoy bien.",
-   "だ = es/estoy; よ = afirma con énfasis."
+   "だ = es/estoy; よ = afirma con énfasis.",
+   0,
+   "genki da yo."
   ],
   "大丈夫？": [
-   "daijōbu?",
+   "だいじょうぶ？",
    "¿Estás bien? / ¿Todo bien?",
-   ""
+   "",
+   0,
+   "daijoubu?"
   ],
   "うん、": [
-   "un,",
+   "うん、",
    "Sí, / Ajá,",
-   "Un 'sí' informal."
+   "Un 'sí' informal.",
+   0,
+   "un,"
   ],
   "大丈夫。": [
-   "daijōbu",
+   "だいじょうぶ。",
    "Estoy bien. / Está bien.",
-   ""
+   "",
+   0,
+   "daijoubu."
   ],
   "今": [
-   "ima",
+   "いま",
    "ahora",
-   ""
+   "",
+   0,
+   "ima"
   ],
   "何してる？": [
-   "nani shiteru?",
+   "なにしてる？",
    "¿Qué haces?",
-   "してる = しているの contracción."
+   "してる = しているの contracción.",
+   0,
+   "nani shiteru?"
   ],
   "今、": [
-   "ima,",
+   "いま、",
    "Ahora,",
-   ""
+   "",
+   0,
+   "ima,"
   ],
   "家に": [
-   "ie ni",
+   "いえに",
    "en casa",
-   "に indica el lugar donde está algo/alguien."
+   "に indica el lugar donde está algo/alguien.",
+   0,
+   "ie ni"
   ],
   "いるよ。": [
-   "iru yo",
+   "いるよ。",
    "Estoy / Estoy aquí.",
-   "いる = estar (seres vivos)."
+   "いる = estar (seres vivos).",
+   0,
+   "iru yo."
   ],
   "どこ？": [
-   "doko?",
+   "どこ？",
    "¿Dónde?",
-   ""
+   "",
+   0,
+   "doko?"
   ],
   "もう": [
-   "mō",
+   "もう",
    "ya / ya casi",
-   "Con pasado: 'ya'. Con negación: 'ya no'."
+   "Con pasado: 'ya'. Con negación: 'ya no'.",
+   0,
+   "mou"
   ],
   "着いた？": [
-   "tsuita?",
+   "ついた？",
    "¿Has llegado?",
-   "着く (tsuku) llegar; 着いた pasado."
+   "着く (tsuku) llegar; 着いた pasado.",
+   0,
+   "tsuita?"
   ],
   "向かってる。": [
-   "mukatteru",
+   "むかってる。",
    "Voy de camino.",
-   "向かう ir hacia; ってる = ている."
+   "向かう ir hacia; ってる = ている.",
+   0,
+   "mukatteru."
   ],
   "ちょっと": [
-   "chotto",
+   "ちょっと",
    "un poco / un momento",
-   ""
+   "",
+   0,
+   "chotto"
   ],
   "待って。": [
-   "matte",
+   "まって。",
    "Espera.",
-   "Forma て = petición informal."
+   "Forma て = petición informal.",
+   0,
+   "matte."
   ],
   "すぐ": [
-   "sugu",
+   "すぐ",
    "enseguida",
-   ""
+   "",
+   0,
+   "sugu"
   ],
   "行くよ。": [
-   "iku yo",
+   "いくよ。",
    "Voy.",
-   "行く ir."
+   "行く ir.",
+   0,
+   "iku yo."
   ],
   "先に": [
-   "saki ni",
+   "さきに",
    "primero / por delante",
-   ""
+   "",
+   0,
+   "saki ni"
   ],
   "行ってて。": [
-   "itteite",
+   "いってて。",
    "Ve tú primero (y quédate allí).",
-   "行っていて → 行ってて."
+   "行っていて → 行ってて.",
+   0,
+   "ittete."
   ],
   "何時？": [
-   "nanji?",
+   "なんじ？",
    "¿Qué hora es? / ¿A qué hora?",
-   ""
+   "",
+   0,
+   "nanji?"
   ],
   "今日": [
-   "kyō",
+   "きょう",
    "hoy",
-   ""
+   "",
+   0,
+   "kyou"
   ],
   "暇？": [
-   "hima?",
+   "ひま？",
    "¿Estás libre?",
-   "暇 = tiempo libre."
+   "暇 = tiempo libre.",
+   0,
+   "hima?"
   ],
   "明日": [
-   "ashita",
+   "あした",
    "mañana",
-   ""
+   "",
+   0,
+   "ashita"
   ],
   "会える？": [
-   "aeru?",
+   "あえる？",
    "¿Podemos vernos?",
-   "会える = poder encontrarse (potencial)."
+   "会える = poder encontrarse (potencial).",
+   0,
+   "aeru?"
   ],
   "今日は": [
-   "kyō wa",
+   "きょうは",
    "Hoy (en cuanto a hoy)…",
-   "は marca el tema."
+   "は marca el tema.",
+   0,
+   "kyou wa"
   ],
   "無理。": [
-   "muri",
+   "むり。",
    "Imposible. / No puedo.",
-   "Rechazo muy habitual."
+   "Rechazo muy habitual.",
+   0,
+   "muri."
   ],
   "いいよ！": [
-   "ii yo",
+   "いいよ！",
    "¡Vale! / ¡Claro!",
-   "いい = bueno; よ = énfasis."
+   "いい = bueno; よ = énfasis.",
+   0,
+   "ii yo!"
   ],
   "いいね！": [
-   "ii ne",
+   "いいね！",
    "¡Qué bien! / ¡Me gusta!",
-   "ね busca acuerdo."
+   "ね busca acuerdo.",
+   0,
+   "ii ne!"
   ],
   "それ": [
-   "sore",
+   "それ",
    "eso",
-   "Lo que está cerca de quien escucha."
+   "Lo que está cerca de quien escucha.",
+   0,
+   "sore"
   ],
   "どうする？": [
-   "dō suru?",
+   "どうする？",
    "¿Qué hacemos?",
-   ""
+   "",
+   0,
+   "dou suru?"
   ],
   "どこ": [
-   "doko",
+   "どこ",
    "dónde",
-   ""
+   "",
+   0,
+   "doko"
   ],
   "行く？": [
-   "iku?",
+   "いく？",
    "¿Vamos?",
-   "Sin partícula de pregunta: la entonación sube."
+   "Sin partícula de pregunta: la entonación sube.",
+   0,
+   "iku?"
   ],
   "一緒に": [
-   "issho ni",
+   "いっしょに",
    "juntos",
-   ""
+   "",
+   0,
+   "issho ni"
   ],
   "行こう！": [
-   "ikō",
+   "いこう！",
    "¡Vamos!",
-   "Forma volitiva: 'vamos a'."
+   "Forma volitiva: 'vamos a'.",
+   0,
+   "ikou!"
   ],
   "何": [
-   "nani",
+   "なに",
    "qué",
-   ""
+   "",
+   0,
+   "nani"
   ],
   "食べたい？": [
-   "tabetai?",
+   "たべたい？",
    "¿Quieres comer?",
-   "Verbo + たい = querer."
+   "Verbo + たい = querer.",
+   0,
+   "tabetai?"
   ],
   "お腹": [
-   "onaka",
+   "おなか",
    "barriga / estómago",
-   ""
+   "",
+   0,
+   "onaka"
   ],
   "すいた。": [
-   "suita",
+   "すいた。",
    "(Tengo) hambre.",
-   "お腹がすいた: が se omite."
+   "お腹がすいた: が se omite.",
+   0,
+   "suita."
   ],
   "のど": [
-   "nodo",
+   "のど",
    "garganta",
-   ""
+   "",
+   0,
+   "nodo"
   ],
   "渇いた。": [
-   "kawaita",
+   "かわいた。",
    "(Tengo) sed.",
-   "のど渇いた = tengo sed."
+   "のど渇いた = tengo sed.",
+   0,
+   "kawaita."
   ],
   "これ": [
-   "kore",
+   "これ",
    "esto",
-   "Lo que está cerca de ti."
+   "Lo que está cerca de ti.",
+   0,
+   "kore"
   ],
   "食べてみて。": [
-   "tabete mite",
+   "たべてみて。",
    "Pruébalo.",
-   "~てみる = probar a hacer algo."
+   "~てみる = probar a hacer algo.",
+   0,
+   "tabete mite."
   ],
   "めっちゃ": [
-   "meccha",
+   "めっちゃ",
    "muy / un montón",
-   "Coloquial (Kansai), muy extendido."
+   "Coloquial (Kansai), muy extendido.",
+   0,
+   "metcha"
   ],
   "おいしい！": [
-   "oishii",
+   "おいしい！",
    "¡Rico!",
-   ""
+   "",
+   0,
+   "oishii!"
   ],
   "いっぱい。": [
-   "ippai",
+   "いっぱい。",
    "Mucho. / Lleno.",
-   ""
+   "",
+   0,
+   "ippai."
   ],
   "水": [
-   "mizu",
+   "みず",
    "agua",
-   ""
+   "",
+   0,
+   "mizu"
   ],
   "ちょうだい。": [
-   "chōdai",
+   "ちょうだい。",
    "Dame.",
-   "Pedir algo de forma informal."
+   "Pedir algo de forma informal.",
+   0,
+   "choudai."
   ],
   "いくら？": [
-   "ikura?",
+   "いくら？",
    "¿Cuánto cuesta?",
-   ""
+   "",
+   0,
+   "ikura?"
   ],
   "ください。": [
-   "kudasai",
+   "ください。",
    "Por favor (deme).",
-   ""
+   "",
+   0,
+   "kudasai."
   ],
   "高いね。": [
-   "takai ne",
+   "たかいね。",
    "Es caro, ¿eh?",
-   "高い caro/alto."
+   "高い caro/alto.",
+   0,
+   "takai ne."
   ],
   "好き。": [
-   "suki",
+   "すき。",
    "Me gusta.",
-   "Se omite 私は."
+   "Se omite 私は.",
+   0,
+   "suki."
   ],
   "知ってる。": [
-   "shitteru",
+   "しってる。",
    "Lo sé.",
-   "知っている contraído."
+   "知っている contraído.",
+   0,
+   "shitteru."
   ],
   "知らなかった。": [
-   "shiranakatta",
+   "しらなかった。",
    "No lo sabía.",
-   "Negativo pasado de 知る."
+   "Negativo pasado de 知る.",
+   0,
+   "shiranakatta."
   ],
   "本当？": [
-   "hontō?",
+   "ほんとう？",
    "¿De verdad?",
-   ""
+   "",
+   0,
+   "hontou?"
   ],
   "うそでしょ？": [
-   "uso desho?",
+   "うそでしょ？",
    "¿No me digas? / ¡Es mentira!",
-   "うそ = mentira."
+   "うそ = mentira.",
+   0,
+   "uso desho?"
   ],
   "マジで？": [
-   "maji de?",
+   "マジで？",
    "¿En serio?",
-   "マジ = en serio, jerga."
+   "マジ = en serio, jerga.",
+   0,
+   "majide?"
   ],
   "すごい！": [
-   "sugoi",
+   "すごい！",
    "¡Increíble!",
-   ""
+   "",
+   0,
+   "sugoi!"
   ],
   "やばい！": [
-   "yabai",
+   "やばい！",
    "¡Uf! / ¡Brutal!",
-   "Sirve para algo muy bueno o muy malo."
+   "Sirve para algo muy bueno o muy malo.",
+   0,
+   "yabai!"
   ],
   "眠い。": [
-   "nemui",
+   "ねむい。",
    "Tengo sueño.",
-   ""
+   "",
+   0,
+   "nemui."
   ],
   "寝るね。": [
-   "neru ne",
+   "ねるね。",
    "Me voy a dormir.",
-   "ね suaviza al avisar."
+   "ね suaviza al avisar.",
+   0,
+   "neru ne."
   ],
   "疲れた。": [
-   "tsukareta",
+   "つかれた。",
    "Estoy cansado/a.",
-   ""
+   "",
+   0,
+   "tsukareta."
   ],
   "暑いね。": [
-   "atsui ne",
+   "あついね。",
    "Hace calor, ¿eh?",
-   ""
+   "",
+   0,
+   "atsui ne."
   ],
   "寒いね。": [
-   "samui ne",
+   "さむいね。",
    "Hace frío, ¿eh?",
-   ""
+   "",
+   0,
+   "samui ne."
   ],
   "雨": [
-   "ame",
+   "あめ",
    "lluvia",
-   ""
+   "",
+   0,
+   "ame"
   ],
   "降ってる。": [
-   "futteru",
+   "ふってる。",
    "Está lloviendo.",
-   "降る caer; ってる = ている."
+   "降る caer; ってる = ている.",
+   0,
+   "futteru."
   ],
   "痛い。": [
-   "itai",
+   "いたい。",
    "Me duele.",
-   ""
+   "",
+   0,
+   "itai."
   ],
   "何か": [
-   "nanika",
+   "なにか",
    "algo",
-   ""
+   "",
+   0,
+   "nani ka"
   ],
   "あった？": [
-   "atta?",
+   "あった？",
    "¿Pasó algo?",
-   "ある pasado."
+   "ある pasado.",
+   0,
+   "atta?"
   ],
   "どうしたの？": [
-   "dō shita no?",
+   "どうしたの？",
    "¿Qué te pasa?",
-   "の convierte en pregunta suave."
+   "の convierte en pregunta suave.",
+   0,
+   "dou shita no?"
   ],
   "また": [
-   "mata",
+   "また",
    "otra vez",
-   ""
+   "",
+   0,
+   "mata"
   ],
   "あとでね。": [
-   "ato de ne",
+   "あとでね。",
    "Luego te veo / hablamos.",
-   ""
+   "",
+   0,
+   "atode ne."
   ],
   "いい？": [
-   "ii?",
+   "いい？",
    "¿Vale? / ¿Puedo?",
-   ""
+   "",
+   0,
+   "ii?"
   ],
   "わかった！": [
-   "wakatta",
+   "わかった！",
    "¡Entendido!",
-   "分かる pasado."
+   "分かる pasado.",
+   0,
+   "wakatta!"
   ],
   "さっき": [
-   "sakki",
+   "さっき",
    "hace un rato",
-   ""
+   "",
+   0,
+   "sakki"
   ],
   "何て": [
-   "nante",
+   "なんて",
    "qué (lo que)",
-   "Contracción de 何と."
+   "Contracción de 何と.",
+   0,
+   "nan te"
   ],
   "言った？": [
-   "itta?",
+   "いった？",
    "¿Dijiste?",
-   "言う decir."
+   "言う decir.",
+   0,
+   "itta?"
   ],
   "もう一回": [
-   "mō ikkai",
+   "もういっかい",
    "una vez más",
-   ""
+   "",
+   0,
+   "mou ikkai"
   ],
   "言って。": [
-   "itte",
+   "いって。",
    "Dilo.",
-   ""
+   "",
+   0,
+   "itte."
   ],
   "よく": [
-   "yoku",
+   "よく",
    "bien / a menudo",
-   ""
+   "",
+   0,
+   "yoku"
   ],
   "分からない。": [
-   "wakaranai",
+   "わからない。",
    "No lo entiendo.",
-   ""
+   "",
+   0,
+   "wakaranai."
   ],
   "そういう": [
-   "sō iu",
+   "そういう",
    "ese tipo de",
-   "そう言う."
+   "そう言う.",
+   0,
+   "sou iu"
   ],
   "ことか。": [
-   "koto ka",
+   "ことか。",
    "Ah, eso era.",
-   "ことか: caer en la cuenta."
+   "ことか: caer en la cuenta.",
+   0,
+   "koto ka."
   ],
   "なるほどね。": [
-   "naruhodo ne",
+   "なるほどね。",
    "Ya veo.",
-   ""
+   "",
+   0,
+   "naruhodo ne."
   ],
   "そうなんだ。": [
-   "sō nanda",
+   "そうなんだ。",
    "Ah, ¿sí? / Vaya.",
-   "んだ expresa explicación."
+   "んだ expresa explicación.",
+   0,
+   "souna n da."
   ],
   "それは": [
-   "sore wa",
+   "それは",
    "Eso (en cuanto a eso)",
-   ""
+   "",
+   0,
+   "sore wa"
   ],
   "そんな": [
-   "sonna",
+   "そんな",
    "así / tal",
-   ""
+   "",
+   0,
+   "sonna"
   ],
   "気がする。": [
-   "ki ga suru",
+   "きがする。",
    "Tengo la sensación.",
-   "気がする = tener la impresión."
+   "気がする = tener la impresión.",
+   0,
+   "ki ga suru."
   ],
   "たぶん": [
-   "tabun",
+   "たぶん",
    "quizá",
-   ""
+   "",
+   0,
+   "tabun"
   ],
   "大丈夫だと": [
-   "daijōbu da to",
+   "だいじょうぶだと",
    "(que) está bien",
-   "と cita un pensamiento."
+   "と cita un pensamiento.",
+   0,
+   "daijoubu da to"
   ],
   "思う。": [
-   "omou",
+   "おもう。",
    "Creo.",
-   "思う pensar."
+   "思う pensar.",
+   0,
+   "omou."
   ],
   "もう少しで": [
-   "mō sukoshi de",
+   "もうすこしで",
    "dentro de poco",
-   ""
+   "",
+   0,
+   "mou sukoshi de"
   ],
   "着く。": [
-   "tsuku",
+   "つく。",
    "Llego.",
-   ""
+   "",
+   0,
+   "tsuku."
   ],
   "思ったより": [
-   "omotta yori",
+   "おもったより",
    "más de lo que pensaba",
-   "より = que (comparación)."
+   "より = que (comparación).",
+   0,
+   "omotta yori"
   ],
   "早かった。": [
-   "hayakatta",
+   "はやかった。",
    "Fue rápido/temprano.",
-   "早い pasado."
+   "早い pasado.",
+   0,
+   "hayakatta."
   ],
   "時間": [
-   "jikan",
+   "じかん",
    "tiempo / hora",
-   ""
+   "",
+   0,
+   "jikan"
   ],
   "かかった。": [
-   "kakatta",
+   "かかった。",
    "Tardó. / Llevó.",
-   "かかる pasado."
+   "かかる pasado.",
+   0,
+   "kakatta."
   ],
   "電車が": [
-   "densha ga",
+   "でんしゃが",
    "el tren (sujeto)",
-   "が marca sujeto."
+   "が marca sujeto.",
+   0,
+   "densha ga"
   ],
   "遅れてる。": [
-   "okureteru",
+   "おくれてる。",
    "Va con retraso.",
-   "遅れる retrasarse."
+   "遅れる retrasarse.",
+   0,
+   "okureteru."
   ],
   "寝坊": [
-   "nebō",
+   "ねぼう",
    "quedarse dormido",
-   ""
+   "",
+   0,
+   "nebou"
   ],
   "しちゃった。": [
-   "shichatta",
+   "しちゃった。",
    "Me ha pasado… (sin querer)",
-   "しちゃった = してしまった."
+   "しちゃった = してしまった.",
+   0,
+   "shichatta."
   ],
   "財布": [
-   "saifu",
+   "さいふ",
    "cartera",
-   ""
+   "",
+   0,
+   "saifu"
   ],
   "忘れちゃった。": [
-   "wasurechatta",
+   "わすれちゃった。",
    "Se me olvidó.",
-   "~ちゃった = ~てしまった."
+   "~ちゃった = ~てしまった.",
+   0,
+   "wasurechatta."
   ],
   "充電": [
-   "jūden",
+   "じゅうでん",
    "carga (batería)",
-   ""
+   "",
+   0,
+   "juuden"
   ],
   "切れそう。": [
-   "kiresō",
+   "きれそう。",
    "Se va a acabar.",
-   "~そう = parece que."
+   "~そう = parece que.",
+   0,
+   "kire sou."
   ],
   "調べてみる。": [
-   "shirabete miru",
+   "しらべてみる。",
    "Lo voy a mirar.",
-   "調べる investigar."
+   "調べる investigar.",
+   0,
+   "shirabete miru."
   ],
   "あとで": [
-   "ato de",
+   "あとで",
    "luego",
-   ""
+   "",
+   0,
+   "atode"
   ],
   "送るね。": [
-   "okuru ne",
+   "おくるね。",
    "Te lo mando.",
-   "送る enviar."
+   "送る enviar.",
+   0,
+   "okuru ne."
   ],
   "確認した？": [
-   "kakunin shita?",
+   "かくにんした？",
    "¿Lo has comprobado?",
-   ""
+   "",
+   0,
+   "kakunin shita?"
   ],
   "それ、": [
-   "sore,",
+   "それ、",
    "Eso,",
-   ""
+   "",
+   0,
+   "sore,"
   ],
   "どこで": [
-   "doko de",
+   "どこで",
    "dónde (acción)",
-   "で marca lugar de acción."
+   "で marca lugar de acción.",
+   0,
+   "doko de"
   ],
   "買ったの？": [
-   "katta no?",
+   "かったの？",
    "¿Lo compraste?",
-   "の pregunta suave."
+   "の pregunta suave.",
+   0,
+   "katta no?"
   ],
   "これって": [
-   "kore tte",
+   "これって",
    "esto (tema)",
-   "って = は coloquial."
+   "って = は coloquial.",
+   0,
+   "korette"
   ],
   "どうやって": [
-   "dō yatte",
+   "どうやって",
    "cómo (método)",
-   ""
+   "",
+   0,
+   "dou yatte"
   ],
   "使うの？": [
-   "tsukau no?",
+   "つかうの？",
    "¿Se usa?",
-   ""
+   "",
+   0,
+   "tsukau no?"
   ],
   "なんで": [
-   "nande",
+   "なんで",
    "¿por qué?",
-   ""
+   "",
+   0,
+   "nan de"
   ],
   "そう": [
-   "sō",
+   "そう",
    "así",
-   ""
+   "",
+   0,
+   "sou"
   ],
   "思うの？": [
-   "omou no?",
+   "おもうの？",
    "¿Lo piensas?",
-   ""
+   "",
+   0,
+   "omou no?"
   ],
   "おすすめ": [
-   "osusume",
+   "おすすめ",
    "recomendación",
-   ""
+   "",
+   0,
+   "o susume"
   ],
   "ある？": [
-   "aru?",
+   "ある？",
    "¿Hay? / ¿Tienes?",
-   "ある (cosas)."
+   "ある (cosas).",
+   0,
+   "aru?"
   ],
   "どっちでも": [
-   "dotchi demo",
+   "どっちでも",
    "cualquiera",
-   ""
+   "",
+   0,
+   "dotchi demo"
   ],
   "いいよ。": [
-   "ii yo",
+   "いいよ。",
    "Está bien.",
-   ""
+   "",
+   0,
+   "ii yo."
   ],
   "どっちが": [
-   "dotchi ga",
+   "どっちが",
    "cuál (de dos)",
-   ""
+   "",
+   0,
+   "dotchi ga"
   ],
   "いいと": [
-   "ii to",
+   "いいと",
    "que es bueno",
-   "と cita."
+   "と cita.",
+   0,
+   "ii to"
   ],
   "思う？": [
-   "omou?",
+   "おもう？",
    "¿Crees?",
-   ""
+   "",
+   0,
+   "omou?"
   ],
   "食べてて。": [
-   "tabetete",
+   "たべてて。",
    "Ve comiendo.",
-   "食べていて contraído."
+   "食べていて contraído.",
+   0,
+   "tabetete."
   ],
   "何食べるか": [
-   "nani taberu ka",
+   "なにたべるか",
    "qué comer",
-   "か = si/qué (pregunta incrustada)."
+   "か = si/qué (pregunta incrustada).",
+   0,
+   "nani taberu ka"
   ],
   "決めた？": [
-   "kimeta?",
+   "きめた？",
    "¿Has decidido?",
-   ""
+   "",
+   0,
+   "kimeta?"
   ],
   "今日、": [
-   "kyō,",
+   "きょう、",
    "Hoy,",
-   ""
+   "",
+   0,
+   "kyou,"
   ],
   "外で": [
-   "soto de",
+   "そとで",
    "fuera",
-   ""
+   "",
+   0,
+   "soto de"
   ],
   "食べない？": [
-   "tabenai?",
+   "たべない？",
    "¿Comemos?",
-   "Negativo = invitación."
+   "Negativo = invitación.",
+   0,
+   "tabenai?"
   ],
   "もう少し": [
-   "mō sukoshi",
+   "もうすこし",
    "un poco más",
-   ""
+   "",
+   0,
+   "mou sukoshi"
   ],
   "ゆっくり": [
-   "yukkuri",
+   "ゆっくり",
    "despacio",
-   ""
+   "",
+   0,
+   "yukkuri"
   ],
   "話して。": [
-   "hanashite",
+   "はなして。",
    "Habla.",
-   ""
+   "",
+   0,
+   "hanashite."
   ],
   "どういう": [
-   "dō iu",
+   "どういう",
    "qué tipo de",
-   ""
+   "",
+   0,
+   "dou iu"
   ],
   "意味？": [
-   "imi?",
+   "いみ？",
    "¿Significado?",
-   ""
+   "",
+   0,
+   "imi?"
   ],
   "聞いたことある。": [
-   "kiita koto aru",
+   "きいたことある。",
    "Lo he oído.",
-   "~たことある = haber hecho."
+   "~たことある = haber hecho.",
+   0,
+   "kiita koto aru."
   ],
   "行けたら": [
-   "iketara",
+   "いけたら",
    "si puedo ir",
-   "~たら condicional."
+   "~たら condicional.",
+   0,
+   "iketara"
   ],
   "行くね。": [
-   "iku ne",
+   "いくね。",
    "Iré.",
-   ""
+   "",
+   0,
+   "iku ne."
   ],
   "考えさせて。": [
-   "kangaesasete",
+   "かんがえさせて。",
    "Déjame pensarlo.",
-   "Causativo+て."
+   "Causativo+て.",
+   0,
+   "kangaesasete."
   ],
   "やっぱり": [
-   "yappari",
+   "やっぱり",
    "al final / como pensaba",
-   ""
+   "",
+   0,
+   "yappari"
   ],
   "やめとく。": [
-   "yametoku",
+   "やめとく。",
    "Mejor lo dejo.",
-   "やめておく contraído."
+   "やめておく contraído.",
+   0,
+   "yametoku."
   ],
   "家で": [
-   "ie de",
+   "いえで",
    "en casa (acción)",
-   ""
+   "",
+   0,
+   "ie de"
   ],
   "ゆっくりしたい。": [
-   "yukkuri shitai",
+   "ゆっくりしたい。",
    "Quiero descansar.",
-   ""
+   "",
+   0,
+   "yukkuri shitai."
   ],
   "最近": [
-   "saikin",
+   "さいきん",
    "últimamente",
-   ""
+   "",
+   0,
+   "saikin"
   ],
   "忙しくてさ。": [
-   "isogashikute sa",
+   "いそがしくてさ。",
    "Estoy ocupado, ¿sabes?",
-   "さ = relleno informal."
+   "さ = relleno informal.",
+   0,
+   "isogashikute sa."
   ],
   "どう？": [
-   "dō?",
+   "どう？",
    "¿Qué tal?",
-   ""
+   "",
+   0,
+   "dou?"
   ],
   "久しぶり！": [
-   "hisashiburi",
+   "ひさしぶり！",
    "¡Cuánto tiempo!",
-   ""
+   "",
+   0,
+   "hisashiburi!"
   ],
   "会えて": [
-   "aete",
+   "あえて",
    "por poder verte",
-   ""
+   "",
+   0,
+   "aete"
   ],
   "うれしい。": [
-   "ureshii",
+   "うれしい。",
    "Me alegro.",
-   ""
+   "",
+   0,
+   "ureshii."
   ],
   "連絡するの": [
-   "renraku suru no",
+   "れんらくするの",
    "avisar / contactar",
-   "の nominaliza."
+   "の nominaliza.",
+   0,
+   "renraku suru no"
   ],
   "忘れてた。": [
-   "wasureteta",
+   "わすれてた。",
    "Se me olvidó.",
-   ""
+   "",
+   0,
+   "wasureteta."
   ],
   "言おうと": [
-   "iō to",
+   "いおうと",
    "intentando decir",
-   "Volitivo + と."
+   "Volitivo + と.",
+   0,
+   "iou to"
   ],
   "思ってたんだけど。": [
-   "omotteta n da kedo",
+   "おもってたんだけど。",
    "Pensaba hacerlo, pero…",
-   "けど = pero."
+   "けど = pero.",
+   0,
+   "omotteta n dakedo."
   ],
   "困る。": [
-   "komaru",
+   "こまる。",
    "Es un problema.",
-   ""
+   "",
+   0,
+   "komaru."
   ],
   "無理しなくて": [
-   "muri shinakute",
+   "むりしなくて",
    "sin forzarte",
-   ""
+   "",
+   0,
+   "muri shinakute"
   ],
   "気にしないで。": [
-   "ki ni shinaide",
+   "きにしないで。",
    "No te preocupes.",
-   ""
+   "",
+   0,
+   "ki ni shinaide."
   ],
   "もうちょっと": [
-   "mō chotto",
+   "もうちょっと",
    "un poco más",
-   ""
+   "",
+   0,
+   "mou chotto"
   ],
   "待ってもらえる？": [
-   "matte moraeru?",
+   "まってもらえる？",
    "¿Puedes esperar?",
-   "~てもらえる = ¿me haces el favor?"
+   "~てもらえる = ¿me haces el favor?",
+   0,
+   "matte moraeru?"
   ],
   "Wi-Fiが": [
-   "wai-fai ga",
+   "Wi-Fiが",
    "el Wi-Fi (sujeto)",
-   ""
+   "",
+   0,
+   "Wi-Fi ga"
   ],
   "全然": [
-   "zenzen",
+   "ぜんぜん",
    "en absoluto",
-   "Con negativo."
+   "Con negativo.",
+   0,
+   "zenzen"
   ],
   "つながらない。": [
-   "tsunagaranai",
+   "つながらない。",
    "No se conecta.",
-   ""
+   "",
+   0,
+   "tsunagaranai."
   ],
   "パソコンが": [
-   "pasokon ga",
+   "パソコンが",
    "el ordenador (sujeto)",
-   ""
+   "",
+   0,
+   "pasokon ga"
   ],
   "急に": [
-   "kyū ni",
+   "きゅうに",
    "de repente",
-   ""
+   "",
+   0,
+   "kyuu ni"
   ],
   "動かなくなった。": [
-   "ugokanaku natta",
+   "うごかなくなった。",
    "Dejó de funcionar.",
-   "~なくなった."
+   "~なくなった.",
+   0,
+   "ugokanaku natta."
   ],
   "ファイル": [
-   "fairu",
+   "ファイル",
    "archivo",
-   ""
+   "",
+   0,
+   "fairu"
   ],
   "どこに": [
-   "doko ni",
+   "どこに",
    "dónde (está)",
-   ""
+   "",
+   0,
+   "doko ni"
   ],
   "保存したっけ？": [
-   "hozon shitakke?",
+   "ほぞんしたっけ？",
    "¿Dónde lo guardé?",
-   "っけ = tratar de recordar."
+   "っけ = tratar de recordar.",
+   0,
+   "hozon shitakke?"
   ],
   "バックアップ": [
-   "bakkuappu",
+   "バックアップ",
    "copia de seguridad",
-   ""
+   "",
+   0,
+   "bakkuappu"
   ],
   "取っといて。": [
-   "totoite",
+   "とっといて。",
    "Hazla (y déjala).",
-   "取っておいて contraído."
+   "取っておいて contraído.",
+   0,
+   "tottoite."
   ],
   "画面共有して": [
-   "gamen kyōyū shite",
+   "がめんきょうゆうして",
    "compartir pantalla",
-   ""
+   "",
+   0,
+   "gamenkyouyuu shite"
   ],
   "もらえる？": [
-   "moraeru?",
+   "もらえる？",
    "¿Puedes?",
-   ""
+   "",
+   0,
+   "moraeru?"
   ],
   "アプリが": [
-   "apuri ga",
+   "アプリが",
    "la app (sujeto)",
-   ""
+   "",
+   0,
+   "apuri ga"
   ],
   "勝手に": [
-   "katte ni",
+   "かってに",
    "por sí sola",
-   ""
+   "",
+   0,
+   "katteni"
   ],
   "閉じちゃう。": [
-   "tojichau",
+   "とじちゃう。",
    "Se cierra (sin querer).",
-   "閉じてしまう."
+   "閉じてしまう.",
+   0,
+   "tojichau."
   ],
   "パスワード": [
-   "pasuwādo",
+   "パスワード",
    "contraseña",
-   ""
+   "",
+   0,
+   "pasuwaado"
   ],
   "忘れた。": [
-   "wasureta",
+   "わすれた。",
    "Se me olvidó.",
-   ""
+   "",
+   0,
+   "wasureta."
   ],
   "通知": [
-   "tsūchi",
+   "つうち",
    "notificación",
-   ""
+   "",
+   0,
+   "tsuuchi"
   ],
   "オフに": [
-   "ofu ni",
+   "オフに",
    "a apagado",
-   ""
+   "",
+   0,
+   "ofu ni"
   ],
   "しとく。": [
-   "shitoku",
+   "しとく。",
    "Lo dejo hecho.",
-   "しておく."
+   "しておく.",
+   0,
+   "shitoku."
   ],
   "この設定、": [
-   "kono settei,",
+   "このせってい、",
    "Este ajuste,",
-   ""
+   "",
+   0,
+   "kono settei,"
   ],
   "変えたほうが": [
-   "kaeta hō ga",
+   "かえたほうが",
    "sería mejor cambiarlo",
-   "~たほうがいい = convendría."
+   "~たほうがいい = convendría.",
+   0,
+   "kaeta hou ga"
   ],
   "いいかな。": [
-   "ii ka na",
+   "いいかな。",
    "¿Será mejor…?",
-   "かな = preguntarse."
+   "かな = preguntarse.",
+   0,
+   "ii ka na."
   ],
   "ラグくない？": [
-   "ragukunai?",
+   "ラグくない？",
    "¿No va con lag?",
-   "ラグい (jerga)."
+   "ラグい (jerga).",
+   0,
+   "ragu kunai?"
   ],
   "今のは": [
-   "ima no wa",
+   "いまのは",
    "lo de ahora",
-   ""
+   "",
+   0,
+   "ima no wa"
   ],
   "ラグのせい": [
-   "ragu no sei",
+   "ラグのせい",
    "culpa del lag",
-   "せい = culpa."
+   "せい = culpa.",
+   0,
+   "ragu no sei"
   ],
   "だって。": [
-   "datte",
+   "だって。",
    "dice que sí / es que…",
-   "だって cita o excusa."
+   "だって cita o excusa.",
+   0,
+   "datte."
   ],
   "回復アイテム": [
-   "kaifuku aitemu",
+   "かいふくアイテム",
    "objeto de curación",
-   ""
+   "",
+   0,
+   "kaifuku aitemu"
   ],
   "持ってる？": [
-   "motteru?",
+   "もってる？",
    "¿Tienes?",
-   ""
+   "",
+   0,
+   "motteru?"
   ],
   "敵を": [
-   "teki o",
+   "てきを",
    "al enemigo",
-   ""
+   "",
+   0,
+   "teki o"
   ],
   "倒しとこう。": [
-   "taoshitokō",
+   "たおしとこう。",
    "Vamos a derrotarlo.",
-   "倒しておこう."
+   "倒しておこう.",
+   0,
+   "taoshitokou."
   ],
   "こっちから": [
-   "kocchi kara",
+   "こっちから",
    "desde aquí",
-   ""
+   "",
+   0,
+   "kotchi kara"
   ],
   "回り込もう。": [
-   "mawarikomō",
+   "まわりこもう。",
    "Rodeemos.",
-   ""
+   "",
+   0,
+   "mawarikomou."
   ],
   "カバーして！": [
-   "kabā shite",
+   "カバーして！",
    "¡Cúbreme!",
-   ""
+   "",
+   0,
+   "kabaa shite!"
   ],
   "どうしてる？": [
-   "dō shiteru?",
+   "どうしてる？",
    "¿Cómo estás?",
-   ""
+   "",
+   0,
+   "dou shiteru?"
   ],
   "調子": [
-   "chōshi",
+   "ちょうし",
    "estado",
-   ""
+   "",
+   0,
+   "choushi"
   ],
   "どうした？": [
-   "dō shita?",
+   "どうした？",
    "¿Qué pasa?",
-   ""
+   "",
+   0,
+   "dou shita?"
   ],
   "なんで？": [
-   "nande?",
+   "なんで？",
    "¿Por qué?",
-   ""
+   "",
+   0,
+   "nan de?"
   ],
   "そっか。": [
-   "sokka",
+   "そっか。",
    "Ah, ya.",
-   "そうか contraído."
+   "そうか contraído.",
+   0,
+   "so kka."
   ],
   "もちろん！": [
-   "mochiron",
+   "もちろん！",
    "¡Por supuesto!",
-   ""
+   "",
+   0,
+   "mochiron!"
   ],
   "いいじゃん！": [
-   "ii jan",
+   "いいじゃん！",
    "¡Está genial!",
-   "じゃん = ¿verdad?"
+   "じゃん = ¿verdad?",
+   0,
+   "ii jan!"
   ],
   "マジ？": [
-   "maji?",
+   "マジ？",
    "¿En serio?",
-   ""
+   "",
+   0,
+   "maji?"
   ],
   "してんの？": [
-   "shiten no?",
+   "してんの？",
    "¿Qué haces?",
-   "している → してん."
+   "している → してん.",
+   0,
+   "shiten no?"
   ],
   "大丈夫": [
-   "daijōbu",
+   "だいじょうぶ",
    "bien",
-   ""
+   "",
+   0,
+   "daijoubu"
   ],
   "だよ。": [
-   "da yo",
+   "だよ。",
    "es.",
-   "だ + よ."
+   "だ + よ.",
+   0,
+   "da yo."
   ],
   "こと？": [
-   "koto?",
+   "こと？",
    "¿(Te refieres a) eso?",
-   "こと = asunto."
+   "こと = asunto.",
+   0,
+   "koto?"
   ],
   "ことじゃない。": [
-   "koto janai",
+   "ことじゃない。",
    "No es eso.",
-   ""
+   "",
+   0,
+   "kotoja nai."
   ],
   "あ、": [
-   "a,",
+   "あ、",
    "Ah,",
-   ""
+   "",
+   0,
+   "a,"
   ],
   "分かった。": [
-   "wakatta",
+   "わかった。",
    "Entendido.",
-   ""
+   "",
+   0,
+   "wakatta."
   ],
   "なんか": [
-   "nanka",
+   "なんか",
    "como que / algo",
-   ""
+   "",
+   0,
+   "nan ka"
   ],
   "違う。": [
-   "chigau",
+   "ちがう。",
    "No / Es distinto.",
-   ""
+   "",
+   0,
+   "chigau."
   ],
   "私も": [
-   "watashi mo",
+   "わたしも",
    "yo también",
-   ""
+   "",
+   0,
+   "watashi mo"
   ],
   "そう思う。": [
-   "sō omou",
+   "そうおもう。",
    "Eso pienso.",
-   ""
+   "",
+   0,
+   "sou omou."
   ],
   "それそれ！": [
-   "sore sore",
+   "それそれ！",
    "¡Eso, eso!",
-   ""
+   "",
+   0,
+   "sore sore!"
   ],
   "まあ、": [
-   "mā,",
+   "まあ、",
    "Bueno,",
-   ""
+   "",
+   0,
+   "maa,"
   ],
   "そうかもね。": [
-   "sō kamo ne",
+   "そうかもね。",
    "Puede ser.",
-   "かも = quizá."
+   "かも = quizá.",
+   0,
+   "sou ka mo ne."
   ],
   "よかったら": [
-   "yokattara",
+   "よかったら",
    "si te parece bien",
-   ""
+   "",
+   0,
+   "yokattara"
   ],
   "来ない？": [
-   "konai?",
+   "こない？",
    "¿No vienes?",
-   ""
+   "",
+   0,
+   "konai?"
   ],
   "また今度に": [
-   "mata kondo ni",
+   "またこんどに",
    "otra vez (otro día)",
-   ""
+   "",
+   0,
+   "mata kondo ni"
   ],
   "しない？": [
-   "shinai?",
+   "しない？",
    "¿Lo dejamos?",
-   ""
+   "",
+   0,
+   "shinai?"
   ],
   "遅れると": [
-   "okureru to",
+   "おくれると",
    "si me retraso",
-   ""
+   "",
+   0,
+   "okureru to"
   ],
   "待たせて": [
-   "matasete",
+   "またせて",
    "haciéndote esperar",
-   ""
+   "",
+   0,
+   "matasete"
   ],
   "ごめん。": [
-   "gomen",
+   "ごめん。",
    "Perdón.",
-   ""
+   "",
+   0,
+   "gomen."
   ],
   "分かんない。": [
-   "wakannai",
+   "わかんない。",
    "No sé.",
-   ""
+   "",
+   0,
+   "wakannai."
   ],
   "よかったー！": [
-   "yokatta",
+   "よかったー！",
    "¡Menos mal!",
-   ""
+   "",
+   0,
+   "yokattaa!"
   ],
   "そうだね。": [
-   "sō da ne",
+   "そうだね。",
    "Sí, es verdad.",
-   ""
+   "",
+   0,
+   "sou da ne."
   ],
   "結局、": [
-   "kekkyoku,",
+   "けっきょく、",
    "Al final,",
-   ""
+   "",
+   0,
+   "kekkyoku,"
   ],
   "いた。": [
-   "ita",
+   "いた。",
    "Estaba (allí).",
-   ""
+   "",
+   0,
+   "ita."
   ]
- },
- "teoria": [
-  {
-   "id": "orden",
-   "titulo": "Orden de las palabras",
-   "icono": "🧩",
-   "texto": [
-    "En japonés el verbo va AL FINAL de la frase. El orden básico es: tema/sujeto → complementos → verbo.",
-    "Ej.: 明日 会える？ = «mañana / ¿podemos vernos?».",
-    "En la calle se omiten partículas (は, が, を) y a veces el sujeto: el contexto lo aclara."
-   ]
-  },
-  {
-   "id": "particulas",
-   "titulo": "Partículas: は が を に で",
-   "icono": "🔗",
-   "texto": [
-    "は marca el tema («en cuanto a…»).",
-    "が marca el sujeto.",
-    "を marca el objeto directo.",
-    "に indica lugar de existencia, destino o hora.",
-    "で indica lugar de acción o medio.",
-    "Coloquialmente muchas desaparecen: 水ちょうだい = 水をちょうだい."
-   ]
-  },
-  {
-   "id": "finales",
-   "titulo": "Partículas finales: よ ね さ の",
-   "icono": "💬",
-   "texto": [
-    "よ: informa o enfatiza («¡te lo digo!»).",
-    "ね: busca acuerdo («¿verdad?»).",
-    "さ: relleno informal.",
-    "の: pregunta suave o explicación (どうしたの？).",
-    "かな: preguntarse a uno mismo."
-   ]
-  },
-  {
-   "id": "contracciones",
-   "titulo": "Contracciones habladas",
-   "icono": "✂️",
-   "texto": [
-    "している → してる; していて → してて.",
-    "~てしまう → ~ちゃう / ~じゃう (algo sin querer o terminado).",
-    "~ておく → ~とく / ~どく.",
-    "のだ → んだ / んの.",
-    "Estas formas son normales hablando, no en escritos formales."
-   ]
-  },
-  {
-   "id": "jerga",
-   "titulo": "Jerga y préstamos",
-   "icono": "🔥",
-   "texto": [
-    "マジ (en serio), やばい (muy bueno/malo), めっちゃ (muy), じゃん (¿verdad?).",
-    "ラグい y otros verbos con ~い vienen de palabras inglesas.",
-    "Úsalas con amigos, no en situaciones formales."
-   ]
-  },
-  {
-   "id": "preguntas",
-   "titulo": "Preguntas sin か",
-   "icono": "❓",
-   "texto": [
-    "Hablando, basta con subir la entonación: 行く？ = ¿vamos?",
-    "Se escribe ？ y se omite か."
-   ]
-  }
- ]
+ }
 }

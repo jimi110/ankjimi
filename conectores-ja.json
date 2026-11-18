@@ -1,855 +1,7351 @@
 {
-  "version": 2,
-  "idioma": "ja",
-  "titulo": "Conectores y enlaces del japonés — edición revisada",
-  "descripcion": "66 ejercicios revisados para enlazar palabras, expresiones e ideas en japonés. Incluye conectores conversacionales y escritos, partículas y estructuras de enlace para expresar adición, secuencia, causa, consecuencia, contraste, condición, concesión, tiempo, finalidad, explicación y alternativa. Los bloques se mezclan en la interfaz, no en este archivo. Algunas expresiones son formales o propias de textos escritos; otras son coloquiales y se usan entre personas de confianza.",
-  "total": 66,
-  "reparto": {
-    "basico": 26,
-    "intermedio": 32,
-    "especializado": 8
+ "version": 2,
+ "idioma": "ja",
+ "titulo": "Conectores y enlaces del japonés — edición revisada",
+ "descripcion": "66 ejercicios revisados para enlazar palabras, expresiones e ideas en japonés. Incluye conectores conversacionales y escritos, partículas y estructuras de enlace para expresar adición, secuencia, causa, consecuencia, contraste, condición, concesión, tiempo, finalidad, explicación y alternativa. Los bloques se mezclan en la interfaz, no en este archivo. Algunas expresiones son formales o propias de textos escritos; otras son coloquiales y se usan entre personas de confianza.",
+ "total": 66,
+ "reparto": {
+  "basico": 25,
+  "especializado": 17,
+  "intermedio": 24
+ },
+ "idiomas_no_disponibles": {
+  "ko": "Las frases todavía no están disponibles para este idioma."
+ },
+ "frases": [
+  {
+   "id": 1,
+   "nivel": "basico",
+   "categoria": "adicion",
+   "es": "Ayer fui de compras y después también vi una película.",
+   "ja": "昨日は買い物に行った。そして、映画も見た。",
+   "lectura": "きのうは かいものに いった。そして、えいがも みた。",
+   "bloques": [
+    "昨日は買い物に行った。",
+    "そして、",
+    "映画も見た。"
+   ],
+   "romaji": "Kinou wa kaimono ni itta. Soshite, eiga mo mita.",
+   "hueco": {
+    "pre": "昨日は買い物に行った。",
+    "con": "そして、",
+    "post": "映画も見た。"
+   },
+   "distractores": [
+    "でも、",
+    "だから、"
+   ],
+   "registro": "neutro",
+   "uso": "そして suma una segunda acción a la primera: ir de compras y, además, ver una película."
   },
-  "idiomas_no_disponibles": {
-    "ko": "Las frases todavía no están disponibles para este idioma."
+  {
+   "id": 2,
+   "nivel": "basico",
+   "categoria": "secuencia",
+   "es": "Primero cenamos y después vimos una película.",
+   "ja": "先にご飯を食べた。それから、映画を見た。",
+   "lectura": "さきに ごはんを たべた。それから、えいがを みた。",
+   "bloques": [
+    "先にご飯を食べた。",
+    "それから、",
+    "映画を見た。"
+   ],
+   "romaji": "Saki ni gohan o tabeta. Sorekara, eiga o mita.",
+   "hueco": {
+    "pre": "先にご飯を食べた。",
+    "con": "それから、",
+    "post": "映画を見た。"
+   },
+   "distractores": [
+    "それとも、",
+    "でも、"
+   ],
+   "registro": "neutro",
+   "uso": "それから marca el orden en el tiempo: primero se cena y después se va al cine."
   },
-  "frases": [
-    {
-      "id": 1,
-      "nivel": "basico",
-      "categoria": "adicion",
-      "es": "Ayer fui de compras y después también vi una película.",
-      "ja": "昨日は買い物に行った。そして、映画も見た。",
-      "lectura": "きのうは かいものに いった。そして、えいがも みた。",
-      "bloques": [
-        "昨日は買い物に行った。",
-        "そして、",
-        "映画も見た。"
-      ]
-    },
-    {
-      "id": 2,
-      "nivel": "basico",
-      "categoria": "secuencia",
-      "es": "Primero cenamos y después vimos una película.",
-      "ja": "先にご飯を食べた。それから、映画を見た。",
-      "lectura": "さきに ごはんを たべた。それから、えいがを みた。",
-      "bloques": [
-        "先にご飯を食べた。",
-        "それから、",
-        "映画を見た。"
-      ]
-    },
-    {
-      "id": 3,
-      "nivel": "basico",
-      "categoria": "adicion",
-      "es": "Esta tienda es barata. Además, la comida está rica.",
-      "ja": "この店は安い。それに、料理もおいしい。",
-      "lectura": "このみせは やすい。それに、りょうりも おいしい。",
-      "bloques": [
-        "この店は安い。",
-        "それに、",
-        "料理もおいしい。"
-      ]
-    },
-    {
-      "id": 4,
-      "nivel": "basico",
-      "categoria": "adicion",
-      "es": "Tengo que comprar leche. Ah, y también pan.",
-      "ja": "牛乳を買わないと。あと、パンも。",
-      "lectura": "ぎゅうにゅうを かわないと。あと、パンも。",
-      "bloques": [
-        "牛乳を",
-        "買わないと。",
-        "あと、",
-        "パンも。"
-      ]
-    },
-    {
-      "id": 5,
-      "nivel": "basico",
-      "categoria": "contraste",
-      "es": "Quería ir, pero al final no pude.",
-      "ja": "行きたかった。でも、行けなかった。",
-      "lectura": "いきたかった。でも、いけなかった。",
-      "bloques": [
-        "行きたかった。",
-        "でも、",
-        "行けなかった。"
-      ]
-    },
-    {
-      "id": 6,
-      "nivel": "basico",
-      "categoria": "contraste",
-      "es": "Está un poco lejos, pero vamos andando.",
-      "ja": "ちょっと遠いけど、歩いて行こう。",
-      "lectura": "ちょっと とおいけど、あるいて いこう。",
-      "bloques": [
-        "ちょっと遠い",
-        "けど、",
-        "歩いて行こう。"
-      ]
-    },
-    {
-      "id": 7,
-      "nivel": "basico",
-      "categoria": "causa_consecuencia",
-      "es": "Mañana tengo un examen, así que hoy voy a estudiar.",
-      "ja": "明日テストがある。だから、今日は勉強する。",
-      "lectura": "あした テストが ある。だから、きょうは べんきょうする。",
-      "bloques": [
-        "明日テストがある。",
-        "だから、",
-        "今日は勉強する。"
-      ]
-    },
-    {
-      "id": 8,
-      "nivel": "basico",
-      "categoria": "causa_consecuencia",
-      "es": "Perdí el tren y por eso llegué tarde.",
-      "ja": "電車に乗り遅れた。それで、遅刻した。",
-      "lectura": "でんしゃに のりおくれた。それで、ちこくした。",
-      "bloques": [
-        "電車に乗り遅れた。",
-        "それで、",
-        "遅刻した。"
-      ]
-    },
-    {
-      "id": 9,
-      "nivel": "basico",
-      "categoria": "causa",
-      "es": "Como estoy cansado, hoy me vuelvo a casa.",
-      "ja": "疲れたから、今日は帰る。",
-      "lectura": "つかれたから、きょうは かえる。",
-      "bloques": [
-        "疲れた",
-        "から、",
-        "今日は帰る。"
-      ]
-    },
-    {
-      "id": 10,
-      "nivel": "basico",
-      "categoria": "causa",
-      "es": "Como mañana trabajo, hoy no puedo ir.",
-      "ja": "明日仕事なので、今日は行けません。",
-      "lectura": "あした しごとなので、きょうは いけません。",
-      "bloques": [
-        "明日仕事",
-        "なので、",
-        "今日は行けません。"
-      ]
-    },
-    {
-      "id": 11,
-      "nivel": "basico",
-      "categoria": "orden",
-      "es": "Primero, abre la aplicación.",
-      "ja": "まず、アプリを開いて。",
-      "lectura": "まず、アプリを ひらいて。",
-      "bloques": [
-        "まず、",
-        "アプリを開いて。"
-      ]
-    },
-    {
-      "id": 12,
-      "nivel": "basico",
-      "categoria": "orden",
-      "es": "Después, pulsa este botón.",
-      "ja": "次に、このボタンを押して。",
-      "lectura": "つぎに、このボタンを おして。",
-      "bloques": [
-        "次に、",
-        "このボタンを押して。"
-      ]
-    },
-    {
-      "id": 13,
-      "nivel": "basico",
-      "categoria": "orden",
-      "es": "Por último, guarda los cambios.",
-      "ja": "最後に、変更を保存して。",
-      "lectura": "さいごに、へんこうを ほぞんして。",
-      "bloques": [
-        "最後に、",
-        "変更を保存して。"
-      ]
-    },
-    {
-      "id": 14,
-      "nivel": "basico",
-      "categoria": "ejemplo",
-      "es": "Me gustan los deportes. Por ejemplo, el fútbol.",
-      "ja": "スポーツが好き。例えば、サッカーとか。",
-      "lectura": "スポーツが すき。たとえば、サッカーとか。",
-      "bloques": [
-        "スポーツが好き。",
-        "例えば、",
-        "サッカーとか。"
-      ]
-    },
-    {
-      "id": 15,
-      "nivel": "basico",
-      "categoria": "resumen",
-      "es": "No tengo dinero. Es decir, no puedo comprarlo.",
-      "ja": "お金がない。つまり、買えない。",
-      "lectura": "おかねが ない。つまり、かえない。",
-      "bloques": [
-        "お金がない。",
-        "つまり、",
-        "買えない。"
-      ]
-    },
-    {
-      "id": 16,
-      "nivel": "basico",
-      "categoria": "informacion_adicional",
-      "es": "Por cierto, ¿cuántos años tienes?",
-      "ja": "ちなみに、何歳？",
-      "lectura": "ちなみに、なんさい？",
-      "bloques": [
-        "ちなみに、",
-        "何歳？"
-      ]
-    },
-    {
-      "id": 17,
-      "nivel": "basico",
-      "categoria": "cambio_de_tema",
-      "es": "Por cierto, ¿qué vas a hacer mañana?",
-      "ja": "ところで、明日は何する？",
-      "lectura": "ところで、あしたは なにする？",
-      "bloques": [
-        "ところで、",
-        "明日は何する？"
-      ]
-    },
-    {
-      "id": 18,
-      "nivel": "basico",
-      "categoria": "alternativa",
-      "es": "¿Quieres té o prefieres café?",
-      "ja": "お茶にする？それとも、コーヒー？",
-      "lectura": "おちゃに する？それとも、コーヒー？",
-      "bloques": [
-        "お茶にする？",
-        "それとも、",
-        "コーヒー？"
-      ]
-    },
-    {
-      "id": 19,
-      "nivel": "basico",
-      "categoria": "alternativa",
-      "es": "Puedes solicitarlo por internet o por teléfono.",
-      "ja": "申し込みはウェブまたは電話でできます。",
-      "lectura": "もうしこみは ウェブ または でんわで できます。",
-      "bloques": [
-        "申し込みは",
-        "ウェブ",
-        "または",
-        "電話でできます。"
-      ]
-    },
-    {
-      "id": 20,
-      "nivel": "basico",
-      "categoria": "tiempo",
-      "es": "Después de comer, voy a salir.",
-      "ja": "ご飯を食べてから、出かける。",
-      "lectura": "ごはんを たべてから、でかける。",
-      "bloques": [
-        "ご飯を食べてから、",
-        "出かける。"
-      ]
-    },
-    {
-      "id": 21,
-      "nivel": "basico",
-      "categoria": "tiempo",
-      "es": "Antes de dormir, me ducho.",
-      "ja": "寝る前に、シャワーを浴びる。",
-      "lectura": "ねるまえに、シャワーを あびる。",
-      "bloques": [
-        "寝る前に、",
-        "シャワーを浴びる。"
-      ]
-    },
-    {
-      "id": 22,
-      "nivel": "basico",
-      "categoria": "tiempo",
-      "es": "Llámame después de clase.",
-      "ja": "授業のあとで、電話して。",
-      "lectura": "じゅぎょうの あとで、でんわして。",
-      "bloques": [
-        "授業のあとで、",
-        "電話して。"
-      ]
-    },
-    {
-      "id": 23,
-      "nivel": "intermedio",
-      "categoria": "tiempo",
-      "es": "Cuando tengo tiempo, leo libros.",
-      "ja": "時間があるとき、本を読む。",
-      "lectura": "じかんが あるとき、ほんを よむ。",
-      "bloques": [
-        "時間があるとき、",
-        "本を読む。"
-      ]
-    },
-    {
-      "id": 24,
-      "nivel": "intermedio",
-      "categoria": "condicion",
-      "es": "Si mañana hace buen tiempo, vamos al parque.",
-      "ja": "もし明日晴れたら、公園に行こう。",
-      "lectura": "もし あした はれたら、こうえんに いこう。",
-      "bloques": [
-        "もし",
-        "明日晴れたら、",
-        "公園に行こう。"
-      ]
-    },
-    {
-      "id": 25,
-      "nivel": "intermedio",
-      "categoria": "condicion",
-      "es": "Si te gusta el anime, deberías probar a ver este.",
-      "ja": "アニメが好きなら、これを見てみて。",
-      "lectura": "アニメが すきなら、これを みてみて。",
-      "bloques": [
-        "アニメが好き",
-        "なら、",
-        "これを見てみて。"
-      ]
-    },
-    {
-      "id": 26,
-      "nivel": "intermedio",
-      "categoria": "condicion",
-      "es": "Si tengo tiempo, iré.",
-      "ja": "時間があれば、行くよ。",
-      "lectura": "じかんが あれば、いくよ。",
-      "bloques": [
-        "時間があれば、",
-        "行くよ。"
-      ]
-    },
-    {
-      "id": 27,
-      "nivel": "intermedio",
-      "categoria": "condicion",
-      "es": "Si pulsas este botón, la pantalla cambia.",
-      "ja": "このボタンを押すと、画面が変わる。",
-      "lectura": "このボタンを おすと、がめんが かわる。",
-      "bloques": [
-        "このボタンを押すと、",
-        "画面が変わる。"
-      ]
-    },
-    {
-      "id": 28,
-      "nivel": "intermedio",
-      "categoria": "concesion",
-      "es": "Aunque esté ocupado, iré.",
-      "ja": "忙しくても、行くよ。",
-      "lectura": "いそがしくても、いくよ。",
-      "bloques": [
-        "忙しくても、",
-        "行くよ。"
-      ]
-    },
-    {
-      "id": 29,
-      "nivel": "intermedio",
-      "categoria": "contraste",
-      "es": "Se lo expliqué, pero no me entiende.",
-      "ja": "説明したのに、分かってくれない。",
-      "lectura": "せつめいしたのに、わかってくれない。",
-      "bloques": [
-        "説明した",
-        "のに、",
-        "分かってくれない。"
-      ]
-    },
-    {
-      "id": 30,
-      "nivel": "intermedio",
-      "categoria": "simultaneidad",
-      "es": "Escucho música mientras estudio.",
-      "ja": "音楽を聞きながら、勉強する。",
-      "lectura": "おんがくを ききながら、べんきょうする。",
-      "bloques": [
-        "音楽を聞きながら、",
-        "勉強する。"
-      ]
-    },
-    {
-      "id": 31,
-      "nivel": "intermedio",
-      "categoria": "adicion_motivos",
-      "es": "Este sitio es barato y está cerca, así que suelo venir.",
-      "ja": "ここは安いし、近いし、よく来る。",
-      "lectura": "ここは やすいし、ちかいし、よく くる。",
-      "bloques": [
-        "ここは安いし、",
-        "近いし、",
-        "よく来る。"
-      ]
-    },
-    {
-      "id": 32,
-      "nivel": "intermedio",
-      "categoria": "ejemplos_de_acciones",
-      "es": "Los fines de semana veo películas y juego a videojuegos, entre otras cosas.",
-      "ja": "週末は映画を見たり、ゲームをしたりする。",
-      "lectura": "しゅうまつは えいがを みたり、ゲームを したりする。",
-      "bloques": [
-        "週末は",
-        "映画を見たり、",
-        "ゲームをしたりする。"
-      ]
-    },
-    {
-      "id": 33,
-      "nivel": "intermedio",
-      "categoria": "adicion",
-      "es": "Ese restaurante es barato. Además, está buenísimo.",
-      "ja": "あの店は安い。しかも、おいしい。",
-      "lectura": "あのみせは やすい。しかも、おいしい。",
-      "bloques": [
-        "あの店は安い。",
-        "しかも、",
-        "おいしい。"
-      ]
-    },
-    {
-      "id": 34,
-      "nivel": "intermedio",
-      "categoria": "adicion",
-      "es": "Esta aplicación es muy útil. Además, es gratis.",
-      "ja": "このアプリはとても便利だ。さらに、無料で使える。",
-      "lectura": "このアプリは とても べんりだ。さらに、むりょうで つかえる。",
-      "bloques": [
-        "このアプリはとても便利だ。",
-        "さらに、",
-        "無料で使える。"
-      ]
-    },
-    {
-      "id": 35,
-      "nivel": "intermedio",
-      "categoria": "adicion",
-      "es": "Hoy hace frío. Encima, también está lloviendo.",
-      "ja": "今日は寒い。そのうえ、雨も降っている。",
-      "lectura": "きょうは さむい。そのうえ、あめも ふっている。",
-      "bloques": [
-        "今日は寒い。",
-        "そのうえ、",
-        "雨も降っている。"
-      ]
-    },
-    {
-      "id": 36,
-      "nivel": "intermedio",
-      "categoria": "contraste",
-      "es": "Lo intenté. Sin embargo, no salió bien.",
-      "ja": "やってみた。しかし、うまくいかなかった。",
-      "lectura": "やってみた。しかし、うまく いかなかった。",
-      "bloques": [
-        "やってみた。",
-        "しかし、",
-        "うまくいかなかった。"
-      ]
-    },
-    {
-      "id": 37,
-      "nivel": "intermedio",
-      "categoria": "contraste",
-      "es": "Este trabajo está bien pagado. Por otro lado, es muy estresante.",
-      "ja": "この仕事は給料がいい。一方で、かなり大変だ。",
-      "lectura": "このしごとは きゅうりょうが いい。いっぽうで、かなり たいへんだ。",
-      "bloques": [
-        "この仕事は給料がいい。",
-        "一方で、",
-        "かなり大変だ。"
-      ]
-    },
-    {
-      "id": 38,
-      "nivel": "intermedio",
-      "categoria": "contraste_inesperado",
-      "es": "Pensaba que sería fácil. Pero resultó ser difícil.",
-      "ja": "簡単だと思っていた。ところが、難しかった。",
-      "lectura": "かんたんだと おもっていた。ところが、むずかしかった。",
-      "bloques": [
-        "簡単だと思っていた。",
-        "ところが、",
-        "難しかった。"
-      ]
-    },
-    {
-      "id": 39,
-      "nivel": "intermedio",
-      "categoria": "contraste",
-      "es": "Le avisé. Aun así, no vino.",
-      "ja": "連絡した。それなのに、来なかった。",
-      "lectura": "れんらくした。それなのに、こなかった。",
-      "bloques": [
-        "連絡した。",
-        "それなのに、",
-        "来なかった。"
-      ]
-    },
-    {
-      "id": 40,
-      "nivel": "intermedio",
-      "categoria": "consecuencia",
-      "es": "El tren se retrasó. Por ese motivo, llegué tarde.",
-      "ja": "電車が遅れた。そのため、遅刻した。",
-      "lectura": "でんしゃが おくれた。そのため、ちこくした。",
-      "bloques": [
-        "電車が遅れた。",
-        "そのため、",
-        "遅刻した。"
-      ]
-    },
-    {
-      "id": 41,
-      "nivel": "intermedio",
-      "categoria": "resultado",
-      "es": "Entrenó todos los días. Como resultado, ganó el campeonato.",
-      "ja": "毎日練習した。その結果、優勝した。",
-      "lectura": "まいにち れんしゅうした。そのけっか、ゆうしょうした。",
-      "bloques": [
-        "毎日練習した。",
-        "その結果、",
-        "優勝した。"
-      ]
-    },
-    {
-      "id": 42,
-      "nivel": "intermedio",
-      "categoria": "consecuencia_decision",
-      "es": "No sabía qué hacer. Así que decidí preguntarle.",
-      "ja": "どうすればいいか分からなかった。そこで、聞いてみることにした。",
-      "lectura": "どうすれば いいか わからなかった。そこで、きいてみる ことにした。",
-      "bloques": [
-        "どうすればいいか分からなかった。",
-        "そこで、",
-        "聞いてみることにした。"
-      ]
-    },
-    {
-      "id": 43,
-      "nivel": "intermedio",
-      "categoria": "concesion",
-      "es": "Estaba lloviendo. Aun así, salí.",
-      "ja": "雨が降っていた。それでも、出かけた。",
-      "lectura": "あめが ふっていた。それでも、でかけた。",
-      "bloques": [
-        "雨が降っていた。",
-        "それでも、",
-        "出かけた。"
-      ]
-    },
-    {
-      "id": 44,
-      "nivel": "intermedio",
-      "categoria": "causa",
-      "es": "Gracias a ti, pude terminarlo.",
-      "ja": "あなたのおかげで、終わらせることができた。",
-      "lectura": "あなたの おかげで、おわらせる ことが できた。",
-      "bloques": [
-        "あなたのおかげで、",
-        "終わらせることができた。"
-      ]
-    },
-    {
-      "id": 45,
-      "nivel": "intermedio",
-      "categoria": "causa_negativa",
-      "es": "Por tu culpa, perdí el autobús.",
-      "ja": "君のせいで、バスに乗り遅れた。",
-      "lectura": "きみの せいで、バスに のりおくれた。",
-      "bloques": [
-        "君のせいで、",
-        "バスに乗り遅れた。"
-      ]
-    },
-    {
-      "id": 46,
-      "nivel": "intermedio",
-      "categoria": "finalidad",
-      "es": "Estudio japonés para trabajar en Japón.",
-      "ja": "日本で働くために、日本語を勉強している。",
-      "lectura": "にほんで はたらくために、にほんごを べんきょうしている。",
-      "bloques": [
-        "日本で働くために、",
-        "日本語を勉強している。"
-      ]
-    },
-    {
-      "id": 47,
-      "nivel": "intermedio",
-      "categoria": "finalidad",
-      "es": "Para no olvidarlo, lo he apuntado en el móvil.",
-      "ja": "忘れないように、スマホにメモした。",
-      "lectura": "わすれないように、スマホに メモした。",
-      "bloques": [
-        "忘れないように、",
-        "スマホにメモした。"
-      ]
-    },
-    {
-      "id": 48,
-      "nivel": "especializado",
-      "categoria": "comparacion",
-      "es": "A mí me gusta el café. En cambio, a mi amigo le gusta el té negro.",
-      "ja": "私はコーヒーが好きだ。それに対して、友達は紅茶が好きだ。",
-      "lectura": "わたしは コーヒーが すきだ。それに たいして、ともだちは こうちゃが すきだ。",
-      "bloques": [
-        "私はコーヒーが好きだ。",
-        "それに対して、",
-        "友達は紅茶が好きだ。"
-      ]
-    },
-    {
-      "id": 49,
-      "nivel": "especializado",
-      "categoria": "contraste_reformulacion",
-      "es": "Este método no es sencillo. De hecho, es bastante difícil.",
-      "ja": "この方法は簡単じゃない。むしろ、かなり難しい。",
-      "lectura": "このほうほうは かんたんじゃない。むしろ、かなり むずかしい。",
-      "bloques": [
-        "この方法は簡単じゃない。",
-        "むしろ、",
-        "かなり難しい。"
-      ]
-    },
-    {
-      "id": 50,
-      "nivel": "especializado",
-      "categoria": "resumen",
-      "es": "En resumen, significa que hoy no podemos ir.",
-      "ja": "要するに、今日は行けないってことだ。",
-      "lectura": "ようするに、きょうは いけないって ことだ。",
-      "bloques": [
-        "要するに、",
-        "今日は行けないってことだ。"
-      ]
-    },
-    {
-      "id": 51,
-      "nivel": "especializado",
-      "categoria": "concesion",
-      "es": "Aunque es caro, aun así quiero comprarlo.",
-      "ja": "高いとはいえ、買いたい。",
-      "lectura": "たかいとはいえ、かいたい。",
-      "bloques": [
-        "高いとはいえ、",
-        "買いたい。"
-      ]
-    },
-    {
-      "id": 52,
-      "nivel": "especializado",
-      "categoria": "intensificacion",
-      "es": "A pesar de que estaba lloviendo, salió.",
-      "ja": "雨が降っていたにもかかわらず、出かけた。",
-      "lectura": "あめが ふっていたにも かかわらず、でかけた。",
-      "bloques": [
-        "雨が降っていた",
-        "にもかかわらず、",
-        "出かけた。"
-      ]
-    },
-    {
-      "id": 53,
-      "nivel": "especializado",
-      "categoria": "explicacion_causa",
-      "es": "No puedo ir. Y es que mañana tengo un examen.",
-      "ja": "行けない。なぜなら、明日テストがあるからだ。",
-      "lectura": "いけない。なぜなら、あした テストが あるからだ。",
-      "bloques": [
-        "行けない。",
-        "なぜなら、",
-        "明日テストがあるからだ。"
-      ]
-    },
-    {
-      "id": 54,
-      "nivel": "especializado",
-      "categoria": "hipotesis",
-      "es": "Si eso fuera verdad, tendríamos un problema.",
-      "ja": "それが本当だとしたら、大変なことになる。",
-      "lectura": "それが ほんとうだとしたら、たいへんな ことに なる。",
-      "bloques": [
-        "それが本当だとしたら、",
-        "大変なことになる。"
-      ]
-    },
-    {
-      "id": 55,
-      "nivel": "especializado",
-      "categoria": "explicacion",
-      "es": "No puedo ir. Y es que mañana tengo un examen.",
-      "ja": "行けない。というのも、明日テストがあるからだ。",
-      "lectura": "いけない。というのも、あした テストが あるからだ。",
-      "bloques": [
-        "行けない。",
-        "というのも、",
-        "明日テストがあるからだ。"
-      ]
-    },
-    {
-      "id": 56,
-      "nivel": "basico",
-      "categoria": "secuencia_acciones",
-      "es": "Me levanto, me lavo la cara y voy al colegio.",
-      "ja": "朝起きて、顔を洗って、学校に行く。",
-      "lectura": "あさ おきて、かおを あらって、がっこうに いく。",
-      "bloques": [
-        "朝起きて、",
-        "顔を洗って、",
-        "学校に行く。"
-      ]
-    },
-    {
-      "id": 57,
-      "nivel": "basico",
-      "categoria": "adicion_conversacional",
-      "es": "Ah, y también tengo que comprar huevos.",
-      "ja": "あ、それと、卵も買わなきゃ。",
-      "lectura": "あ、それと、たまごも かわなきゃ。",
-      "bloques": [
-        "あ、",
-        "それと、",
-        "卵も買わなきゃ。"
-      ]
-    },
-    {
-      "id": 58,
-      "nivel": "basico",
-      "categoria": "transicion_conversacional",
-      "es": "Bueno, ¡hasta mañana!",
-      "ja": "じゃあ、また明日！",
-      "lectura": "じゃあ、また あした！",
-      "bloques": [
-        "じゃあ、",
-        "また明日！"
-      ]
-    },
-    {
-      "id": 59,
-      "nivel": "intermedio",
-      "categoria": "consecuencia_condicional",
-      "es": "¿Vas en coche? En ese caso, voy contigo.",
-      "ja": "車で行くの？それなら、私も一緒に行く。",
-      "lectura": "くるまで いくの？それなら、わたしも いっしょに いく。",
-      "bloques": [
-        "車で行くの？",
-        "それなら、",
-        "私も一緒に行く。"
-      ]
-    },
-    {
-      "id": 60,
-      "nivel": "intermedio",
-      "categoria": "secuencia_resultado_inesperado",
-      "es": "Abrí la puerta. Entonces, salió un gato.",
-      "ja": "ドアを開けた。すると、猫が出てきた。",
-      "lectura": "ドアを あけた。すると、ねこが でてきた。",
-      "bloques": [
-        "ドアを開けた。",
-        "すると、",
-        "猫が出てきた。"
-      ]
-    },
-    {
-      "id": 61,
-      "nivel": "intermedio",
-      "categoria": "excepcion_aclaracion",
-      "es": "Aquí puedes hacer fotos. Eso sí, no uses el flash.",
-      "ja": "ここで写真を撮ってもいい。ただし、フラッシュは使わないで。",
-      "lectura": "ここで しゃしんを とっても いい。ただし、フラッシュは つかわないで。",
-      "bloques": [
-        "ここで写真を撮ってもいい。",
-        "ただし、",
-        "フラッシュは使わないで。"
-      ]
-    },
-    {
-      "id": 62,
-      "nivel": "intermedio",
-      "categoria": "alternativa_compensacion",
-      "es": "Hoy no puedo ir. A cambio, mañana sí.",
-      "ja": "今日は行けない。そのかわり、明日なら行けるよ。",
-      "lectura": "きょうは いけない。そのかわり、あしたなら いけるよ。",
-      "bloques": [
-        "今日は行けない。",
-        "そのかわり、",
-        "明日なら行けるよ。"
-      ]
-    },
-    {
-      "id": 63,
-      "nivel": "intermedio",
-      "categoria": "adicion_estructura",
-      "es": "No solo habla japonés, sino también coreano.",
-      "ja": "彼は日本語だけでなく、韓国語も話せる。",
-      "lectura": "かれは にほんごだけでなく、かんこくごも はなせる。",
-      "bloques": [
-        "彼は日本語だけでなく、",
-        "韓国語も",
-        "話せる。"
-      ]
-    },
-    {
-      "id": 64,
-      "nivel": "intermedio",
-      "categoria": "contraste_conjuncion",
-      "es": "Hoy no puedo ir, pero mañana sí.",
-      "ja": "今日は行けないが、明日なら行ける。",
-      "lectura": "きょうは いけないが、あしたなら いける。",
-      "bloques": [
-        "今日は行けない",
-        "が、",
-        "明日なら行ける。"
-      ]
-    },
-    {
-      "id": 65,
-      "nivel": "basico",
-      "categoria": "alternativa_correccion",
-      "es": "No quiero café; prefiero té.",
-      "ja": "コーヒーじゃなくて、お茶がいい。",
-      "lectura": "コーヒーじゃなくて、おちゃが いい。",
-      "bloques": [
-        "コーヒー",
-        "じゃなくて、",
-        "お茶がいい。"
-      ]
-    },
-    {
-      "id": 66,
-      "nivel": "intermedio",
-      "categoria": "accion_sin_hacer_otra",
-      "es": "Fui al colegio sin desayunar.",
-      "ja": "朝ご飯を食べずに、学校に行った。",
-      "lectura": "あさごはんを たべずに、がっこうに いった。",
-      "bloques": [
-        "朝ご飯を食べずに、",
-        "学校に行った。"
-      ]
-    }
+  {
+   "id": 3,
+   "nivel": "basico",
+   "categoria": "adicion",
+   "es": "Esta tienda es barata. Además, la comida está rica.",
+   "ja": "この店は安い。それに、料理もおいしい。",
+   "lectura": "このみせは やすい。それに、りょうりも おいしい。",
+   "bloques": [
+    "この店は安い。",
+    "それに、",
+    "料理もおいしい。"
+   ],
+   "romaji": "Kono mise wa yasui. Sore ni, ryouri mo oishii.",
+   "hueco": {
+    "pre": "この店は安い。",
+    "con": "それに、",
+    "post": "料理もおいしい。"
+   },
+   "distractores": [
+    "でも、",
+    "だから、"
+   ],
+   "registro": "calle",
+   "uso": "それに añade otro punto a favor de la tienda: es barata y, además, la comida está rica."
+  },
+  {
+   "id": 4,
+   "nivel": "basico",
+   "categoria": "adicion",
+   "es": "Tengo que comprar leche. Ah, y también pan.",
+   "ja": "牛乳を買わないと。あと、パンも。",
+   "lectura": "ぎゅうにゅうを かわないと。あと、パンも。",
+   "bloques": [
+    "牛乳を",
+    "買わないと。",
+    "あと、",
+    "パンも。"
+   ],
+   "romaji": "Gyuunyuu o kawanai to. Ato, pan mo.",
+   "hueco": {
+    "pre": "牛乳を買わないと。",
+    "con": "あと、",
+    "post": "パンも。"
+   },
+   "distractores": [
+    "でも、",
+    "それとも、"
+   ],
+   "registro": "calle",
+   "uso": "あと se usa al hablar cuando recuerdas algo más que añadir: la leche y, ah, también el pan."
+  },
+  {
+   "id": 5,
+   "nivel": "basico",
+   "categoria": "contraste",
+   "es": "Quería ir, pero al final no pude.",
+   "ja": "行きたかった。でも、行けなかった。",
+   "lectura": "いきたかった。でも、いけなかった。",
+   "bloques": [
+    "行きたかった。",
+    "でも、",
+    "行けなかった。"
+   ],
+   "romaji": "Ikitakatta. Demo, ikenakatta.",
+   "hueco": {
+    "pre": "行きたかった。",
+    "con": "でも、",
+    "post": "行けなかった。"
+   },
+   "distractores": [
+    "だから、",
+    "それに、"
+   ],
+   "registro": "calle",
+   "uso": "でも contrasta dos ideas: querías ir, pero no pudiste. Es el «pero» del día a día."
+  },
+  {
+   "id": 6,
+   "nivel": "basico",
+   "categoria": "contraste",
+   "es": "Está un poco lejos, pero vamos andando.",
+   "ja": "ちょっと遠いけど、歩いて行こう。",
+   "lectura": "ちょっと とおいけど、あるいて いこう。",
+   "bloques": [
+    "ちょっと遠い",
+    "けど、",
+    "歩いて行こう。"
+   ],
+   "romaji": "Chotto tooi kedo, aruite ikou.",
+   "hueco": {
+    "pre": "ちょっと遠い",
+    "con": "けど、",
+    "post": "歩いて行こう。"
+   },
+   "distractores": [
+    "から、",
+    "ので、"
+   ],
+   "registro": "calle",
+   "uso": "けど se pega a «está lejos» y lo contrasta con lo que propones: aunque está lejos, vamos andando."
+  },
+  {
+   "id": 7,
+   "nivel": "basico",
+   "categoria": "causa_consecuencia",
+   "es": "Mañana tengo un examen, así que hoy voy a estudiar.",
+   "ja": "明日テストがある。だから、今日は勉強する。",
+   "lectura": "あした テストが ある。だから、きょうは べんきょうする。",
+   "bloques": [
+    "明日テストがある。",
+    "だから、",
+    "今日は勉強する。"
+   ],
+   "romaji": "Ashita tesuto ga aru. Dakara, kyou wa benkyou suru.",
+   "hueco": {
+    "pre": "明日テストがある。",
+    "con": "だから、",
+    "post": "今日は勉強する。"
+   },
+   "distractores": [
+    "でも、",
+    "それとも、"
+   ],
+   "registro": "calle",
+   "uso": "だから pone la consecuencia: hay examen, por eso hoy estudio."
+  },
+  {
+   "id": 8,
+   "nivel": "basico",
+   "categoria": "causa_consecuencia",
+   "es": "Perdí el tren y por eso llegué tarde.",
+   "ja": "電車に乗り遅れた。それで、遅刻した。",
+   "lectura": "でんしゃに のりおくれた。それで、ちこくした。",
+   "bloques": [
+    "電車に乗り遅れた。",
+    "それで、",
+    "遅刻した。"
+   ],
+   "romaji": "Densha ni nori okureta. Sorede, chikoku shita.",
+   "hueco": {
+    "pre": "電車に乗り遅れた。",
+    "con": "それで、",
+    "post": "遅刻した。"
+   },
+   "distractores": [
+    "でも、",
+    "それに、"
+   ],
+   "registro": "calle",
+   "uso": "それで cuenta lo que pasó como resultado: perdí el tren, y por eso llegué tarde."
+  },
+  {
+   "id": 9,
+   "nivel": "basico",
+   "categoria": "causa",
+   "es": "Como estoy cansado, hoy me vuelvo a casa.",
+   "ja": "疲れたから、今日は帰る。",
+   "lectura": "つかれたから、きょうは かえる。",
+   "bloques": [
+    "疲れた",
+    "から、",
+    "今日は帰る。"
+   ],
+   "romaji": "Tsukaretakara, kyou wa kaeru.",
+   "hueco": {
+    "pre": "疲れた",
+    "con": "から、",
+    "post": "今日は帰る。"
+   },
+   "distractores": [
+    "けど、",
+    "のに、"
+   ],
+   "registro": "calle",
+   "uso": "から va detrás de la causa («estoy cansado») y da la razón de lo que sigue («me voy a casa»)."
+  },
+  {
+   "id": 10,
+   "nivel": "basico",
+   "categoria": "causa",
+   "es": "Como mañana trabajo, hoy no puedo ir.",
+   "ja": "明日仕事なので、今日は行けません。",
+   "lectura": "あした しごとなので、きょうは いけません。",
+   "bloques": [
+    "明日仕事",
+    "なので、",
+    "今日は行けません。"
+   ],
+   "romaji": "Ashitashigoto nanode, kyou wa ikemasen.",
+   "hueco": {
+    "pre": "明日仕事",
+    "con": "なので、",
+    "post": "今日は行けません。"
+   },
+   "distractores": [
+    "けど、",
+    "のに、"
+   ],
+   "registro": "neutro",
+   "uso": "なので da la razón de forma más suave y educada que から: como mañana trabajo, hoy no puedo."
+  },
+  {
+   "id": 11,
+   "nivel": "basico",
+   "categoria": "orden",
+   "es": "Primero, abre la aplicación.",
+   "ja": "まず、アプリを開いて。",
+   "lectura": "まず、アプリを ひらいて。",
+   "bloques": [
+    "まず、",
+    "アプリを開いて。"
+   ],
+   "romaji": "Mazu, apuri o hiraite.",
+   "hueco": {
+    "pre": "",
+    "con": "まず、",
+    "post": "アプリを開いて。"
+   },
+   "distractores": [
+    "最後に、",
+    "ところで、"
+   ],
+   "registro": "neutro",
+   "uso": "まず abre una serie de pasos: es el primero de todos."
+  },
+  {
+   "id": 12,
+   "nivel": "basico",
+   "categoria": "orden",
+   "es": "Después, pulsa este botón.",
+   "ja": "次に、このボタンを押して。",
+   "lectura": "つぎに、このボタンを おして。",
+   "bloques": [
+    "次に、",
+    "このボタンを押して。"
+   ],
+   "romaji": "Tsugini, kono botan o oshite.",
+   "hueco": {
+    "pre": "",
+    "con": "次に、",
+    "post": "このボタンを押して。"
+   },
+   "distractores": [
+    "まず、",
+    "最後に、"
+   ],
+   "registro": "neutro",
+   "uso": "次に indica el segundo paso, lo que viene después del primero."
+  },
+  {
+   "id": 13,
+   "nivel": "basico",
+   "categoria": "orden",
+   "es": "Por último, guarda los cambios.",
+   "ja": "最後に、変更を保存して。",
+   "lectura": "さいごに、へんこうを ほぞんして。",
+   "bloques": [
+    "最後に、",
+    "変更を保存して。"
+   ],
+   "romaji": "Saigoni, henkou o hozon shite.",
+   "hueco": {
+    "pre": "",
+    "con": "最後に、",
+    "post": "変更を保存して。"
+   },
+   "distractores": [
+    "まず、",
+    "次に、"
+   ],
+   "registro": "neutro",
+   "uso": "最後に cierra la serie: es el último paso."
+  },
+  {
+   "id": 14,
+   "nivel": "basico",
+   "categoria": "ejemplo",
+   "es": "Me gustan los deportes. Por ejemplo, el fútbol.",
+   "ja": "スポーツが好き。例えば、サッカーとか。",
+   "lectura": "スポーツが すき。たとえば、サッカーとか。",
+   "bloques": [
+    "スポーツが好き。",
+    "例えば、",
+    "サッカーとか。"
+   ],
+   "romaji": "Supootsu ga suki. Tatoeba, sakkaa to ka.",
+   "hueco": {
+    "pre": "スポーツが好き。",
+    "con": "例えば、",
+    "post": "サッカーとか。"
+   },
+   "distractores": [
+    "だから、",
+    "でも、"
+   ],
+   "registro": "neutro",
+   "uso": "例えば introduce un ejemplo de lo que acabas de decir: deportes, por ejemplo el fútbol."
+  },
+  {
+   "id": 15,
+   "nivel": "basico",
+   "categoria": "resumen",
+   "es": "No tengo dinero. Es decir, no puedo comprarlo.",
+   "ja": "お金がない。つまり、買えない。",
+   "lectura": "おかねが ない。つまり、かえない。",
+   "bloques": [
+    "お金がない。",
+    "つまり、",
+    "買えない。"
+   ],
+   "romaji": "O kane ga nai. Tsumari, kaenai.",
+   "hueco": {
+    "pre": "お金がない。",
+    "con": "つまり、",
+    "post": "買えない。"
+   },
+   "distractores": [
+    "でも、",
+    "それに、"
+   ],
+   "registro": "calle",
+   "uso": "つまり resume o reformula lo anterior: «no tengo dinero» significa «no puedo comprarlo»."
+  },
+  {
+   "id": 16,
+   "nivel": "basico",
+   "categoria": "informacion_adicional",
+   "es": "Por cierto, ¿cuántos años tienes?",
+   "ja": "ちなみに、何歳？",
+   "lectura": "ちなみに、なんさい？",
+   "bloques": [
+    "ちなみに、",
+    "何歳？"
+   ],
+   "romaji": "Chinamini, nansai?",
+   "hueco": {
+    "pre": "",
+    "con": "ちなみに、",
+    "post": "何歳？"
+   },
+   "distractores": [
+    "だから、",
+    "でも、"
+   ],
+   "registro": "calle",
+   "uso": "ちなみに añade un dato de pasada, sin cambiar de tema."
+  },
+  {
+   "id": 17,
+   "nivel": "basico",
+   "categoria": "cambio_de_tema",
+   "es": "Por cierto, ¿qué vas a hacer mañana?",
+   "ja": "ところで、明日は何する？",
+   "lectura": "ところで、あしたは なにする？",
+   "bloques": [
+    "ところで、",
+    "明日は何する？"
+   ],
+   "romaji": "Tokorode, ashita wa nani suru?",
+   "hueco": {
+    "pre": "",
+    "con": "ところで、",
+    "post": "明日は何する？"
+   },
+   "distractores": [
+    "だから、",
+    "でも、"
+   ],
+   "registro": "calle",
+   "uso": "ところで cambia de tema de golpe: «por cierto…»."
+  },
+  {
+   "id": 18,
+   "nivel": "basico",
+   "categoria": "alternativa",
+   "es": "¿Quieres té o prefieres café?",
+   "ja": "お茶にする？それとも、コーヒー？",
+   "lectura": "おちゃに する？それとも、コーヒー？",
+   "bloques": [
+    "お茶にする？",
+    "それとも、",
+    "コーヒー？"
+   ],
+   "romaji": "Ocha ni suru? Soretomo, koohii?",
+   "hueco": {
+    "pre": "お茶にする？",
+    "con": "それとも、",
+    "post": "コーヒー？"
+   },
+   "distractores": [
+    "そして、",
+    "だから、"
+   ],
+   "registro": "calle",
+   "uso": "それとも ofrece una alternativa dentro de una pregunta: ¿té, o prefieres café?"
+  },
+  {
+   "id": 19,
+   "nivel": "especializado",
+   "categoria": "alternativa",
+   "es": "Puedes solicitarlo por internet o por teléfono.",
+   "ja": "申し込みはウェブまたは電話でできます。",
+   "lectura": "もうしこみは ウェブ または でんわで できます。",
+   "bloques": [
+    "申し込みは",
+    "ウェブ",
+    "または",
+    "電話でできます。"
+   ],
+   "romaji": "Moushikomi wa webu matawa denwa de dekimasu.",
+   "hueco": {
+    "pre": "申し込みはウェブ",
+    "con": "または",
+    "post": "電話でできます。"
+   },
+   "distractores": [
+    "だから",
+    "でも"
+   ],
+   "registro": "formal",
+   "uso": "または es un «o» formal de textos y formularios. Hablando se suele decir か o それとも."
+  },
+  {
+   "id": 20,
+   "nivel": "basico",
+   "categoria": "tiempo",
+   "es": "Después de comer, voy a salir.",
+   "ja": "ご飯を食べてから、出かける。",
+   "lectura": "ごはんを たべてから、でかける。",
+   "bloques": [
+    "ご飯を食べてから、",
+    "出かける。"
+   ],
+   "romaji": "Gohan o tabe tekara, dekakeru.",
+   "hueco": {
+    "pre": "ご飯を食べ",
+    "con": "てから、",
+    "post": "出かける。"
+   },
+   "distractores": [
+    "る前に、",
+    "ないで、"
+   ],
+   "registro": "neutro",
+   "uso": "Verbo en forma て + から significa «después de hacer»: después de comer, salgo."
+  },
+  {
+   "id": 21,
+   "nivel": "basico",
+   "categoria": "tiempo",
+   "es": "Antes de dormir, me ducho.",
+   "ja": "寝る前に、シャワーを浴びる。",
+   "lectura": "ねるまえに、シャワーを あびる。",
+   "bloques": [
+    "寝る前に、",
+    "シャワーを浴びる。"
+   ],
+   "romaji": "Neru mae ni, shawaa o abiru.",
+   "hueco": {
+    "pre": "寝",
+    "con": "る前に、",
+    "post": "シャワーを浴びる。"
+   },
+   "distractores": [
+    "てから、",
+    "ないで、"
+   ],
+   "registro": "neutro",
+   "uso": "Verbo en forma diccionario + 前に significa «antes de hacer»: antes de dormir, me ducho."
+  },
+  {
+   "id": 22,
+   "nivel": "basico",
+   "categoria": "tiempo",
+   "es": "Llámame después de clase.",
+   "ja": "授業のあとで、電話して。",
+   "lectura": "じゅぎょうの あとで、でんわして。",
+   "bloques": [
+    "授業のあとで、",
+    "電話して。"
+   ],
+   "romaji": "Jugyou no atode, denwa shite.",
+   "hueco": {
+    "pre": "授業の",
+    "con": "あとで、",
+    "post": "電話して。"
+   },
+   "distractores": [
+    "前に、",
+    "とき、"
+   ],
+   "registro": "neutro",
+   "uso": "Nombre + の + あとで significa «después de»: después de clase, llámame."
+  },
+  {
+   "id": 23,
+   "nivel": "intermedio",
+   "categoria": "tiempo",
+   "es": "Cuando tengo tiempo, leo libros.",
+   "ja": "時間があるとき、本を読む。",
+   "lectura": "じかんが あるとき、ほんを よむ。",
+   "bloques": [
+    "時間があるとき、",
+    "本を読む。"
+   ],
+   "romaji": "Jikan ga aru toki, hon o yomu.",
+   "hueco": {
+    "pre": "時間がある",
+    "con": "とき、",
+    "post": "本を読む。"
+   },
+   "distractores": [
+    "のに、",
+    "ために、"
+   ],
+   "registro": "neutro",
+   "uso": "とき significa «cuando»: cuando tengo tiempo, leo."
+  },
+  {
+   "id": 24,
+   "nivel": "intermedio",
+   "categoria": "condicion",
+   "es": "Si mañana hace buen tiempo, vamos al parque.",
+   "ja": "もし明日晴れたら、公園に行こう。",
+   "lectura": "もし あした はれたら、こうえんに いこう。",
+   "bloques": [
+    "もし",
+    "明日晴れたら、",
+    "公園に行こう。"
+   ],
+   "romaji": "Moshi ashitaharetara, kouen ni ikou.",
+   "hueco": {
+    "pre": "もし明日晴れ",
+    "con": "たら、",
+    "post": "公園に行こう。"
+   },
+   "distractores": [
+    "ても、",
+    "ので、"
+   ],
+   "registro": "neutro",
+   "uso": "Forma た + ら es el condicional «si»: si mañana hace sol… もし lo refuerza."
+  },
+  {
+   "id": 25,
+   "nivel": "intermedio",
+   "categoria": "condicion",
+   "es": "Si te gusta el anime, deberías probar a ver este.",
+   "ja": "アニメが好きなら、これを見てみて。",
+   "lectura": "アニメが すきなら、これを みてみて。",
+   "bloques": [
+    "アニメが好き",
+    "なら、",
+    "これを見てみて。"
+   ],
+   "romaji": "Anime ga sukinara, kore o mite mite.",
+   "hueco": {
+    "pre": "アニメが好き",
+    "con": "なら、",
+    "post": "これを見てみて。"
+   },
+   "distractores": [
+    "なのに、",
+    "でも、"
+   ],
+   "registro": "calle",
+   "uso": "なら retoma lo que sabe o dice el otro: «si es que te gusta el anime…»."
+  },
+  {
+   "id": 26,
+   "nivel": "intermedio",
+   "categoria": "condicion",
+   "es": "Si tengo tiempo, iré.",
+   "ja": "時間があれば、行くよ。",
+   "lectura": "じかんが あれば、いくよ。",
+   "bloques": [
+    "時間があれば、",
+    "行くよ。"
+   ],
+   "romaji": "Jikan ga areba, iku yo.",
+   "hueco": {
+    "pre": "時間があ",
+    "con": "れば、",
+    "post": "行くよ。"
+   },
+   "distractores": [
+    "っても、",
+    "るのに、"
+   ],
+   "registro": "neutro",
+   "uso": "Forma ば = «si», condición general: si tengo tiempo, voy."
+  },
+  {
+   "id": 27,
+   "nivel": "intermedio",
+   "categoria": "condicion",
+   "es": "Si pulsas este botón, la pantalla cambia.",
+   "ja": "このボタンを押すと、画面が変わる。",
+   "lectura": "このボタンを おすと、がめんが かわる。",
+   "bloques": [
+    "このボタンを押すと、",
+    "画面が変わる。"
+   ],
+   "romaji": "Kono botan o osuto, gamen ga kawaru.",
+   "hueco": {
+    "pre": "このボタンを押す",
+    "con": "と、",
+    "post": "画面が変わる。"
+   },
+   "distractores": [
+    "のに、",
+    "ために、"
+   ],
+   "registro": "neutro",
+   "uso": "と expresa un resultado natural: cuando pulsas el botón, la pantalla cambia (siempre)."
+  },
+  {
+   "id": 28,
+   "nivel": "intermedio",
+   "categoria": "concesion",
+   "es": "Aunque esté ocupado, iré.",
+   "ja": "忙しくても、行くよ。",
+   "lectura": "いそがしくても、いくよ。",
+   "bloques": [
+    "忙しくても、",
+    "行くよ。"
+   ],
+   "romaji": "Isogashiku temo, iku yo.",
+   "hueco": {
+    "pre": "忙しく",
+    "con": "ても、",
+    "post": "行くよ。"
+   },
+   "distractores": [
+    "て、",
+    "ないと、"
+   ],
+   "registro": "calle",
+   "uso": "Forma て + も significa «aunque»: aunque esté ocupado, iré."
+  },
+  {
+   "id": 29,
+   "nivel": "intermedio",
+   "categoria": "contraste",
+   "es": "Se lo expliqué, pero no me entiende.",
+   "ja": "説明したのに、分かってくれない。",
+   "lectura": "せつめいしたのに、わかってくれない。",
+   "bloques": [
+    "説明した",
+    "のに、",
+    "分かってくれない。"
+   ],
+   "romaji": "Setsumei shita noni, wakatte kurenai.",
+   "hueco": {
+    "pre": "説明した",
+    "con": "のに、",
+    "post": "分かってくれない。"
+   },
+   "distractores": [
+    "から、",
+    "ので、"
+   ],
+   "registro": "calle",
+   "uso": "のに expresa contraste con queja o sorpresa: se lo expliqué y, aun así, no me entiende."
+  },
+  {
+   "id": 30,
+   "nivel": "intermedio",
+   "categoria": "simultaneidad",
+   "es": "Escucho música mientras estudio.",
+   "ja": "音楽を聞きながら、勉強する。",
+   "lectura": "おんがくを ききながら、べんきょうする。",
+   "bloques": [
+    "音楽を聞きながら、",
+    "勉強する。"
+   ],
+   "romaji": "Ongaku o kikinagara, benkyou suru.",
+   "hueco": {
+    "pre": "音楽を聞き",
+    "con": "ながら、",
+    "post": "勉強する。"
+   },
+   "distractores": [
+    "たくて、",
+    "に行って、"
+   ],
+   "registro": "neutro",
+   "uso": "Raíz del verbo + ながら significa «mientras»: escucho música y estudio a la vez."
+  },
+  {
+   "id": 31,
+   "nivel": "intermedio",
+   "categoria": "adicion_motivos",
+   "es": "Este sitio es barato y está cerca, así que suelo venir.",
+   "ja": "ここは安いし、近いし、よく来る。",
+   "lectura": "ここは やすいし、ちかいし、よく くる。",
+   "bloques": [
+    "ここは安いし、",
+    "近いし、",
+    "よく来る。"
+   ],
+   "romaji": "Koko wa yasuishi, chikaishi, yoku kuru.",
+   "hueco": {
+    "pre": "ここは安い",
+    "con": "し、",
+    "post": "近いし、よく来る。"
+   },
+   "distractores": [
+    "けど、",
+    "のに、"
+   ],
+   "registro": "calle",
+   "uso": "し enumera motivos: barato, cerca… (y por eso vengo). Se repite con cada motivo."
+  },
+  {
+   "id": 32,
+   "nivel": "intermedio",
+   "categoria": "ejemplos_de_acciones",
+   "es": "Los fines de semana veo películas y juego a videojuegos, entre otras cosas.",
+   "ja": "週末は映画を見たり、ゲームをしたりする。",
+   "lectura": "しゅうまつは えいがを みたり、ゲームを したりする。",
+   "bloques": [
+    "週末は",
+    "映画を見たり、",
+    "ゲームをしたりする。"
+   ],
+   "romaji": "Shuumatsu wa eiga o mi tari, geemu o shi tari suru.",
+   "hueco": {
+    "pre": "週末は映画を見",
+    "con": "たり、",
+    "post": "ゲームをしたりする。"
+   },
+   "distractores": [
+    "ながら、",
+    "てから、"
+   ],
+   "registro": "calle",
+   "uso": "~たり~たりする enumera ejemplos de acciones: ver películas, jugar a videojuegos…"
+  },
+  {
+   "id": 33,
+   "nivel": "intermedio",
+   "categoria": "adicion",
+   "es": "Ese restaurante es barato. Además, está buenísimo.",
+   "ja": "あの店は安い。しかも、おいしい。",
+   "lectura": "あのみせは やすい。しかも、おいしい。",
+   "bloques": [
+    "あの店は安い。",
+    "しかも、",
+    "おいしい。"
+   ],
+   "romaji": "Ano mise wa yasui. Shikamo, oishii.",
+   "hueco": {
+    "pre": "あの店は安い。",
+    "con": "しかも、",
+    "post": "おいしい。"
+   },
+   "distractores": [
+    "でも、",
+    "だから、"
+   ],
+   "registro": "calle",
+   "uso": "しかも suma algo todavía mejor (o peor): barato y, encima, rico."
+  },
+  {
+   "id": 34,
+   "nivel": "especializado",
+   "categoria": "adicion",
+   "es": "Esta aplicación es muy útil. Además, es gratis.",
+   "ja": "このアプリはとても便利だ。さらに、無料で使える。",
+   "lectura": "このアプリは とても べんりだ。さらに、むりょうで つかえる。",
+   "bloques": [
+    "このアプリはとても便利だ。",
+    "さらに、",
+    "無料で使える。"
+   ],
+   "romaji": "Kono apuri wa totemo benri da. Sarani, muryou de tsukaeru.",
+   "hueco": {
+    "pre": "このアプリはとても便利だ。",
+    "con": "さらに、",
+    "post": "無料で使える。"
+   },
+   "distractores": [
+    "でも、",
+    "だから、"
+   ],
+   "registro": "formal",
+   "uso": "さらに suma un punto más; suena más formal (presentaciones, textos). Hablando: それに / しかも."
+  },
+  {
+   "id": 35,
+   "nivel": "especializado",
+   "categoria": "adicion",
+   "es": "Hoy hace frío. Encima, también está lloviendo.",
+   "ja": "今日は寒い。そのうえ、雨も降っている。",
+   "lectura": "きょうは さむい。そのうえ、あめも ふっている。",
+   "bloques": [
+    "今日は寒い。",
+    "そのうえ、",
+    "雨も降っている。"
+   ],
+   "romaji": "Kyou wa samui. Sonoue, ame mo futte iru.",
+   "hueco": {
+    "pre": "今日は寒い。",
+    "con": "そのうえ、",
+    "post": "雨も降っている。"
+   },
+   "distractores": [
+    "でも、",
+    "だから、"
+   ],
+   "registro": "formal",
+   "uso": "そのうえ suma algo más, a menudo negativo: hace frío y, encima, llueve. Algo formal."
+  },
+  {
+   "id": 36,
+   "nivel": "especializado",
+   "categoria": "contraste",
+   "es": "Lo intenté. Sin embargo, no salió bien.",
+   "ja": "やってみた。しかし、うまくいかなかった。",
+   "lectura": "やってみた。しかし、うまく いかなかった。",
+   "bloques": [
+    "やってみた。",
+    "しかし、",
+    "うまくいかなかった。"
+   ],
+   "romaji": "Yatte mita. Shikashi, umaku ikanakatta.",
+   "hueco": {
+    "pre": "やってみた。",
+    "con": "しかし、",
+    "post": "うまくいかなかった。"
+   },
+   "distractores": [
+    "だから、",
+    "それに、"
+   ],
+   "registro": "formal",
+   "uso": "しかし = «sin embargo». Es de textos y discursos; hablando se usa でも."
+  },
+  {
+   "id": 37,
+   "nivel": "especializado",
+   "categoria": "contraste",
+   "es": "Este trabajo está bien pagado. Por otro lado, es muy estresante.",
+   "ja": "この仕事は給料がいい。一方で、かなり大変だ。",
+   "lectura": "このしごとは きゅうりょうが いい。いっぽうで、かなり たいへんだ。",
+   "bloques": [
+    "この仕事は給料がいい。",
+    "一方で、",
+    "かなり大変だ。"
+   ],
+   "romaji": "Kono shigoto wa kyuuryou ga ii. Ippoude, kanari taihen da.",
+   "hueco": {
+    "pre": "この仕事は給料がいい。",
+    "con": "一方で、",
+    "post": "かなり大変だ。"
+   },
+   "distractores": [
+    "だから、",
+    "それから、"
+   ],
+   "registro": "formal",
+   "uso": "一方で contrasta dos caras de lo mismo: bien pagado, pero estresante. Más escrito que hablado."
+  },
+  {
+   "id": 38,
+   "nivel": "especializado",
+   "categoria": "contraste_inesperado",
+   "es": "Pensaba que sería fácil. Pero resultó ser difícil.",
+   "ja": "簡単だと思っていた。ところが、難しかった。",
+   "lectura": "かんたんだと おもっていた。ところが、むずかしかった。",
+   "bloques": [
+    "簡単だと思っていた。",
+    "ところが、",
+    "難しかった。"
+   ],
+   "romaji": "Kantan da to omotte ita. Tokoroga, muzukashikatta.",
+   "hueco": {
+    "pre": "簡単だと思っていた。",
+    "con": "ところが、",
+    "post": "難しかった。"
+   },
+   "distractores": [
+    "だから、",
+    "それに、"
+   ],
+   "registro": "formal",
+   "uso": "ところが introduce un resultado inesperado: pensaba que sería fácil, pero no. Típico de narraciones."
+  },
+  {
+   "id": 39,
+   "nivel": "intermedio",
+   "categoria": "contraste",
+   "es": "Le avisé. Aun así, no vino.",
+   "ja": "連絡した。それなのに、来なかった。",
+   "lectura": "れんらくした。それなのに、こなかった。",
+   "bloques": [
+    "連絡した。",
+    "それなのに、",
+    "来なかった。"
+   ],
+   "romaji": "Renraku shita. Sorenanoni, konakatta.",
+   "hueco": {
+    "pre": "連絡した。",
+    "con": "それなのに、",
+    "post": "来なかった。"
+   },
+   "distractores": [
+    "だから、",
+    "それに、"
+   ],
+   "registro": "neutro",
+   "uso": "それなのに expresa queja: le avisé y aun así no vino."
+  },
+  {
+   "id": 40,
+   "nivel": "especializado",
+   "categoria": "consecuencia",
+   "es": "El tren se retrasó. Por ese motivo, llegué tarde.",
+   "ja": "電車が遅れた。そのため、遅刻した。",
+   "lectura": "でんしゃが おくれた。そのため、ちこくした。",
+   "bloques": [
+    "電車が遅れた。",
+    "そのため、",
+    "遅刻した。"
+   ],
+   "romaji": "Densha ga okureta. Sonotame, chikoku shita.",
+   "hueco": {
+    "pre": "電車が遅れた。",
+    "con": "そのため、",
+    "post": "遅刻した。"
+   },
+   "distractores": [
+    "でも、",
+    "しかし、"
+   ],
+   "registro": "formal",
+   "uso": "そのため = «por ese motivo». Formal; hablando se dice だから o それで."
+  },
+  {
+   "id": 41,
+   "nivel": "especializado",
+   "categoria": "resultado",
+   "es": "Entrenó todos los días. Como resultado, ganó el campeonato.",
+   "ja": "毎日練習した。その結果、優勝した。",
+   "lectura": "まいにち れんしゅうした。そのけっか、ゆうしょうした。",
+   "bloques": [
+    "毎日練習した。",
+    "その結果、",
+    "優勝した。"
+   ],
+   "romaji": "Mainichirenshuu shita. Sonokekka, yuushou shita.",
+   "hueco": {
+    "pre": "毎日練習した。",
+    "con": "その結果、",
+    "post": "優勝した。"
+   },
+   "distractores": [
+    "でも、",
+    "しかも、"
+   ],
+   "registro": "formal",
+   "uso": "その結果 = «como resultado». Más de noticias o informes."
+  },
+  {
+   "id": 42,
+   "nivel": "especializado",
+   "categoria": "consecuencia_decision",
+   "es": "No sabía qué hacer. Así que decidí preguntarle.",
+   "ja": "どうすればいいか分からなかった。そこで、聞いてみることにした。",
+   "lectura": "どうすれば いいか わからなかった。そこで、きいてみる ことにした。",
+   "bloques": [
+    "どうすればいいか分からなかった。",
+    "そこで、",
+    "聞いてみることにした。"
+   ],
+   "romaji": "Dou sureba ii ka wakaranakatta. Sokode, kiite miru koto ni shita.",
+   "hueco": {
+    "pre": "どうすればいいか分からなかった。",
+    "con": "そこで、",
+    "post": "聞いてみることにした。"
+   },
+   "distractores": [
+    "でも、",
+    "しかも、"
+   ],
+   "registro": "formal",
+   "uso": "そこで introduce una acción que haces como respuesta a una situación: no sabía qué hacer, así que pregunté."
+  },
+  {
+   "id": 43,
+   "nivel": "intermedio",
+   "categoria": "concesion",
+   "es": "Estaba lloviendo. Aun así, salí.",
+   "ja": "雨が降っていた。それでも、出かけた。",
+   "lectura": "あめが ふっていた。それでも、でかけた。",
+   "bloques": [
+    "雨が降っていた。",
+    "それでも、",
+    "出かけた。"
+   ],
+   "romaji": "Ame ga futte ita. Soredemo, dekaketa.",
+   "hueco": {
+    "pre": "雨が降っていた。",
+    "con": "それでも、",
+    "post": "出かけた。"
+   },
+   "distractores": [
+    "だから、",
+    "それで、"
+   ],
+   "registro": "calle",
+   "uso": "それでも = «aun así»: llovía, pero salí igualmente."
+  },
+  {
+   "id": 44,
+   "nivel": "intermedio",
+   "categoria": "causa",
+   "es": "Gracias a ti, pude terminarlo.",
+   "ja": "あなたのおかげで、終わらせることができた。",
+   "lectura": "あなたの おかげで、おわらせる ことが できた。",
+   "bloques": [
+    "あなたのおかげで、",
+    "終わらせることができた。"
+   ],
+   "romaji": "Anata no okagede, owaraseru koto ga dekita.",
+   "hueco": {
+    "pre": "あなたの",
+    "con": "おかげで、",
+    "post": "終わらせることができた。"
+   },
+   "distractores": [
+    "せいで、",
+    "ために、"
+   ],
+   "registro": "calle",
+   "uso": "~のおかげで = «gracias a». Se usa cuando el resultado es bueno."
+  },
+  {
+   "id": 45,
+   "nivel": "intermedio",
+   "categoria": "causa_negativa",
+   "es": "Por tu culpa, perdí el autobús.",
+   "ja": "君のせいで、バスに乗り遅れた。",
+   "lectura": "きみの せいで、バスに のりおくれた。",
+   "bloques": [
+    "君のせいで、",
+    "バスに乗り遅れた。"
+   ],
+   "romaji": "Kimi no seide, basu ni nori okureta.",
+   "hueco": {
+    "pre": "君の",
+    "con": "せいで、",
+    "post": "バスに乗り遅れた。"
+   },
+   "distractores": [
+    "おかげで、",
+    "ために、"
+   ],
+   "registro": "calle",
+   "uso": "~のせいで = «por culpa de». Se usa cuando el resultado es malo."
+  },
+  {
+   "id": 46,
+   "nivel": "intermedio",
+   "categoria": "finalidad",
+   "es": "Estudio japonés para trabajar en Japón.",
+   "ja": "日本で働くために、日本語を勉強している。",
+   "lectura": "にほんで はたらくために、にほんごを べんきょうしている。",
+   "bloques": [
+    "日本で働くために、",
+    "日本語を勉強している。"
+   ],
+   "romaji": "Nihon de hataraku tameni, nihongo o benkyou shite iru.",
+   "hueco": {
+    "pre": "日本で働く",
+    "con": "ために、",
+    "post": "日本語を勉強している。"
+   },
+   "distractores": [
+    "のに、",
+    "から、"
+   ],
+   "registro": "neutro",
+   "uso": "Verbo en diccionario + ために indica el objetivo: trabajar en Japón (para eso estudio)."
+  },
+  {
+   "id": 47,
+   "nivel": "intermedio",
+   "categoria": "finalidad",
+   "es": "Para no olvidarlo, lo he apuntado en el móvil.",
+   "ja": "忘れないように、スマホにメモした。",
+   "lectura": "わすれないように、スマホに メモした。",
+   "bloques": [
+    "忘れないように、",
+    "スマホにメモした。"
+   ],
+   "romaji": "Wasurenai youni, sumaho ni memo shita.",
+   "hueco": {
+    "pre": "忘れない",
+    "con": "ように、",
+    "post": "スマホにメモした。"
+   },
+   "distractores": [
+    "から、",
+    "のに、"
+   ],
+   "registro": "neutro",
+   "uso": "Verbo en negativo + ように = «para que no…»: para no olvidarlo."
+  },
+  {
+   "id": 48,
+   "nivel": "especializado",
+   "categoria": "comparacion",
+   "es": "A mí me gusta el café. En cambio, a mi amigo le gusta el té negro.",
+   "ja": "私はコーヒーが好きだ。それに対して、友達は紅茶が好きだ。",
+   "lectura": "わたしは コーヒーが すきだ。それに たいして、ともだちは こうちゃが すきだ。",
+   "bloques": [
+    "私はコーヒーが好きだ。",
+    "それに対して、",
+    "友達は紅茶が好きだ。"
+   ],
+   "romaji": "Watashi wa koohii ga suki da. Sore nitaishite, tomodachi wa koucha ga suki da.",
+   "hueco": {
+    "pre": "私はコーヒーが好きだ。",
+    "con": "それに対して、",
+    "post": "友達は紅茶が好きだ。"
+   },
+   "distractores": [
+    "だから、",
+    "それに、"
+   ],
+   "registro": "formal",
+   "uso": "それに対して compara dos cosas opuestas: a mí café, a mi amigo té. Formal."
+  },
+  {
+   "id": 49,
+   "nivel": "especializado",
+   "categoria": "contraste_reformulacion",
+   "es": "Este método no es sencillo. De hecho, es bastante difícil.",
+   "ja": "この方法は簡単じゃない。むしろ、かなり難しい。",
+   "lectura": "このほうほうは かんたんじゃない。むしろ、かなり むずかしい。",
+   "bloques": [
+    "この方法は簡単じゃない。",
+    "むしろ、",
+    "かなり難しい。"
+   ],
+   "romaji": "Kono houhou wa kantanja nai. Mushiro, kanari muzukashii.",
+   "hueco": {
+    "pre": "この方法は簡単じゃない。",
+    "con": "むしろ、",
+    "post": "かなり難しい。"
+   },
+   "distractores": [
+    "だから、",
+    "しかも、"
+   ],
+   "registro": "neutro",
+   "uso": "むしろ corrige lo anterior con algo más fuerte: no es fácil, más bien es difícil."
+  },
+  {
+   "id": 50,
+   "nivel": "especializado",
+   "categoria": "resumen",
+   "es": "En resumen, significa que hoy no podemos ir.",
+   "ja": "要するに、今日は行けないってことだ。",
+   "lectura": "ようするに、きょうは いけないって ことだ。",
+   "bloques": [
+    "要するに、",
+    "今日は行けないってことだ。"
+   ],
+   "romaji": "Yousuruni, kyou wa ikenaitte koto da.",
+   "hueco": {
+    "pre": "",
+    "con": "要するに、",
+    "post": "今日は行けないってことだ。"
+   },
+   "distractores": [
+    "でも、",
+    "それに、"
+   ],
+   "registro": "formal",
+   "uso": "要するに resume todo en una idea: en resumen… Más de reuniones y textos."
+  },
+  {
+   "id": 51,
+   "nivel": "especializado",
+   "categoria": "concesion",
+   "es": "Aunque es caro, aun así quiero comprarlo.",
+   "ja": "高いとはいえ、買いたい。",
+   "lectura": "たかいとはいえ、かいたい。",
+   "bloques": [
+    "高いとはいえ、",
+    "買いたい。"
+   ],
+   "romaji": "Takai towaie, kaitai.",
+   "hueco": {
+    "pre": "高い",
+    "con": "とはいえ、",
+    "post": "買いたい。"
+   },
+   "distractores": [
+    "から、",
+    "なら、"
+   ],
+   "registro": "formal",
+   "uso": "~とはいえ = «aunque sea así…». Concede algo y sigue adelante. Formal."
+  },
+  {
+   "id": 52,
+   "nivel": "especializado",
+   "categoria": "intensificacion",
+   "es": "A pesar de que estaba lloviendo, salió.",
+   "ja": "雨が降っていたにもかかわらず、出かけた。",
+   "lectura": "あめが ふっていたにも かかわらず、でかけた。",
+   "bloques": [
+    "雨が降っていた",
+    "にもかかわらず、",
+    "出かけた。"
+   ],
+   "romaji": "Ame ga futte ita nimokakawarazu, dekaketa.",
+   "hueco": {
+    "pre": "雨が降っていた",
+    "con": "にもかかわらず、",
+    "post": "出かけた。"
+   },
+   "distractores": [
+    "から、",
+    "ので、"
+   ],
+   "registro": "formal",
+   "uso": "~にもかかわらず = «a pesar de». Muy formal y escrito."
+  },
+  {
+   "id": 53,
+   "nivel": "especializado",
+   "categoria": "explicacion_causa",
+   "es": "No puedo ir. Y es que mañana tengo un examen.",
+   "ja": "行けない。なぜなら、明日テストがあるからだ。",
+   "lectura": "いけない。なぜなら、あした テストが あるからだ。",
+   "bloques": [
+    "行けない。",
+    "なぜなら、",
+    "明日テストがあるからだ。"
+   ],
+   "romaji": "Ikenai. Nazenara, ashita tesuto ga arukara da.",
+   "hueco": {
+    "pre": "行けない。",
+    "con": "なぜなら、",
+    "post": "明日テストがあるからだ。"
+   },
+   "distractores": [
+    "だから、",
+    "それで、"
+   ],
+   "registro": "formal",
+   "uso": "なぜなら introduce la razón y siempre acaba en から: «y es que…». Formal."
+  },
+  {
+   "id": 54,
+   "nivel": "especializado",
+   "categoria": "hipotesis",
+   "es": "Si eso fuera verdad, tendríamos un problema.",
+   "ja": "それが本当だとしたら、大変なことになる。",
+   "lectura": "それが ほんとうだとしたら、たいへんな ことに なる。",
+   "bloques": [
+    "それが本当だとしたら、",
+    "大変なことになる。"
+   ],
+   "romaji": "Sore ga hontou da toshitara, taihenna koto ni naru.",
+   "hueco": {
+    "pre": "それが本当だ",
+    "con": "としたら、",
+    "post": "大変なことになる。"
+   },
+   "distractores": [
+    "けど、",
+    "から、"
+   ],
+   "registro": "neutro",
+   "uso": "~としたら = «suponiendo que…». Sirve para hipótesis."
+  },
+  {
+   "id": 55,
+   "nivel": "especializado",
+   "categoria": "explicacion",
+   "es": "No puedo ir. Y es que mañana tengo un examen.",
+   "ja": "行けない。というのも、明日テストがあるからだ。",
+   "lectura": "いけない。というのも、あした テストが あるからだ。",
+   "bloques": [
+    "行けない。",
+    "というのも、",
+    "明日テストがあるからだ。"
+   ],
+   "romaji": "Ikenai. Toiunomo, ashita tesuto ga arukara da.",
+   "hueco": {
+    "pre": "行けない。",
+    "con": "というのも、",
+    "post": "明日テストがあるからだ。"
+   },
+   "distractores": [
+    "だから、",
+    "それで、"
+   ],
+   "registro": "formal",
+   "uso": "というのも = «y es que…». Explica el motivo de lo anterior; es escrito."
+  },
+  {
+   "id": 56,
+   "nivel": "basico",
+   "categoria": "secuencia_acciones",
+   "es": "Me levanto, me lavo la cara y voy al colegio.",
+   "ja": "朝起きて、顔を洗って、学校に行く。",
+   "lectura": "あさ おきて、かおを あらって、がっこうに いく。",
+   "bloques": [
+    "朝起きて、",
+    "顔を洗って、",
+    "学校に行く。"
+   ],
+   "romaji": "Asaokite, kao o aratte, gakkou ni iku.",
+   "hueco": {
+    "pre": "朝起き",
+    "con": "て、",
+    "post": "顔を洗って、学校に行く。"
+   },
+   "distractores": [
+    "ないで、",
+    "ながら、"
+   ],
+   "registro": "calle",
+   "uso": "La forma て une acciones en orden: me levanto, me lavo la cara, voy al colegio."
+  },
+  {
+   "id": 57,
+   "nivel": "basico",
+   "categoria": "adicion_conversacional",
+   "es": "Ah, y también tengo que comprar huevos.",
+   "ja": "あ、それと、卵も買わなきゃ。",
+   "lectura": "あ、それと、たまごも かわなきゃ。",
+   "bloques": [
+    "あ、",
+    "それと、",
+    "卵も買わなきゃ。"
+   ],
+   "romaji": "A, soreto, tamago mo kawanakya.",
+   "hueco": {
+    "pre": "あ、",
+    "con": "それと、",
+    "post": "卵も買わなきゃ。"
+   },
+   "distractores": [
+    "でも、",
+    "だから、"
+   ],
+   "registro": "calle",
+   "uso": "それと añade un elemento más, muy hablado: «y también…»."
+  },
+  {
+   "id": 58,
+   "nivel": "basico",
+   "categoria": "transicion_conversacional",
+   "es": "Bueno, ¡hasta mañana!",
+   "ja": "じゃあ、また明日！",
+   "lectura": "じゃあ、また あした！",
+   "bloques": [
+    "じゃあ、",
+    "また明日！"
+   ],
+   "romaji": "Jaa, mata ashita!",
+   "hueco": {
+    "pre": "",
+    "con": "じゃあ、",
+    "post": "また明日！"
+   },
+   "distractores": [
+    "でも、",
+    "だから、"
+   ],
+   "registro": "calle",
+   "uso": "じゃあ cierra la conversación o pasa a otra cosa: «bueno…»."
+  },
+  {
+   "id": 59,
+   "nivel": "intermedio",
+   "categoria": "consecuencia_condicional",
+   "es": "¿Vas en coche? En ese caso, voy contigo.",
+   "ja": "車で行くの？それなら、私も一緒に行く。",
+   "lectura": "くるまで いくの？それなら、わたしも いっしょに いく。",
+   "bloques": [
+    "車で行くの？",
+    "それなら、",
+    "私も一緒に行く。"
+   ],
+   "romaji": "Kuruma de iku no? Sorenara, watashi mo issho ni iku.",
+   "hueco": {
+    "pre": "車で行くの？",
+    "con": "それなら、",
+    "post": "私も一緒に行く。"
+   },
+   "distractores": [
+    "でも、",
+    "それから、"
+   ],
+   "registro": "calle",
+   "uso": "それなら responde a lo que ha dicho el otro: «en ese caso…»."
+  },
+  {
+   "id": 60,
+   "nivel": "intermedio",
+   "categoria": "secuencia_resultado_inesperado",
+   "es": "Abrí la puerta. Entonces, salió un gato.",
+   "ja": "ドアを開けた。すると、猫が出てきた。",
+   "lectura": "ドアを あけた。すると、ねこが でてきた。",
+   "bloques": [
+    "ドアを開けた。",
+    "すると、",
+    "猫が出てきた。"
+   ],
+   "romaji": "Doa o aketa. Suruto, neko ga dete kita.",
+   "hueco": {
+    "pre": "ドアを開けた。",
+    "con": "すると、",
+    "post": "猫が出てきた。"
+   },
+   "distractores": [
+    "でも、",
+    "だから、"
+   ],
+   "registro": "neutro",
+   "uso": "すると cuenta algo que ocurre justo después, a menudo sorprendente."
+  },
+  {
+   "id": 61,
+   "nivel": "intermedio",
+   "categoria": "excepcion_aclaracion",
+   "es": "Aquí puedes hacer fotos. Eso sí, no uses el flash.",
+   "ja": "ここで写真を撮ってもいい。ただし、フラッシュは使わないで。",
+   "lectura": "ここで しゃしんを とっても いい。ただし、フラッシュは つかわないで。",
+   "bloques": [
+    "ここで写真を撮ってもいい。",
+    "ただし、",
+    "フラッシュは使わないで。"
+   ],
+   "romaji": "Koko de shashin o to ttemo ii. Tadashi, furasshu wa tsukawanaide.",
+   "hueco": {
+    "pre": "ここで写真を撮ってもいい。",
+    "con": "ただし、",
+    "post": "フラッシュは使わないで。"
+   },
+   "distractores": [
+    "だから、",
+    "それに、"
+   ],
+   "registro": "neutro",
+   "uso": "ただし pone una limitación a lo que acabas de permitir: eso sí, sin flash."
+  },
+  {
+   "id": 62,
+   "nivel": "intermedio",
+   "categoria": "alternativa_compensacion",
+   "es": "Hoy no puedo ir. A cambio, mañana sí.",
+   "ja": "今日は行けない。そのかわり、明日なら行けるよ。",
+   "lectura": "きょうは いけない。そのかわり、あしたなら いけるよ。",
+   "bloques": [
+    "今日は行けない。",
+    "そのかわり、",
+    "明日なら行けるよ。"
+   ],
+   "romaji": "Kyou wa ikenai. Sonokawari, ashita nara ikeru yo.",
+   "hueco": {
+    "pre": "今日は行けない。",
+    "con": "そのかわり、",
+    "post": "明日なら行けるよ。"
+   },
+   "distractores": [
+    "だから、",
+    "しかも、"
+   ],
+   "registro": "neutro",
+   "uso": "そのかわり ofrece una compensación: hoy no, pero a cambio mañana sí."
+  },
+  {
+   "id": 63,
+   "nivel": "intermedio",
+   "categoria": "adicion_estructura",
+   "es": "No solo habla japonés, sino también coreano.",
+   "ja": "彼は日本語だけでなく、韓国語も話せる。",
+   "lectura": "かれは にほんごだけでなく、かんこくごも はなせる。",
+   "bloques": [
+    "彼は日本語だけでなく、",
+    "韓国語も",
+    "話せる。"
+   ],
+   "romaji": "Kare wa nihongo dakedenaku, kankokugo mo hanaseru.",
+   "hueco": {
+    "pre": "彼は日本語",
+    "con": "だけでなく、",
+    "post": "韓国語も話せる。"
+   },
+   "distractores": [
+    "だけで、",
+    "じゃなくて、"
+   ],
+   "registro": "neutro",
+   "uso": "~だけでなく = «no solo… sino también». Añade un segundo elemento: japonés y coreano."
+  },
+  {
+   "id": 64,
+   "nivel": "intermedio",
+   "categoria": "contraste_conjuncion",
+   "es": "Hoy no puedo ir, pero mañana sí.",
+   "ja": "今日は行けないが、明日なら行ける。",
+   "lectura": "きょうは いけないが、あしたなら いける。",
+   "bloques": [
+    "今日は行けない",
+    "が、",
+    "明日なら行ける。"
+   ],
+   "romaji": "Kyou wa ikenai ga, ashita nara ikeru.",
+   "hueco": {
+    "pre": "今日は行けない",
+    "con": "が、",
+    "post": "明日なら行ける。"
+   },
+   "distractores": [
+    "から、",
+    "ので、"
+   ],
+   "registro": "neutro",
+   "uso": "が (al final de una cláusula) = «pero». Más formal que けど."
+  },
+  {
+   "id": 65,
+   "nivel": "basico",
+   "categoria": "alternativa_correccion",
+   "es": "No quiero café; prefiero té.",
+   "ja": "コーヒーじゃなくて、お茶がいい。",
+   "lectura": "コーヒーじゃなくて、おちゃが いい。",
+   "bloques": [
+    "コーヒー",
+    "じゃなくて、",
+    "お茶がいい。"
+   ],
+   "romaji": "Koohii janakute, ocha ga ii.",
+   "hueco": {
+    "pre": "コーヒー",
+    "con": "じゃなくて、",
+    "post": "お茶がいい。"
+   },
+   "distractores": [
+    "だけでなく、",
+    "とか、"
+   ],
+   "registro": "calle",
+   "uso": "~じゃなくて = «no… sino…»: niega lo primero y corrige con lo segundo."
+  },
+  {
+   "id": 66,
+   "nivel": "intermedio",
+   "categoria": "accion_sin_hacer_otra",
+   "es": "Fui al colegio sin desayunar.",
+   "ja": "朝ご飯を食べずに、学校に行った。",
+   "lectura": "あさごはんを たべずに、がっこうに いった。",
+   "bloques": [
+    "朝ご飯を食べずに、",
+    "学校に行った。"
+   ],
+   "romaji": "Asagohan o tabezu ni, gakkou ni itta.",
+   "hueco": {
+    "pre": "朝ご飯を食べ",
+    "con": "ずに、",
+    "post": "学校に行った。"
+   },
+   "distractores": [
+    "てから、",
+    "ながら、"
+   ],
+   "registro": "neutro",
+   "uso": "~ずに = «sin hacer»: fui al colegio sin desayunar."
+  }
+ ],
+ "furi": {
+  "昨日は買い物に行った。そして、映画も見た。": [
+   [
+    "昨日",
+    "きのう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "買",
+    "か"
+   ],
+   [
+    "い",
+    ""
+   ],
+   [
+    "物",
+    "もの"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "った。そして、",
+    ""
+   ],
+   [
+    "映画",
+    "えいが"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "た。",
+    ""
+   ]
+  ],
+  "昨日は買い物に行った。": [
+   [
+    "昨日",
+    "きのう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "買",
+    "か"
+   ],
+   [
+    "い",
+    ""
+   ],
+   [
+    "物",
+    "もの"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "った。",
+    ""
+   ]
+  ],
+  "そして、": [
+   [
+    "そして、",
+    ""
+   ]
+  ],
+  "映画も見た。": [
+   [
+    "映画",
+    "えいが"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "た。",
+    ""
+   ]
+  ],
+  "先にご飯を食べた。それから、映画を見た。": [
+   [
+    "先",
+    "さき"
+   ],
+   [
+    "にご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べた。それから、",
+    ""
+   ],
+   [
+    "映画",
+    "えいが"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "た。",
+    ""
+   ]
+  ],
+  "先にご飯を食べた。": [
+   [
+    "先",
+    "さき"
+   ],
+   [
+    "にご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べた。",
+    ""
+   ]
+  ],
+  "それから、": [
+   [
+    "それから、",
+    ""
+   ]
+  ],
+  "映画を見た。": [
+   [
+    "映画",
+    "えいが"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "た。",
+    ""
+   ]
+  ],
+  "この店は安い。それに、料理もおいしい。": [
+   [
+    "この",
+    ""
+   ],
+   [
+    "店",
+    "みせ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "安",
+    "やす"
+   ],
+   [
+    "い。それに、",
+    ""
+   ],
+   [
+    "料理",
+    "りょうり"
+   ],
+   [
+    "もおいしい。",
+    ""
+   ]
+  ],
+  "この店は安い。": [
+   [
+    "この",
+    ""
+   ],
+   [
+    "店",
+    "みせ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "安",
+    "やす"
+   ],
+   [
+    "い。",
+    ""
+   ]
+  ],
+  "それに、": [
+   [
+    "それに、",
+    ""
+   ]
+  ],
+  "料理もおいしい。": [
+   [
+    "料理",
+    "りょうり"
+   ],
+   [
+    "もおいしい。",
+    ""
+   ]
+  ],
+  "牛乳を買わないと。あと、パンも。": [
+   [
+    "牛乳",
+    "ぎゅうにゅう"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "買",
+    "か"
+   ],
+   [
+    "わないと。あと、パンも。",
+    ""
+   ]
+  ],
+  "牛乳を": [
+   [
+    "牛乳",
+    "ぎゅうにゅう"
+   ],
+   [
+    "を",
+    ""
+   ]
+  ],
+  "買わないと。": [
+   [
+    "買",
+    "か"
+   ],
+   [
+    "わないと。",
+    ""
+   ]
+  ],
+  "あと、": [
+   [
+    "あと、",
+    ""
+   ]
+  ],
+  "パンも。": [
+   [
+    "パンも。",
+    ""
+   ]
+  ],
+  "行きたかった。でも、行けなかった。": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "きたかった。でも、",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けなかった。",
+    ""
+   ]
+  ],
+  "行きたかった。": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "きたかった。",
+    ""
+   ]
+  ],
+  "でも、": [
+   [
+    "でも、",
+    ""
+   ]
+  ],
+  "行けなかった。": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けなかった。",
+    ""
+   ]
+  ],
+  "ちょっと遠いけど、歩いて行こう。": [
+   [
+    "ちょっと",
+    ""
+   ],
+   [
+    "遠",
+    "とお"
+   ],
+   [
+    "いけど、",
+    ""
+   ],
+   [
+    "歩",
+    "ある"
+   ],
+   [
+    "いて",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "こう。",
+    ""
+   ]
+  ],
+  "ちょっと遠い": [
+   [
+    "ちょっと",
+    ""
+   ],
+   [
+    "遠",
+    "とお"
+   ],
+   [
+    "い",
+    ""
+   ]
+  ],
+  "けど、": [
+   [
+    "けど、",
+    ""
+   ]
+  ],
+  "歩いて行こう。": [
+   [
+    "歩",
+    "ある"
+   ],
+   [
+    "いて",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "こう。",
+    ""
+   ]
+  ],
+  "明日テストがある。だから、今日は勉強する。": [
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "テストがある。だから、",
+    ""
+   ],
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "勉強",
+    "べんきょう"
+   ],
+   [
+    "する。",
+    ""
+   ]
+  ],
+  "明日テストがある。": [
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "テストがある。",
+    ""
+   ]
+  ],
+  "だから、": [
+   [
+    "だから、",
+    ""
+   ]
+  ],
+  "今日は勉強する。": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "勉強",
+    "べんきょう"
+   ],
+   [
+    "する。",
+    ""
+   ]
+  ],
+  "電車に乗り遅れた。それで、遅刻した。": [
+   [
+    "電車",
+    "でんしゃ"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "乗",
+    "の"
+   ],
+   [
+    "り",
+    ""
+   ],
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れた。それで、",
+    ""
+   ],
+   [
+    "遅刻",
+    "ちこく"
+   ],
+   [
+    "した。",
+    ""
+   ]
+  ],
+  "電車に乗り遅れた。": [
+   [
+    "電車",
+    "でんしゃ"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "乗",
+    "の"
+   ],
+   [
+    "り",
+    ""
+   ],
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れた。",
+    ""
+   ]
+  ],
+  "それで、": [
+   [
+    "それで、",
+    ""
+   ]
+  ],
+  "遅刻した。": [
+   [
+    "遅刻",
+    "ちこく"
+   ],
+   [
+    "した。",
+    ""
+   ]
+  ],
+  "疲れたから、今日は帰る。": [
+   [
+    "疲",
+    "つか"
+   ],
+   [
+    "れたから、",
+    ""
+   ],
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "帰",
+    "かえ"
+   ],
+   [
+    "る。",
+    ""
+   ]
+  ],
+  "疲れた": [
+   [
+    "疲",
+    "つか"
+   ],
+   [
+    "れた",
+    ""
+   ]
+  ],
+  "から、": [
+   [
+    "から、",
+    ""
+   ]
+  ],
+  "今日は帰る。": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "帰",
+    "かえ"
+   ],
+   [
+    "る。",
+    ""
+   ]
+  ],
+  "明日仕事なので、今日は行けません。": [
+   [
+    "明日仕事",
+    "あしたしごと"
+   ],
+   [
+    "なので、",
+    ""
+   ],
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けません。",
+    ""
+   ]
+  ],
+  "明日仕事": [
+   [
+    "明日仕事",
+    "あしたしごと"
+   ]
+  ],
+  "なので、": [
+   [
+    "なので、",
+    ""
+   ]
+  ],
+  "今日は行けません。": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けません。",
+    ""
+   ]
+  ],
+  "まず、アプリを開いて。": [
+   [
+    "まず、アプリを",
+    ""
+   ],
+   [
+    "開",
+    "ひら"
+   ],
+   [
+    "いて。",
+    ""
+   ]
+  ],
+  "まず、": [
+   [
+    "まず、",
+    ""
+   ]
+  ],
+  "アプリを開いて。": [
+   [
+    "アプリを",
+    ""
+   ],
+   [
+    "開",
+    "ひら"
+   ],
+   [
+    "いて。",
+    ""
+   ]
+  ],
+  "次に、このボタンを押して。": [
+   [
+    "次",
+    "つぎ"
+   ],
+   [
+    "に、このボタンを",
+    ""
+   ],
+   [
+    "押",
+    "お"
+   ],
+   [
+    "して。",
+    ""
+   ]
+  ],
+  "次に、": [
+   [
+    "次",
+    "つぎ"
+   ],
+   [
+    "に、",
+    ""
+   ]
+  ],
+  "このボタンを押して。": [
+   [
+    "このボタンを",
+    ""
+   ],
+   [
+    "押",
+    "お"
+   ],
+   [
+    "して。",
+    ""
+   ]
+  ],
+  "最後に、変更を保存して。": [
+   [
+    "最後",
+    "さいご"
+   ],
+   [
+    "に、",
+    ""
+   ],
+   [
+    "変更",
+    "へんこう"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "保存",
+    "ほぞん"
+   ],
+   [
+    "して。",
+    ""
+   ]
+  ],
+  "最後に、": [
+   [
+    "最後",
+    "さいご"
+   ],
+   [
+    "に、",
+    ""
+   ]
+  ],
+  "変更を保存して。": [
+   [
+    "変更",
+    "へんこう"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "保存",
+    "ほぞん"
+   ],
+   [
+    "して。",
+    ""
+   ]
+  ],
+  "スポーツが好き。例えば、サッカーとか。": [
+   [
+    "スポーツが",
+    ""
+   ],
+   [
+    "好",
+    "す"
+   ],
+   [
+    "き。",
+    ""
+   ],
+   [
+    "例",
+    "たと"
+   ],
+   [
+    "えば、サッカーとか。",
+    ""
+   ]
+  ],
+  "スポーツが好き。": [
+   [
+    "スポーツが",
+    ""
+   ],
+   [
+    "好",
+    "す"
+   ],
+   [
+    "き。",
+    ""
+   ]
+  ],
+  "例えば、": [
+   [
+    "例",
+    "たと"
+   ],
+   [
+    "えば、",
+    ""
+   ]
+  ],
+  "サッカーとか。": [
+   [
+    "サッカーとか。",
+    ""
+   ]
+  ],
+  "お金がない。つまり、買えない。": [
+   [
+    "お",
+    ""
+   ],
+   [
+    "金",
+    "かね"
+   ],
+   [
+    "がない。つまり、",
+    ""
+   ],
+   [
+    "買",
+    "か"
+   ],
+   [
+    "えない。",
+    ""
+   ]
+  ],
+  "お金がない。": [
+   [
+    "お",
+    ""
+   ],
+   [
+    "金",
+    "かね"
+   ],
+   [
+    "がない。",
+    ""
+   ]
+  ],
+  "つまり、": [
+   [
+    "つまり、",
+    ""
+   ]
+  ],
+  "買えない。": [
+   [
+    "買",
+    "か"
+   ],
+   [
+    "えない。",
+    ""
+   ]
+  ],
+  "ちなみに、何歳？": [
+   [
+    "ちなみに、",
+    ""
+   ],
+   [
+    "何歳",
+    "なんさい"
+   ],
+   [
+    "？",
+    ""
+   ]
+  ],
+  "ちなみに、": [
+   [
+    "ちなみに、",
+    ""
+   ]
+  ],
+  "何歳？": [
+   [
+    "何歳",
+    "なんさい"
+   ],
+   [
+    "？",
+    ""
+   ]
+  ],
+  "ところで、明日は何する？": [
+   [
+    "ところで、",
+    ""
+   ],
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "する？",
+    ""
+   ]
+  ],
+  "ところで、": [
+   [
+    "ところで、",
+    ""
+   ]
+  ],
+  "明日は何する？": [
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "する？",
+    ""
+   ]
+  ],
+  "お茶にする？それとも、コーヒー？": [
+   [
+    "お",
+    ""
+   ],
+   [
+    "茶",
+    "ちゃ"
+   ],
+   [
+    "にする？それとも、コーヒー？",
+    ""
+   ]
+  ],
+  "お茶にする？": [
+   [
+    "お",
+    ""
+   ],
+   [
+    "茶",
+    "ちゃ"
+   ],
+   [
+    "にする？",
+    ""
+   ]
+  ],
+  "それとも、": [
+   [
+    "それとも、",
+    ""
+   ]
+  ],
+  "コーヒー？": [
+   [
+    "コーヒー？",
+    ""
+   ]
+  ],
+  "申し込みはウェブまたは電話でできます。": [
+   [
+    "申",
+    "もう"
+   ],
+   [
+    "し",
+    ""
+   ],
+   [
+    "込",
+    "こ"
+   ],
+   [
+    "みはウェブまたは",
+    ""
+   ],
+   [
+    "電話",
+    "でんわ"
+   ],
+   [
+    "でできます。",
+    ""
+   ]
+  ],
+  "申し込みは": [
+   [
+    "申",
+    "もう"
+   ],
+   [
+    "し",
+    ""
+   ],
+   [
+    "込",
+    "こ"
+   ],
+   [
+    "みは",
+    ""
+   ]
+  ],
+  "ウェブ": [
+   [
+    "ウェブ",
+    ""
+   ]
+  ],
+  "または": [
+   [
+    "または",
+    ""
+   ]
+  ],
+  "電話でできます。": [
+   [
+    "電話",
+    "でんわ"
+   ],
+   [
+    "でできます。",
+    ""
+   ]
+  ],
+  "ご飯を食べてから、出かける。": [
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べてから、",
+    ""
+   ],
+   [
+    "出",
+    "で"
+   ],
+   [
+    "かける。",
+    ""
+   ]
+  ],
+  "ご飯を食べてから、": [
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べてから、",
+    ""
+   ]
+  ],
+  "出かける。": [
+   [
+    "出",
+    "で"
+   ],
+   [
+    "かける。",
+    ""
+   ]
+  ],
+  "寝る前に、シャワーを浴びる。": [
+   [
+    "寝",
+    "ね"
+   ],
+   [
+    "る",
+    ""
+   ],
+   [
+    "前",
+    "まえ"
+   ],
+   [
+    "に、シャワーを",
+    ""
+   ],
+   [
+    "浴",
+    "あ"
+   ],
+   [
+    "びる。",
+    ""
+   ]
+  ],
+  "寝る前に、": [
+   [
+    "寝",
+    "ね"
+   ],
+   [
+    "る",
+    ""
+   ],
+   [
+    "前",
+    "まえ"
+   ],
+   [
+    "に、",
+    ""
+   ]
+  ],
+  "シャワーを浴びる。": [
+   [
+    "シャワーを",
+    ""
+   ],
+   [
+    "浴",
+    "あ"
+   ],
+   [
+    "びる。",
+    ""
+   ]
+  ],
+  "授業のあとで、電話して。": [
+   [
+    "授業",
+    "じゅぎょう"
+   ],
+   [
+    "のあとで、",
+    ""
+   ],
+   [
+    "電話",
+    "でんわ"
+   ],
+   [
+    "して。",
+    ""
+   ]
+  ],
+  "授業のあとで、": [
+   [
+    "授業",
+    "じゅぎょう"
+   ],
+   [
+    "のあとで、",
+    ""
+   ]
+  ],
+  "電話して。": [
+   [
+    "電話",
+    "でんわ"
+   ],
+   [
+    "して。",
+    ""
+   ]
+  ],
+  "時間があるとき、本を読む。": [
+   [
+    "時間",
+    "じかん"
+   ],
+   [
+    "があるとき、",
+    ""
+   ],
+   [
+    "本",
+    "ほん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "読",
+    "よ"
+   ],
+   [
+    "む。",
+    ""
+   ]
+  ],
+  "時間があるとき、": [
+   [
+    "時間",
+    "じかん"
+   ],
+   [
+    "があるとき、",
+    ""
+   ]
+  ],
+  "本を読む。": [
+   [
+    "本",
+    "ほん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "読",
+    "よ"
+   ],
+   [
+    "む。",
+    ""
+   ]
+  ],
+  "もし明日晴れたら、公園に行こう。": [
+   [
+    "もし",
+    ""
+   ],
+   [
+    "明日晴",
+    "あしたは"
+   ],
+   [
+    "れたら、",
+    ""
+   ],
+   [
+    "公園",
+    "こうえん"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "こう。",
+    ""
+   ]
+  ],
+  "もし": [
+   [
+    "もし",
+    ""
+   ]
+  ],
+  "明日晴れたら、": [
+   [
+    "明日晴",
+    "あしたは"
+   ],
+   [
+    "れたら、",
+    ""
+   ]
+  ],
+  "公園に行こう。": [
+   [
+    "公園",
+    "こうえん"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "こう。",
+    ""
+   ]
+  ],
+  "アニメが好きなら、これを見てみて。": [
+   [
+    "アニメが",
+    ""
+   ],
+   [
+    "好",
+    "す"
+   ],
+   [
+    "きなら、これを",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "てみて。",
+    ""
+   ]
+  ],
+  "アニメが好き": [
+   [
+    "アニメが",
+    ""
+   ],
+   [
+    "好",
+    "す"
+   ],
+   [
+    "き",
+    ""
+   ]
+  ],
+  "なら、": [
+   [
+    "なら、",
+    ""
+   ]
+  ],
+  "これを見てみて。": [
+   [
+    "これを",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "てみて。",
+    ""
+   ]
+  ],
+  "時間があれば、行くよ。": [
+   [
+    "時間",
+    "じかん"
+   ],
+   [
+    "があれば、",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くよ。",
+    ""
+   ]
+  ],
+  "時間があれば、": [
+   [
+    "時間",
+    "じかん"
+   ],
+   [
+    "があれば、",
+    ""
+   ]
+  ],
+  "行くよ。": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くよ。",
+    ""
+   ]
+  ],
+  "このボタンを押すと、画面が変わる。": [
+   [
+    "このボタンを",
+    ""
+   ],
+   [
+    "押",
+    "お"
+   ],
+   [
+    "すと、",
+    ""
+   ],
+   [
+    "画面",
+    "がめん"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "変",
+    "か"
+   ],
+   [
+    "わる。",
+    ""
+   ]
+  ],
+  "このボタンを押すと、": [
+   [
+    "このボタンを",
+    ""
+   ],
+   [
+    "押",
+    "お"
+   ],
+   [
+    "すと、",
+    ""
+   ]
+  ],
+  "画面が変わる。": [
+   [
+    "画面",
+    "がめん"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "変",
+    "か"
+   ],
+   [
+    "わる。",
+    ""
+   ]
+  ],
+  "忙しくても、行くよ。": [
+   [
+    "忙",
+    "いそが"
+   ],
+   [
+    "しくても、",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くよ。",
+    ""
+   ]
+  ],
+  "忙しくても、": [
+   [
+    "忙",
+    "いそが"
+   ],
+   [
+    "しくても、",
+    ""
+   ]
+  ],
+  "説明したのに、分かってくれない。": [
+   [
+    "説明",
+    "せつめい"
+   ],
+   [
+    "したのに、",
+    ""
+   ],
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "かってくれない。",
+    ""
+   ]
+  ],
+  "説明した": [
+   [
+    "説明",
+    "せつめい"
+   ],
+   [
+    "した",
+    ""
+   ]
+  ],
+  "のに、": [
+   [
+    "のに、",
+    ""
+   ]
+  ],
+  "分かってくれない。": [
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "かってくれない。",
+    ""
+   ]
+  ],
+  "音楽を聞きながら、勉強する。": [
+   [
+    "音楽",
+    "おんがく"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "聞",
+    "き"
+   ],
+   [
+    "きながら、",
+    ""
+   ],
+   [
+    "勉強",
+    "べんきょう"
+   ],
+   [
+    "する。",
+    ""
+   ]
+  ],
+  "音楽を聞きながら、": [
+   [
+    "音楽",
+    "おんがく"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "聞",
+    "き"
+   ],
+   [
+    "きながら、",
+    ""
+   ]
+  ],
+  "勉強する。": [
+   [
+    "勉強",
+    "べんきょう"
+   ],
+   [
+    "する。",
+    ""
+   ]
+  ],
+  "ここは安いし、近いし、よく来る。": [
+   [
+    "ここは",
+    ""
+   ],
+   [
+    "安",
+    "やす"
+   ],
+   [
+    "いし、",
+    ""
+   ],
+   [
+    "近",
+    "ちか"
+   ],
+   [
+    "いし、よく",
+    ""
+   ],
+   [
+    "来",
+    "く"
+   ],
+   [
+    "る。",
+    ""
+   ]
+  ],
+  "ここは安いし、": [
+   [
+    "ここは",
+    ""
+   ],
+   [
+    "安",
+    "やす"
+   ],
+   [
+    "いし、",
+    ""
+   ]
+  ],
+  "近いし、": [
+   [
+    "近",
+    "ちか"
+   ],
+   [
+    "いし、",
+    ""
+   ]
+  ],
+  "よく来る。": [
+   [
+    "よく",
+    ""
+   ],
+   [
+    "来",
+    "く"
+   ],
+   [
+    "る。",
+    ""
+   ]
+  ],
+  "週末は映画を見たり、ゲームをしたりする。": [
+   [
+    "週末",
+    "しゅうまつ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "映画",
+    "えいが"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "たり、ゲームをしたりする。",
+    ""
+   ]
+  ],
+  "週末は": [
+   [
+    "週末",
+    "しゅうまつ"
+   ],
+   [
+    "は",
+    ""
+   ]
+  ],
+  "映画を見たり、": [
+   [
+    "映画",
+    "えいが"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "たり、",
+    ""
+   ]
+  ],
+  "ゲームをしたりする。": [
+   [
+    "ゲームをしたりする。",
+    ""
+   ]
+  ],
+  "あの店は安い。しかも、おいしい。": [
+   [
+    "あの",
+    ""
+   ],
+   [
+    "店",
+    "みせ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "安",
+    "やす"
+   ],
+   [
+    "い。しかも、おいしい。",
+    ""
+   ]
+  ],
+  "あの店は安い。": [
+   [
+    "あの",
+    ""
+   ],
+   [
+    "店",
+    "みせ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "安",
+    "やす"
+   ],
+   [
+    "い。",
+    ""
+   ]
+  ],
+  "しかも、": [
+   [
+    "しかも、",
+    ""
+   ]
+  ],
+  "おいしい。": [
+   [
+    "おいしい。",
+    ""
+   ]
+  ],
+  "このアプリはとても便利だ。さらに、無料で使える。": [
+   [
+    "このアプリはとても",
+    ""
+   ],
+   [
+    "便利",
+    "べんり"
+   ],
+   [
+    "だ。さらに、",
+    ""
+   ],
+   [
+    "無料",
+    "むりょう"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "使",
+    "つか"
+   ],
+   [
+    "える。",
+    ""
+   ]
+  ],
+  "このアプリはとても便利だ。": [
+   [
+    "このアプリはとても",
+    ""
+   ],
+   [
+    "便利",
+    "べんり"
+   ],
+   [
+    "だ。",
+    ""
+   ]
+  ],
+  "さらに、": [
+   [
+    "さらに、",
+    ""
+   ]
+  ],
+  "無料で使える。": [
+   [
+    "無料",
+    "むりょう"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "使",
+    "つか"
+   ],
+   [
+    "える。",
+    ""
+   ]
+  ],
+  "今日は寒い。そのうえ、雨も降っている。": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "寒",
+    "さむ"
+   ],
+   [
+    "い。そのうえ、",
+    ""
+   ],
+   [
+    "雨",
+    "あめ"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "降",
+    "ふ"
+   ],
+   [
+    "っている。",
+    ""
+   ]
+  ],
+  "今日は寒い。": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "寒",
+    "さむ"
+   ],
+   [
+    "い。",
+    ""
+   ]
+  ],
+  "そのうえ、": [
+   [
+    "そのうえ、",
+    ""
+   ]
+  ],
+  "雨も降っている。": [
+   [
+    "雨",
+    "あめ"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "降",
+    "ふ"
+   ],
+   [
+    "っている。",
+    ""
+   ]
+  ],
+  "やってみた。しかし、うまくいかなかった。": [
+   [
+    "やってみた。しかし、うまくいかなかった。",
+    ""
+   ]
+  ],
+  "やってみた。": [
+   [
+    "やってみた。",
+    ""
+   ]
+  ],
+  "しかし、": [
+   [
+    "しかし、",
+    ""
+   ]
+  ],
+  "うまくいかなかった。": [
+   [
+    "うまくいかなかった。",
+    ""
+   ]
+  ],
+  "この仕事は給料がいい。一方で、かなり大変だ。": [
+   [
+    "この",
+    ""
+   ],
+   [
+    "仕事",
+    "しごと"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "給料",
+    "きゅうりょう"
+   ],
+   [
+    "がいい。",
+    ""
+   ],
+   [
+    "一方",
+    "いっぽう"
+   ],
+   [
+    "で、かなり",
+    ""
+   ],
+   [
+    "大変",
+    "たいへん"
+   ],
+   [
+    "だ。",
+    ""
+   ]
+  ],
+  "この仕事は給料がいい。": [
+   [
+    "この",
+    ""
+   ],
+   [
+    "仕事",
+    "しごと"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "給料",
+    "きゅうりょう"
+   ],
+   [
+    "がいい。",
+    ""
+   ]
+  ],
+  "一方で、": [
+   [
+    "一方",
+    "いっぽう"
+   ],
+   [
+    "で、",
+    ""
+   ]
+  ],
+  "かなり大変だ。": [
+   [
+    "かなり",
+    ""
+   ],
+   [
+    "大変",
+    "たいへん"
+   ],
+   [
+    "だ。",
+    ""
+   ]
+  ],
+  "簡単だと思っていた。ところが、難しかった。": [
+   [
+    "簡単",
+    "かんたん"
+   ],
+   [
+    "だと",
+    ""
+   ],
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "っていた。ところが、",
+    ""
+   ],
+   [
+    "難",
+    "むずか"
+   ],
+   [
+    "しかった。",
+    ""
+   ]
+  ],
+  "簡単だと思っていた。": [
+   [
+    "簡単",
+    "かんたん"
+   ],
+   [
+    "だと",
+    ""
+   ],
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "っていた。",
+    ""
+   ]
+  ],
+  "ところが、": [
+   [
+    "ところが、",
+    ""
+   ]
+  ],
+  "難しかった。": [
+   [
+    "難",
+    "むずか"
+   ],
+   [
+    "しかった。",
+    ""
+   ]
+  ],
+  "連絡した。それなのに、来なかった。": [
+   [
+    "連絡",
+    "れんらく"
+   ],
+   [
+    "した。それなのに、",
+    ""
+   ],
+   [
+    "来",
+    "こ"
+   ],
+   [
+    "なかった。",
+    ""
+   ]
+  ],
+  "連絡した。": [
+   [
+    "連絡",
+    "れんらく"
+   ],
+   [
+    "した。",
+    ""
+   ]
+  ],
+  "それなのに、": [
+   [
+    "それなのに、",
+    ""
+   ]
+  ],
+  "来なかった。": [
+   [
+    "来",
+    "こ"
+   ],
+   [
+    "なかった。",
+    ""
+   ]
+  ],
+  "電車が遅れた。そのため、遅刻した。": [
+   [
+    "電車",
+    "でんしゃ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れた。そのため、",
+    ""
+   ],
+   [
+    "遅刻",
+    "ちこく"
+   ],
+   [
+    "した。",
+    ""
+   ]
+  ],
+  "電車が遅れた。": [
+   [
+    "電車",
+    "でんしゃ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れた。",
+    ""
+   ]
+  ],
+  "そのため、": [
+   [
+    "そのため、",
+    ""
+   ]
+  ],
+  "毎日練習した。その結果、優勝した。": [
+   [
+    "毎日練習",
+    "まいにちれんしゅう"
+   ],
+   [
+    "した。その",
+    ""
+   ],
+   [
+    "結果",
+    "けっか"
+   ],
+   [
+    "、",
+    ""
+   ],
+   [
+    "優勝",
+    "ゆうしょう"
+   ],
+   [
+    "した。",
+    ""
+   ]
+  ],
+  "毎日練習した。": [
+   [
+    "毎日練習",
+    "まいにちれんしゅう"
+   ],
+   [
+    "した。",
+    ""
+   ]
+  ],
+  "その結果、": [
+   [
+    "その",
+    ""
+   ],
+   [
+    "結果",
+    "けっか"
+   ],
+   [
+    "、",
+    ""
+   ]
+  ],
+  "優勝した。": [
+   [
+    "優勝",
+    "ゆうしょう"
+   ],
+   [
+    "した。",
+    ""
+   ]
+  ],
+  "どうすればいいか分からなかった。そこで、聞いてみることにした。": [
+   [
+    "どうすればいいか",
+    ""
+   ],
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "からなかった。そこで、",
+    ""
+   ],
+   [
+    "聞",
+    "き"
+   ],
+   [
+    "いてみることにした。",
+    ""
+   ]
+  ],
+  "どうすればいいか分からなかった。": [
+   [
+    "どうすればいいか",
+    ""
+   ],
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "からなかった。",
+    ""
+   ]
+  ],
+  "そこで、": [
+   [
+    "そこで、",
+    ""
+   ]
+  ],
+  "聞いてみることにした。": [
+   [
+    "聞",
+    "き"
+   ],
+   [
+    "いてみることにした。",
+    ""
+   ]
+  ],
+  "雨が降っていた。それでも、出かけた。": [
+   [
+    "雨",
+    "あめ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "降",
+    "ふ"
+   ],
+   [
+    "っていた。それでも、",
+    ""
+   ],
+   [
+    "出",
+    "で"
+   ],
+   [
+    "かけた。",
+    ""
+   ]
+  ],
+  "雨が降っていた。": [
+   [
+    "雨",
+    "あめ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "降",
+    "ふ"
+   ],
+   [
+    "っていた。",
+    ""
+   ]
+  ],
+  "それでも、": [
+   [
+    "それでも、",
+    ""
+   ]
+  ],
+  "出かけた。": [
+   [
+    "出",
+    "で"
+   ],
+   [
+    "かけた。",
+    ""
+   ]
+  ],
+  "あなたのおかげで、終わらせることができた。": [
+   [
+    "あなたのおかげで、",
+    ""
+   ],
+   [
+    "終",
+    "お"
+   ],
+   [
+    "わらせることができた。",
+    ""
+   ]
+  ],
+  "あなたのおかげで、": [
+   [
+    "あなたのおかげで、",
+    ""
+   ]
+  ],
+  "終わらせることができた。": [
+   [
+    "終",
+    "お"
+   ],
+   [
+    "わらせることができた。",
+    ""
+   ]
+  ],
+  "君のせいで、バスに乗り遅れた。": [
+   [
+    "君",
+    "きみ"
+   ],
+   [
+    "のせいで、バスに",
+    ""
+   ],
+   [
+    "乗",
+    "の"
+   ],
+   [
+    "り",
+    ""
+   ],
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れた。",
+    ""
+   ]
+  ],
+  "君のせいで、": [
+   [
+    "君",
+    "きみ"
+   ],
+   [
+    "のせいで、",
+    ""
+   ]
+  ],
+  "バスに乗り遅れた。": [
+   [
+    "バスに",
+    ""
+   ],
+   [
+    "乗",
+    "の"
+   ],
+   [
+    "り",
+    ""
+   ],
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れた。",
+    ""
+   ]
+  ],
+  "日本で働くために、日本語を勉強している。": [
+   [
+    "日本",
+    "にほん"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "働",
+    "はたら"
+   ],
+   [
+    "くために、",
+    ""
+   ],
+   [
+    "日本語",
+    "にほんご"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "勉強",
+    "べんきょう"
+   ],
+   [
+    "している。",
+    ""
+   ]
+  ],
+  "日本で働くために、": [
+   [
+    "日本",
+    "にほん"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "働",
+    "はたら"
+   ],
+   [
+    "くために、",
+    ""
+   ]
+  ],
+  "日本語を勉強している。": [
+   [
+    "日本語",
+    "にほんご"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "勉強",
+    "べんきょう"
+   ],
+   [
+    "している。",
+    ""
+   ]
+  ],
+  "忘れないように、スマホにメモした。": [
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れないように、スマホにメモした。",
+    ""
+   ]
+  ],
+  "忘れないように、": [
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れないように、",
+    ""
+   ]
+  ],
+  "スマホにメモした。": [
+   [
+    "スマホにメモした。",
+    ""
+   ]
+  ],
+  "私はコーヒーが好きだ。それに対して、友達は紅茶が好きだ。": [
+   [
+    "私",
+    "わたし"
+   ],
+   [
+    "はコーヒーが",
+    ""
+   ],
+   [
+    "好",
+    "す"
+   ],
+   [
+    "きだ。それに",
+    ""
+   ],
+   [
+    "対",
+    "たい"
+   ],
+   [
+    "して、",
+    ""
+   ],
+   [
+    "友達",
+    "ともだち"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "紅茶",
+    "こうちゃ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "好",
+    "す"
+   ],
+   [
+    "きだ。",
+    ""
+   ]
+  ],
+  "私はコーヒーが好きだ。": [
+   [
+    "私",
+    "わたし"
+   ],
+   [
+    "はコーヒーが",
+    ""
+   ],
+   [
+    "好",
+    "す"
+   ],
+   [
+    "きだ。",
+    ""
+   ]
+  ],
+  "それに対して、": [
+   [
+    "それに",
+    ""
+   ],
+   [
+    "対",
+    "たい"
+   ],
+   [
+    "して、",
+    ""
+   ]
+  ],
+  "友達は紅茶が好きだ。": [
+   [
+    "友達",
+    "ともだち"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "紅茶",
+    "こうちゃ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "好",
+    "す"
+   ],
+   [
+    "きだ。",
+    ""
+   ]
+  ],
+  "この方法は簡単じゃない。むしろ、かなり難しい。": [
+   [
+    "この",
+    ""
+   ],
+   [
+    "方法",
+    "ほうほう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "簡単",
+    "かんたん"
+   ],
+   [
+    "じゃない。むしろ、かなり",
+    ""
+   ],
+   [
+    "難",
+    "むずか"
+   ],
+   [
+    "しい。",
+    ""
+   ]
+  ],
+  "この方法は簡単じゃない。": [
+   [
+    "この",
+    ""
+   ],
+   [
+    "方法",
+    "ほうほう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "簡単",
+    "かんたん"
+   ],
+   [
+    "じゃない。",
+    ""
+   ]
+  ],
+  "むしろ、": [
+   [
+    "むしろ、",
+    ""
+   ]
+  ],
+  "かなり難しい。": [
+   [
+    "かなり",
+    ""
+   ],
+   [
+    "難",
+    "むずか"
+   ],
+   [
+    "しい。",
+    ""
+   ]
+  ],
+  "要するに、今日は行けないってことだ。": [
+   [
+    "要",
+    "よう"
+   ],
+   [
+    "するに、",
+    ""
+   ],
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けないってことだ。",
+    ""
+   ]
+  ],
+  "要するに、": [
+   [
+    "要",
+    "よう"
+   ],
+   [
+    "するに、",
+    ""
+   ]
+  ],
+  "今日は行けないってことだ。": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けないってことだ。",
+    ""
+   ]
+  ],
+  "高いとはいえ、買いたい。": [
+   [
+    "高",
+    "たか"
+   ],
+   [
+    "いとはいえ、",
+    ""
+   ],
+   [
+    "買",
+    "か"
+   ],
+   [
+    "いたい。",
+    ""
+   ]
+  ],
+  "高いとはいえ、": [
+   [
+    "高",
+    "たか"
+   ],
+   [
+    "いとはいえ、",
+    ""
+   ]
+  ],
+  "買いたい。": [
+   [
+    "買",
+    "か"
+   ],
+   [
+    "いたい。",
+    ""
+   ]
+  ],
+  "雨が降っていたにもかかわらず、出かけた。": [
+   [
+    "雨",
+    "あめ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "降",
+    "ふ"
+   ],
+   [
+    "っていたにもかかわらず、",
+    ""
+   ],
+   [
+    "出",
+    "で"
+   ],
+   [
+    "かけた。",
+    ""
+   ]
+  ],
+  "雨が降っていた": [
+   [
+    "雨",
+    "あめ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "降",
+    "ふ"
+   ],
+   [
+    "っていた",
+    ""
+   ]
+  ],
+  "にもかかわらず、": [
+   [
+    "にもかかわらず、",
+    ""
+   ]
+  ],
+  "行けない。なぜなら、明日テストがあるからだ。": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けない。なぜなら、",
+    ""
+   ],
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "テストがあるからだ。",
+    ""
+   ]
+  ],
+  "行けない。": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けない。",
+    ""
+   ]
+  ],
+  "なぜなら、": [
+   [
+    "なぜなら、",
+    ""
+   ]
+  ],
+  "明日テストがあるからだ。": [
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "テストがあるからだ。",
+    ""
+   ]
+  ],
+  "それが本当だとしたら、大変なことになる。": [
+   [
+    "それが",
+    ""
+   ],
+   [
+    "本当",
+    "ほんとう"
+   ],
+   [
+    "だとしたら、",
+    ""
+   ],
+   [
+    "大変",
+    "たいへん"
+   ],
+   [
+    "なことになる。",
+    ""
+   ]
+  ],
+  "それが本当だとしたら、": [
+   [
+    "それが",
+    ""
+   ],
+   [
+    "本当",
+    "ほんとう"
+   ],
+   [
+    "だとしたら、",
+    ""
+   ]
+  ],
+  "大変なことになる。": [
+   [
+    "大変",
+    "たいへん"
+   ],
+   [
+    "なことになる。",
+    ""
+   ]
+  ],
+  "行けない。というのも、明日テストがあるからだ。": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けない。というのも、",
+    ""
+   ],
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "テストがあるからだ。",
+    ""
+   ]
+  ],
+  "というのも、": [
+   [
+    "というのも、",
+    ""
+   ]
+  ],
+  "朝起きて、顔を洗って、学校に行く。": [
+   [
+    "朝起",
+    "あさお"
+   ],
+   [
+    "きて、",
+    ""
+   ],
+   [
+    "顔",
+    "かお"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "洗",
+    "あら"
+   ],
+   [
+    "って、",
+    ""
+   ],
+   [
+    "学校",
+    "がっこう"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く。",
+    ""
+   ]
+  ],
+  "朝起きて、": [
+   [
+    "朝起",
+    "あさお"
+   ],
+   [
+    "きて、",
+    ""
+   ]
+  ],
+  "顔を洗って、": [
+   [
+    "顔",
+    "かお"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "洗",
+    "あら"
+   ],
+   [
+    "って、",
+    ""
+   ]
+  ],
+  "学校に行く。": [
+   [
+    "学校",
+    "がっこう"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く。",
+    ""
+   ]
+  ],
+  "あ、それと、卵も買わなきゃ。": [
+   [
+    "あ、それと、",
+    ""
+   ],
+   [
+    "卵",
+    "たまご"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "買",
+    "か"
+   ],
+   [
+    "わなきゃ。",
+    ""
+   ]
+  ],
+  "あ、": [
+   [
+    "あ、",
+    ""
+   ]
+  ],
+  "それと、": [
+   [
+    "それと、",
+    ""
+   ]
+  ],
+  "卵も買わなきゃ。": [
+   [
+    "卵",
+    "たまご"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "買",
+    "か"
+   ],
+   [
+    "わなきゃ。",
+    ""
+   ]
+  ],
+  "じゃあ、また明日！": [
+   [
+    "じゃあ、また",
+    ""
+   ],
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "！",
+    ""
+   ]
+  ],
+  "じゃあ、": [
+   [
+    "じゃあ、",
+    ""
+   ]
+  ],
+  "また明日！": [
+   [
+    "また",
+    ""
+   ],
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "！",
+    ""
+   ]
+  ],
+  "車で行くの？それなら、私も一緒に行く。": [
+   [
+    "車",
+    "くるま"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くの？それなら、",
+    ""
+   ],
+   [
+    "私",
+    "わたし"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "一緒",
+    "いっしょ"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く。",
+    ""
+   ]
+  ],
+  "車で行くの？": [
+   [
+    "車",
+    "くるま"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くの？",
+    ""
+   ]
+  ],
+  "それなら、": [
+   [
+    "それなら、",
+    ""
+   ]
+  ],
+  "私も一緒に行く。": [
+   [
+    "私",
+    "わたし"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "一緒",
+    "いっしょ"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く。",
+    ""
+   ]
+  ],
+  "ドアを開けた。すると、猫が出てきた。": [
+   [
+    "ドアを",
+    ""
+   ],
+   [
+    "開",
+    "あ"
+   ],
+   [
+    "けた。すると、",
+    ""
+   ],
+   [
+    "猫",
+    "ねこ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "出",
+    "で"
+   ],
+   [
+    "てきた。",
+    ""
+   ]
+  ],
+  "ドアを開けた。": [
+   [
+    "ドアを",
+    ""
+   ],
+   [
+    "開",
+    "あ"
+   ],
+   [
+    "けた。",
+    ""
+   ]
+  ],
+  "すると、": [
+   [
+    "すると、",
+    ""
+   ]
+  ],
+  "猫が出てきた。": [
+   [
+    "猫",
+    "ねこ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "出",
+    "で"
+   ],
+   [
+    "てきた。",
+    ""
+   ]
+  ],
+  "ここで写真を撮ってもいい。ただし、フラッシュは使わないで。": [
+   [
+    "ここで",
+    ""
+   ],
+   [
+    "写真",
+    "しゃしん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "撮",
+    "と"
+   ],
+   [
+    "ってもいい。ただし、フラッシュは",
+    ""
+   ],
+   [
+    "使",
+    "つか"
+   ],
+   [
+    "わないで。",
+    ""
+   ]
+  ],
+  "ここで写真を撮ってもいい。": [
+   [
+    "ここで",
+    ""
+   ],
+   [
+    "写真",
+    "しゃしん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "撮",
+    "と"
+   ],
+   [
+    "ってもいい。",
+    ""
+   ]
+  ],
+  "ただし、": [
+   [
+    "ただし、",
+    ""
+   ]
+  ],
+  "フラッシュは使わないで。": [
+   [
+    "フラッシュは",
+    ""
+   ],
+   [
+    "使",
+    "つか"
+   ],
+   [
+    "わないで。",
+    ""
+   ]
+  ],
+  "今日は行けない。そのかわり、明日なら行けるよ。": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けない。そのかわり、",
+    ""
+   ],
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "なら",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けるよ。",
+    ""
+   ]
+  ],
+  "今日は行けない。": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けない。",
+    ""
+   ]
+  ],
+  "そのかわり、": [
+   [
+    "そのかわり、",
+    ""
+   ]
+  ],
+  "明日なら行けるよ。": [
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "なら",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けるよ。",
+    ""
+   ]
+  ],
+  "彼は日本語だけでなく、韓国語も話せる。": [
+   [
+    "彼",
+    "かれ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "日本語",
+    "にほんご"
+   ],
+   [
+    "だけでなく、",
+    ""
+   ],
+   [
+    "韓国語",
+    "かんこくご"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "話",
+    "はな"
+   ],
+   [
+    "せる。",
+    ""
+   ]
+  ],
+  "彼は日本語だけでなく、": [
+   [
+    "彼",
+    "かれ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "日本語",
+    "にほんご"
+   ],
+   [
+    "だけでなく、",
+    ""
+   ]
+  ],
+  "韓国語も": [
+   [
+    "韓国語",
+    "かんこくご"
+   ],
+   [
+    "も",
+    ""
+   ]
+  ],
+  "話せる。": [
+   [
+    "話",
+    "はな"
+   ],
+   [
+    "せる。",
+    ""
+   ]
+  ],
+  "今日は行けないが、明日なら行ける。": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けないが、",
+    ""
+   ],
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "なら",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "ける。",
+    ""
+   ]
+  ],
+  "今日は行けない": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けない",
+    ""
+   ]
+  ],
+  "が、": [
+   [
+    "が、",
+    ""
+   ]
+  ],
+  "明日なら行ける。": [
+   [
+    "明日",
+    "あした"
+   ],
+   [
+    "なら",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "ける。",
+    ""
+   ]
+  ],
+  "コーヒーじゃなくて、お茶がいい。": [
+   [
+    "コーヒーじゃなくて、お",
+    ""
+   ],
+   [
+    "茶",
+    "ちゃ"
+   ],
+   [
+    "がいい。",
+    ""
+   ]
+  ],
+  "コーヒー": [
+   [
+    "コーヒー",
+    ""
+   ]
+  ],
+  "じゃなくて、": [
+   [
+    "じゃなくて、",
+    ""
+   ]
+  ],
+  "お茶がいい。": [
+   [
+    "お",
+    ""
+   ],
+   [
+    "茶",
+    "ちゃ"
+   ],
+   [
+    "がいい。",
+    ""
+   ]
+  ],
+  "朝ご飯を食べずに、学校に行った。": [
+   [
+    "朝",
+    "あさ"
+   ],
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べずに、",
+    ""
+   ],
+   [
+    "学校",
+    "がっこう"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "った。",
+    ""
+   ]
+  ],
+  "朝ご飯を食べずに、": [
+   [
+    "朝",
+    "あさ"
+   ],
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べずに、",
+    ""
+   ]
+  ],
+  "学校に行った。": [
+   [
+    "学校",
+    "がっこう"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "った。",
+    ""
+   ]
+  ],
+  "牛乳を買わないと。": [
+   [
+    "牛乳",
+    "ぎゅうにゅう"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "買",
+    "か"
+   ],
+   [
+    "わないと。",
+    ""
+   ]
+  ],
+  "最後に": [
+   [
+    "最後",
+    "さいご"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "次に": [
+   [
+    "次",
+    "つぎ"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "例えば": [
+   [
+    "例",
+    "たと"
+   ],
+   [
+    "えば",
+    ""
+   ]
+  ],
+  "申し込みはウェブ": [
+   [
+    "申",
+    "もう"
+   ],
+   [
+    "し",
+    ""
+   ],
+   [
+    "込",
+    "こ"
+   ],
+   [
+    "みはウェブ",
+    ""
+   ]
+  ],
+  "ご飯を食べ": [
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べ",
+    ""
+   ]
+  ],
+  "る前に": [
+   [
+    "る",
+    ""
+   ],
+   [
+    "前",
+    "まえ"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "寝": [
+   [
+    "寝",
+    "ね"
+   ]
+  ],
+  "授業の": [
+   [
+    "授業",
+    "じゅぎょう"
+   ],
+   [
+    "の",
+    ""
+   ]
+  ],
+  "前に": [
+   [
+    "前",
+    "まえ"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "時間がある": [
+   [
+    "時間",
+    "じかん"
+   ],
+   [
+    "がある",
+    ""
+   ]
+  ],
+  "もし明日晴れ": [
+   [
+    "もし",
+    ""
+   ],
+   [
+    "明日晴",
+    "あしたは"
+   ],
+   [
+    "れ",
+    ""
+   ]
+  ],
+  "時間があ": [
+   [
+    "時間",
+    "じかん"
+   ],
+   [
+    "があ",
+    ""
+   ]
+  ],
+  "このボタンを押す": [
+   [
+    "このボタンを",
+    ""
+   ],
+   [
+    "押",
+    "お"
+   ],
+   [
+    "す",
+    ""
+   ]
+  ],
+  "忙しく": [
+   [
+    "忙",
+    "いそが"
+   ],
+   [
+    "しく",
+    ""
+   ]
+  ],
+  "音楽を聞き": [
+   [
+    "音楽",
+    "おんがく"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "聞",
+    "き"
+   ],
+   [
+    "き",
+    ""
+   ]
+  ],
+  "に行って": [
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "って",
+    ""
+   ]
+  ],
+  "ここは安い": [
+   [
+    "ここは",
+    ""
+   ],
+   [
+    "安",
+    "やす"
+   ],
+   [
+    "い",
+    ""
+   ]
+  ],
+  "近いし、よく来る。": [
+   [
+    "近",
+    "ちか"
+   ],
+   [
+    "いし、よく",
+    ""
+   ],
+   [
+    "来",
+    "く"
+   ],
+   [
+    "る。",
+    ""
+   ]
+  ],
+  "週末は映画を見": [
+   [
+    "週末",
+    "しゅうまつ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "映画",
+    "えいが"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ]
+  ],
+  "一方で": [
+   [
+    "一方",
+    "いっぽう"
+   ],
+   [
+    "で",
+    ""
+   ]
+  ],
+  "その結果": [
+   [
+    "その",
+    ""
+   ],
+   [
+    "結果",
+    "けっか"
+   ]
+  ],
+  "あなたの": [
+   [
+    "あなたの",
+    ""
+   ]
+  ],
+  "君の": [
+   [
+    "君",
+    "きみ"
+   ],
+   [
+    "の",
+    ""
+   ]
+  ],
+  "日本で働く": [
+   [
+    "日本",
+    "にほん"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "働",
+    "はたら"
+   ],
+   [
+    "く",
+    ""
+   ]
+  ],
+  "忘れない": [
+   [
+    "忘",
+    "わす"
+   ],
+   [
+    "れない",
+    ""
+   ]
+  ],
+  "それに対して": [
+   [
+    "それに",
+    ""
+   ],
+   [
+    "対",
+    "たい"
+   ],
+   [
+    "して",
+    ""
+   ]
+  ],
+  "要するに": [
+   [
+    "要",
+    "よう"
+   ],
+   [
+    "するに",
+    ""
+   ]
+  ],
+  "高い": [
+   [
+    "高",
+    "たか"
+   ],
+   [
+    "い",
+    ""
+   ]
+  ],
+  "それが本当だ": [
+   [
+    "それが",
+    ""
+   ],
+   [
+    "本当",
+    "ほんとう"
+   ],
+   [
+    "だ",
+    ""
+   ]
+  ],
+  "朝起き": [
+   [
+    "朝起",
+    "あさお"
+   ],
+   [
+    "き",
+    ""
+   ]
+  ],
+  "顔を洗って、学校に行く。": [
+   [
+    "顔",
+    "かお"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "洗",
+    "あら"
+   ],
+   [
+    "って、",
+    ""
+   ],
+   [
+    "学校",
+    "がっこう"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く。",
+    ""
+   ]
+  ],
+  "彼は日本語": [
+   [
+    "彼",
+    "かれ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "日本語",
+    "にほんご"
+   ]
+  ],
+  "韓国語も話せる。": [
+   [
+    "韓国語",
+    "かんこくご"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "話",
+    "はな"
+   ],
+   [
+    "せる。",
+    ""
+   ]
+  ],
+  "朝ご飯を食べ": [
+   [
+    "朝",
+    "あさ"
+   ],
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べ",
+    ""
+   ]
+  ],
+  "この店は安い": [
+   [
+    "この",
+    ""
+   ],
+   [
+    "店",
+    "みせ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "安",
+    "やす"
+   ],
+   [
+    "い",
+    ""
+   ]
+  ],
+  "料理もおいしい": [
+   [
+    "料理",
+    "りょうり"
+   ],
+   [
+    "もおいしい",
+    ""
+   ]
+  ],
+  "あの店は安い": [
+   [
+    "あの",
+    ""
+   ],
+   [
+    "店",
+    "みせ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "安",
+    "やす"
+   ],
+   [
+    "い",
+    ""
+   ]
+  ],
+  "牛乳を買わないと": [
+   [
+    "牛乳",
+    "ぎゅうにゅう"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "買",
+    "か"
+   ],
+   [
+    "わないと",
+    ""
+   ]
+  ],
+  "昨日は買い物に行った": [
+   [
+    "昨日",
+    "きのう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "買",
+    "か"
+   ],
+   [
+    "い",
+    ""
+   ],
+   [
+    "物",
+    "もの"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "った",
+    ""
+   ]
+  ],
+  "映画も見た": [
+   [
+    "映画",
+    "えいが"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "た",
+    ""
+   ]
+  ],
+  "今日は寒い": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "寒",
+    "さむ"
+   ],
+   [
+    "い",
+    ""
+   ]
+  ],
+  "雨も降っている": [
+   [
+    "雨",
+    "あめ"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "降",
+    "ふ"
+   ],
+   [
+    "っている",
+    ""
+   ]
+  ],
+  "連絡した": [
+   [
+    "連絡",
+    "れんらく"
+   ],
+   [
+    "した",
+    ""
+   ]
+  ],
+  "来なかった": [
+   [
+    "来",
+    "こ"
+   ],
+   [
+    "なかった",
+    ""
+   ]
+  ],
+  "行きたかった": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "きたかった",
+    ""
+   ]
+  ],
+  "行けなかった": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けなかった",
+    ""
+   ]
+  ],
+  "ちょっと遠いけど": [
+   [
+    "ちょっと",
+    ""
+   ],
+   [
+    "遠",
+    "とお"
+   ],
+   [
+    "いけど",
+    ""
+   ]
+  ],
+  "歩いて行こう": [
+   [
+    "歩",
+    "ある"
+   ],
+   [
+    "いて",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "こう",
+    ""
+   ]
+  ],
+  "説明したのに": [
+   [
+    "説明",
+    "せつめい"
+   ],
+   [
+    "したのに",
+    ""
+   ]
+  ],
+  "分かってくれない": [
+   [
+    "分",
+    "わ"
+   ],
+   [
+    "かってくれない",
+    ""
+   ]
+  ],
+  "ここで写真を撮ってもいい": [
+   [
+    "ここで",
+    ""
+   ],
+   [
+    "写真",
+    "しゃしん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "撮",
+    "と"
+   ],
+   [
+    "ってもいい",
+    ""
+   ]
+  ],
+  "フラッシュは使わないで": [
+   [
+    "フラッシュは",
+    ""
+   ],
+   [
+    "使",
+    "つか"
+   ],
+   [
+    "わないで",
+    ""
+   ]
+  ],
+  "簡単だと思っていた": [
+   [
+    "簡単",
+    "かんたん"
+   ],
+   [
+    "だと",
+    ""
+   ],
+   [
+    "思",
+    "おも"
+   ],
+   [
+    "っていた",
+    ""
+   ]
+  ],
+  "難しかった": [
+   [
+    "難",
+    "むずか"
+   ],
+   [
+    "しかった",
+    ""
+   ]
+  ],
+  "疲れたから": [
+   [
+    "疲",
+    "つか"
+   ],
+   [
+    "れたから",
+    ""
+   ]
+  ],
+  "帰る": [
+   [
+    "帰",
+    "かえ"
+   ],
+   [
+    "る",
+    ""
+   ]
+  ],
+  "明日テストがある": [
+   [
+    "明日",
+    "あす"
+   ],
+   [
+    "テストがある",
+    ""
+   ]
+  ],
+  "今日は勉強する": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "勉強",
+    "べんきょう"
+   ],
+   [
+    "する",
+    ""
+   ]
+  ],
+  "今日は帰る": [
+   [
+    "今日",
+    "きょう"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "帰",
+    "かえ"
+   ],
+   [
+    "る",
+    ""
+   ]
+  ],
+  "電車に乗り遅れた": [
+   [
+    "電車",
+    "でんしゃ"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "乗",
+    "の"
+   ],
+   [
+    "り",
+    ""
+   ],
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れた",
+    ""
+   ]
+  ],
+  "遅刻した": [
+   [
+    "遅刻",
+    "ちこく"
+   ],
+   [
+    "した",
+    ""
+   ]
+  ],
+  "終わらせることができた": [
+   [
+    "終",
+    "お"
+   ],
+   [
+    "わらせることができた",
+    ""
+   ]
+  ],
+  "勉強する": [
+   [
+    "勉強",
+    "べんきょう"
+   ],
+   [
+    "する",
+    ""
+   ]
+  ],
+  "君": [
+   [
+    "君",
+    "きみ"
+   ]
+  ],
+  "遅れた": [
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れた",
+    ""
+   ]
+  ],
+  "ご飯を食べてから": [
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べてから",
+    ""
+   ]
+  ],
+  "出かける": [
+   [
+    "出",
+    "で"
+   ],
+   [
+    "かける",
+    ""
+   ]
+  ],
+  "朝起きて": [
+   [
+    "朝起",
+    "あさお"
+   ],
+   [
+    "きて",
+    ""
+   ]
+  ],
+  "顔を洗って": [
+   [
+    "顔",
+    "かお"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "洗",
+    "あら"
+   ],
+   [
+    "って",
+    ""
+   ]
+  ],
+  "学校に行く": [
+   [
+    "学校",
+    "がっこう"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く",
+    ""
+   ]
+  ],
+  "先にご飯を食べた": [
+   [
+    "先",
+    "さき"
+   ],
+   [
+    "にご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べた",
+    ""
+   ]
+  ],
+  "映画を見た": [
+   [
+    "映画",
+    "えいが"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "た",
+    ""
+   ]
+  ],
+  "アプリを開いて": [
+   [
+    "アプリを",
+    ""
+   ],
+   [
+    "開",
+    "ひら"
+   ],
+   [
+    "いて",
+    ""
+   ]
+  ],
+  "ご飯を食べる前に": [
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べる",
+    ""
+   ],
+   [
+    "前",
+    "まえ"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "ご飯を食べないで": [
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べないで",
+    ""
+   ]
+  ],
+  "寝る前に": [
+   [
+    "寝",
+    "ね"
+   ],
+   [
+    "る",
+    ""
+   ],
+   [
+    "前",
+    "まえ"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "寝てから": [
+   [
+    "寝",
+    "ね"
+   ],
+   [
+    "てから",
+    ""
+   ]
+  ],
+  "寝たあとで": [
+   [
+    "寝",
+    "ね"
+   ],
+   [
+    "たあとで",
+    ""
+   ]
+  ],
+  "また明日": [
+   [
+    "また",
+    ""
+   ],
+   [
+    "明日",
+    "あす"
+   ]
+  ],
+  "明日は何する": [
+   [
+    "明日",
+    "あす"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "何",
+    "なに"
+   ],
+   [
+    "する",
+    ""
+   ]
+  ],
+  "何歳": [
+   [
+    "何歳",
+    "なんさい"
+   ]
+  ],
+  "スポーツが好き": [
+   [
+    "スポーツが",
+    ""
+   ],
+   [
+    "好",
+    "す"
+   ],
+   [
+    "き",
+    ""
+   ]
+  ],
+  "お茶にする": [
+   [
+    "お",
+    ""
+   ],
+   [
+    "茶",
+    "ちゃ"
+   ],
+   [
+    "にする",
+    ""
+   ]
+  ],
+  "お茶がいい": [
+   [
+    "お",
+    ""
+   ],
+   [
+    "茶",
+    "ちゃ"
+   ],
+   [
+    "がいい",
+    ""
+   ]
+  ],
+  "お金がない": [
+   [
+    "お",
+    ""
+   ],
+   [
+    "金",
+    "かね"
+   ],
+   [
+    "がない",
+    ""
+   ]
+  ],
+  "買えない": [
+   [
+    "買",
+    "か"
+   ],
+   [
+    "えない",
+    ""
+   ]
+  ],
+  "朝ご飯を食べずに": [
+   [
+    "朝",
+    "あさ"
+   ],
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べずに",
+    ""
+   ]
+  ],
+  "学校に行った": [
+   [
+    "学校",
+    "がっこう"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "った",
+    ""
+   ]
+  ],
+  "朝ご飯を食べてから": [
+   [
+    "朝",
+    "あさ"
+   ],
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べてから",
+    ""
+   ]
+  ],
+  "朝ご飯を食べながら": [
+   [
+    "朝",
+    "あさ"
+   ],
+   [
+    "ご",
+    ""
+   ],
+   [
+    "飯",
+    "はん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "食",
+    "た"
+   ],
+   [
+    "べながら",
+    ""
+   ]
+  ],
+  "日本語": [
+   [
+    "日本語",
+    "にっぽんご"
+   ]
+  ],
+  "韓国語も話せる": [
+   [
+    "韓国語",
+    "かんこくご"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "話",
+    "はな"
+   ],
+   [
+    "せる",
+    ""
+   ]
+  ],
+  "もし明日晴れたら": [
+   [
+    "もし",
+    ""
+   ],
+   [
+    "明日晴",
+    "あすは"
+   ],
+   [
+    "れたら",
+    ""
+   ]
+  ],
+  "公園に行こう": [
+   [
+    "公園",
+    "こうえん"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "こう",
+    ""
+   ]
+  ],
+  "時間があれば": [
+   [
+    "時間",
+    "じかん"
+   ],
+   [
+    "があれば",
+    ""
+   ]
+  ],
+  "行くよ": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くよ",
+    ""
+   ]
+  ],
+  "ボタンを押すと": [
+   [
+    "ボタンを",
+    ""
+   ],
+   [
+    "押",
+    "お"
+   ],
+   [
+    "すと",
+    ""
+   ]
+  ],
+  "画面が変わる": [
+   [
+    "画面",
+    "がめん"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "変",
+    "か"
+   ],
+   [
+    "わる",
+    ""
+   ]
+  ],
+  "アニメが好きなら": [
+   [
+    "アニメが",
+    ""
+   ],
+   [
+    "好",
+    "す"
+   ],
+   [
+    "きなら",
+    ""
+   ]
+  ],
+  "これを見て": [
+   [
+    "これを",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "て",
+    ""
+   ]
+  ],
+  "それが本当だとしたら": [
+   [
+    "それが",
+    ""
+   ],
+   [
+    "本当",
+    "ほんとう"
+   ],
+   [
+    "だとしたら",
+    ""
+   ]
+  ],
+  "このボタンを押すと": [
+   [
+    "このボタンを",
+    ""
+   ],
+   [
+    "押",
+    "お"
+   ],
+   [
+    "すと",
+    ""
+   ]
+  ],
+  "車で行くの": [
+   [
+    "車",
+    "くるま"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "くの",
+    ""
+   ]
+  ],
+  "私も一緒に行く": [
+   [
+    "私",
+    "わたくし"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "一緒",
+    "いっしょ"
+   ],
+   [
+    "に",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く",
+    ""
+   ]
+  ],
+  "ボタンを押": [
+   [
+    "ボタンを",
+    ""
+   ],
+   [
+    "押",
+    "おし"
+   ]
+  ],
+  "私も行く": [
+   [
+    "私",
+    "わたくし"
+   ],
+   [
+    "も",
+    ""
+   ],
+   [
+    "行",
+    "い"
+   ],
+   [
+    "く",
+    ""
+   ]
+  ],
+  "時間があるとき": [
+   [
+    "時間",
+    "じかん"
+   ],
+   [
+    "があるとき",
+    ""
+   ]
+  ],
+  "本を読む": [
+   [
+    "本",
+    "ほん"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "読",
+    "よ"
+   ],
+   [
+    "む",
+    ""
+   ]
+  ],
+  "音楽を聞きながら": [
+   [
+    "音楽",
+    "おんがく"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "聞",
+    "き"
+   ],
+   [
+    "きながら",
+    ""
+   ]
+  ],
+  "シャワーを浴びる": [
+   [
+    "シャワーを",
+    ""
+   ],
+   [
+    "浴",
+    "あ"
+   ],
+   [
+    "びる",
+    ""
+   ]
+  ],
+  "ドアを開けた": [
+   [
+    "ドアを",
+    ""
+   ],
+   [
+    "開",
+    "あ"
+   ],
+   [
+    "けた",
+    ""
+   ]
+  ],
+  "猫が出てきた": [
+   [
+    "猫",
+    "ねこ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "出",
+    "で"
+   ],
+   [
+    "てきた",
+    ""
+   ]
+  ],
+  "週末は映画を見たり": [
+   [
+    "週末",
+    "しゅうまつ"
+   ],
+   [
+    "は",
+    ""
+   ],
+   [
+    "映画",
+    "えいが"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ],
+   [
+    "たり",
+    ""
+   ]
+  ],
+  "寝ながら": [
+   [
+    "寝",
+    "ね"
+   ],
+   [
+    "ながら",
+    ""
+   ]
+  ],
+  "授業のあとで": [
+   [
+    "授業",
+    "じゅぎょう"
+   ],
+   [
+    "のあとで",
+    ""
+   ]
+  ],
+  "授業の前に": [
+   [
+    "授業",
+    "じゅぎょう"
+   ],
+   [
+    "の",
+    ""
+   ],
+   [
+    "前",
+    "まえ"
+   ],
+   [
+    "に",
+    ""
+   ]
+  ],
+  "授業のとき": [
+   [
+    "授業",
+    "じゅぎょう"
+   ],
+   [
+    "のとき",
+    ""
+   ]
+  ],
+  "映画を見": [
+   [
+    "映画",
+    "えいが"
+   ],
+   [
+    "を",
+    ""
+   ],
+   [
+    "見",
+    "み"
+   ]
+  ],
+  "忙しくても": [
+   [
+    "忙",
+    "いそが"
+   ],
+   [
+    "しくても",
+    ""
+   ]
+  ],
+  "高いとはいえ": [
+   [
+    "高",
+    "たか"
+   ],
+   [
+    "いとはいえ",
+    ""
+   ]
+  ],
+  "出かけた": [
+   [
+    "出",
+    "で"
+   ],
+   [
+    "かけた",
+    ""
+   ]
+  ],
+  "買いたい": [
+   [
+    "買",
+    "か"
+   ],
+   [
+    "いたい",
+    ""
+   ]
+  ],
+  "高いから": [
+   [
+    "高",
+    "たか"
+   ],
+   [
+    "いから",
+    ""
+   ]
+  ],
+  "高いし": [
+   [
+    "高",
+    "たか"
+   ],
+   [
+    "いし",
+    ""
+   ]
+  ],
+  "電車が遅れた": [
+   [
+    "電車",
+    "でんしゃ"
+   ],
+   [
+    "が",
+    ""
+   ],
+   [
+    "遅",
+    "おく"
+   ],
+   [
+    "れた",
+    ""
+   ]
+  ],
+  "このアプリはとても便利だ": [
+   [
+    "このアプリはとても",
+    ""
+   ],
+   [
+    "便利",
+    "べんり"
+   ],
+   [
+    "だ",
+    ""
+   ]
+  ],
+  "無料で使える": [
+   [
+    "無料",
+    "むりょう"
+   ],
+   [
+    "で",
+    ""
+   ],
+   [
+    "使",
+    "つか"
+   ],
+   [
+    "える",
+    ""
+   ]
+  ],
+  "行けない": [
+   [
+    "行",
+    "い"
+   ],
+   [
+    "けない",
+    ""
+   ]
+  ],
+  "明日テストがあるからだ": [
+   [
+    "明日",
+    "あす"
+   ],
+   [
+    "テストがあるからだ",
+    ""
+   ]
   ]
+ }
 }
