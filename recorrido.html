@@ -1369,6 +1369,17 @@ button{color:var(--text-main)}
 .end-space{height:max(200px,30vh)}
 .end-note{text-align:center;font-size:12px;line-height:1.8;letter-spacing:.06em;color:var(--text-muted);opacity:.8;margin:0}
 .end-space-2{height:140px}
+.curio-wrap{margin-top:28px}
+.curio-sum{color:var(--text-muted);font-size:13px;margin:8px 0 0 2px;min-height:18px}
+.curio-list{margin-top:6px}
+.curio-item{border-top:1px solid var(--border);padding:14px 2px 6px;content-visibility:auto;contain-intrinsic-size:auto 180px}
+.curio-item:first-child{border-top:0}
+.curio-cat{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin-bottom:2px}
+.ver-in .curio-item h4{font-size:17px;font-weight:800;margin:0 0 6px;color:var(--text-main)}
+.curio-item ul{margin:0 0 10px 20px;font-size:15px;color:var(--text-muted)}
+mark.curio-hit{background:var(--primary);color:#fff;border-radius:4px;padding:0 3px}
+.curio-sentinel{height:1px}
+.curio-msg{color:var(--text-muted);font-size:14px;text-align:center;padding:18px 0}
 </style>
 </head>
 <body>
@@ -1404,6 +1415,8 @@ button{color:var(--text-main)}
       <h2>Filosofía del proyecto</h2>
       <div id="fil"></div>
     </section>
+    <div id="curio" class="curio-wrap"></div>
+
     <div class="end-space"></div>
     <p class="end-note">頑張って ✦ Gracias por llegar hasta el final.<br>Que disfrutes aprendiendo.</p>
     <div class="end-space-2"></div>
@@ -1467,11 +1480,88 @@ D.kquiz=e=>{let n=0,ok=0;const T=5;const next=()=>{if(n>=T){const p=Math.round(o
  next();e.onclick=x=>{if(x.target.closest('[data-r]')){n=ok=0;next();return}const b=x.target.closest('[data-j]');if(!b)return;const g=b.dataset.j===b.dataset.i;n++;if(g)ok++;e.querySelectorAll('.kana-option-btn').forEach(o=>{o.classList.add('disabled');if(o.dataset.j===o.dataset.i)o.classList.add('is-correct')});if(!g)b.classList.add('is-wrong');setTimeout(next,700)}};
 D.stats=e=>{let tab='s',days=7;const draw=()=>{e.innerHTML=`<div class="stats-tabs"><button class="stats-tab${tab=='s'?' active':''}" data-t="s"><span class="stats-tab-icon">📊</span>Resumen</button><button class="stats-tab${tab=='k'?' active':''}" data-t="k"><span class="stats-tab-icon">あ</span>Kana</button></div>`+(tab=='s'?`<div class="stats-grid stats-grid-compact"><div class="stat-card stat-card-streak"><div class="stat-value">🔥 5</div><div class="stat-label">Racha actual</div></div><div class="stat-card"><div class="stat-value">82%</div><div class="stat-label">Aciertos</div></div><div class="stat-card"><div class="stat-value">34</div><div class="stat-label">Prácticas</div></div></div><div class="stats-chart-head"><h3>Palabras por día</h3><div class="segmented-control"><button class="seg-btn${days==7?' active':''}" data-d="7">7 días</button><button class="seg-btn${days==30?' active':''}" data-d="30">30 días</button></div></div>${chart(days)}`:`<div class="stats-kana-grid">${[['Hiragana',46,38,8],['Katakana',30,21,9]].map(k=>`<div class="stats-kana-card"><div class="stats-kana-card-title">${k[0]}</div><div class="kana-stats-row"><span>Intentos</span><strong>${k[1]}</strong></div><div class="kana-stats-row"><span>Aciertos</span><strong style="color:var(--correct)">${k[2]}</strong></div><div class="kana-stats-row"><span>Fallos</span><span class="kana-fail-badge">${k[3]}</span></div></div>`).join('')}</div><div class="stats-kana-hard-title">Los 5 que más fallas</div><div class="stats-kana-chips">${[['し','shi',4],['ツ','tsu',3],['ぬ','nu',3],['シ','shi',2],['め','me',2]].map(c=>`<span class="stats-kana-chip">${c[0]}<small>${c[1]}</small><span class="kana-fail-badge">${c[2]}</span></span>`).join('')}</div>`)};
  draw();e.onclick=x=>{const t=x.target.closest('[data-t]'),d=x.target.closest('[data-d]');if(t){tab=t.dataset.t;draw()}if(d){days=+d.dataset.d;draw()}}};
-const DM={'v0.3':['furi'],'v0.4.1':['search'],'v0.5.1':['chart','qstats'],'v1.0':['niveles','quiz'],'v3.0':['kana'],'v3.1':['kquiz'],'v3.4':['stats']};
+const DM={'v0.3':['furi'],'v0.4.1':['search'],'v0.5.1':['chart','qstats'],'v1.0':['niveles','quiz'],'v3.0':['kana'],'v3.1':['kquiz'],'v3.4':['stats'],'curiosidades':['curio']};
+
+/* ---------- Curiosidades de Japón: carga bajo demanda desde curiosidades.txt ---------- */
+const CURIO_URL='curiosidades_japon.txt',CURIO_BATCH=15;
+const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const norm=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const ACC={a:'aáàäâã',e:'eéèëê',i:'iíìïî',o:'oóòöôõ',u:'uúùüû',n:'nñ',c:'cç'};
+function curioParse(txt){
+ const L=txt.replace(/\r\n?/g,'\n').split('\n'),E=[];let cat='',cur=null;
+ const heads=/^## /m.test(txt);
+ const push=(t)=>{cur={t,c:cat,r:[]};E.push(cur)};
+ if(heads){
+  for(const l of L){
+   if(l.startsWith('# ')){cat=l.slice(2).trim();cur=null}
+   else if(l.startsWith('## ')){push(l.slice(3).trim())}
+   else if(cur)cur.r.push(l);
+  }
+ }else{
+  /* Sin títulos "## ": cada bloque separado por línea en blanco es una curiosidad */
+  let blk=[];const fl=()=>{if(blk.length){push('');cur.r=blk;blk=[]}};
+  for(const l of L){if(l.startsWith('# ')){fl();cat=l.slice(2).trim()}else if(l.trim()==='')fl();else blk.push(l)}
+  fl();
+ }
+ E.forEach(e=>{e.raw=e.r.join('\n').trim();delete e.r});
+ return E.filter(e=>e.t||e.raw);
+}
+function curioBody(raw){
+ let h='',p=[],ul=[];
+ const fp=()=>{if(p.length){h+=`<p>${inl(esc(p.join('\n'))).replace(/\n/g,'<br>')}</p>`;p=[]}};
+ const fu=()=>{if(ul.length){h+='<ul>'+ul.map(x=>`<li>${inl(esc(x))}</li>`).join('')+'</ul>';ul=[]}};
+ for(const l of raw.split('\n')){
+  if(!l.trim()){fp();fu()}
+  else if(l.startsWith('- ')){fp();ul.push(l.slice(2))}
+  else{fu();p.push(l)}
+ }
+ fp();fu();return h;
+}
+function curioMark(html,terms){
+ if(!terms.length)return html;
+ const re=new RegExp('('+terms.map(t=>[...t].map(ch=>{const c=ch.toLowerCase();return ACC[c]?'['+ACC[c]+']':ch.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}).join('')).join('|')+')','gi');
+ return html.split(/(<[^>]+>)/).map(x=>x.startsWith('<')?x:x.replace(re,'<mark class="curio-hit">$1</mark>')).join('');
+}
+D.curio=e=>{
+ e.innerHTML=`<div class="global-search" style="margin:0"><label for="cs">🔎 Buscar curiosidades</label><input id="cs" class="global-search-input" type="search" placeholder="Palabras clave: festival, comida, anime…" autocomplete="off" disabled><div class="curio-sum" id="csum">Cargando curiosidades…</div></div><div class="curio-list" id="clist"></div><div class="curio-sentinel" id="cend"></div>`;
+ const $i=e.querySelector('#cs'),$s=e.querySelector('#csum'),$l=e.querySelector('#clist'),$e=e.querySelector('#cend');
+ let E=[],idx=null,view=[],shown=0,terms=[],io=null,timer=0;
+ const more=()=>{
+  if(shown>=view.length)return;
+  const end=Math.min(shown+CURIO_BATCH,view.length);let h='';
+  for(let i=shown;i<end;i++){const x=E[view[i]];h+=curioMark(`<article class="curio-item">${x.c?`<div class="curio-cat">${esc(x.c)}</div>`:''}${x.t?`<h4>${inl(esc(x.t))}</h4>`:''}${curioBody(x.raw)}</article>`,terms)}
+  $l.insertAdjacentHTML('beforeend',h);shown=end;
+  if(io&&shown<view.length){io.unobserve($e);io.observe($e)}
+ };
+ const show=()=>{
+  $l.innerHTML='';shown=0;
+  const q=$i.value.trim();
+  $s.textContent=q?(view.length?`${view.length} resultado${view.length>1?'s':''} para «${q}»`:`Sin resultados para «${q}»`):`${E.length} curiosidades`;
+  if(q&&!view.length)$l.innerHTML='<div class="curio-msg">Prueba con otra palabra clave.</div>';
+  more();
+ };
+ const search=()=>{
+  const q=$i.value.trim();terms=q?norm(q).split(/\s+/).filter(Boolean):[];
+  if(terms.length&&!idx)idx=E.map(x=>norm(x.c+' '+x.t+' '+x.raw.replace(/\*\*/g,'')));
+  view=[];
+  if(!terms.length){for(let i=0;i<E.length;i++)view.push(i)}
+  else for(let i=0;i<E.length;i++){if(terms.every(t=>idx[i].includes(t)))view.push(i)}
+  show();
+ };
+ $i.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(search,200)});
+ if('IntersectionObserver' in window){io=new IntersectionObserver(en=>{if(en.some(x=>x.isIntersecting))more()},{rootMargin:'900px 0px'});io.observe($e)}
+ else addEventListener('scroll',()=>{if($e.getBoundingClientRect().top<innerHeight+900)more()},{passive:true});
+ fetch(CURIO_URL).then(r=>{if(!r.ok)throw new Error(r.status);return r.text()}).then(t=>{
+  E=curioParse(t);
+  if(!E.length){$s.textContent='El archivo curiosidades_japon.txt está vacío.';return}
+  $i.disabled=false;search();
+ }).catch(()=>{$s.innerHTML='No se pudo cargar <b>curiosidades_japon.txt</b>. Debe estar en la misma carpeta que esta página (y abrirse desde GitHub Pages o un servidor, no como archivo local).'});
+};
+
 const COL={'0':'#8e9aa5','1':'#1cb0f6','2':'#58cc02','3':'#a560f2','4':'#ff9500'};
 
 /* ---------- Tarjetas desplegables ---------- */
-function build(el,items){el.innerHTML=items.map(v=>`<article class="ver" ${v.id?`id="${v.id}"`:''} style="--c:${v.id?COL[v.id[1]]:'#8e9aa5'}"><button class="ver-head" aria-expanded="false">${v.id?`<span class="badge">${v.label}</span>`:''}<span class="ver-t">${v.title}</span><span class="chev">▾</span></button><div class="ver-wrap"><div class="ver-body"><div class="ver-in">${v.h}${(DM[v.id]||[]).map(d=>`<div class="demo" data-demo="${d}"></div>`).join('')}</div></div></div></article>`).join('');
+function build(el,items){el.innerHTML=items.map(v=>`<article class="ver" ${v.id?`id="${v.id}"`:''} style="--c:${v.id?(COL[v.id[1]]||'var(--primary)'):'#8e9aa5'}"><button class="ver-head" aria-expanded="false">${v.id?`<span class="badge">${v.label}</span>`:''}<span class="ver-t">${v.title}</span><span class="chev">▾</span></button><div class="ver-wrap"><div class="ver-body"><div class="ver-in">${v.h}${(DM[v.id]||[]).map(d=>`<div class="demo" data-demo="${d}"></div>`).join('')}</div></div></div></article>`).join('');
  el.onclick=x=>{const h=x.target.closest('.ver-head');if(h)toggle(h.parentElement)}}
 function toggle(v,force){
  const head=v.querySelector('.ver-head');
@@ -1487,7 +1577,7 @@ function toggle(v,force){
   if(above){const t0=performance.now();(function keep(){const d=head.getBoundingClientRect().top-top0;if(d)window.scrollBy(0,d);if(performance.now()-t0<340)requestAnimationFrame(keep)})()}
   if(v.id){try{history.replaceState(null,'','#'+v.id)}catch(e){}}
  }else{v.classList.remove('open');head.setAttribute('aria-expanded','false')}}
-build($('#list'),parse(MD));build($('#general'),parse(GENERAL));$('#obj').innerHTML=blocks(OBJ);$('#fil').innerHTML=blocks(FIL,1);
+build($('#list'),parse(MD));build($('#general'),parse(GENERAL));build($('#curio'),[{id:'curiosidades',label:'日本',title:'Curiosidades de Japón',h:'',l:[]}]);$('#obj').innerHTML=blocks(OBJ);$('#fil').innerHTML=blocks(FIL,1);
 let hs='';try{hs=decodeURIComponent(location.hash.slice(1))}catch(e){}
 if(hs){const v=document.getElementById(hs);if(v&&v.classList.contains('ver')){toggle(v,true);setTimeout(()=>v.scrollIntoView({block:'start'}),50)}}
 
