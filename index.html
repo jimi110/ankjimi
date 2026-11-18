@@ -9,7 +9,7 @@
 
     <!-- ===== PWA: manifest y metadatos de instalación (no afecta a navegadores sin soporte) ===== -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#3a3a42">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- ===== PWA: soporte específico para iOS/iPadOS (incluye iOS 12) ===== -->
     <!-- Estas etiquetas son las que usa Safari antiguo; ignoradas sin problema por el resto de navegadores -->
@@ -352,6 +352,12 @@
         body.anki-modal-dimmed,
         html:has(body.anki-modal-dimmed) {
             background-color: #6e6e6e;
+        }
+        /* En móvil (iPhone) la zona de arriba, junto a la Dynamic Island, tiene que seguir del color de la app, no gris */
+        @media (max-width: 900px) {
+            body.anki-modal-dimmed,
+            html:has(body.anki-modal-dimmed) { background-color: var(--bg-color); }
+            html:has(body.dark-theme.anki-modal-dimmed), body.dark-theme.anki-modal-dimmed { background-color: #131f24; }
         }
 
         /* --- OVERLAY --- */
@@ -2408,7 +2414,16 @@
 
     // Aplica el tema activo (prefs.theme) al documento, generando variables CSS
     // dinámicamente salvo para 'light'/'dark' clásicos que usan el CSS ya existente.
+    function syncThemeColorMeta() {
+        const m = document.querySelector('meta[name="theme-color"]'); if (!m) return;
+        const c = getComputedStyle(document.body).getPropertyValue('--bg-color').trim() || getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim();
+        if (c) m.setAttribute('content', c);
+    }
     function applyTheme() {
+        applyThemeInner();
+        requestAnimationFrame(syncThemeColorMeta);
+    }
+    function applyThemeInner() {
         const root = document.documentElement;
         // Limpiar variables inline generadas antes de recalcular
         Object.keys(THEME_BASE_COLORS).forEach(() => {}); // no-op, reservado
