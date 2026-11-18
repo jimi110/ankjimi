@@ -5624,14 +5624,14 @@
         if (!(await frEnsureData(body))) return;
         const all = frInLevel(frLevel, frType), done = all.filter(f => frIsDone(f.id, frType)).length;
         const pct = all.length ? Math.round(done / all.length * 100) : 0;
-        let h = `<div class="fr-hub"><h2>${m.icono} ${m.titulo}</h2><p class="subtitle" style="margin-bottom:12px;">${m.sub}</p>
+        let h = `<div class="fr-hub"><h2>${m.icono} ${m.titulo}</h2>
             <div class="kana-section-title" style="text-align:center;">Dificultad</div><div class="fr-level-row">`;
         FR_LEVELS.forEach(l => {
             const a = frInLevel(l.id, frType), d = a.filter(f => frIsDone(f.id, frType)).length;
-            h += `<button type="button" class="kana-group-chip ${l.id === frLevel ? 'active' : ''}" onclick="frPickLevel('${l.id}')">${l.label} · ${d}/${a.length}</button>`;
+            h += `<button type="button" class="kana-group-chip ${l.id === frLevel ? 'active' : ''}" onclick="frPickLevel('${l.id}')">${l.label}</button>`;
         });
         h += `</div><button class="btn fr-play" onclick="startFrases()">▶️ Jugar</button>
-            <div class="fr-bar"><div class="fr-bar-fill" style="width:${pct}%"></div></div><div class="fr-bar-txt">${done} de ${all.length} ${m.items} completadas · ${pct}%</div>
+            <div class="fr-bar"><div class="fr-bar-fill" style="width:${pct}%"></div></div><div class="fr-bar-txt">${done}/${all.length}</div>
             <button class="btn outline fr-tem-btn" onclick="openTemario()">📖 Temario</button></div>`;
         body.innerHTML = h;
     }
@@ -5647,22 +5647,21 @@
         const items = m.items === 'frases' ? 'Frases' : 'Oraciones';
         if (frTemView === 'lecciones') { ttl.innerText = '📚 Lecciones · ' + m.titulo; body.innerHTML = frRenderLessons(); return; }
         if (frTemView === 'frases') { ttl.innerText = (m.items === 'frases' ? '💬 Frases' : '💬 Oraciones') + ' · ' + m.titulo; body.innerHTML = frRenderPhrases(); return; }
-        body.innerHTML = `<p class="subtitle" style="text-align:center;margin-bottom:16px;">¿Qué quieres estudiar? Aquí solo hay teoría; la práctica está en «Jugar».</p>
-            <div class="fr-tem-choices">
-                <button type="button" class="kana-choice-card fr-tem-card" onclick="frTemOpen('lecciones')"><span class="kana-choice-glyph">📚</span><span><b>Lecciones</b><small>${frData.lecciones.length} lecciones de la más fácil a la más difícil, con ejemplos y romaji</small></span></button>
-                <button type="button" class="kana-choice-card fr-tem-card" onclick="frTemOpen('frases')"><span class="kana-choice-glyph">💬</span><span><b>${items}</b><small>${frData.frases.length} ${m.items} de la app: japonés, romaji, español y ${m.conn ? 'cómo se usa cada conector' : 'qué significa cada bloque'}</small></span></button>
+        body.innerHTML = `<div class="fr-tem-choices">
+                <button type="button" class="kana-choice-card fr-tem-card" onclick="frTemOpen('lecciones')"><span class="kana-choice-glyph">📚</span><span><b>Lecciones</b></span></button>
+                <button type="button" class="kana-choice-card fr-tem-card" onclick="frTemOpen('frases')"><span class="kana-choice-glyph">💬</span><span><b>${items}</b></span></button>
             </div>`;
     }
 
     const FR_NIVEL = { basico: '🟢 Básico', intermedio: '🟡 Intermedio', especializado: '🔴 Especializado' };
     function frRenderLessons() {
-        let h = '<p class="subtitle" style="text-align:center;">Ordenadas de más fácil a más difícil. Solo se abre una a la vez.</p>';
+        let h = '';
         frData.lecciones.forEach((l, idx) => {
             const d = l.ejercicios.filter(e => frStats.ex[e.id]).length, all = l.ejercicios.length, open = frOpenAcc === l.id;
             h += `<div class="fr-acc ${open ? 'open' : ''}" data-id="${l.id}">
                 <button type="button" class="fr-acc-head" onclick="frToggleAcc('${l.id}')">
                     <span class="fr-acc-ico">${l.icono}</span>
-                    <span class="fr-acc-title">${idx + 1}. ${frJa(l.titulo)}<span class="fr-acc-meter"><span style="width:${all ? d / all * 100 : 0}%"></span></span><small>${FR_NIVEL[l.nivel] || ''} · ${d === all ? '✓ ' : ''}${d}/${all} ejercicios</small></span>
+                    <span class="fr-acc-title">${idx + 1}. ${frJa(l.titulo)}<span class="fr-acc-meter"><span style="width:${all ? d / all * 100 : 0}%"></span></span><small>${FR_NIVEL[l.nivel] || ''}</small></span>
                     <span class="fr-acc-chev">›</span></button>
                 <div class="fr-acc-panel"><div class="fr-acc-inner"><div class="fr-acc-content">
                     ${l.resumen ? `<p class="fr-resumen">${frRich(l.resumen)}</p>` : ''}
@@ -5693,11 +5692,10 @@
         let h = '<div class="fr-level-row">';
         FR_LEVELS.forEach(l => {
             const n = frInLevel(l.id).length;
-            h += `<button type="button" class="kana-group-chip ${l.id === frTemLevel ? 'active' : ''}" onclick="frTemLevel='${l.id}';frOpenPh=null;renderTemario()">${l.id === 'mezcla' ? '📚 Todas' : l.label} · ${n}</button>`;
+            h += `<button type="button" class="kana-group-chip ${l.id === frTemLevel ? 'active' : ''}" onclick="frTemLevel='${l.id}';frOpenPh=null;renderTemario()">${l.id === 'mezcla' ? '📚 Todas' : l.label}</button>`;
         });
         h += '</div>';
         const list = frInLevel(frTemLevel);
-        h += `<p class="subtitle" style="text-align:center;">${list.length} ${m.items}. Toca una para ver su explicación.</p>`;
         list.forEach(f => {
             const open = frOpenPh === f.id;
             h += `<div class="fr-item-wrap ${open ? 'open' : ''}" data-id="${f.id}"><div class="fr-item" onclick="frTogglePhrase(${f.id})"><div class="fr-item-main">${frEsc(f.es)}</div><span class="fr-acc-chev" style="font-size:22px;">›</span></div><div class="fr-det"><div class="fr-det-clip"><div class="fr-det-in">${open ? frPhraseCard(f) : ''}</div></div></div></div>`;
