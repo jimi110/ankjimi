@@ -364,7 +364,9 @@
         .settings-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.35);
+            /* Transparente a propósito: en iOS un fondo oscuro fijo tiñe de gris la barra superior.
+               El oscurecimiento lo da la sombra del panel (ver .settings-panel.open). */
+            background: transparent;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.25s ease;
@@ -385,12 +387,12 @@
             box-shadow: -8px 0 24px rgba(0,0,0,0.15);
             z-index: 1003;
             transform: translateX(100%);
-            transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+            transition: transform 0.28s cubic-bezier(.4,0,.2,1), box-shadow 0.28s ease;
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
-        .settings-panel.open { transform: translateX(0); }
+        .settings-panel.open { transform: translateX(0); box-shadow: -8px 0 24px rgba(0,0,0,0.15), 0 0 0 100vmax rgba(0,0,0,0.35); }
 
         .settings-panel-header {
             display: flex;
@@ -2415,9 +2417,12 @@
     // Aplica el tema activo (prefs.theme) al documento, generando variables CSS
     // dinámicamente salvo para 'light'/'dark' clásicos que usan el CSS ya existente.
     function syncThemeColorMeta() {
-        const m = document.querySelector('meta[name="theme-color"]'); if (!m) return;
+        const old = document.querySelector('meta[name="theme-color"]');
         const c = getComputedStyle(document.body).getPropertyValue('--bg-color').trim() || getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim();
-        if (c) m.setAttribute('content', c);
+        if (!c) return;
+        // iOS no siempre relee el valor si solo se cambia el atributo: se sustituye la etiqueta entera.
+        const m = document.createElement('meta'); m.name = 'theme-color'; m.content = c;
+        if (old) old.replaceWith(m); else document.head.appendChild(m);
     }
     function applyTheme() {
         applyThemeInner();
