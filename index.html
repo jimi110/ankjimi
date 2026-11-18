@@ -1182,6 +1182,19 @@
         .option-btn:active { transform: translateY(4px); box-shadow: var(--shadow-active); }
         .option-btn.disabled { pointer-events: none; }
 
+        /* --- DIÁLOGOS DE LA APP (sustituyen a confirm()/alert() del navegador) --- */
+        .app-dlg-overlay { position: fixed; inset: 0; z-index: 9000; display:flex; align-items:center; justify-content:center; padding: 20px; background: rgba(0,0,0,.45); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); opacity:0; transition: opacity .2s ease; }
+        .app-dlg-overlay.show { opacity:1; }
+        .app-dlg { width:100%; max-width: 340px; background: var(--card-bg); color: var(--text-main); border: 2px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow), 0 20px 50px rgba(0,0,0,.3); padding: 22px 20px 18px; text-align:center; transform: translateY(14px) scale(.96); transition: transform .22s cubic-bezier(.2,1.2,.4,1); }
+        .app-dlg-overlay.show .app-dlg { transform: none; }
+        .app-dlg-ico { font-size: 40px; line-height:1; margin-bottom: 8px; }
+        .app-dlg-title { font-size: 19px; font-weight: 800; margin-bottom: 6px; }
+        .app-dlg-text { font-size: 14.5px; color: var(--text-muted); line-height:1.45; margin-bottom: 16px; }
+        .app-dlg-actions { display:flex; flex-direction:column; gap:10px; }
+        .app-dlg-btn { font-family: inherit; font-size: 16px; font-weight: 800; padding: 13px; border-radius: 14px; cursor:pointer; border: 2px solid var(--border); background: var(--bg-secondary); color: var(--text-main); box-shadow: 0 3px 0 var(--border); }
+        .app-dlg-btn:active { transform: translateY(2px); box-shadow: none; }
+        .app-dlg-btn.primary { background: var(--primary); border-color: var(--primary); color:#fff; box-shadow: 0 3px 0 var(--primary-shadow); }
+        .app-dlg-btn.danger { background: var(--wrong); border-color: var(--wrong); color:#fff; box-shadow: 0 3px 0 rgba(0,0,0,.2); }
         /* --- RECORRIDO POR VERSIONES --- */
         .rec-overlay { position: fixed; inset: 0; z-index: 5000; display: none; flex-direction: column; background: var(--bg-color); }
         .rec-overlay.open { display: flex; }
@@ -1235,7 +1248,7 @@
         .fr-hub { text-align:center; padding-top: 6px; }
         .fr-hub-ico { font-size: 54px; line-height:1; }
         .fr-hub h2 { font-size: 24px; margin: 6px 0 2px; }
-        .fr-play { width:100%; max-width:360px; font-size: 20px; padding: 18px 24px; margin: 12px auto 4px; display:block; }
+        .fr-play { width:100%; max-width:360px; font-size: 20px; padding: 16px 24px; margin: 6px auto 4px; display:block; }
         .fr-tem-btn { width:100%; max-width:360px; margin: 18px auto 0; display:block; }
         .fr-bar { height: 10px; background: var(--border); border-radius: 6px; overflow:hidden; max-width: 360px; margin: 12px auto 4px; }
         .fr-bar-fill { height:100%; background: var(--correct); border-radius:6px; transition: width .4s ease; }
@@ -1269,6 +1282,19 @@
         @keyframes frIn { to { opacity:1; transform:none; } }
         .fr-acc-go { width:100%; margin: 14px 0 0; }
         .fr-ex { border-left: 4px solid var(--primary); }
+        .fr-item-wrap { margin-bottom: 8px; }
+        .fr-item-wrap .fr-item { margin-bottom: 0; }
+        .fr-item-wrap.open .fr-item { border-color: var(--primary); }
+        .fr-item-wrap.open .fr-acc-chev { transform: rotate(90deg); color: var(--primary); }
+        .fr-det { display:grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+        .fr-item-wrap.open .fr-det { grid-template-rows: 1fr; }
+        .fr-det-clip { overflow:hidden; min-height:0; }
+        .fr-det-in { background: var(--bg-secondary); border:2px solid var(--border); border-top:none; border-radius: 0 0 var(--radius-md) var(--radius-md); padding: 14px; margin: 0 6px; opacity:0; transition: opacity .3s ease .1s; }
+        .fr-item-wrap.open .fr-det-in { opacity:1; }
+        .fr-det-ja { font-size: 24px; font-weight: 800; line-height: 1.35; }
+        .fr-det-es { font-size: 16px; font-weight: 700; margin-top: 6px; }
+        .fr-det-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top: 8px; }
+        .fr-tag { font-size: 11.5px; font-weight:700; text-transform: capitalize; background: var(--card-bg); border:1px solid var(--border); border-radius: 20px; padding: 2px 10px; color: var(--text-muted); }
         .fr-expr { text-align:center; margin: 24px 0; }
         .fr-expr-ja { font-size: 56px; font-weight:700; margin: 10px 0 4px; }
         .fr-expr-read { color: var(--text-muted); font-size: 15px; }
@@ -3627,10 +3653,9 @@
         showScreen('practice');
     }
 
-    function abortPractice() {
-        if(confirm("¿Seguro que quieres salir de la práctica?")) {
-            showScreen(practiceState.isReview ? 'review' : 'topic');
-        }
+    async function abortPractice() {
+        const ok = await appConfirm({ icon: '🚪', title: '¿Salir de la práctica?', text: 'Volverás a la pantalla anterior.', confirmText: 'Salir', cancelText: 'Seguir practicando', danger: true });
+        if (ok) showScreen(practiceState.isReview ? 'review' : 'topic');
     }
 
     function generateQuestion() {
@@ -4991,7 +5016,7 @@
     function startKanaPractice(type) {
         const selectedGroups = Object.keys(kanaTestGroups).filter(g => kanaTestGroups[g]);
         if (selectedGroups.length === 0) {
-            alert('Selecciona al menos un grupo (Básico, Dakuten o Yōon) para practicar.');
+            appAlert({ icon: '☝️', title: 'Elige al menos un grupo', text: 'Selecciona Básico, Dakuten o Yōon para poder practicar.', confirmText: 'Entendido' });
             return;
         }
         playSound('primary');
@@ -5013,10 +5038,9 @@
         showScreen('kana-practice');
     }
 
-    function abortKanaPractice() {
-        if (confirm('¿Seguro que quieres salir de la práctica?')) {
-            showScreen('kana-vocab');
-        }
+    async function abortKanaPractice() {
+        const ok = await appConfirm({ icon: '🚪', title: '¿Salir de la práctica?', text: 'Volverás al vocabulario.', confirmText: 'Salir', cancelText: 'Seguir practicando', danger: true });
+        if (ok) showScreen('kana-vocab');
     }
 
     function kanaSolvedCount() {
@@ -5356,12 +5380,49 @@
         container.innerHTML = `<div class="stats-kana-grid">${cards}</div>${hardestHTML}<div class="stats-kana-hard-title">🧩 Frases y oraciones</div><div class="stats-kana-grid">${frCards}</div>`;
     }
 
+    // ===================== DIÁLOGOS DE LA APP ===================== //
+    // Sustituyen a confirm()/alert() del navegador: mismo aspecto que el resto de la app y tema aplicado.
+    let appDlgOpen = null;
+    function appDialog({ icon = '❓', title = '', text = '', confirmText = 'Aceptar', cancelText = null, danger = false } = {}) {
+        return new Promise(resolve => {
+            if (appDlgOpen) appDlgOpen(false);
+            const ov = document.createElement('div');
+            ov.className = 'app-dlg-overlay'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true');
+            const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+            ov.innerHTML = `<div class="app-dlg"><div class="app-dlg-ico">${icon}</div><div class="app-dlg-title">${esc(title)}</div>${text ? `<div class="app-dlg-text">${esc(text)}</div>` : ''}
+                <div class="app-dlg-actions">${cancelText ? `<button type="button" class="app-dlg-btn primary" data-r="0">${esc(cancelText)}</button>` : ''}
+                <button type="button" class="app-dlg-btn ${danger ? 'danger' : (cancelText ? '' : 'primary')}" data-r="1">${esc(confirmText)}</button></div></div>`;
+            const done = v => {
+                document.removeEventListener('keydown', onKey, true);
+                appDlgOpen = null; ov.classList.remove('show');
+                setTimeout(() => ov.remove(), 220); resolve(v);
+            };
+            const onKey = e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); done(false); } };
+            ov.addEventListener('click', e => {
+                const b = e.target.closest('[data-r]');
+                if (b) done(b.dataset.r === '1'); else if (e.target === ov && cancelText) done(false);
+            });
+            document.addEventListener('keydown', onKey, true);
+            appDlgOpen = done;
+            document.body.appendChild(ov);
+            requestAnimationFrame(() => ov.classList.add('show'));
+            const first = ov.querySelector('.app-dlg-btn.primary') || ov.querySelector('.app-dlg-btn'); if (first) first.focus();
+        });
+    }
+    const appConfirm = o => appDialog({ cancelText: 'Cancelar', ...o });
+    const appAlert = o => appDialog(o);
+
     // ===================== RECORRIDO POR VERSIONES ===================== //
     function openRecorrido() {
         if (typeof closeSettingsPanel === 'function') closeSettingsPanel();
         const ov = document.getElementById('recorrido-overlay'), fr = document.getElementById('recorrido-iframe');
-        if (!fr.getAttribute('src')) { fr.addEventListener('load', syncRecorridoTheme); fr.src = 'recorrido.html'; }
-        else syncRecorridoTheme();
+        // Cada vez se abre "de cero": arriba del todo, sin desplegables ni ajustes abiertos.
+        if (!fr.dataset.ready) {
+            fr.dataset.ready = '1';
+            fr.addEventListener('load', () => { syncRecorridoTheme(); resetRecorrido(); });
+        }
+        if (!fr.getAttribute('src')) fr.src = 'recorrido.html';
+        else { syncRecorridoTheme(); resetRecorrido(); }
         ov.classList.add('open');
         document.body.style.overflow = 'hidden';
     }
@@ -5385,6 +5446,14 @@
                     else setPref('theme', v);
                 };
             }
+        } catch (e) {}
+    }
+    function resetRecorrido() {
+        try {
+            const w = document.getElementById('recorrido-iframe').contentWindow;
+            w.eval(`togglePanel(false);document.querySelectorAll('.ver.open,.tool.open,details[open]').forEach(x=>{x.classList.remove('open');x.removeAttribute&&x.removeAttribute('open')});`);
+            w.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            setTimeout(() => { try { w.scrollTo({ top: 0, behavior: 'instant' }); } catch (e) {} }, 400);
         } catch (e) {}
     }
     function closeRecorrido() {
@@ -5494,14 +5563,14 @@
         if (!(await frEnsureData(body))) return;
         const all = frInLevel(frLevel), done = all.filter(f => frStats.done[f.id]).length;
         const pct = all.length ? Math.round(done / all.length * 100) : 0;
-        let h = `<div class="fr-hub"><div class="fr-hub-ico">${m.icono}</div><h2>${m.titulo}</h2><p class="subtitle">${m.sub}</p>
-            <button class="btn fr-play" onclick="startFrases()">▶️ Jugar</button>
+        let h = `<div class="fr-hub"><h2>${m.icono} ${m.titulo}</h2><p class="subtitle" style="margin-bottom:14px;">${m.sub}</p>
             <div class="kana-section-title" style="text-align:center;">Dificultad</div><div class="fr-level-row">`;
         FR_LEVELS.forEach(l => {
             const a = frInLevel(l.id), d = a.filter(f => frStats.done[f.id]).length;
             h += `<button type="button" class="kana-group-chip ${l.id === frLevel ? 'active' : ''}" onclick="frPickLevel('${l.id}')">${l.label} · ${d}/${a.length}</button>`;
         });
-        h += `</div><div class="fr-bar"><div class="fr-bar-fill" style="width:${pct}%"></div></div><div class="fr-bar-txt">${done} de ${all.length} ${m.items} completadas</div>
+        h += `</div><button class="btn fr-play" onclick="startFrases()">▶️ Jugar</button>
+            <div class="fr-bar"><div class="fr-bar-fill" style="width:${pct}%"></div></div><div class="fr-bar-txt">${done} de ${all.length} ${m.items} completadas · ${pct}%</div>
             <button class="btn outline fr-tem-btn" onclick="openTemario('teoria')">📖 Temario</button></div>`;
         body.innerHTML = h;
     }
@@ -5553,15 +5622,37 @@
         h += '</div>';
         const cur = frInLevel(frLevel);
         const pending = cur.filter(f => !frStats.done[f.id]), done = cur.filter(f => frStats.done[f.id]);
-        const item = f => `<div class="fr-item ${frStats.done[f.id] ? 'done' : ''}" onclick="startFrases(${f.id})"><div class="fr-item-main">${frEsc(f.es)}${frStats.done[f.id] ? `<div class="fr-item-sub">${frEsc(f.ja)}</div>` : ''}</div>${frStats.done[f.id] ? '<span class="fr-check">✓</span>' : '<span style="color:var(--text-muted)">›</span>'}</div>`;
+        const item = f => `<div class="fr-item-wrap" data-id="${f.id}"><div class="fr-item ${frStats.done[f.id] ? 'done' : ''}" onclick="frToggleItem(${f.id})"><div class="fr-item-main">${frEsc(f.es)}${frStats.done[f.id] ? `<div class="fr-item-sub">${frEsc(f.ja)}</div>` : ''}</div>${frStats.done[f.id] ? '<span class="fr-check">✓</span>' : ''}<span class="fr-acc-chev" style="font-size:22px;">›</span></div><div class="fr-det"><div class="fr-det-clip"><div class="fr-det-in"></div></div></div></div>`;
         h += `<div class="kana-section-title">Pendientes (${pending.length})</div>` + (pending.map(item).join('') || `<p class="subtitle">¡Todas completadas! 🎉</p>`);
         h += `<div class="kana-section-title">Completadas (${done.length})</div>` + (done.map(item).join('') || '<p class="subtitle">Aún ninguna.</p>');
         if (done.length) h += '<div class="center-btn-wrap" style="margin-top:14px;"><button class="btn outline" onclick="frResetLevel()">↺ Reiniciar este nivel</button></div>';
         return h;
     }
 
-    function frResetLevel() {
-        if (!confirm('¿Reiniciar el progreso de este nivel?')) return;
+    // Ficha de estudio de una frase: japonés, traducción, explicación palabra a palabra y audio.
+    function frSpeak(id) { const f = frData.frases.find(x => x.id === id); if (f) speakJapanese(f.ja); }
+    function frToggleItem(id) {
+        const wrap = document.querySelector(`.fr-item-wrap[data-id="${id}"]`); if (!wrap) return;
+        const inner = wrap.querySelector('.fr-det-in');
+        if (!inner.innerHTML) {
+            const f = frData.frases.find(x => x.id === id);
+            const tipo = String(f.categoria || '').replace(/_/g, ' ');
+            inner.innerHTML = `<div class="fr-det-ja">${frEsc(f.ja)}</div>
+                <div class="fr-expr-read">${frEsc(f.lectura)}</div>
+                <div class="fr-det-es">${frEsc(f.es)}</div>
+                <div class="fr-det-tags"><span class="fr-tag">${frEsc(f.nivel)}</span>${tipo ? `<span class="fr-tag">${frEsc(tipo)}</span>` : ''}</div>
+                <button type="button" class="btn outline" style="width:auto;padding:8px 18px;margin:10px 0 4px;font-size:15px;" onclick="frSpeak(${f.id})">🔊 Escuchar</button>
+                <div class="kana-section-title" style="margin-top:6px;">Palabra a palabra</div>
+                <div class="fr-gloss" style="max-height:none;border:0;padding:0;">${frGloss(f)}</div>
+                <button type="button" class="btn outline" style="width:100%;margin:12px 0 0;" onclick="startFrases(${f.id})">▶️ Practicar esta ${FR_MODES[frMode].items === 'frases' ? 'frase' : 'oración'}</button>`;
+        }
+        const willOpen = !wrap.classList.contains('open');
+        wrap.classList.toggle('open', willOpen);
+        if (willOpen) { playSound('click'); setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 340); }
+    }
+
+    async function frResetLevel() {
+        if (!(await appConfirm({ icon: '↺', title: '¿Reiniciar este nivel?', text: 'Las frases de este nivel volverán a estar pendientes.', confirmText: 'Reiniciar', danger: true }))) return;
         frInLevel(frLevel).forEach(f => delete frStats.done[f.id]);
         frSave(); renderTemario();
     }
@@ -5641,8 +5732,8 @@
         frQuestion();
     }
 
-    function abortFrases() {
-        if (!confirm('¿Salir? Tu progreso ya está guardado.')) return;
+    async function abortFrases() {
+        if (!(await appConfirm({ icon: '🚪', title: '¿Salir de la práctica?', text: 'Tu progreso ya está guardado.', confirmText: 'Salir', cancelText: 'Seguir practicando', danger: true }))) return;
         if (frSession && frSession.mode === 'quiz') { frTab = 'teoria'; frOpenAcc = frSession.lesson; frBackToTemario(); }
         else if (frSession && frSession.single) { frTab = 'lista'; frBackToTemario(); }
         else frBackToHub();
