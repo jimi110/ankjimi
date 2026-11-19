@@ -1217,8 +1217,8 @@
         .fr-resumen { font-weight:600; margin:2px 0 8px; }
         .fr-uso { background:var(--bg-secondary); border-left:4px solid var(--primary); border-radius:var(--radius-md); padding:8px 12px; margin:8px 0; font-size:14px; line-height:1.4; }
         .fr-mark { background:var(--correct-bg); color:inherit; border-radius:6px; padding:0 4px; }
-        .fr-inline { align-items:center; font-size:22px; font-weight:700; gap:6px; }
-        .fr-fixed { font-size:22px; font-weight:700; }
+        .fr-inline { align-items:center; font-size:24px; font-weight:700; gap:6px; }
+        .fr-fixed { font-size:24px; font-weight:700; }
         .fr-opt-ja { font-size:19px; line-height:1.9; }
         .fr-card-wide { grid-column: 1 / -1; display:flex; align-items:center; gap:14px; text-align:left; }
         .fr-card-wide .kana-choice-glyph { font-size: 30px; margin:0; }
@@ -1231,6 +1231,19 @@
         .fr-theory .fr-theory-body { padding: 0 14px 12px; color: var(--text-main); font-size: 14.5px; line-height:1.5; }
         .fr-theory .fr-theory-body p { margin: 6px 0; }
         .fr-notice { text-align:center; background: var(--bg-secondary); border:2px dashed var(--border); border-radius: var(--radius-lg); padding: 28px 18px; color: var(--text-muted); margin-top: 20px; }
+        .fr-stage { display:flex; flex-direction:column; flex-grow:1; }
+        .fr-stage .question-container { margin-bottom: 24px; }
+        .fr-stage .question-word.sentence-mode { font-size: 28px; }
+        .fr-build { width:100%; max-width:520px; margin: 0 auto; }
+        .fr-stage .options-container { margin-bottom: 8px; }
+        .fr-stage .option-btn { font-family: inherit; line-height: 1.9; font-size: 22px; }
+        .fr-stage .option-btn.good { border-color: var(--correct); background: var(--correct-bg); }
+        .fr-stage .option-btn.bad { border-color: var(--wrong); background: var(--wrong-bg); }
+        .fr-fb-inner { max-width: 600px; margin: 0 auto; width: 100%; display:flex; flex-direction:column; gap: 12px; max-height: 78vh; overflow:auto; }
+        .fr-fb-ja { font-size: 24px; font-weight: 700; line-height: 1.9; }
+        .fr-fb-ro { font-size: 15px; color: var(--text-muted); font-weight: 600; }
+        .fr-fb-es { font-size: 18px; font-weight: 600; }
+        .fr-fb-audio { align-self:flex-start; }
         .fr-prompt { text-align:center; margin: 18px 0 8px; }
         .fr-prompt-label { color: var(--text-muted); font-size: 13px; }
         .fr-prompt-es { font-size: 24px; font-weight: 700; margin-top: 6px; }
@@ -1238,7 +1251,7 @@
         .fr-slot { min-width: 70px; min-height: 54px; border: 2px dashed var(--border); border-radius: var(--radius-md); display:flex; align-items:center; justify-content:center; background: var(--bg-secondary); }
         .fr-slot.over { border-color: var(--primary); background: var(--card-bg); }
         .fr-tray { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:520px; margin: 0 auto; min-height:60px; padding: 12px 0; border-top: 2px solid var(--border); }
-        .fr-chip { background: var(--card-bg); border:2px solid var(--border); border-radius: var(--radius-md); padding: 8px 14px; font-size: 20px; font-weight:700; box-shadow: var(--shadow); cursor: grab; touch-action: none; user-select:none; -webkit-user-select:none; text-align:center; }
+        .fr-chip { background: var(--card-bg); border:2px solid var(--border); border-radius: var(--radius-md); padding: 10px 16px; font-size: 22px; font-weight:700; box-shadow: var(--shadow); cursor: grab; touch-action: none; user-select:none; -webkit-user-select:none; text-align:center; }
         .fr-chip small { display:block; font-size: 11.5px; font-weight:500; color: var(--text-muted); margin-top:2px; }
         .fr-chip.used { opacity: .25; pointer-events:none; box-shadow:none; }
         .fr-chip.in-slot { box-shadow:none; border-color: var(--primary); }
@@ -1891,19 +1904,20 @@
 
     <!-- PANTALLA: PRÁCTICA DE FORMAR FRASES -->
     <div id="screen-frases-practice" class="screen pad-bottom" style="padding-bottom:260px;">
-        <div class="kana-practice-topbar">
-            <button class="btn-back" style="padding:4px;" onclick="abortFrases()">✕</button>
-            <div class="kana-progress-bar-track"><div class="kana-progress-bar-fill" id="fr-progress" style="width:0%;"></div></div>
-            <div class="kana-progress-count" id="fr-count">0/0</div>
+        <div class="practice-header">
+            <button class="btn-back" onclick="abortFrases()" style="font-size:24px; padding:0;">×</button>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="fr-progress"></div>
+            </div>
         </div>
-        <div id="fr-stage"></div>
+        <div id="fr-stage" class="fr-stage"></div>
         <div id="fr-feedback" class="feedback-panel" style="display:none;">
-            <div>
+            <div class="fr-fb-inner">
                 <div class="feedback-title" id="fr-fb-title"></div>
                 <div class="feedback-answer" id="fr-fb-answer" style="display:block;"></div>
                 <div class="fr-gloss" id="fr-fb-gloss"></div>
+                <button class="btn btn-next" onclick="frNext()" style="margin-bottom:0;">Siguiente →</button>
             </div>
-            <button class="btn btn-next" onclick="frNext()" style="margin-bottom:0;">Continuar →</button>
         </div>
     </div>
 
@@ -5767,22 +5781,22 @@
         frCur = null; frState = null; frQuizEx = ex;
         const opts = frShuffle(ex.ops.map((t, i) => ({ t, ok: i === ex.ok })));
         frQuizOpts = opts;
-        document.getElementById('fr-stage').innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">${l.icono} ${frJa(l.titulo)}</div><div class="fr-prompt-es" style="font-size:20px;">${frRich(ex.p)}</div>${ex.ja ? `<div class="fr-expr-ja" style="font-size:34px;">${frJa(ex.ja)}</div>` : ''}</div>
-            <div class="fr-opts">${opts.map((o, i) => `<button class="fr-opt" data-i="${i}" onclick="frAnswerQuiz(${i})">${frJa(o.t)}</button>`).join('')}</div>`;
+        document.getElementById('fr-stage').innerHTML = `<div class="question-container"><div class="question-label">${l.icono} ${frJa(l.titulo)}</div><div class="question-word sentence-mode">${frRich(ex.p)}</div>${ex.ja ? `<div class="question-word" style="margin-top:12px;">${frJa(ex.ja)}</div>` : ''}</div>
+            <div class="options-container">${opts.map((o, i) => `<button class="option-btn" data-i="${i}" onclick="frAnswerQuiz(${i})">${frJa(o.t)}</button>`).join('')}</div>`;
     }
     let frQuizEx = null, frQuizOpts = null, frQuizLocked = false;
     function frAnswerQuiz(i) {
         if (frQuizLocked) return; frQuizLocked = true;
         const ok = frQuizOpts[i].ok, ex = frQuizEx;
-        document.querySelectorAll('.fr-opt').forEach((b, k) => { if (frQuizOpts[k].ok) b.classList.add('good'); else if (k === i) b.classList.add('bad'); b.disabled = true; });
+        document.querySelectorAll('.fr-stage .option-btn').forEach((b, k) => { if (frQuizOpts[k].ok) b.classList.add('good'); else if (k === i) b.classList.add('bad'); b.disabled = true; });
         frStats.attempts++;
         if (ok) { frStats.correct++; frStats.ex[ex.id] = true; if (!frSession.retry[ex.id]) frSession.firstTry++; frSession.queue.shift(); playSound('correct'); }
         else { frSession.retry[ex.id] = true; frSession.queue.push(frSession.queue.shift()); playSound('wrong'); }
         frSave();
         const fb = document.getElementById('fr-feedback');
         fb.className = 'feedback-panel ' + (ok ? 'correct' : 'wrong'); fb.style.display = 'flex';
-        document.getElementById('fr-fb-title').innerText = ok ? '✓ ¡Correcto!' : '✗ No era esa';
-        document.getElementById('fr-fb-answer').innerHTML = `<div style="font-size:18px;font-weight:700;">${frJa(frQuizOpts.find(o => o.ok).t)}</div>`;
+        document.getElementById('fr-fb-title').innerText = ok ? '✓ ¡Correcto!' : '✕ Incorrecto';
+        document.getElementById('fr-fb-answer').innerHTML = `<div class="fr-fb-ja">${frJa(frQuizOpts.find(o => o.ok).t)}</div>`;
         document.getElementById('fr-fb-gloss').innerHTML = `<div class="fr-gloss-item"><span>${frRich(ex.exp)}</span></div>`;
     }
 
@@ -5863,7 +5877,7 @@
     function frGloss(f) {
         return f.bloques.map(b => {
             const g = frData.bloques[b] || ['', '', '', 0, ''];
-            return `<div class="fr-gloss-item"><b>${frJa(b)}</b><span>${frEsc(g[1])}<i>${frEsc(g[4] || '')}${g[2] ? ' · ' + frEsc(g[2]) : ''}</i></span></div>`;
+            return `<div class="fr-gloss-item"><b>${frJa(b)}</b><span>${frEsc(g[1])}<i>${frEsc((g[4] || '').replace(/[,.\s]+$/, ''))}${g[2] ? ' · ' + frEsc(g[2]) : ''}</i></span></div>`;
         }).join('');
     }
 
@@ -5912,45 +5926,44 @@
         if (frSession.queue.length === 0) return frFinish();
         const done = frSession.total - new Set(frSession.queue).size;
         document.getElementById('fr-progress').style.width = (done / frSession.total * 100) + '%';
-        document.getElementById('fr-count').innerText = done + '/' + frSession.total;
         if (frSession.mode === 'quiz') return frQuizQuestion();
         const id = frSession.queue[0];
         frCur = frData.frases.find(f => f.id === id);
         frQT = frSession.qt[id];
         const stage = document.getElementById('fr-stage'), f = frCur;
         frHints = false;
+        const label = t => `<div class="question-label">${t}</div>`;
+        const esq = `<div class="question-word sentence-mode">${frSpanishHtml(f.es)}</div>`;
+        const hintBtns = `<div class="center-btn-wrap" style="margin-top:14px;"><button class="btn outline" id="fr-hint-btn" onclick="frToggleHints()" style="margin-bottom:8px;">👁️ Ver significados</button></div>
+                <div class="center-btn-wrap"><button class="btn" id="fr-check-btn" onclick="frCheck()" disabled style="opacity:.5">Comprobar</button></div>`;
         if (frQT === 'ordenar' && f.bloques.length === 1) {
             frState = null;
             const g = frData.bloques[f.bloques[0]] || ['', '', '', 0, ''];
-            stage.innerHTML = `<div class="fr-expr"><div class="fr-prompt-label">Expresión para aprender</div>
-                <div class="fr-expr-ja">${frJa(f.ja)}</div><div class="fr-expr-read">${frEsc(f.romaji)}</div>
-                <div class="fr-expr-es">${frSpanishHtml(f.es)}</div>${g[2] ? '<div class="fr-expr-note">💡 ' + frEsc(g[2]) + '</div>' : ''}
-                <button class="kana-audio-btn" onclick="speakJapanese('${f.ja.replace(/'/g, '')}')">🔊</button></div>
+            stage.innerHTML = `<div class="question-container">${label('Expresión para aprender')}
+                <div class="question-word">${frJa(f.ja)}</div><div class="fr-fb-ro" style="margin-top:8px;">${frEsc(f.romaji)}</div>
+                <div class="question-word sentence-mode" style="margin-top:14px;">${frSpanishHtml(f.es)}</div>${g[2] ? '<div class="question-translation">💡 ' + frEsc(g[2]) + '</div>' : ''}
+                <button class="btn-audio" style="display:flex;margin:16px auto 0;" onclick="speakJapanese('${f.ja.replace(/'/g, '')}')">🔊</button></div>
                 <div class="center-btn-wrap"><button class="btn" onclick="frExprDone()">Entendido →</button></div>`;
             speakJapanese(f.ja);
             return;
         }
         if (frQT === 'elegir') {
             frState = null; frElegirOpts = frMakeOptions(f);
-            stage.innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">${f.hueco ? 'Elige la oración con el conector correcto' : 'Elige la frase correcta'}</div><div class="fr-prompt-es">${frSpanishHtml(f.es)}</div></div>
-                <div class="fr-opts">${frElegirOpts.map((o, i) => `<button class="fr-opt fr-opt-ja" data-i="${i}" onclick="frAnswerElegir(${i})">${frJaParts(o.parts)}</button>`).join('')}</div>`;
+            stage.innerHTML = `<div class="question-container">${label(f.hueco ? 'Elige la oración con el conector correcto' : 'Elige la frase correcta')}${esq}</div>
+                <div class="options-container">${frElegirOpts.map((o, i) => `<button class="option-btn" data-i="${i}" onclick="frAnswerElegir(${i})">${frJaParts(o.parts)}</button>`).join('')}</div>`;
             return;
         }
         if (frQT === 'completar') {
             const g = frMakeGap(f);
             frState = { chips: g.chips, slots: [null], target: g.target, parts: g.parts, checked: false };
-            stage.innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">${f.hueco ? 'Coloca el conector que falta' : 'Completa la frase'}</div><div class="fr-prompt-es">${frSpanishHtml(f.es)}</div></div>
-                <div class="fr-slots fr-inline" id="fr-slots"></div><div class="fr-tray" id="fr-tray"></div>
-                <div class="center-btn-wrap" style="margin-top:12px;"><button class="btn outline" id="fr-hint-btn" onclick="frToggleHints()" style="margin-bottom:8px;">👁️ Ver significados</button></div>
-                <div class="center-btn-wrap"><button class="btn" id="fr-check-btn" onclick="frCheck()" disabled style="opacity:.5">Comprobar</button></div>`;
+            stage.innerHTML = `<div class="question-container">${label(f.hueco ? 'Coloca el conector que falta' : 'Completa la frase')}${esq}</div>
+                <div class="fr-build"><div class="fr-slots fr-inline" id="fr-slots"></div><div class="fr-tray" id="fr-tray"></div>${hintBtns}</div>`;
             frRender();
             return;
         }
         frState = { chips: frMakeChips(f), slots: new Array(f.bloques.length).fill(null), target: f.bloques.slice(), parts: f.bloques.map((b, i) => ({ slot: i })), checked: false };
-        stage.innerHTML = `<div class="fr-prompt"><div class="fr-prompt-label">${f.hueco ? 'Ordena la oración en japonés' : 'Ordena la frase en japonés'}</div><div class="fr-prompt-es">${frSpanishHtml(f.es)}</div></div>
-            <div class="fr-slots" id="fr-slots"></div><div class="fr-tray" id="fr-tray"></div>
-            <div class="center-btn-wrap" style="margin-top:12px;"><button class="btn outline" id="fr-hint-btn" onclick="frToggleHints()" style="margin-bottom:8px;">👁️ Ver significados</button></div>
-            <div class="center-btn-wrap"><button class="btn" id="fr-check-btn" onclick="frCheck()" disabled style="opacity:.5">Comprobar</button></div>`;
+        stage.innerHTML = `<div class="question-container">${label(f.hueco ? 'Ordena la oración en japonés' : 'Ordena la frase en japonés')}${esq}</div>
+            <div class="fr-build"><div class="fr-slots" id="fr-slots"></div><div class="fr-tray" id="fr-tray"></div>${hintBtns}</div>`;
         frRender();
     }
 
@@ -6073,11 +6086,12 @@
         frSave();
         const fb = document.getElementById('fr-feedback');
         fb.className = 'feedback-panel ' + (ok ? 'correct' : 'wrong'); fb.style.display = 'flex';
-        document.getElementById('fr-fb-title').innerText = ok ? '✓ ¡Correcto!' : (frQT === 'ordenar' ? '✗ Casi…' : '✗ No era esa');
+        document.getElementById('fr-fb-title').innerText = ok ? '✓ ¡Correcto!' : '✕ Incorrecto';
         const sentence = f.bloques.map(b => frTapOn() ? `<span class="fr-w" data-ja="${frEsc(b)}">${frJa(b)}</span>` : frJa(b)).join('');
-        document.getElementById('fr-fb-answer').innerHTML = `<div style="font-size:20px;font-weight:700;">${sentence}</div><div style="font-size:13px;opacity:.85;">${frEsc(f.romaji)}</div>${f.uso ? `<div style="font-size:13px;margin-top:4px;"><b>${frJa(f.hueco.con)}</b>: ${frEsc(f.uso)}</div>` : ''}`;
+        const con = f.uso ? f.hueco.con.replace(/[、。]$/, '') : '';
+        document.getElementById('fr-fb-answer').innerHTML = `<div class="fr-fb-ja">${sentence}</div><div class="fr-fb-ro">${frEsc(f.romaji)}</div><div class="fr-fb-es">${frEsc(f.es)}</div>${f.uso ? `<div class="fr-uso"><b>${frJa(con)}</b>: ${frEsc(f.uso)}</div>` : ''}<button type="button" class="btn-audio fr-fb-audio" onclick="speakJapanese(frCur.ja)">🔊</button>`;
         document.getElementById('fr-fb-gloss').innerHTML = frGloss(f);
-        speakJapanese(f.ja);
+        setTimeout(() => speakJapanese(f.ja), 250);
     }
     function frCheck() {
         if (frState.checked) return;
@@ -6087,7 +6101,7 @@
     }
     function frAnswerElegir(i) {
         if (frQuizLocked) return; frQuizLocked = true;
-        document.querySelectorAll('.fr-opt').forEach((b, k) => { if (frElegirOpts[k].ok) b.classList.add('good'); else if (k === i) b.classList.add('bad'); b.disabled = true; });
+        document.querySelectorAll('.fr-stage .option-btn').forEach((b, k) => { if (frElegirOpts[k].ok) b.classList.add('good'); else if (k === i) b.classList.add('bad'); b.disabled = true; });
         frResolve(frElegirOpts[i].ok);
     }
 
