@@ -7,12 +7,6 @@
    "icono": "🧩",
    "titulo": "Orden de las palabras",
    "resumen": "El verbo siempre al final",
-   "explicacion": [
-    "El verbo va SIEMPRE al final de la frase. Es como decir «yo agua bebo».",
-    "Orden habitual: tiempo → lugar → objeto → verbo. 明日 家で 水を 飲む (ashita, ie de, mizu o, nomu) = mañana / en casa / agua / bebo.",
-    "En la calle se omite lo que se sobreentiende: el «yo» y muchas partículas. Por eso las frases suelen quedar en 2 o 3 bloques cortos.",
-    "Los complementos pueden cambiar de sitio si el verbo sigue al final: 今日 家にいる (kyou ie ni iru) y 家に 今日いる suenan bien."
-   ],
    "ejemplos": [
     {
      "ja": "明日、会える？",
@@ -83,6 +77,76 @@
      "ok": 0,
      "exp": "En japonés hablado el sujeto obvio se omite."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "En japonés el verbo va siempre al final de la frase. Si en español dices «yo bebo agua», en japonés la idea se ordena como «yo agua bebo». Todo lo demás (quién, cuándo, dónde, qué) se coloca antes del verbo.",
+      "Esto da una regla muy cómoda: para saber qué ha pasado en una frase, espera al último bloque. Quien habla puede ir añadiendo datos y soltar la acción al final."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "Siempre, en cualquier frase afirmativa, negativa o interrogativa. No hay excepciones en el habla normal: incluso las frases largas terminan con el verbo, o con una partícula final que se pega a él.",
+      "El orden habitual de los bloques es tiempo, lugar, objeto y verbo. Por ejemplo, 明日 家で 水を 飲む significa «mañana bebo agua en casa». Es un patrón de partida, no una ley rígida."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "明日",
+       "ro": "ashita",
+       "es": "mañana (el tiempo va primero)",
+       "nota": "Puede ir al principio de la frase"
+      },
+      {
+       "ja": "家で",
+       "ro": "ie de",
+       "es": "en casa (lugar donde ocurre la acción)",
+       "nota": "Lugar más partícula で"
+      },
+      {
+       "ja": "水を",
+       "ro": "mizu o",
+       "es": "agua (el objeto de la acción)",
+       "nota": "Objeto más partícula を"
+      },
+      {
+       "ja": "飲む",
+       "ro": "nomu",
+       "es": "beber",
+       "nota": "El verbo cierra la frase"
+      },
+      {
+       "ja": "今日 家にいる",
+       "ro": "kyou ie ni iru",
+       "es": "hoy estoy en casa",
+       "nota": "Orden natural: tiempo, lugar, verbo"
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "En la calle se omite todo lo que se sobreentiende. El «yo» casi nunca se dice, y muchas partículas desaparecen. Por eso las frases suelen quedar en dos o tres bloques cortos, como «水 飲む» para «voy a beber agua».",
+      "Los bloques que van antes del verbo pueden cambiar de sitio con bastante libertad. 今日 家にいる y 家に 今日いる suenan bien las dos. Lo que cada bloque significa lo marca su partícula, no su posición, así que mientras el verbo siga al final, se entiende."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "El error típico del hispanohablante es poner el verbo en medio, como en español. «飲む 水を» suena roto. Primero piensa todos los datos y deja el verbo para el final.",
+      "Otro fallo es traducir el «yo» en cada frase. En japonés repetirlo suena pesado y poco natural; si el contexto lo deja claro, se calla."
+     ]
+    }
    ]
   },
   {
@@ -92,12 +156,6 @@
    "icono": "❓",
    "titulo": "Preguntas sin か",
    "resumen": "Sube la entonación y listo",
-   "explicacion": [
-    "Hablando basta con subir la entonación: 行く？ (iku?) = ¿vamos? No hace falta か (ka).",
-    "Se escribe ？ y se omite か. Con か suena más formal o seco.",
-    "Palabras clave: どこ (doko, dónde), 何 (nani, qué), なんで (nande, por qué), 何時 (nanji, qué hora), いくら (ikura, cuánto cuesta), いつ (itsu, cuándo), だれ (dare, quién).",
-    "Para pedir permiso o un momento: いい？ (ii?) y ちょっといい？ (chotto ii?)."
-   ],
    "ejemplos": [
     {
      "ja": "行く？",
@@ -179,6 +237,106 @@
      "ok": 0,
      "exp": "何時 = qué hora."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "En la conversación diaria no hace falta ninguna palabra especial para preguntar. Se dice la frase tal cual y se sube la entonación al final. 行く？ puede ser «¿vamos?» o «¿vas?», según el contexto.",
+      "Al escribir se pone el signo ？ y se omite か, la partícula interrogativa de los libros de texto."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "Con amigos, familia y compañeros cercanos, esta es la forma normal de preguntar. か al final de una frase suena más formal o incluso seco, así que en la calle se usa poco.",
+      "Cuando la pregunta lleva una palabra interrogativa (dónde, qué, cuándo), esa palabra ya hace el trabajo y el tono sube suavemente. «どこ行く？» significa «¿adónde vas?»."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "行く？",
+       "ro": "iku",
+       "es": "¿vamos? / ¿vas?",
+       "nota": "Sube la entonación; sin か"
+      },
+      {
+       "ja": "どこ",
+       "ro": "doko",
+       "es": "dónde / adónde",
+       "nota": ""
+      },
+      {
+       "ja": "何",
+       "ro": "nani",
+       "es": "qué",
+       "nota": "A veces se oye なに y a veces なん, según la palabra que sigue"
+      },
+      {
+       "ja": "なんで",
+       "ro": "nande",
+       "es": "por qué",
+       "nota": "Muy común hablando"
+      },
+      {
+       "ja": "何時",
+       "ro": "nanji",
+       "es": "qué hora",
+       "nota": ""
+      },
+      {
+       "ja": "いくら",
+       "ro": "ikura",
+       "es": "cuánto cuesta",
+       "nota": "Para precios"
+      },
+      {
+       "ja": "いつ",
+       "ro": "itsu",
+       "es": "cuándo",
+       "nota": ""
+      },
+      {
+       "ja": "だれ",
+       "ro": "dare",
+       "es": "quién",
+       "nota": ""
+      },
+      {
+       "ja": "いい？",
+       "ro": "ii",
+       "es": "¿vale? / ¿te parece bien?",
+       "nota": "Sirve para pedir permiso"
+      },
+      {
+       "ja": "ちょっといい？",
+       "ro": "chotto ii",
+       "es": "¿tienes un momento?",
+       "nota": "Para llamar la atención de alguien con educación"
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "Las palabras interrogativas ocupan el mismo lugar que ocuparía la respuesta. Si dirías «駅に行く» para «voy a la estación», preguntas «どこに行く？» para «¿adónde vas?». No hay que mover nada de sitio.",
+      "Para pedir permiso, une la acción con いい？. Por ejemplo, «ここ座っていい？» significa «¿puedo sentarme aquí?». Y si necesitas la atención de alguien antes de hablarle, ちょっといい？ abre la conversación."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "No olvides la entonación. Sin el tono ascendente, 行く suena a afirmación, es decir «voy». En el texto escrito, el ？ es lo que te avisa de que es pregunta.",
+      "Evita poner か en todas partes para sonar educado con amigos. Queda rígido, como hablar con un libro de texto."
+     ]
+    }
    ]
   },
   {
@@ -188,14 +346,6 @@
    "icono": "🔗",
    "titulo": "Partículas: は が を に で",
    "resumen": "Las piezas que unen las palabras",
-   "explicacion": [
-    "は (wa) marca el tema («en cuanto a…»): 今日は無理。(kyou wa muri) = hoy no puedo.",
-    "が (ga) marca el sujeto: 電車が遅れてる。(densha ga okureteru) = el tren va con retraso.",
-    "を (o) marca el objeto directo: 水をちょうだい。(mizu o choudai) = dame agua.",
-    "に (ni) indica dónde está algo o alguien, el destino o la hora: 家にいる。(ie ni iru) = estoy en casa.",
-    "で (de) indica dónde ocurre una acción o el medio: 外で食べる。(soto de taberu) = como fuera.",
-    "Hablando muchas desaparecen: 水ちょうだい = 水をちょうだい. Pero に y で casi nunca se omiten, porque cambian el sentido."
-   ],
    "ejemplos": [
     {
      "ja": "今日はちょっと無理。",
@@ -290,6 +440,106 @@
      "ok": 0,
      "exp": "En la calle muchas partículas se caen."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Las partículas son palabras muy cortas que se pegan detrás de otra palabra para decir qué papel juega en la frase. Hacen el trabajo que en español hacen las preposiciones y el orden de las palabras: quién hace algo, qué recibe la acción, dónde ocurre.",
+      "Como el japonés pone el verbo al final y mueve los bloques con libertad, las partículas son lo que evita la confusión. Aprender cinco de ellas, は が を に で, te cubre la mayoría de las frases."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "は presenta el tema, aquello de lo que vas a hablar, algo así como «en cuanto a esto». «今日は無理。» significa «hoy no puedo». が señala el sujeto, quien o lo que realiza la acción o está en cierto estado, y se usa mucho para informar de algo nuevo: «電車が遅れてる。» significa «el tren va con retraso».",
+      "を marca el objeto directo, lo que recibe la acción: «水をちょうだい。» es «dame agua». に indica el lugar donde alguien está, el destino o la hora, como en «家にいる。», «estoy en casa». で indica dónde ocurre una acción o con qué medio se hace: «外で食べる。» es «como fuera»."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "は",
+       "ro": "wa",
+       "es": "tema («en cuanto a…»)",
+       "nota": "Se escribe は pero se lee wa"
+      },
+      {
+       "ja": "が",
+       "ro": "ga",
+       "es": "sujeto",
+       "nota": "Señala quién o qué hace o es"
+      },
+      {
+       "ja": "を",
+       "ro": "o",
+       "es": "objeto directo",
+       "nota": "Se escribe を pero se lee o"
+      },
+      {
+       "ja": "に",
+       "ro": "ni",
+       "es": "lugar de estar, destino u hora",
+       "nota": "Con いる, 行く, 来る y horas concretas"
+      },
+      {
+       "ja": "で",
+       "ro": "de",
+       "es": "lugar de la acción o medio",
+       "nota": "Dónde ocurre algo o con qué se hace"
+      },
+      {
+       "ja": "今日は無理",
+       "ro": "kyou wa muri",
+       "es": "hoy no puedo",
+       "nota": "は marca el tema"
+      },
+      {
+       "ja": "電車が遅れてる",
+       "ro": "densha ga okureteru",
+       "es": "el tren va con retraso",
+       "nota": "が marca el sujeto"
+      },
+      {
+       "ja": "水をちょうだい",
+       "ro": "mizu o choudai",
+       "es": "dame agua",
+       "nota": "を marca lo que se pide"
+      },
+      {
+       "ja": "家にいる",
+       "ro": "ie ni iru",
+       "es": "estoy en casa",
+       "nota": "に marca dónde estás"
+      },
+      {
+       "ja": "外で食べる",
+       "ro": "soto de taberu",
+       "es": "como fuera",
+       "nota": "で marca dónde ocurre"
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "Cada partícula va pegada justo detrás de la palabra a la que se refiere, y esa palabra va antes del verbo. Una frase completa puede juntar varias: «私は 家で 水を 飲む» sería «yo bebo agua en casa», con tema, lugar, objeto y verbo.",
+      "Hablando, muchas partículas desaparecen: 水ちょうだい vale igual que 水をちょうだい. Las más fáciles de callar son は, が y を, porque el contexto suele aclarar su papel."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "に y で casi nunca se omiten, porque cambian el sentido. 家にいる es «estoy en casa» (dónde estás), mientras que 家で食べる es «como en casa» (dónde haces la acción). Si las quitas, el oyente tiene que adivinar.",
+      "No confundas は y が. Para empezar, usa は cuando hables de un tema que ya está claro y が cuando presentes información nueva sobre alguien o algo. Y recuerda que は se pronuncia wa y を se pronuncia o, aunque se escriban así."
+     ]
+    }
    ]
   },
   {
@@ -299,14 +549,6 @@
    "icono": "💬",
    "titulo": "Partículas finales: よ ね さ の かな",
    "resumen": "Dan el tono a lo que dices",
-   "explicacion": [
-    "よ (yo) informa o enfatiza («¡te lo digo!»): 行くよ。(iku yo) = voy, ¿eh?",
-    "ね (ne) busca acuerdo («¿verdad?»): 暑いね。(atsui ne) = hace calor, ¿eh?",
-    "さ (sa) es un relleno informal, como «¿sabes?»: 忙しくてさ。(isogashikute sa) = es que ando liado, ¿sabes?",
-    "の (no) vuelve la pregunta suave y natural: どうしたの？(dou shita no?) = ¿qué te pasa?",
-    "かな (kana) es preguntarse a uno mismo: いいかな。(ii kana) = ¿estará bien?",
-    "って (tte) cita o retoma algo: これって何？(kore tte nani?) = esto, ¿qué es?"
-   ],
    "ejemplos": [
     {
      "ja": "いいよ！",
@@ -390,6 +632,101 @@
      "ok": 0,
      "exp": "かな = «me pregunto si…»."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Las partículas finales se ponen al final de la frase y no cambian lo que dices, sino cómo lo dices. Aportan el tono: si informas, si buscas que te den la razón, si estás pensando en voz alta. Son una de las claves para sonar natural.",
+      "En español este papel lo hacen la entonación y muletillas como «¿verdad?», «¿sabes?» o «¡te lo digo!». En japonés van como una pieza más de la frase."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "よ se usa cuando das una información que el otro no tiene o quieres darle énfasis: «行くよ。» es «voy, ¿eh?». ね se usa para buscar acuerdo o compartir una opinión: «暑いね。» es «hace calor, ¿eh?».",
+      "さ es un relleno informal que sirve para ir contando algo en trozos, como «¿sabes?»: «忙しくてさ。» es «es que ando liado, ¿sabes?». の suaviza una pregunta y la hace natural: «どうしたの？» es «¿qué te pasa?». かな es preguntarse algo a uno mismo: «いいかな。» es «¿estará bien?».",
+      "って sirve para citar o retomar lo que alguien ha dicho o lo que se está tratando: «これって何？» es «esto, ¿qué es?»."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "よ",
+       "ro": "yo",
+       "es": "informa o enfatiza",
+       "nota": "Como «¡te lo digo!»; con mala entonación puede sonar insistente"
+      },
+      {
+       "ja": "ね",
+       "ro": "ne",
+       "es": "busca acuerdo",
+       "nota": "Como «¿verdad?» o «¿no?»"
+      },
+      {
+       "ja": "さ",
+       "ro": "sa",
+       "es": "relleno informal",
+       "nota": "Típico de la charla entre amigos; muy informal"
+      },
+      {
+       "ja": "の",
+       "ro": "no",
+       "es": "suaviza la pregunta",
+       "nota": "Con entonación ascendente"
+      },
+      {
+       "ja": "かな",
+       "ro": "kana",
+       "es": "preguntarse a uno mismo",
+       "nota": "Pensar en voz alta"
+      },
+      {
+       "ja": "って",
+       "ro": "tte",
+       "es": "citar o retomar un tema",
+       "nota": "Informal; funciona como «eso de…»"
+      },
+      {
+       "ja": "行くよ",
+       "ro": "iku yo",
+       "es": "voy, ¿eh?",
+       "nota": ""
+      },
+      {
+       "ja": "暑いね",
+       "ro": "atsui ne",
+       "es": "hace calor, ¿eh?",
+       "nota": ""
+      },
+      {
+       "ja": "どうしたの",
+       "ro": "dou shita no",
+       "es": "¿qué te pasa?",
+       "nota": ""
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "Van al final, pegadas al verbo o al adjetivo: 行くよ, 暑いね, いいかな. A veces se usan con una pausa en medio de la frase, como さ en «忙しくてさ、遅れちゃった», y sirven para repartir la historia en trozos.",
+      "Con los verbos y adjetivos en su forma corta, de diccionario, suenan naturales entre amigos. Con la entonación hacen todo el trabajo: la misma frase con ね sube o baja de tono según busques acuerdo o confirmes algo."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "No abuses de よ: informar con demasiada fuerza puede sonar a que le estás corrigiendo. Y no pongas さ en todas las frases, porque cansa. Úsalo con amigos y en conversación relajada.",
+      "Estas partículas son muy informales. Con alguien a quien no conoces o con un superior, conviene no usar さ ni って, y ser más prudente con el resto."
+     ]
+    }
    ]
   },
   {
@@ -399,14 +736,6 @@
    "icono": "✂️",
    "titulo": "Contracciones habladas",
    "resumen": "Cómo se acorta el japonés hablado",
-   "explicacion": [
-    "している → してる (shiteru): ている pierde la い. 何してる？ = ¿qué haces?",
-    "~てしまう → ~ちゃう (chau) / ~でしまう → ~じゃう (jau): algo que pasa sin querer o del todo. 忘れちゃった。(wasurechatta) = se me olvidó.",
-    "~ておく → ~とく (toku): hacer algo de antemano. やめとく。(yametoku) = mejor lo dejo.",
-    "のだ → んだ / んの: そうなんだ。(sou nanda) = ah, ¿sí? Explica o muestra interés.",
-    "分からない → 分かんない (wakannai): ない tras ら pasa a んない. Es muy frecuente.",
-    "Estas formas son normales hablando; en textos formales se escriben completas."
-   ],
    "ejemplos": [
     {
      "ja": "何してる？",
@@ -502,6 +831,89 @@
      "ok": 0,
      "exp": "ちゃった = sin querer / ya está hecho."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Cuando hablamos con prisa, acortamos las palabras. El japonés hace lo mismo: ciertas terminaciones largas se encogen en versiones más cortas y más fáciles de decir. No es un idioma distinto ni un error, es simplemente cómo suena la lengua de todos los días.",
+      "Aquí aprenderás cinco atajos muy frecuentes. Una vez que los reconoces, mucha gente que antes te sonaba a «habla rápida y confusa» empieza a tener sentido."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "Se usan al hablar con amigos, familia, compañeros o en el chat de una partida. También aparecen en mensajes informales y en subtítulos de series o juegos, porque reflejan la voz real de los personajes.",
+      "No los uses en una carta, un correo de trabajo ni un texto formal. Allí se escriben las formas completas, y con un jefe o un cliente lo normal es hablar con más cuidado. Mejor: tú entiéndelos siempre, y úsalos cuando el ambiente sea relajado."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "〜てる",
+       "ro": "teru",
+       "es": "estar haciendo algo (forma corta de ている)",
+       "nota": "Pierde la い. Es la más común de todas."
+      },
+      {
+       "ja": "〜ちゃう",
+       "ro": "chau",
+       "es": "hacer algo sin querer, o hacerlo del todo (forma corta de てしまう)",
+       "nota": "Pasado: ちゃった. Suele llevar un matiz de «ay, se me fue»."
+      },
+      {
+       "ja": "〜じゃう",
+       "ro": "jau",
+       "es": "lo mismo que ちゃう, tras verbos con で",
+       "nota": "Es la versión de でしまう, por ejemplo con 飲む o 読む."
+      },
+      {
+       "ja": "〜とく",
+       "ro": "toku",
+       "es": "dejar algo hecho de antemano (forma corta de ておく)",
+       "nota": "Sirve también para decidir algo: «mejor lo dejo»."
+      },
+      {
+       "ja": "〜んだ",
+       "ro": "nda",
+       "es": "explicar, o mostrar que lo has entendido (forma corta de のだ)",
+       "nota": "Muy usada en respuestas como そうなんだ."
+      },
+      {
+       "ja": "〜んの",
+       "ro": "nno",
+       "es": "versión interrogativa de んだ, para preguntar con confianza",
+       "nota": "Informal. Se oye mucho entre amigos."
+      },
+      {
+       "ja": "〜んない",
+       "ro": "nnai",
+       "es": "forma corta de らない, sobre todo en 分からない",
+       "nota": "分かんない es la que más oirás."
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "Todas estas piezas se pegan directamente a un verbo. 何してる？ viene de 何している？ y significa «¿qué haces?». La versión con んの, 何してんの？, suena aún más suelta, como una pregunta entre colegas.",
+      "Con ちゃう hay que fijarse en el final del verbo. Si el verbo en forma て acaba en で, usamos じゃう: 飲んじゃった quiere decir «me lo bebí todo». Si acaba en て, usamos ちゃう: 忘れちゃった significa «se me olvidó». Con とく pasa igual que con ておく, y 先に買っとく es «lo compro ya, por si acaso».",
+      "Fíjate en que ちゃう tiene dos usos que se parecen: lo que ocurre sin querer, como 寝坊しちゃった «me quedé dormido», y lo que se hace hasta el final, como 全部食べちゃった «me lo comí todo»."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "No confundas ちゃう con とく. ちゃう mira a lo que ya pasó o a lo que se terminó del todo, mientras que とく mira al futuro y es una preparación. やめとく «mejor lo dejo» y やめちゃう «lo dejo del todo» no dicen lo mismo.",
+      "Y no te lances a acortarlo todo en cualquier situación. Que algo se oiga mucho no significa que valga para escribirlo en un trabajo escolar o en un correo. Ante la duda con alguien a quien no conoces, usa la forma completa."
+     ]
+    }
    ]
   },
   {
@@ -511,14 +923,6 @@
    "icono": "🔥",
    "titulo": "Jerga y préstamos",
    "resumen": "Palabras de calle que oirás mucho",
-   "explicacion": [
-    "マジ (maji) = en serio. マジで？ = ¿en serio? Muy informal.",
-    "やばい (yabai) = fuerte. Puede ser genial o terrible: depende del contexto.",
-    "めっちゃ (meccha) = muy / un montón. めっちゃおいしい！ = ¡está buenísimo!",
-    "じゃん (jan) = «¿a que sí?». いいじゃん！ = ¡qué guay!",
-    "ラグい (ragui) viene del inglés «lag»: muchas palabras extranjeras se vuelven adjetivos con ~い.",
-    "Úsalas con amigos, no con un jefe ni en situaciones formales."
-   ],
    "ejemplos": [
     {
      "ja": "マジで？",
@@ -600,6 +1004,77 @@
      ],
      "ok": 0,
      "exp": "Es jerga informal."
+    }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "La jerga es el vocabulario de la calle: palabras que no están en los libros de texto formales pero que oyes en cada conversación, canal de vídeos o partida online. Aquí verás las más frecuentes y también cómo el japonés convierte palabras prestadas del inglés en palabras propias.",
+      "Son expresiones cortas y con mucha personalidad. Dan color a lo que dices, pero hay que saber cuándo ponerlas."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "Se usan con amigos, con gente de tu edad y en ambientes relajados: charlas, chats, juegos, redes. Ahí suenan naturales, e incluso hacen que parezcas más cercano.",
+      "No las uses con un jefe, un profesor, un cliente ni con alguien mayor al que acabas de conocer. Allí suenan demasiado confiadas y pueden parecer faltas de respeto. En esas situaciones es mejor usar el vocabulario neutro que ya conoces."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "マジ",
+       "ro": "maji",
+       "es": "en serio",
+       "nota": "マジで？ es «¿en serio?». Muy informal."
+      },
+      {
+       "ja": "やばい",
+       "ro": "yabai",
+       "es": "fuerte, increíble o terrible, según el contexto",
+       "nota": "El tono de voz y la situación te dicen si es bueno o malo."
+      },
+      {
+       "ja": "めっちゃ",
+       "ro": "meccha",
+       "es": "muy, un montón",
+       "nota": "Se coloca delante de un adjetivo, como めっちゃおいしい."
+      },
+      {
+       "ja": "〜じゃん",
+       "ro": "jan",
+       "es": "¿a que sí? / ya ves",
+       "nota": "Refuerza tu opinión: いいじゃん es «¡qué guay!»."
+      },
+      {
+       "ja": "ラグい",
+       "ro": "ragui",
+       "es": "que va con lag",
+       "nota": "Palabra inglesa convertida en adjetivo con い."
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "マジ funciona de varias maneras. Solo, como マジ！, es una exclamación de sorpresa. Con で al final, マジで？, es una pregunta: «¿en serio?». Y también puedes ponerlo delante de un adjetivo para intensificar, como en マジうれしい.",
+      "めっちゃ se pega a un adjetivo para darle fuerza: めっちゃおいしい！ es «¡está buenísimo!». じゃん va al final de la frase y busca que el otro esté de acuerdo contigo, así que いいじゃん！ es algo como «¡pero si está genial!».",
+      "Con las palabras extranjeras, el japonés suele añadirles い y las trata como adjetivos normales. Por eso ラグい significa «va con lag» y ちょっとラグくない？ es «¿no va un poco lageado?». Una vez que lo notas, empiezas a reconocer esta jugada en muchas palabras nuevas."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "やばい es la que más confunde, porque puede ser buena o mala. La misma palabra sirve para «¡qué pasada!» y para «¡uy, qué problema!». Fíjate siempre en la situación, en la cara y en la voz de quien habla antes de decidir qué quiere decir.",
+      "Evita llenar cada frase de jerga. Como la sal, un poco da sabor y demasiado cansa. Y piensa siempre con quién hablas: lo que es perfecto con tus amigos puede sonar mal en otra situación."
+     ]
     }
    ]
   }

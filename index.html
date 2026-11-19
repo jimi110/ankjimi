@@ -1215,6 +1215,20 @@
         .fr-tem-card .kana-choice-glyph { font-size:34px; margin:0; }
         .fr-tem-card b { display:block; font-size:19px; margin-bottom:3px; }
         .fr-tem-card small { display:block; font-size:13px; color:var(--text-muted); font-weight:500; line-height:1.35; }
+        .fr-ex { display:flex; align-items:center; gap:10px; }
+        .fr-ex-text { flex:1; min-width:0; }
+        .fr-ex .btn-audio { margin:0; flex-shrink:0; background: var(--card-bg); }
+        .fr-tem-choices { gap:12px; }
+        .fr-sec { margin-top: 18px; }
+        .fr-sec-h { display:flex; align-items:center; gap:8px; font-size:15px; font-weight:800; color:var(--text-main); margin-bottom:8px; padding-bottom:6px; border-bottom:2px solid var(--border); }
+        .fr-sec-p { font-size:15.5px; line-height:1.6; margin:0 0 10px; color:var(--text-main); }
+        .fr-cards { display:grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap:10px; }
+        .fr-card { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 10px 12px; border-left: 4px solid var(--primary); }
+        .fr-card.wide { grid-column: 1 / -1; }
+        .fr-card-ja { font-size:22px; font-weight:700; line-height:1.8; }
+        .fr-card-ro { font-size:13px; color:var(--text-muted); font-weight:600; margin-bottom:4px; }
+        .fr-card-es { font-size:14.5px; font-weight:600; line-height:1.4; }
+        .fr-card-nota { font-size:13px; color:var(--text-muted); margin-top:4px; line-height:1.4; }
         .fr-resumen { font-weight:600; margin:2px 0 8px; }
         .fr-uso { background:var(--bg-secondary); border-left:4px solid var(--primary); border-radius:var(--radius-md); padding:8px 12px; margin:8px 0; font-size:14px; line-height:1.4; }
         .fr-mark { background:var(--correct-bg); color:inherit; border-radius:6px; padding:0 4px; }
@@ -5665,7 +5679,7 @@
             const a = frInLevel(l.id, frType), d = a.filter(f => frIsDone(f.id, frType)).length;
             h += `<button type="button" class="kana-group-chip ${l.id === frLevel ? 'active' : ''}" onclick="frPickLevel('${l.id}')">${l.label}</button>`;
         });
-        h += `</div><button class="btn fr-play" onclick="startFrases()">▶️ Jugar</button>
+        h += `</div><button class="btn fr-play" onclick="startFrases()">✏️ Práctica (10 pregs)</button>
             <div class="fr-bar"><div class="fr-bar-fill" style="width:${pct}%"></div></div><div class="fr-bar-txt">${done}/${all.length}</div>
             <button class="btn outline fr-tem-btn" onclick="openTemario()">📖 Temario</button></div>`;
         body.innerHTML = h;
@@ -5683,8 +5697,8 @@
         if (frTemView === 'lecciones') { ttl.innerText = 'Lecciones'; body.innerHTML = frRenderLessons(); return; }
         if (frTemView === 'frases') { ttl.innerText = m.items === 'frases' ? 'Frases' : 'Oraciones'; body.innerHTML = frRenderPhrases(); return; }
         body.innerHTML = `<div class="fr-tem-choices">
-                <button type="button" class="kana-choice-card fr-tem-card" onclick="frTemOpen('lecciones')"><span class="kana-choice-glyph">📚</span><span><b>Lecciones</b></span></button>
-                <button type="button" class="kana-choice-card fr-tem-card" onclick="frTemOpen('frases')"><span class="kana-choice-glyph">💬</span><span><b>${items}</b></span></button>
+                <div class="topic-card" onclick="frTemOpen('lecciones')"><div class="topic-icon">📚</div><div class="topic-info"><div class="topic-title"><span style="color:var(--text-muted); font-size:13px; font-weight:normal;">01</span> Lecciones</div><div class="topic-stats">${frData.lecciones.length} lecciones</div></div></div>
+                <div class="topic-card" onclick="frTemOpen('frases')"><div class="topic-icon">💬</div><div class="topic-info"><div class="topic-title"><span style="color:var(--text-muted); font-size:13px; font-weight:normal;">02</span> ${items}</div><div class="topic-stats">${frData.frases.length} ${m.items}</div></div></div>
             </div>`;
     }
 
@@ -5700,13 +5714,21 @@
                     <span class="fr-acc-chev">›</span></button>
                 <div class="fr-acc-panel"><div class="fr-acc-inner"><div class="fr-acc-content">
                     ${l.resumen ? `<p class="fr-resumen">${frRich(l.resumen)}</p>` : ''}
-                    <ul class="fr-points">${l.explicacion.map(t => `<li>${frRich(t)}</li>`).join('')}</ul>
-                    <div class="kana-section-title" style="margin-top:14px;">Ejemplos</div>
-                    ${l.ejemplos.map(e => `<div class="fr-ex"><b onclick="speakJapanese('${e.ja.replace(/'/g, '')}')">${frJa(e.ja)} 🔊</b><div class="fr-expr-read">${frEsc(e.romaji)}</div><div>${frEsc(e.es)}</div></div>`).join('')}
+                    ${(l.secciones || []).map(frSection).join('')}
+                    <div class="fr-sec"><div class="fr-sec-h"><span>🗣️</span>Ejemplos</div>
+                    ${l.ejemplos.map(e => `<div class="fr-ex"><div class="fr-ex-text"><b>${frJa(e.ja)}</b><div class="fr-expr-read">${frEsc(e.romaji)}</div><div>${frEsc(e.es)}</div></div><button type="button" class="btn-audio" onclick="speakJapanese('${e.ja.replace(/'/g, '')}')">🔊</button></div>`).join('')}</div>
                     <button class="btn fr-acc-go" onclick="startQuiz('${l.id}')">▶️ Practicar esta lección</button>
                 </div></div></div></div>`;
         });
         return h;
+    }
+    function frSection(sc) {
+        let h = `<div class="fr-sec"><div class="fr-sec-h"><span>${frEsc(sc.icono || '')}</span>${frEsc(sc.t)}</div>`;
+        (sc.p || []).forEach(t => { h += `<p class="fr-sec-p">${frRich(t)}</p>`; });
+        if (sc.cards && sc.cards.length) {
+            h += '<div class="fr-cards">' + sc.cards.map(c => `<div class="fr-card${String(c.ja || '').length > 4 ? ' wide' : ''}"><div class="fr-card-ja">${frJa(c.ja)}</div><div class="fr-card-ro">${frEsc(c.ro || '')}</div><div class="fr-card-es">${frRich(c.es || '')}</div>${c.nota ? `<div class="fr-card-nota">${frRich(c.nota)}</div>` : ''}</div>`).join('') + '</div>';
+        }
+        return h + '</div>';
     }
     function frToggleAcc(id) {
         const el = document.querySelector(`.fr-acc[data-id="${id}"]`); if (!el) return;
@@ -5745,7 +5767,7 @@
             <div class="fr-det-es">${frEsc(f.es)}</div>
             <div class="fr-det-tags"><span class="fr-tag">${frEsc(FR_NIVEL[f.nivel] || f.nivel)}</span>${f.registro ? `<span class="fr-tag">${FR_REG[f.registro] || frEsc(f.registro)}</span>` : ''}${tipo ? `<span class="fr-tag">${frEsc(tipo)}</span>` : ''}</div>
             ${f.uso ? `<div class="fr-uso"><b>${frJa(f.hueco.con)}</b> en esta frase: ${frEsc(f.uso)}</div>` : ''}
-            <button type="button" class="btn outline" style="width:auto;padding:8px 18px;margin:10px 0 4px;font-size:15px;" onclick="frSpeak(${f.id})">🔊 Escuchar</button>
+            <button type="button" class="btn-audio" style="margin:10px 0 4px;" onclick="frSpeak(${f.id})">🔊</button>
             <div class="kana-section-title" style="margin-top:6px;">${m.conn ? 'Parte a parte' : 'Bloque a bloque'}</div>
             <div class="fr-gloss" style="max-height:none;border:0;padding:0;">${frGloss(f)}</div>`;
     }

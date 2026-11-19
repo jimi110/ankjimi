@@ -7,13 +7,6 @@
    "icono": "➕",
    "titulo": "Sumar ideas",
    "resumen": "そして · それに · しかも",
-   "explicacion": [
-    "そして (soshite): suma neutra, «y luego / y además». Sirve para casi todo.",
-    "それに (sore ni): añade otro punto a favor o en contra, «además». Muy natural hablando.",
-    "しかも (shikamo): suma algo todavía más fuerte, «y encima».",
-    "あと / それと (ato / sore to): coloquiales, para añadir un elemento más mientras hablas, «ah, y también».",
-    "さらに (sara ni) y そのうえ (sono ue) también suman, pero suenan más formales o escritos."
-   ],
    "ejemplos": [
     {
      "ja": "この店は安い。それに、料理もおいしい。",
@@ -85,6 +78,89 @@
      "ok": 0,
      "exp": "それに añade otro dato a la misma idea."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Estos conectores sirven para sumar una idea a otra, como nuestros «y», «además» o «y encima». Cada uno añade la información con un matiz distinto: unos solo continúan, otros dan más fuerza y otros se usan al hablar, cuando se te ocurre algo más.",
+      "Elegir bien te permite sonar natural. Con unos pocos de estos conectores ya puedes enlazar casi cualquier conversación."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "Los usas cuando ya has dicho algo y quieres añadir otra cosa del mismo tema. Puede ser algo a favor, como «es barata y además está rica», o algo en contra, como «hace frío y además llueve».",
+      "En la conversación diaria dominan そして, それに, しかも y あと. さらに y そのうえ también suman, pero suenan más formales o de texto escrito. Si estás charlando con amigos, apóyate en los primeros."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "そして",
+       "ro": "soshite",
+       "es": "y; y luego",
+       "nota": "Suma neutra, sirve para casi todo."
+      },
+      {
+       "ja": "それに",
+       "ro": "sore ni",
+       "es": "además",
+       "nota": "Añade otro punto, a favor o en contra. Muy natural al hablar."
+      },
+      {
+       "ja": "しかも",
+       "ro": "shikamo",
+       "es": "y encima",
+       "nota": "Lo que añades es todavía más fuerte que lo anterior."
+      },
+      {
+       "ja": "あと",
+       "ro": "ato",
+       "es": "ah, y también",
+       "nota": "Coloquial, para añadir un elemento mientras hablas."
+      },
+      {
+       "ja": "それと",
+       "ro": "sore to",
+       "es": "y también",
+       "nota": "Parecido a あと, coloquial."
+      },
+      {
+       "ja": "さらに",
+       "ro": "sara ni",
+       "es": "además, aún más",
+       "nota": "Suena más formal o escrito."
+      },
+      {
+       "ja": "そのうえ",
+       "ro": "sono ue",
+       "es": "además, por si fuera poco",
+       "nota": "Más formal o de texto."
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "Normalmente el conector abre la segunda frase y suele ir seguido de una coma: «この店は安い。それに、料理もおいしい。» quiere decir «esta tienda es barata; además, la comida está rica». Fíjate en que la segunda idea va en la misma línea que la primera, a favor del mismo punto.",
+      "しかも funciona igual, pero se usa cuando lo segundo pesa más: «あの店は安い。しかも、おいしい。» es «aquel sitio es barato, y encima está rico». Con あと el efecto es más ligero y espontáneo: «牛乳を買わないと。あと、パンも。» significa «tengo que comprar leche, ah, y también pan». Se oye mucho cuando haces una lista de pie.",
+      "そして suma de forma neutra, y a menudo con orden de tiempo: «昨日は買い物に行った。そして、映画も見た。» es «ayer fui de compras, y después vi una película»."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "No uses しかも si lo que sumas no es más fuerte que lo anterior; entonces それに encaja mejor. しかも necesita un «y todavía más». También puede sumar algo malo: hace falta que sea una sorpresa mayor, no necesariamente positiva.",
+      "Y no mezcles el registro. Con amigos, さらに y そのうえ pueden sonar a discurso o a texto escrito. Si estás hablando, quédate con それに, しかも y あと."
+     ]
+    }
    ]
   },
   {
@@ -94,14 +170,6 @@
    "icono": "⚖️",
    "titulo": "Contraste: «pero»",
    "resumen": "でも · けど · のに",
-   "explicacion": [
-    "でも (demo): «pero», coloquial y muy común al inicio de frase. Es el que más oirás.",
-    "けど (kedo): «pero / aunque», pegado a la frase. Muy hablado. が (ga) hace lo mismo pero más formal.",
-    "のに (noni): «a pesar de que…», con sorpresa o queja.",
-    "それなのに (sore na no ni): «y aun así…», con queja. 連絡した。それなのに、来なかった。",
-    "ただし (tadashi): «eso sí», pone una limitación.",
-    "しかし (shikashi) = «sin embargo», más de textos. Hablando, でも."
-   ],
    "ejemplos": [
     {
      "ja": "行きたかった。でも、行けなかった。",
@@ -185,6 +253,89 @@
      "ok": 0,
      "exp": "ところが indica un resultado inesperado."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Son las palabras japonesas para decir «pero», «aunque» o «sin embargo». Sirven para oponer dos ideas: lo que querías y lo que pasó, lo que parecía y lo que resultó, o para poner un límite a lo que acabas de decir.",
+      "Hay varias porque cada una funciona en un sitio distinto de la frase y con un tono diferente. Aquí aprenderás a elegir la correcta."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "Cuando tu segunda idea choca con la primera. «Quería ir, pero no pude.» «Está lejos, pero iremos andando.» En la conversación diaria, el más usado es でも, seguido de けど.",
+      "Los más escritos o formales, como しかし, aparecen en textos, noticias o presentaciones. Hablando con amigos casi siempre bastan でも y けど."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "でも",
+       "ro": "demo",
+       "es": "pero (al empezar una frase)",
+       "nota": "El más común en el habla diaria."
+      },
+      {
+       "ja": "けど",
+       "ro": "kedo",
+       "es": "pero; aunque (pegado a la frase)",
+       "nota": "Muy hablado. Va al final de la primera parte."
+      },
+      {
+       "ja": "が",
+       "ro": "ga",
+       "es": "pero (pegado a la frase)",
+       "nota": "Hace lo mismo que けど, pero más formal."
+      },
+      {
+       "ja": "のに",
+       "ro": "noni",
+       "es": "a pesar de que",
+       "nota": "Lleva sorpresa o queja."
+      },
+      {
+       "ja": "それなのに",
+       "ro": "sore na no ni",
+       "es": "y aun así",
+       "nota": "Con queja o frustración."
+      },
+      {
+       "ja": "ただし",
+       "ro": "tadashi",
+       "es": "eso sí",
+       "nota": "Pone una limitación o condición."
+      },
+      {
+       "ja": "しかし",
+       "ro": "shikashi",
+       "es": "sin embargo",
+       "nota": "Más de textos. Hablando, mejor でも."
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "でも, それなのに, ただし y しかし abren una frase nueva, normalmente con coma después: «行きたかった。でも、行けなかった。» significa «quería ir, pero no pude». けど, が y のに, en cambio, se pegan a la primera parte y la unen con la segunda en una sola frase: «ちょっと遠いけど、歩いて行こう。» es «está un poco lejos, pero vamos andando».",
+      "のに añade un sentimiento: «説明したのに、分かってくれない。» quiere decir «se lo expliqué y no me entiende», con un toque de queja. それなのに dice algo parecido pero abriendo una frase nueva, por ejemplo tras «連絡した。» «Avisé.».",
+      "ただし sirve para poner un límite a algo permitido: «ここで写真を撮ってもいい。ただし、フラッシュは使わないで。» es «aquí puedes hacer fotos; eso sí, sin flash»."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "No uses のに cuando solo quieres decir «pero» sin sentimiento: aquel «a pesar de que» siempre lleva sorpresa, queja o decepción. Si solo oponías dos hechos con calma, usa けど.",
+      "Tampoco copies しかし en una charla informal: suena a texto. Y ten presente que けど y が van pegados a la frase, mientras que でも va al principio de otra. Cambiar eso de sitio suena raro."
+     ]
+    }
    ]
   },
   {
@@ -194,14 +345,6 @@
    "icono": "🔗",
    "titulo": "Causa y consecuencia",
    "resumen": "から · だから · それで · なので",
-   "explicacion": [
-    "〜から (kara): «porque / así que». Va detrás de la CAUSA: 疲れたから、帰る。(tsukareta kara, kaeru).",
-    "だから (dakara): «por eso». Abre una frase nueva con la consecuencia.",
-    "それで (sore de): «y por eso», al contar lo que pasó.",
-    "なので (na node): más suave y educado que から.",
-    "〜おかげで (okage de) = gracias a (algo bueno). 〜せいで (sei de) = por culpa de (algo malo).",
-    "そのため (sono tame) y なぜなら (nazenara) son formales; hablando se usa だから y から."
-   ],
    "ejemplos": [
     {
      "ja": "明日テストがある。だから、今日は勉強する。",
@@ -285,6 +428,96 @@
      "ok": 0,
      "exp": "そこで introduce una acción como respuesta."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Para explicar por qué pasa algo, el japonés tiene varias piezas pequeñas que enlazan una causa con su consecuencia. Es lo que en español haces con «porque», «así que», «por eso» o «gracias a».",
+      "Lo importante es fijarse en el orden. Con から la causa va primero y la consecuencia después, y con だから la frase nueva empieza justo por la consecuencia."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "Se usan cuando das una razón, te justificas o cuentas por qué ocurrió algo. Por ejemplo, para rechazar un plan: «疲れたから、帰る。» significa «como estoy cansado, me voy a casa».",
+      "Para contar una historia en pasado, それで encaja muy bien: «電車に乗り遅れた。それで、遅刻した。» quiere decir «perdí el tren y por eso llegué tarde». Para dar las gracias o quejarte por un resultado, se usan おかげで (bueno) y せいで (malo)."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "〜から",
+       "ro": "kara",
+       "es": "porque / así que",
+       "nota": "Va justo detrás de la causa: 疲れたから、帰る."
+      },
+      {
+       "ja": "だから",
+       "ro": "dakara",
+       "es": "por eso",
+       "nota": "Abre una frase nueva con la consecuencia."
+      },
+      {
+       "ja": "それで",
+       "ro": "sore de",
+       "es": "y por eso",
+       "nota": "Para contar lo que pasó, en un relato."
+      },
+      {
+       "ja": "なので",
+       "ro": "na node",
+       "es": "por lo tanto / así que",
+       "nota": "Más suave y educado que から."
+      },
+      {
+       "ja": "〜おかげで",
+       "ro": "okage de",
+       "es": "gracias a",
+       "nota": "Para algo bueno."
+      },
+      {
+       "ja": "〜せいで",
+       "ro": "sei de",
+       "es": "por culpa de",
+       "nota": "Para algo malo."
+      },
+      {
+       "ja": "そのため",
+       "ro": "sono tame",
+       "es": "por ese motivo",
+       "nota": "Formal; mejor en textos escritos."
+      },
+      {
+       "ja": "なぜなら",
+       "ro": "nazenara",
+       "es": "la razón es que",
+       "nota": "Formal; hablando casi no se usa."
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "から se pega al final de la frase que expresa la causa, y después sigue la consecuencia: «明日テストがあるから、今日は勉強する。» es «como mañana tengo examen, hoy estudio». La causa queda antes, igual que en español con «como».",
+      "だから hace lo mismo pero partido en dos frases: primero dices la causa, punto, y luego empiezas con だから para la consecuencia. なので funciona como から, pero queda más cortés, y se usa mucho al explicar algo a un profesor o a un desconocido.",
+      "おかげで y せいで se colocan detrás del motivo, igual que から: «あなたのおかげで、終わらせることができた。» significa «gracias a ti, pude terminarlo»."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "No mezcles el orden: から se pone detrás de la causa, nunca detrás de la consecuencia. Si lo pones al revés, el significado cambia por completo.",
+      "No uses そのため ni なぜなら en una charla con amigos. Suenan a texto escrito o a discurso formal. Hablando, lo natural es から y だから.",
+      "Elige bien entre おかげで y せいで. Si dices せいで a alguien que te ayudó, suena a que lo culpas, y eso puede ofender."
+     ]
+    }
    ]
   },
   {
@@ -294,12 +527,6 @@
    "icono": "🔢",
    "titulo": "Orden y secuencia",
    "resumen": "それから · まず · 次に · 〜てから",
-   "explicacion": [
-    "それから (sorekara): «y después», sigue el orden de las acciones.",
-    "まず (mazu) → 次に (tsugi ni) → 最後に (saigo ni): «primero → después → por último». Perfectos para dar instrucciones.",
-    "Verbo en て + から: «después de hacer». ご飯を食べてから、出かける。(gohan o tabete kara, dekakeru).",
-    "La forma て (te) une acciones en cadena: 朝起きて、顔を洗って、学校に行く。"
-   ],
    "ejemplos": [
     {
      "ja": "先にご飯を食べた。それから、映画を見た。",
@@ -383,6 +610,83 @@
      "ok": 0,
      "exp": "〜前に = antes de."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Estas piezas sirven para poner las acciones en orden: primero esto, luego aquello. Son como «y después», «primero», «luego», «por último» y «después de hacer» en español.",
+      "Hay dos familias. Unas son palabras sueltas que abren una frase, como それから, まず y 次に. Otras se pegan al verbo, como la forma て y 〜てから."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "Se usan al contar lo que hiciste, lo que vas a hacer o al dar instrucciones. «先にご飯を食べた。それから、映画を見た。» es «primero cenamos, después vimos una película».",
+      "Para explicar los pasos de algo, la serie まず, 次に y 最後に es perfecta, por ejemplo al enseñar a alguien a usar una aplicación: «まず、アプリを開いて。» es «primero, abre la aplicación»."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "それから",
+       "ro": "sorekara",
+       "es": "y después",
+       "nota": "Sigue el orden de las acciones."
+      },
+      {
+       "ja": "まず",
+       "ro": "mazu",
+       "es": "primero",
+       "nota": "Abre una serie de pasos."
+      },
+      {
+       "ja": "次に",
+       "ro": "tsugi ni",
+       "es": "después / a continuación",
+       "nota": "Pasa al siguiente paso."
+      },
+      {
+       "ja": "最後に",
+       "ro": "saigo ni",
+       "es": "por último",
+       "nota": "Cierra la serie."
+      },
+      {
+       "ja": "〜てから",
+       "ro": "te kara",
+       "es": "después de hacer",
+       "nota": "Se pega a un verbo en forma て."
+      },
+      {
+       "ja": "〜て",
+       "ro": "te",
+       "es": "y (une acciones)",
+       "nota": "Une acciones en cadena dentro de una sola frase."
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "Con 〜てから pones el verbo en forma て y añades から. La acción de antes va primero: «ご飯を食べてから、出かける。» significa «después de comer, salgo». Fíjate en que la acción que ocurre antes es la que lleva てから.",
+      "La forma て también une acciones en cadena sin necesidad de palabras extra: «朝起きて、顔を洗って、学校に行く。» es «me levanto, me lavo la cara y voy al colegio». Solo el último verbo marca el tiempo de toda la cadena.",
+      "まず, 次に y 最後に se usan juntos al inicio de cada paso, y entre ellos puedes poner la forma て o frases cortas para explicar cada acción."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "No confundas それから con 〜てから. それから abre una frase nueva, mientras que 〜てから se pega al verbo dentro de la misma frase.",
+      "Con la forma て en cadena, no repitas el tiempo en cada verbo. Se dice 起きて, 洗って y al final 行く, no el pasado en todos."
+     ]
+    }
    ]
   },
   {
@@ -392,13 +696,6 @@
    "icono": "💬",
    "titulo": "Cambiar de tema, ejemplos y cierres",
    "resumen": "ところで · ちなみに · 例えば · じゃあ",
-   "explicacion": [
-    "ところで (tokoro de): «por cierto», cambia de tema de golpe.",
-    "ちなみに (chinami ni): «a propósito», añade un dato de pasada.",
-    "例えば (tatoeba): «por ejemplo». Con とか (toka) al final suena natural: サッカーとか。",
-    "つまり (tsumari): «es decir», resume lo anterior.",
-    "じゃあ (jaa): «bueno…», para cerrar o pasar a otra cosa: じゃあ、また明日！"
-   ],
    "ejemplos": [
     {
      "ja": "ところで、明日は何する？",
@@ -470,6 +767,82 @@
      "ok": 0,
      "exp": "じゃあ cierra la charla."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Son palabras que sirven para mover la conversación: cambiar de tema, añadir un dato, poner un ejemplo, resumir o despedirte. En español harías lo mismo con «por cierto», «a propósito», «por ejemplo», «es decir» o «bueno».",
+      "No cambian el significado de lo que dices, pero hacen que hables con más naturalidad y que el otro sepa hacia dónde va la charla."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "Usa ところで cuando quieres saltar a otro asunto de golpe: «ところで、明日は何する？» es «por cierto, ¿qué haces mañana?». ちなみに es más suave, y sirve para añadir un dato de pasada, sin cambiar de tema del todo.",
+      "例えば introduce un ejemplo, y つまり resume lo que ya dijiste con otras palabras. じゃあ se usa para cerrar o pasar a la siguiente cosa, y es muy típico al despedirse: «じゃあ、また明日！» es «bueno, ¡hasta mañana!»."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "ところで",
+       "ro": "tokoro de",
+       "es": "por cierto",
+       "nota": "Cambia de tema de golpe."
+      },
+      {
+       "ja": "ちなみに",
+       "ro": "chinami ni",
+       "es": "a propósito",
+       "nota": "Añade un dato de pasada."
+      },
+      {
+       "ja": "例えば",
+       "ro": "tatoeba",
+       "es": "por ejemplo",
+       "nota": "Abre un ejemplo."
+      },
+      {
+       "ja": "〜とか",
+       "ro": "toka",
+       "es": "tipo / como (al dar ejemplos)",
+       "nota": "Va al final del ejemplo; muy coloquial."
+      },
+      {
+       "ja": "つまり",
+       "ro": "tsumari",
+       "es": "es decir",
+       "nota": "Resume lo anterior."
+      },
+      {
+       "ja": "じゃあ",
+       "ro": "jaa",
+       "es": "bueno...",
+       "nota": "Para cerrar o pasar a otra cosa."
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "例えば y とか se llevan muy bien: primero dices la idea general y luego das un ejemplo. «スポーツが好き。例えば、サッカーとか。» es «me gustan los deportes, por ejemplo el fútbol». El とか del final deja claro que hay más ejemplos posibles.",
+      "Estas piezas suelen ir al principio de la frase, seguidas de una pausa corta (una coma al escribir). じゃあ también se puede combinar con otras frases de despedida, como また明日."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "ところで cambia de tema de forma brusca. Úsalo cuando de verdad quieras pasar a otra cosa, no para añadir un dato al tema actual; para eso está ちなみに.",
+      "つまり no es para cualquier ejemplo: solo se usa cuando lo que viene después dice lo mismo que lo anterior, pero más claro o más corto."
+     ]
+    }
    ]
   },
   {
@@ -479,14 +852,6 @@
    "icono": "🔄",
    "titulo": "Alternativas y reformulación",
    "resumen": "それとも · つまり · じゃなくて",
-   "explicacion": [
-    "それとも (sore tomo): «¿o…?» en una pregunta: お茶にする？それとも、コーヒー？",
-    "または (mata wa): «o (bien)», más formal; en formularios. Hablando se usa か o それとも.",
-    "つまり (tsumari) / 要するに (you suru ni): «es decir / en resumen».",
-    "〜じゃなくて (janakute): «no… sino…». コーヒーじゃなくて、お茶がいい。",
-    "〜ずに (zu ni): «sin hacer». 〜だけでなく (dake de naku): «no solo… sino también».",
-    "そのかわり (sono kawari): «a cambio»."
-   ],
    "ejemplos": [
     {
      "ja": "お茶にする？それとも、コーヒー？",
@@ -570,6 +935,95 @@
      "ok": 0,
      "exp": "〜だけでなく = no solo."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Son piezas para ofrecer opciones, corregir lo que acabas de decir o reformular una idea. Equivalen a «¿o...?», «no... sino...», «es decir» o «sin hacer» en español.",
+      "Algunas, como それとも, van sueltas al principio de una frase. Otras, como じゃなくて y ずに, se pegan a la palabra o al verbo anterior."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "それとも sirve para preguntar entre dos opciones: «お茶にする？それとも、コーヒー？» es «¿té? ¿O café?». Cuando corriges algo, usas じゃなくて: «コーヒーじゃなくて、お茶がいい。» es «no café, prefiero té».",
+      "つまり y 要するに sirven para resumir o decir lo mismo con otras palabras: «お金がない。つまり、買えない。» significa «no tengo dinero, es decir, no puedo comprarlo». Para contar algo hecho sin otra acción, se usa ずに: «朝ご飯を食べずに、学校に行った。» es «fui al colegio sin desayunar»."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "それとも",
+       "ro": "sore tomo",
+       "es": "¿o...?",
+       "nota": "Para preguntas con dos opciones."
+      },
+      {
+       "ja": "または",
+       "ro": "mata wa",
+       "es": "o (bien)",
+       "nota": "Formal; típico de formularios."
+      },
+      {
+       "ja": "つまり",
+       "ro": "tsumari",
+       "es": "es decir",
+       "nota": "Resume lo anterior."
+      },
+      {
+       "ja": "要するに",
+       "ro": "you suru ni",
+       "es": "en resumen",
+       "nota": "Un poco más formal que つまり."
+      },
+      {
+       "ja": "〜じゃなくて",
+       "ro": "janakute",
+       "es": "no... sino...",
+       "nota": "Niega lo primero y da lo correcto."
+      },
+      {
+       "ja": "〜ずに",
+       "ro": "zu ni",
+       "es": "sin hacer",
+       "nota": "Se pega al verbo; es más escrito que coloquial."
+      },
+      {
+       "ja": "〜だけでなく",
+       "ro": "dake de naku",
+       "es": "no solo... sino también",
+       "nota": "Suma algo más."
+      },
+      {
+       "ja": "そのかわり",
+       "ro": "sono kawari",
+       "es": "a cambio",
+       "nota": "Compensa algo con otra cosa."
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "じゃなくて va justo después de lo que niegas y antes de lo que sí es correcto: 「Aじゃなくて、Bがいい」. Es una forma muy coloquial de corregir.",
+      "〜ずに se pega a la forma base del verbo, sin ない: 食べずに, 行かずに. Con el verbo する la forma es せずに. 〜だけでなく añade una segunda idea que se suma a la primera.",
+      "そのかわり se usa cuando algo malo o difícil se compensa con algo bueno, por ejemplo al negociar o proponer un trato."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "または es formal. Hablando con amigos se usa か o それとも, y または queda para formularios y textos escritos.",
+      "No confundas それとも con または. それとも se usa para preguntar entre opciones, mientras que または enumera alternativas en frases afirmativas."
+     ]
+    }
    ]
   },
   {
@@ -579,14 +1033,6 @@
    "icono": "🔀",
    "titulo": "Condiciones: «si…»",
    "resumen": "たら · ば · と · なら",
-   "explicacion": [
-    "〜たら (tara): «si / cuando». もし明日晴れたら、公園に行こう。(moshi ashita haretara, kouen ni ikou).",
-    "〜ば (ba): «si», condición general: 時間があれば、行くよ。",
-    "〜と (to): resultado natural, «cuando A, siempre B»: ボタンを押すと、画面が変わる。",
-    "〜なら (nara): «si es así», retoma lo que dice el otro: アニメが好きなら、これを見て。",
-    "それなら (sore nara): «en ese caso». それが本当だとしたら: «si eso fuera verdad».",
-    "もし (moshi) refuerza cualquier condicional y va al principio."
-   ],
    "ejemplos": [
     {
      "ja": "もし明日晴れたら、公園に行こう。",
@@ -670,6 +1116,91 @@
      "ok": 0,
      "exp": "〜なら retoma lo que sabes."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Una condicional es una frase que dice «si pasa A, entonces B». En japonés no hay una sola forma para esto: hay varias, y cada una tiene su matiz. Las cuatro que más oirás en la calle son たら, ば, と y なら.",
+      "No se trata de memorizar cuál es «la correcta», sino de elegir según lo que quieres decir: si es algo que podría pasar, un resultado automático, o una reacción a lo que acaba de decir otra persona."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "〜たら es la más versátil y la más natural al hablar. Sirve tanto para «si» como para «cuando» (algo que va a pasar y tras lo cual harás otra cosa). Si dudas, empieza por ella: «もし明日晴れたら、公園に行こう。» significa: si mañana hace sol, vamos al parque.",
+      "〜ば expresa una condición más general o de tipo «si se da esto, entonces aquello»: «時間があれば、行くよ。» significa: si tengo tiempo, iré. Suena un poco más neutro y a menudo deja ver que no estás seguro de que se cumpla.",
+      "〜と se usa cuando el resultado es natural, automático o siempre ocurre al cumplirse la condición. Es como decir «cada vez que haces A, pasa B»: «ボタンを押すと、画面が変わる。» significa: si pulsas el botón, cambia la pantalla.",
+      "〜なら se usa para reaccionar a lo que acaba de decir otra persona, o a una situación que ya está sobre la mesa. Significa «si es así» o «si es el caso»: «アニメが好きなら、これを見て。» significa: si te gusta el anime, mira esto."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "〜たら",
+       "ro": "tara",
+       "es": "si / cuando",
+       "nota": "la más usada y flexible al hablar"
+      },
+      {
+       "ja": "〜ば",
+       "ro": "ba",
+       "es": "si (condición general)",
+       "nota": "un poco más neutra que たら"
+      },
+      {
+       "ja": "〜と",
+       "ro": "to",
+       "es": "cuando A, siempre B",
+       "nota": "resultado natural o automático"
+      },
+      {
+       "ja": "〜なら",
+       "ro": "nara",
+       "es": "si es así / si se trata de eso",
+       "nota": "retoma lo que dice el otro"
+      },
+      {
+       "ja": "それなら",
+       "ro": "sore nara",
+       "es": "en ese caso",
+       "nota": "respuesta rápida a lo que acabas de oír"
+      },
+      {
+       "ja": "それが本当だとしたら",
+       "ro": "sore ga hontou da to shitara",
+       "es": "si eso fuera verdad",
+       "nota": "supone algo que aún no sabes si es cierto"
+      },
+      {
+       "ja": "もし",
+       "ro": "moshi",
+       "es": "si por casualidad / en caso de que",
+       "nota": "va al principio y refuerza cualquier condicional"
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "もし se pone al inicio de la frase y puede acompañar a cualquiera de las cuatro formas. No cambia el significado, solo subraya que es una suposición: «もし明日晴れたら…».",
+      "それなら funciona como una frase independiente: alguien dice algo y tú contestas «それなら、私も一緒に行く。» significa: en ese caso, voy contigo. Es la versión corta de なら, ya que el «eso» es lo que acaban de decir.",
+      "Cuando quieras suponer algo dudoso, puedes usar だとしたら detrás de una frase, como en «それが本当だとしたら…» significa: si eso fuera verdad…"
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "No uses 〜と cuando después quieras dar una orden, hacer una invitación o expresar tu intención, por ejemplo «vamos» o «llámame». Para eso usa たら o ば. 〜と está pensada para resultados que ocurren solos.",
+      "Tampoco mezcles なら con situaciones que tú mismo vives en directo: なら responde a algo que otro ha dicho o que se acaba de mencionar. Si hablas de tu propio plan futuro, te irá mejor たら."
+     ]
+    }
    ]
   },
   {
@@ -679,13 +1210,6 @@
    "icono": "⏱️",
    "titulo": "Tiempo: cuándo y a la vez",
    "resumen": "とき · ながら · 前に · あとで",
-   "explicacion": [
-    "〜とき (toki): «cuando». 時間があるとき、本を読む。",
-    "〜ながら (nagara): «mientras» (dos acciones a la vez). 音楽を聞きながら、勉強する。",
-    "〜前に (mae ni): «antes de»; 〜あとで (ato de): «después de».",
-    "〜たり〜たりする (tari… tari suru): hacer cosas como… y…",
-    "すると (suru to): «y entonces», un resultado inmediato, a menudo sorprendente."
-   ],
    "ejemplos": [
     {
      "ja": "音楽を聞きながら、勉強する。",
@@ -769,6 +1293,86 @@
      "ok": 0,
      "exp": "〜たり〜たり = cosas como…"
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Estos conectores sirven para situar acciones en el tiempo: cuándo ocurre algo respecto a otra cosa, si pasan a la vez, si una va antes o después, o si una cosa provoca de pronto otra.",
+      "Son muy frecuentes en la conversación diaria, porque casi siempre contamos cosas ordenándolas: «antes de dormir», «mientras estudio», «cuando tengo tiempo»."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "〜とき significa «cuando» y sirve para hablar de un momento o una situación: «時間があるとき、本を読む。» significa: cuando tengo tiempo, leo.",
+      "〜ながら se usa cuando haces dos cosas a la vez, y la persona que las hace es la misma: «音楽を聞きながら、勉強する。» significa: estudio escuchando música. La acción principal es la que va al final.",
+      "〜前に y 〜あとで marcan el orden: «antes de» y «después de». Un ejemplo es «寝る前に、シャワーを浴びる。» significa: antes de dormir, me ducho.",
+      "〜たり〜たりする sirve para dar ejemplos de cosas que haces, sin decir todo: «週末は映画を見たり、ゲームをしたりする。» significa: los fines de semana veo películas, juego a videojuegos y cosas así.",
+      "すると se pone al principio de una frase y cuenta algo que ocurre justo después de lo anterior, a menudo con sorpresa: «ドアを開けた。すると、猫が出てきた。» significa: abrí la puerta. Entonces, salió un gato."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "〜とき",
+       "ro": "toki",
+       "es": "cuando",
+       "nota": "sirve para momentos y situaciones"
+      },
+      {
+       "ja": "〜ながら",
+       "ro": "nagara",
+       "es": "mientras",
+       "nota": "dos acciones a la vez, misma persona"
+      },
+      {
+       "ja": "〜前に",
+       "ro": "mae ni",
+       "es": "antes de",
+       "nota": "la acción de antes va en forma de diccionario"
+      },
+      {
+       "ja": "〜あとで",
+       "ro": "ato de",
+       "es": "después de",
+       "nota": "el verbo anterior va en pasado"
+      },
+      {
+       "ja": "〜たり〜たりする",
+       "ro": "tari tari suru",
+       "es": "hacer cosas como... y...",
+       "nota": "da ejemplos, no una lista completa"
+      },
+      {
+       "ja": "すると",
+       "ro": "suru to",
+       "es": "y entonces",
+       "nota": "resultado inmediato, a menudo sorprendente"
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "Con 〜ながら el verbo se pone en su base sin ます: de 聞く sale 聞きながら. Con 〜前に usas la forma de diccionario: 寝る前に. Con 〜あとで usas la forma de pasado: 食べたあとで.",
+      "Con 〜とき puedes usar la forma de diccionario o la de pasado, según si la acción aún no ha ocurrido o ya sucedió. Si lo que va antes es un sustantivo, se une con の: 休みのとき, es decir, cuando estoy de vacaciones.",
+      "〜たり〜たりする se forma con la forma de pasado del verbo y se cierra con する: 見たり、したりする. Lo normal es dar al menos dos ejemplos."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "〜ながら solo funciona si la misma persona hace las dos cosas. Si dos personas hacen algo a la vez, tendrás que decirlo de otra manera.",
+      "すると no se usa para decir lo que tú vas a hacer después. Cuenta algo que sucede como consecuencia o sorpresa, normalmente al narrar una historia."
+     ]
+    }
    ]
   },
   {
@@ -778,12 +1382,6 @@
    "icono": "🛡️",
    "titulo": "Concesión: «aunque»",
    "resumen": "ても · それでも · とはいえ",
-   "explicacion": [
-    "〜ても (temo): «aunque». 忙しくても、行くよ。",
-    "それでも (soredemo): «aun así», haces algo a pesar de lo anterior.",
-    "高いとはいえ (takai to wa ie): «aunque sea caro», algo formal.",
-    "にもかかわらず (ni mo kakawarazu): «a pesar de», muy formal y escrito."
-   ],
    "ejemplos": [
     {
      "ja": "雨が降っていた。それでも、出かけた。",
@@ -855,6 +1453,78 @@
      "ok": 0,
      "exp": "〜とはいえ concede y sigue adelante."
     }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "La concesión es el «aunque»: reconoces que hay algo que normalmente frenaría la acción, pero la haces igualmente, o ocurre un resultado inesperado.",
+      "En japonés hay una forma gramatical para usar dentro de la frase (〜ても) y varios conectores para empezar una frase nueva, que se diferencian sobre todo por lo formales que suenan."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "〜ても se usa dentro de la misma frase para decir «aunque»: «忙しくても、行くよ。» significa: aunque esté ocupado, iré. Es natural y cotidiana, así que es la que más usarás.",
+      "それでも empieza una frase nueva y significa «aun así». Cuentas primero lo que pasó y luego lo que hiciste a pesar de ello: «雨が降っていた。それでも、出かけた。» significa: llovía. Aun así, salí.",
+      "それなのに también significa «y aun así», pero lleva un tono de sorpresa o queja, porque el resultado no es el que esperabas: «連絡した。それなのに、来なかった。» significa: le avisé. Y aun así no vino.",
+      "Cuando quieres sonar más serio o formal, aparecen 〜とはいえ y にもかかわらず, más propios de textos o de un habla cuidada."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "〜ても",
+       "ro": "temo",
+       "es": "aunque",
+       "nota": "dentro de la frase, natural en la calle"
+      },
+      {
+       "ja": "それでも",
+       "ro": "soredemo",
+       "es": "aun así",
+       "nota": "empieza una frase nueva"
+      },
+      {
+       "ja": "それなのに",
+       "ro": "sore na noni",
+       "es": "y aun así",
+       "nota": "con sorpresa o queja"
+      },
+      {
+       "ja": "〜とはいえ",
+       "ro": "to wa ie",
+       "es": "aunque sea cierto que",
+       "nota": "algo formal"
+      },
+      {
+       "ja": "にもかかわらず",
+       "ro": "ni mo kakawarazu",
+       "es": "a pesar de",
+       "nota": "muy formal y escrito"
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "〜ても se une a la forma て del verbo o del adjetivo: 忙しくても, 行っても. Con un sustantivo o un adjetivo な se usa でも: 雨でも, es decir, aunque llueva.",
+      "〜とはいえ se coloca detrás de la parte que concedes: «高いとはいえ、買いたい。» significa: aunque es caro, quiero comprarlo. Después va lo que quieres decir de verdad."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "にもかかわらず y 〜とはいえ suenan rígidos en una charla con amigos. Si los usas con confianza, puede parecer que lees un informe en voz alta. En la calle quédate con 〜ても y それでも.",
+      "No confundas それでも con でも al empezar una frase: でも es simplemente «pero», mientras que それでも es «aun así» y indica que sigues adelante pese a lo anterior."
+     ]
+    }
    ]
   },
   {
@@ -864,14 +1534,6 @@
    "icono": "🎭",
    "titulo": "Calle vs. formal",
    "resumen": "Lo mismo, dicho de dos maneras",
-   "explicacion": [
-    "Muchos conectores existen en dos versiones: la de calle y la de textos o reuniones. Tú aprende primero la de calle.",
-    "Pero → でも (demo) en la calle; しかし (shikashi) en textos.",
-    "Por eso → だから (dakara) / それで (sore de) en la calle; そのため (sono tame) en textos.",
-    "Además → それに (sore ni) / しかも (shikamo) en la calle; さらに (sara ni) / そのうえ (sono ue) en textos.",
-    "Y es que… → だって (datte) o simplemente から en la calle; なぜなら (nazenara) / というのも (to iu no mo) en textos.",
-    "O → それとも (sore tomo) / か (ka) en la calle; または (mata wa) en formularios."
-   ],
    "ejemplos": [
     {
      "ja": "やってみた。しかし、うまくいかなかった。",
@@ -942,6 +1604,144 @@
      ],
      "ok": 0,
      "exp": "En la calle basta con から."
+    }
+   ],
+   "secciones": [
+    {
+     "t": "Qué es",
+     "icono": "💡",
+     "p": [
+      "Muchos conectores existen en dos versiones con el mismo significado: una de calle, que oirás entre amigos y en la vida diaria, y otra más formal, propia de textos, noticias, reuniones y trabajos escritos.",
+      "Elegir una u otra no cambia lo que dices, pero sí cómo suenas. Usar la versión equivocada en el momento equivocado resulta raro, o demasiado seco o demasiado informal."
+     ]
+    },
+    {
+     "t": "Cuándo se usa",
+     "icono": "🕐",
+     "p": [
+      "La versión de calle es la que debes aprender primero: es la que usarás en conversaciones, mensajes con amigos y situaciones informales. «やってみた。でも、うまくいかなかった。» significa: lo intenté, pero no salió bien.",
+      "La versión formal aparece en lo escrito y en situaciones serias: «やってみた。しかし、うまくいかなかった。» dice lo mismo, pero con un tono de informe o noticia. También la verás en libros, artículos y presentaciones.",
+      "Es útil conocer las formales aunque no las uses al hablar, porque las encontrarás al leer."
+     ]
+    },
+    {
+     "t": "Las piezas",
+     "icono": "🧩",
+     "cards": [
+      {
+       "ja": "でも",
+       "ro": "demo",
+       "es": "pero",
+       "nota": "calle"
+      },
+      {
+       "ja": "しかし",
+       "ro": "shikashi",
+       "es": "sin embargo",
+       "nota": "textos y situaciones formales"
+      },
+      {
+       "ja": "だから",
+       "ro": "dakara",
+       "es": "por eso",
+       "nota": "calle"
+      },
+      {
+       "ja": "それで",
+       "ro": "sore de",
+       "es": "por eso / así que",
+       "nota": "calle"
+      },
+      {
+       "ja": "そのため",
+       "ro": "sono tame",
+       "es": "por ese motivo",
+       "nota": "textos y situaciones formales"
+      },
+      {
+       "ja": "それに",
+       "ro": "sore ni",
+       "es": "además",
+       "nota": "calle"
+      },
+      {
+       "ja": "しかも",
+       "ro": "shikamo",
+       "es": "y encima",
+       "nota": "calle, con tono de énfasis"
+      },
+      {
+       "ja": "さらに",
+       "ro": "sara ni",
+       "es": "además, aún más",
+       "nota": "textos y situaciones formales"
+      },
+      {
+       "ja": "そのうえ",
+       "ro": "sono ue",
+       "es": "por si fuera poco",
+       "nota": "textos y situaciones formales"
+      },
+      {
+       "ja": "だって",
+       "ro": "datte",
+       "es": "es que... (excusa)",
+       "nota": "calle, al justificarte"
+      },
+      {
+       "ja": "から",
+       "ro": "kara",
+       "es": "porque (al final de la frase)",
+       "nota": "calle, razón dicha al final"
+      },
+      {
+       "ja": "なぜなら",
+       "ro": "nazenara",
+       "es": "y es que, porque",
+       "nota": "formal, la razón va después"
+      },
+      {
+       "ja": "というのも",
+       "ro": "to iu no mo",
+       "es": "y es que",
+       "nota": "formal, algo escrito"
+      },
+      {
+       "ja": "それとも",
+       "ro": "sore tomo",
+       "es": "o bien (en una pregunta)",
+       "nota": "calle"
+      },
+      {
+       "ja": "か",
+       "ro": "ka",
+       "es": "o",
+       "nota": "calle, entre dos opciones"
+      },
+      {
+       "ja": "または",
+       "ro": "mata wa",
+       "es": "o",
+       "nota": "formularios y textos"
+      }
+     ]
+    },
+    {
+     "t": "Cómo se combina",
+     "icono": "🔗",
+     "p": [
+      "Dentro de un mismo texto conviene mantener un solo registro. Si empiezas una explicación con しかし, sigue con そのため y さらに, no mezcles con でも y だから.",
+      "Un ejemplo formal completo: «電車が遅れた。そのため、遅刻した。» significa: el tren se retrasó. Por ese motivo, llegué tarde. En la calle dirías algo como だから o それで en su lugar.",
+      "Fíjate también en cómo termina la frase: «行けない。なぜなら、明日テストがあるからだ。» significa: no puedo ir. Y es que mañana tengo examen. La forma formal suele cerrarse con だ, mientras que en la calle bastaría con から o だって."
+     ]
+    },
+    {
+     "t": "Ojo con",
+     "icono": "⚠️",
+     "p": [
+      "だって es una excusa o una queja y suena infantil o confiada. No la uses con un jefe o un profesor.",
+      "Hablar con conectores formales entre amigos puede sonar distante o gracioso, y escribir un correo de trabajo con でも o だって queda demasiado informal. Piensa siempre en quién te escucha o te lee."
+     ]
     }
    ]
   }
