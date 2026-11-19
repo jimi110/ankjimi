@@ -558,6 +558,7 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         }
         
+        #screen-frases-temario .header-controls.sticky-header { padding-right: 24px; }
         .btn-back {
             background: none;
             border: none;
@@ -1895,10 +1896,10 @@
 
     <!-- PANTALLA: TEMARIO (teoría + lista) -->
     <div id="screen-frases-temario" class="screen pad-bottom">
-        <div class="header-controls">
+        <div class="header-controls sticky-header">
             <button class="btn-back" onclick="frTemBack()">← Volver</button>
+            <span id="fr-tem-title" style="font-weight:bold; color:var(--text-muted)">Temario</span>
         </div>
-        <div style="text-align:center; margin-bottom:6px;"><h2 id="fr-tem-title" style="font-size:20px;">📖 Temario</h2></div>
         <div id="fr-tem-body"></div>
     </div>
 
@@ -3062,7 +3063,7 @@
         updateSettingsAnkiSection(screenId);
         updateBottomNav(screenId);
         const settingsFab = document.getElementById('settings-fab');
-        if (settingsFab) settingsFab.style.display = (screenId === 'theory' || screenId === 'practice' || screenId === 'kana-practice' || screenId === 'frases-practice') ? 'none' : 'flex';
+        if (settingsFab) settingsFab.style.display = (screenId === 'theory' || screenId === 'practice' || screenId === 'kana-practice' || screenId === 'frases-practice' || screenId === 'frases-temario') ? 'none' : 'flex';
         // La teoría solo restaura el scroll si se vuelve a entrar al mismo
         // temario del que se salió; si es uno distinto, empieza desde arriba
         // y esa posición guardada deja de pertenecer a nadie hasta salir de nuevo.
@@ -5676,11 +5677,11 @@
     async function renderTemario() {
         const m = FR_MODES[frMode], body = document.getElementById('fr-tem-body');
         const ttl = document.getElementById('fr-tem-title');
-        ttl.innerText = '📖 Temario · ' + m.titulo;
+        ttl.innerText = 'Temario';
         if (!(await frEnsureData(body))) return;
         const items = m.items === 'frases' ? 'Frases' : 'Oraciones';
-        if (frTemView === 'lecciones') { ttl.innerText = '📚 Lecciones · ' + m.titulo; body.innerHTML = frRenderLessons(); return; }
-        if (frTemView === 'frases') { ttl.innerText = (m.items === 'frases' ? '💬 Frases' : '💬 Oraciones') + ' · ' + m.titulo; body.innerHTML = frRenderPhrases(); return; }
+        if (frTemView === 'lecciones') { ttl.innerText = 'Lecciones'; body.innerHTML = frRenderLessons(); return; }
+        if (frTemView === 'frases') { ttl.innerText = m.items === 'frases' ? 'Frases' : 'Oraciones'; body.innerHTML = frRenderPhrases(); return; }
         body.innerHTML = `<div class="fr-tem-choices">
                 <button type="button" class="kana-choice-card fr-tem-card" onclick="frTemOpen('lecciones')"><span class="kana-choice-glyph">📚</span><span><b>Lecciones</b></span></button>
                 <button type="button" class="kana-choice-card fr-tem-card" onclick="frTemOpen('frases')"><span class="kana-choice-glyph">💬</span><span><b>${items}</b></span></button>
