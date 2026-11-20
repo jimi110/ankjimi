@@ -1274,9 +1274,20 @@
         .fr-chip.bad { border-color: var(--wrong); background: var(--wrong-bg); }
         .fr-ghost { position: fixed; z-index: 1000; pointer-events:none; transform: translate(-50%,-60%) scale(1.08); box-shadow: 0 10px 24px rgba(0,0,0,.25); }
         .fr-gloss { text-align:left; max-height: 34vh; overflow:auto; margin-top: 8px; border-top: 1px solid rgba(0,0,0,.12); padding-top: 8px; }
-        .fr-gloss-item { display:flex; gap:10px; padding: 4px 0; font-size: 14px; color: var(--text-main); }
-        .fr-gloss-item b { min-width: 90px; font-size: 16px; }
-        .fr-gloss-item i { color: var(--text-muted); font-style: normal; font-size: 12.5px; display:block; }
+        .fr-gloss-item { display:flex; gap:12px; padding: 8px 0; font-size: 14px; color: var(--text-main); border-bottom: 1px solid var(--border); align-items:flex-start; }
+        .fr-gloss-item:last-child { border-bottom: 0; }
+        .fr-gloss-item b { flex: 0 0 38%; max-width: 38%; font-size: 18px; line-height: 1.8; word-break: keep-all; }
+        .fr-gloss-item > span { flex:1; min-width:0; }
+        .fr-gloss-item .g-es { display:block; font-weight:700; font-size:14.5px; }
+        .fr-gloss-item .g-ro { display:block; color: var(--text-muted); font-size: 12.5px; font-style: normal; }
+        .fr-gloss-item .g-nota { display:block; color: var(--text-muted); font-size: 12.5px; font-style: normal; margin-top:2px; }
+        .fr-stage .btn-audio, .fr-det .btn-audio, .fr-fb-audio, .fr-ex .btn-audio { background: var(--card-bg); border: 2px solid var(--border); width: 44px; height: 44px; box-shadow: var(--shadow); }
+        .fr-det-head { display:flex; align-items:flex-start; gap:12px; }
+        .fr-det-head .fr-det-main { flex:1; min-width:0; }
+        .fr-det-head .btn-audio { margin:0; flex-shrink:0; }
+        .fr-con-box { background: var(--bg-secondary); border-left:4px solid var(--primary); border-radius: var(--radius-md); padding: 10px 14px; }
+        .fr-con-box .fr-con-word { font-size: 22px; font-weight: 800; line-height:1.8; }
+        .fr-con-box p { margin: 4px 0 0; font-size: 14.5px; line-height: 1.55; }
         .fr-w { border-bottom: 2px dotted var(--primary); cursor: pointer; }
         .fr-pop { position: fixed; z-index: 1200; max-width: 280px; background: var(--card-bg); color: var(--text-main); border: 2px solid var(--primary); border-radius: var(--radius-md); padding: 8px 12px; font-size: 14px; box-shadow: 0 8px 22px rgba(0,0,0,.25); }
         .fr-pop b { font-size: 17px; } .fr-pop i { color: var(--text-muted); font-style: normal; font-size: 12.5px; }
@@ -1295,7 +1306,7 @@
         .fr-hub { text-align:center; padding-top: 6px; }
         .fr-hub-ico { font-size: 54px; line-height:1; }
         .fr-hub h2 { font-size: 24px; margin: 6px 0 2px; }
-        .fr-play { width:100%; max-width:360px; font-size: 20px; padding: 16px 24px; margin: 6px auto 4px; display:block; }
+        .fr-play { width:100%; max-width:360px; margin: 6px auto 4px; display:block; }
         .fr-tem-btn { width:100%; max-width:360px; margin: 18px auto 0; display:block; }
         .fr-bar { height: 10px; background: var(--border); border-radius: 6px; overflow:hidden; max-width: 360px; margin: 12px auto 4px; }
         .fr-bar-fill { height:100%; background: var(--correct); border-radius:6px; transition: width .4s ease; }
@@ -5762,14 +5773,14 @@
     function frPhraseCard(f) {
         const tipo = String(f.categoria || '').replace(/_/g, ' ');
         const m = FR_MODES[frMode];
-        return `<div class="fr-det-ja">${frJaMarked(f)}</div>
-            <div class="fr-expr-read">${frEsc(f.romaji)}</div>
+        const con = f.hueco ? f.hueco.con.replace(/[、。]$/, '') : '';
+        const tags = `<span class="fr-tag">${frEsc(FR_NIVEL[f.nivel] || f.nivel)}</span>${f.registro ? `<span class="fr-tag">${FR_REG[f.registro] || frEsc(f.registro)}</span>` : ''}${tipo ? `<span class="fr-tag">${frEsc(tipo)}</span>` : ''}`;
+        return `<div class="fr-det-head"><div class="fr-det-main"><div class="fr-det-ja">${frJaMarked(f)}</div><div class="fr-expr-read">${frEsc(f.romaji)}</div></div><button type="button" class="btn-audio" onclick="frSpeak(${f.id})">🔊</button></div>
             <div class="fr-det-es">${frEsc(f.es)}</div>
-            <div class="fr-det-tags"><span class="fr-tag">${frEsc(FR_NIVEL[f.nivel] || f.nivel)}</span>${f.registro ? `<span class="fr-tag">${FR_REG[f.registro] || frEsc(f.registro)}</span>` : ''}${tipo ? `<span class="fr-tag">${frEsc(tipo)}</span>` : ''}</div>
-            ${f.uso ? `<div class="fr-uso"><b>${frJa(f.hueco.con)}</b> en esta frase: ${frEsc(f.uso)}</div>` : ''}
-            <button type="button" class="btn-audio" style="margin:10px 0 4px;" onclick="frSpeak(${f.id})">🔊</button>
-            <div class="kana-section-title" style="margin-top:6px;">${m.conn ? 'Parte a parte' : 'Bloque a bloque'}</div>
-            <div class="fr-gloss" style="max-height:none;border:0;padding:0;">${frGloss(f)}</div>`;
+            <div class="fr-det-tags">${tags}</div>
+            ${f.uso ? `<div class="fr-sec"><div class="fr-sec-h"><span>🔗</span>El conector</div><div class="fr-con-box"><div class="fr-con-word">${frJa(con)}</div><p>${frEsc(f.uso)}</p></div></div>` : ''}
+            <div class="fr-sec"><div class="fr-sec-h"><span>🧩</span>${m.conn ? 'Parte a parte' : 'Bloque a bloque'}</div>
+            <div class="fr-gloss" style="max-height:none;border:0;padding:0;margin:0;">${frGloss(f)}</div></div>`;
     }
     function frSpeak(id) { const f = frData.frases.find(x => x.id === id); if (f) speakJapanese(f.ja); }
     function frTogglePhrase(id) {
@@ -5900,7 +5911,7 @@
     function frGloss(f) {
         return f.bloques.map(b => {
             const g = frData.bloques[b] || ['', '', '', 0, ''];
-            return `<div class="fr-gloss-item"><b>${frJa(b)}</b><span>${frEsc(g[1])}<i>${frEsc((g[4] || '').replace(/[,.\s]+$/, ''))}${g[2] ? ' · ' + frEsc(g[2]) : ''}</i></span></div>`;
+            return `<div class="fr-gloss-item"><b>${frJa(b)}</b><span><span class="g-es">${frEsc(g[1])}</span><span class="g-ro">${frEsc((g[4] || '').replace(/[,.\s]+$/, ''))}</span>${g[2] ? `<span class="g-nota">💡 ${frEsc(g[2])}</span>` : ''}</span></div>`;
         }).join('');
     }
 
