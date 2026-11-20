@@ -6164,6 +6164,36 @@
         }
     }
 
+    // ---- Gesto: arrastrar horizontalmente por cualquier parte = pulsar «← Volver/Salir» ----
+    (function () {
+        let st = null;
+        const MIN_DX = 110, MAX_MS = 1000;
+        function blocked(t) {
+            if (!t || !t.closest) return false;
+            if (t.closest('input, textarea, select, canvas, iframe, .fr-chip, .fr-slot, .fr-ghost, [draggable="true"], .settings-panel, .app-dlg-overlay, .rec-overlay, .fr-pop')) return true;
+            for (let e = t; e && e !== document.body; e = e.parentElement) {   // zonas que ya se desplazan en horizontal
+                const o = getComputedStyle(e).overflowX;
+                if ((o === 'auto' || o === 'scroll') && e.scrollWidth > e.clientWidth + 4) return true;
+            }
+            return false;
+        }
+        function start(x, y, t) { st = blocked(t) ? null : { x, y, t: Date.now() }; }
+        function end(x, y) {
+            if (!st) return; const d = st; st = null;
+            const dx = x - d.x, dy = y - d.y;
+            if (Math.abs(dx) < MIN_DX || Math.abs(dy) > Math.abs(dx) * 0.5 || Date.now() - d.t > MAX_MS) return;
+            if (document.querySelector('.app-dlg-overlay, .rec-overlay.open, .settings-panel.open')) return;
+            if (window.getSelection) window.getSelection().removeAllRanges();
+            const scr = document.querySelector('.screen.active'); if (!scr) return;
+            const btn = [...scr.querySelectorAll('.btn-back')].find(b => b.offsetParent !== null && /^\s*←/.test(b.textContent));
+            if (btn) btn.click();
+        }
+        document.addEventListener('touchstart', e => { const t = e.touches[0]; if (e.touches.length === 1) start(t.clientX, t.clientY, e.target); else st = null; }, { passive: true });
+        document.addEventListener('touchend', e => { const t = e.changedTouches[0]; end(t.clientX, t.clientY); }, { passive: true });
+        document.addEventListener('mousedown', e => { if (e.button === 0) start(e.clientX, e.clientY, e.target); });
+        document.addEventListener('mouseup', e => end(e.clientX, e.clientY));
+    })();
+
     window.addEventListener('scroll', updateScrollTopButton, { passive: true });
 
     // Init
