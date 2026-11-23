@@ -497,6 +497,7 @@ body {
   opacity: 0.6;
   transition: opacity 0.15s ease, background-color 0.15s ease;
 }
+.icon-btn-inline.skip-btn { right: 38px; }
 .icon-btn-inline:hover { opacity: 1; background: var(--bg-secondary); }
 .icon-btn-inline:active { transform: translateY(-50%) scale(0.92); }
 
@@ -1119,7 +1120,8 @@ textarea:focus, .btn:focus-visible, .icon-btn:focus-visible {
     <section id="view-study" class="view">
       <div class="study-progress">
         <span id="study-remaining">0 restantes</span>
-        <button type="button" id="btn-delete-card" class="icon-btn-inline" aria-label="Eliminar tarjeta">🗑️</button>
+        <button type="button" id="btn-skip-card" class="icon-btn-inline skip-btn" aria-label="Saltar tarjeta" title="Saltar (no cuenta como estudiada)">⏭️</button>
+        <button type="button" id="btn-delete-card" class="icon-btn-inline" aria-label="Eliminar tarjeta" title="Eliminar tarjeta">🗑️</button>
       </div>
 
       <div class="card-area">
@@ -3062,6 +3064,7 @@ document.getElementById('btn-delete-deck').addEventListener('click', async () =>
       { label: 'Cancelar', style: 'secondary' },
       {
         label: 'Eliminar', style: 'danger', onClick: async () => {
+          if (isDefaultDeck(deck)) setDefaultDeckFlag('removed'); // no volver a añadirlo solo
           await window.DB.deleteDeck(state.currentDeckId);
           state.currentDeckId = null;
           backStack = ['view-decks'];
@@ -3408,8 +3411,9 @@ document.getElementById('btn-show-answer').addEventListener('click', () => {
 });
 
 let _saveToastTimer = null;
-function showSaveToast() {
+function showSaveToast(text) {
   const el = document.getElementById('save-toast');
+  el.textContent = text || '✓ Progreso guardado en este dispositivo';
   el.classList.add('visible');
   clearTimeout(_saveToastTimer);
   _saveToastTimer = setTimeout(() => el.classList.remove('visible'), 900);
@@ -3473,6 +3477,60 @@ async function answerCurrentCard(answer) {
 document.getElementById('btn-again').addEventListener('click', () => answerCurrentCard('again'));
 document.getElementById('btn-good').addEventListener('click', () => answerCurrentCard('good'));
 
+/** Añade al final de la cola la siguiente tarjeta nueva liberada hoy que aún
+    no esté en ella (se usa al borrar una nueva, para que borrar no gaste el cupo). */
+async function topUpQueueWithNewCard() {
+  if (!state.currentDeckId) return;
+  let deck = await window.DB.getDeck(state.currentDeckId);
+  if (!deck) return;
+  deck = await ensureDailyRelease(deck);
+  const inQueue = new Set(state.studyQueue.map((it) => it.card.id));
+  const newInQueue = state.studyQueue.filter((it) => it.card.state === 'new').length;
+  const slots = Math.min(deck.newReleasedTotal || 0, orDefault(deck.maxAccumulated, 100)) - newInQueue;
+  if (slots <= 0) return;
+  const now = window.SRS.nowMs();
+  const cards = await window.DB.getCardsByDeck(state.currentDeckId);
+  const candidates = cards
+    .filter((c) => c.state === 'new' && window.SRS.isCardDue(c, now) && !inQueue.has(c.id))
+    .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+    .slice(0, slots);
+  for (const card of candidates) {
+    const note = await window.DB.getNote(card.noteId);
+    if (note) state.studyQueue.push({ card, note });
+  }
+}
+
+/** Salta la tarjeta actual: NO se registra repaso, NO se gasta cupo diario y
+    NO se borra. Se recoloca en una posición aleatoria posterior de la cola. */
+document.getElementById('btn-skip-card').addEventListener('click', async () => {
+  if (state.studyQueue.length === 0) return;
+  stopAllAudio();
+
+  if (state.studyQueue.length === 1) {
+    showModal({
+      message: 'Es la última tarjeta pendiente. Si la saltas, la sesión terminará sin contarla como estudiada y seguirá pendiente.',
+      actions: [
+        { label: 'Cancelar', style: 'secondary' },
+        {
+          label: 'Saltar y terminar', style: 'primary', onClick: async () => {
+            state.studyQueue.shift();
+            await persistStudySessionQueue(state.studyQueue);
+            await showNextCard();
+          },
+        },
+      ],
+    });
+    return;
+  }
+
+  const item = state.studyQueue.shift();
+  const insertAt = 1 + Math.floor(Math.random() * state.studyQueue.length); // nunca la primera
+  state.studyQueue.splice(insertAt, 0, item);
+  await persistStudySessionQueue(state.studyQueue);
+  showSaveToast('⏭️ Tarjeta saltada');
+  await showNextCard();
+});
+
 /** Elimina la tarjeta que se está estudiando ahora mismo (girada o no da igual,
     ya que solo actúa sobre la cola y la base de datos, no sobre lo que se ve). */
 document.getElementById('btn-delete-card').addEventListener('click', () => {
@@ -3486,6 +3544,10 @@ document.getElementById('btn-delete-card').addEventListener('click', () => {
         label: 'Eliminar', style: 'danger', onClick: async () => {
           state.studyQueue.shift();
           await window.DB.deleteCard(item.card.id);
+          // Borrar NO cuenta como estudiar: no se registra repaso ni se gasta
+          // cupo diario. Si era una tarjeta nueva, su hueco se repone con la
+          // siguiente nueva disponible para no perder una del día.
+          if (item.card.state === 'new') await topUpQueueWithNewCard();
           await persistStudySessionQueue(state.studyQueue);
           playSound('danger');
           showSaveToast();
@@ -3498,8 +3560,9 @@ document.getElementById('btn-delete-card').addEventListener('click', () => {
 
 async function finishStudySession() {
   const stats = state.studySessionStats;
-  document.getElementById('session-summary').textContent =
-    `Has repasado ${stats.studied} tarjeta(s): ${stats.good} bien, ${stats.again} otra vez.`;
+  document.getElementById('session-summary').textContent = stats.studied > 0
+    ? `Has repasado ${stats.studied} tarjeta(s): ${stats.good} bien, ${stats.again} otra vez.`
+    : 'No has repasado ninguna tarjeta en esta sesión. Las que quedan siguen pendientes.';
 
   let dailyFinished = false;
   if (state.currentDeckId) {
@@ -3507,7 +3570,9 @@ async function finishStudySession() {
     if (deck) {
       deck.studySessionActive = false;
       deck.studySessionQueue = [];
-      deck.studySessionFinishedDate = todayKey();
+      // Solo se da el día por terminado si realmente se estudió algo; borrar
+      // o saltar tarjetas no cuenta como estudiar.
+      if (stats.studied > 0) deck.studySessionFinishedDate = todayKey();
       await window.DB.updateDeck(deck);
 
       const counts = await computeDeckCounts(state.currentDeckId);
@@ -3621,6 +3686,148 @@ document.getElementById('file-backup').addEventListener('change', async (e) => {
   });
 });
 
+// ---------------------------------------------------------------------
+// Mazo incluido en el repositorio (1.5k palabras, .apkg en la raíz)
+// ---------------------------------------------------------------------
+// La app lee directamente el .apkg alojado junto a este archivo, así el
+// usuario no tiene que importarlo a mano. Se añade solo la primera vez (si
+// no hay mazos), se puede eliminar como cualquier otro, y se puede volver a
+// añadir desde Ajustes > Información (AnkiAppActions.addDefaultDeck).
+
+const DEFAULT_DECK_FILES = ['Mazo_1_5k_más_comunes.apkg', 'Mazo_1_5k_mas_comunes.apkg'];
+const DEFAULT_DECK_SOURCE = 'github-default';
+const DEFAULT_DECK_FLAG = 'ankjimiDefaultDeckState'; // 'added' | 'removed' | 'skip'
+const DEFAULT_DECK_NAME = 'Kaishi 1.5k';
+
+function getDefaultDeckFlag() {
+  try { return localStorage.getItem(DEFAULT_DECK_FLAG); } catch (e) { return null; }
+}
+function setDefaultDeckFlag(value) {
+  try { localStorage.setItem(DEFAULT_DECK_FLAG, value); } catch (e) {}
+}
+
+function isDefaultDeck(deck) {
+  if (!deck) return false;
+  if (deck.source === DEFAULT_DECK_SOURCE) return true;
+  // Mazos importados a mano antes de existir esta función (sin marca).
+  return !deck.source && String(deck.name || '').trim().toLowerCase() === DEFAULT_DECK_NAME.toLowerCase();
+}
+
+async function findDefaultDecks() {
+  const decks = await window.DB.getAllDecks();
+  return decks.filter(isDefaultDeck);
+}
+
+/** Descarga el .apkg del repositorio mostrando el progreso. Devuelve un File. */
+async function fetchDefaultDeckFile(onProgress) {
+  let lastError = null;
+  for (const name of DEFAULT_DECK_FILES) {
+    try {
+      onProgress('Descargando el mazo…');
+      const res = await fetch(encodeURI(name));
+      if (!res.ok) { lastError = new Error(`HTTP ${res.status}`); continue; }
+
+      let blob;
+      const total = Number(res.headers.get('content-length')) || 0;
+      if (res.body && res.body.getReader) {
+        const reader = res.body.getReader();
+        const chunks = [];
+        let received = 0;
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          chunks.push(value);
+          received += value.length;
+          const mb = (received / 1048576).toFixed(0);
+          onProgress(total
+            ? `Descargando el mazo… ${mb} / ${(total / 1048576).toFixed(0)} MB (${Math.round((received / total) * 100)}%)`
+            : `Descargando el mazo… ${mb} MB`);
+        }
+        blob = new Blob(chunks, { type: 'application/zip' });
+      } else {
+        blob = await res.blob();
+      }
+      return new File([blob], name, { type: 'application/zip' });
+    } catch (err) {
+      lastError = err;
+    }
+  }
+  throw new Error(
+    'No se pudo descargar el mazo del repositorio. Comprueba tu conexión y que el archivo ' +
+    `"${DEFAULT_DECK_FILES[0]}" esté en la raíz junto a esta página.` +
+    (lastError ? `\n\n(${lastError.message})` : '')
+  );
+}
+
+/** Descarga e importa el mazo. Si ya existía, lo borra primero (reinicio). */
+async function installDefaultDeck() {
+  showModal({ message: 'Añadiendo el mazo de 1.5k palabras…\n\nNo cierres ni recargues la página.', progress: true });
+  try {
+    // Primero se descarga: si falla, no se toca nada de lo que ya hubiera.
+    const file = await fetchDefaultDeckFile(updateModalProgress);
+
+    const existing = await findDefaultDecks();
+    for (const d of existing) await window.DB.deleteDeck(d.id);
+
+    const before = new Set((await window.DB.getAllDecks()).map((d) => d.id));
+    const report = await window.AnkiImport.importApkg(file, updateModalProgress);
+
+    // Marca los mazos recién creados como "mazo del repositorio".
+    const after = await window.DB.getAllDecks();
+    for (const d of after) {
+      if (!before.has(d.id)) {
+        d.source = DEFAULT_DECK_SOURCE;
+        await window.DB.updateDeck(d);
+      }
+    }
+    setDefaultDeckFlag('added');
+
+    state.currentDeckId = null;
+    backStack = ['view-decks'];
+    showView('view-decks');
+    await refreshDeckList();
+    showModal({
+      message: `✅ Mazo añadido: ${report.cardsCount} tarjetas.`,
+      actions: [{ label: 'Aceptar', style: 'primary' }],
+    });
+  } catch (err) {
+    showModal({
+      message: `No se pudo añadir el mazo:\n\n${err.message}`,
+      actions: [
+        { label: 'Cerrar', style: 'secondary' },
+        { label: 'Reintentar', style: 'primary', onClick: installDefaultDeck },
+      ],
+    });
+  }
+}
+
+/** Primera vez: si no hay ningún mazo y nunca se eliminó, lo añade solo. */
+async function autoInstallDefaultDeckIfNeeded() {
+  if (getDefaultDeckFlag()) return;
+  const decks = await window.DB.getAllDecks();
+  if (decks.length > 0) { setDefaultDeckFlag('skip'); return; } // usuario con mazos propios
+  await installDefaultDeck();
+}
+
+/** Enlace de Ajustes > Información: añade el mazo al instante (o pregunta si ya está). */
+async function addDefaultDeck() {
+  if (window.AnkiAppActions && window.AnkiAppActions.goToDeckList) {
+    await window.AnkiAppActions.goToDeckList();
+  }
+  const existing = await findDefaultDecks();
+  if (existing.length === 0) {
+    await installDefaultDeck();
+    return;
+  }
+  showModal({
+    message: `El mazo "${existing[0].name}" ya está añadido.\n\n¿Quieres volver a importarlo? Se reiniciará: se perderá el progreso de ese mazo y quedará como nuevo.`,
+    actions: [
+      { label: 'Cancelar', style: 'secondary' },
+      { label: 'Volver a importar', style: 'danger', onClick: installDefaultDeck },
+    ],
+  });
+}
+
 function runWipeAll() {
   showModal({
     message: '¿Borrar TODOS los mazos, tarjetas e historial? Esta acción no se puede deshacer.',
@@ -3629,6 +3836,7 @@ function runWipeAll() {
       {
         label: 'Borrar todo', style: 'danger', onClick: async () => {
           await window.DB.wipeAll();
+          setDefaultDeckFlag('removed');
           state.mediaUrlCache.forEach((url) => URL.revokeObjectURL(url));
           state.mediaUrlCache.clear();
           backStack = ['view-decks'];
@@ -3646,6 +3854,8 @@ window.AnkiAppActions = {
   exportBackup: runExportBackup,
   importBackup: runImportBackup,
   wipeAll: runWipeAll,
+  // Añade (o reimporta, previa confirmación) el mazo .apkg del repositorio.
+  addDefaultDeck,
   // Vuelve a la lista de mazos (el inicio de la app), desde donde sea que
   // esté. La llama la app principal al pulsar la pestaña "Anki" del menú
   // inferior, para que siempre te lleve al inicio si no estabas ya ahí.
@@ -3936,6 +4146,7 @@ async function init() {
   applyFuriganaPref();
   await window.DB.openDB();
   await refreshDeckList();
+  await autoInstallDefaultDeckIfNeeded();
 
   // Nota: esta version de archivo unico no registra Service Worker (PWA/offline
   // instalable). Ver la version multi-archivo si necesitas esa funcionalidad.

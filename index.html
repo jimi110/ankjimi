@@ -2265,6 +2265,9 @@
         <p class="info-text" style="margin-bottom:2px;"><strong>🔗 Mazo en AnkiWeb</strong></p>
         <a class="info-link" href="https://ankiweb.net/shared/info/1196762551" target="_blank" rel="noopener noreferrer">https://ankiweb.net/shared/info/1196762551</a>
 
+        <p class="info-text" style="margin-bottom:2px;"><strong>📥 Añadir el mazo al instante</strong></p>
+        <a class="info-link" href="#" onclick="addGithubDeckFromInfo(event)">Añadir el mazo de 1.5k palabras</a>
+
         <p class="info-text">Créditos al autor original del mazo y a AnkiWeb 🙏</p>
 
         <p class="info-text">
@@ -2631,6 +2634,15 @@
                 actions[actionName]();
             }
         }, 300);
+    }
+
+    // Enlace "Añadir el mazo" de la Información de Anki: cierra la Información
+    // y los Ajustes, deja al usuario en la lista de mazos de Anki y allí la app
+    // añade el .apkg del repositorio (o pregunta si reimportarlo si ya existe).
+    function addGithubDeckFromInfo(event) {
+        if (event) event.preventDefault();
+        closeInfoModal();
+        callAnkiAction('addDefaultDeck');
     }
 
     // Pestaña "Anki" del menú inferior: además de mostrar la pantalla, le
