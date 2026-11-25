@@ -353,6 +353,12 @@
         html:has(body.anki-modal-dimmed) {
             background-color: #6e6e6e;
         }
+        /* Modo oscuro: los lados deben oscurecerse igual que el resto, no
+           quedarse en gris claro mientras se muestra el aviso. */
+        html:has(body.dark-theme.anki-modal-dimmed),
+        body.dark-theme.anki-modal-dimmed {
+            background-color: #070c0e;
+        }
         /* En móvil (iPhone) la zona de arriba, junto a la Dynamic Island, tiene que seguir del color de la app, no gris */
         @media (max-width: 900px) {
             body.anki-modal-dimmed,
